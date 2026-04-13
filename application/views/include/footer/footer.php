@@ -1,0 +1,212 @@
+ 
+<?php
+$w = isset($this->website['data']) ? $this->website['data'] : new stdClass();
+$company = isset($w->company_name) ? trim((string) $w->company_name) : '';
+$company_esc = htmlspecialchars($company !== '' ? $company : 'Clinic', ENT_QUOTES, 'UTF-8');
+$phone_raw = isset($w->support_contact) ? (string) $w->support_contact : '';
+$phones = array_values(array_filter(array_map('trim', preg_split('/[\n\r|]+/', $phone_raw, -1, PREG_SPLIT_NO_EMPTY))));
+if (count($phones) === 0 && trim($phone_raw) !== '') {
+    $phones = array(trim($phone_raw));
+}
+$email = isset($w->support_email) ? trim((string) $w->support_email) : '';
+$addr1 = isset($w->address) ? trim((string) $w->address) : '';
+$addr2 = isset($w->corporate_address) ? trim((string) $w->corporate_address) : '';
+$copy = isset($w->copy_right) ? trim((string) $w->copy_right) : ('© ' . date('Y') . ' ' . $company_esc);
+$dontia_footer_social = array(
+    array('link' => isset($w->facebook_link) ? trim((string) $w->facebook_link) : '', 'icon' => 'fa-facebook', 'label' => 'Facebook'),
+    array('link' => isset($w->instagram_link) ? trim((string) $w->instagram_link) : '', 'icon' => 'fa-instagram', 'label' => 'Instagram'),
+    array('link' => isset($w->youtube_link) ? trim((string) $w->youtube_link) : '', 'icon' => 'fa-youtube-play', 'label' => 'YouTube'),
+    array('link' => isset($w->linkedin_link) ? trim((string) $w->linkedin_link) : '', 'icon' => 'fa-linkedin', 'label' => 'LinkedIn'),
+    array('link' => isset($w->twitter_link) ? trim((string) $w->twitter_link) : '', 'icon' => 'fa-twitter', 'label' => 'Twitter'),
+);
+?>
+    <footer class="main-footer dontia-footer">
+        <div class="auto-container">
+            <div class="widgets-section dontia-footer-widgets">
+                <div class="row dontia-footer-row">
+                    <div class="col-xl-4 col-lg-6 col-md-12 dontia-footer-brand-col">
+                        <div class="dontia-footer-brand">
+                            <a href="<?php echo base_url(); ?>" class="dontia-footer-logo-link">
+                                <img src="<?php echo base_url('admin/webroot/uploads/logo/') . $w->company_logo; ?>" alt="<?php echo $company_esc; ?>">
+                            </a>
+                            <p class="dontia-footer-tagline"><?php echo $company_esc; ?></p>
+                            <p class="dontia-footer-about">
+                                We offer a wide range of dental and skin care services. For appointments or questions, reach us by phone or email—we are happy to help.
+                            </p>
+                            <ul class="dontia-footer-contact-inline">
+                                <?php foreach ($phones as $p) { ?>
+                                <li><a href="tel:<?php echo preg_replace('/\s+/', '', $p); ?>"><i class="fa fa-phone" aria-hidden="true"></i><?php echo htmlspecialchars($p, ENT_QUOTES, 'UTF-8'); ?></a></li>
+                                <?php } ?>
+                                <?php if ($email !== '') { ?>
+                                <li><a href="mailto:<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-envelope" aria-hidden="true"></i><?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?></a></li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-12 dontia-footer-locations-col">
+                        <h2 class="dontia-footer-heading">Reach us at</h2>
+                        <div class="dontia-footer-locations">
+                            <?php if ($addr1 !== '') { ?>
+                            <div class="dontia-footer-location">
+                                <span class="dontia-footer-location-label">Registered office</span>
+                                <p><?php echo htmlspecialchars($addr1, ENT_QUOTES, 'UTF-8'); ?></p>
+                            </div>
+                            <?php } ?>
+                            <?php if ($addr2 !== '') { ?>
+                            <div class="dontia-footer-location">
+                                <span class="dontia-footer-location-label">Corporate office</span>
+                                <p><?php echo htmlspecialchars($addr2, ENT_QUOTES, 'UTF-8'); ?></p>
+                            </div>
+                            <?php } ?>
+                            <?php if ($addr1 === '' && $addr2 === '') { ?>
+                            <p class="dontia-footer-muted">Add addresses in Admin → Website settings.</p>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-12 col-md-12 dontia-footer-links-col">
+                        <h2 class="dontia-footer-heading">Useful links</h2>
+                        <ul class="dontia-footer-links">
+                            <li><a href="<?php echo base_url('About'); ?>">About</a></li>
+                            <li><a href="<?php echo base_url('Blog'); ?>">Blog</a></li>
+                            <li><a href="<?php echo base_url('Client'); ?>">Client</a></li>
+                            <li><a href="<?php echo base_url('Gallery'); ?>">Gallery</a></li>
+                            <li><a href="<?php echo base_url('Career'); ?>">Career</a></li>
+                            <li><a href="<?php echo base_url('Contact'); ?>">Contact us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom dontia-footer-bottom">
+            <div class="auto-container">
+                <div class="inner-container clearfix dontia-footer-bottom-inner">
+                    <div class="copyright-text dontia-footer-copyright">
+                        <p><?php echo htmlspecialchars($copy, ENT_QUOTES, 'UTF-8'); ?></p>
+                    </div>
+                    <div class="social-links dontia-footer-social">
+                        <ul class="dontia-footer-social-list">
+                            <?php foreach ($dontia_footer_social as $soc) {
+                                $href = $soc['link'];
+                                if ($href === '') {
+                                    continue;
+                                }
+                                $h = htmlspecialchars($href, ENT_QUOTES, 'UTF-8');
+                                ?>
+                            <li>
+                                <a href="<?php echo $h; ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo htmlspecialchars($soc['label'], ENT_QUOTES, 'UTF-8'); ?>">
+                                    <i class="fa <?php echo $soc['icon']; ?>" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+
+</div>
+  
+     
+
+<!--Scroll to top-->
+<div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-arrow-circle-o-up"></span></div>
+<script src="<?php echo base_url('assets/'); ?>js/jquery.js"></script> 
+<script src="<?php echo base_url('assets/'); ?>js/popper.min.js"></script>
+<script src="<?php echo base_url('assets/'); ?>js/bootstrap.min.js"></script>
+<script src="<?php echo base_url('assets/'); ?>js/jquery.fancybox.js"></script>
+<script src="<?php echo base_url('assets/'); ?>js/owl.js"></script>
+<script src="<?php echo base_url('assets/'); ?>js/wow.js"></script>
+<script src="<?php echo base_url('assets/'); ?>js/appear.js"></script>
+<script src="<?php echo base_url('assets/'); ?>js/mixitup.js"></script>
+<script src="<?php echo base_url('assets/'); ?>js/slick.js"></script>
+<script src="<?php echo base_url('assets/'); ?>js/script.js"></script>
+<!-- Color Setting -->
+<script src="<?php echo base_url('assets/'); ?>js/color-settings.js"></script>
+
+<script>
+	if (jQuery('.product-slide').length) {
+		jQuery('.product-slide').slick({
+			dots: false,
+			autoplay: true,
+			infinite: true,
+			speed: 300,
+			slidesToShow: 3,
+			slidesToScroll: 1,
+			responsive: [{
+					breakpoint: 1025,
+					settings: {
+						slidesToShow: 2,
+						slidesToScroll: 2
+					}
+				},
+				{
+					breakpoint: 850,
+					settings: {
+						slidesToShow: 2,
+						slidesToScroll: 2
+					}
+				},
+				{
+					breakpoint: 600,
+					settings: {
+						slidesToShow: 2,
+						slidesToScroll: 2
+					}
+				},
+				{
+					breakpoint: 480,
+					settings: {
+						slidesToShow: 1,
+						slidesToScroll: 1
+					}
+				}
+			]
+		});
+	}
+	(function ($) {
+		var $sec = $('.dontia-services-section');
+		if (!$sec.length) return;
+		$sec.on('click', '.dontia-services-tab[data-target]', function () {
+			var $t = $(this);
+			var id = $t.attr('data-target');
+			if (!id) return;
+			$sec.find('.dontia-services-tab[role="tab"]').removeClass('is-active').attr('aria-selected', 'false');
+			$t.addClass('is-active').attr('aria-selected', 'true');
+			$sec.find('.dontia-services-panel').attr('hidden', true);
+			$sec.find('#' + id).removeAttr('hidden');
+		});
+	})(jQuery);
+</script>
+
+
+
+
+
+<?php
+$flash_message = $this->session->flashdata('message');
+if ($flash_message != '') {
+?>
+<div class="modal fade" id="flashMessageModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+                <h4 class="modal-title">Message</h4>
+            </div>
+            <div class="modal-body"><?php echo $flash_message; ?></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(window).on('load', function () {
+        $('#flashMessageModal').modal('show');
+    });
+</script>
+<?php } ?>
+</body>
+
+
+</html>
