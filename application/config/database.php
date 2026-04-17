@@ -80,8 +80,8 @@ if ($server_name === 'localhost' || str_starts_with($server_name, '127.'))
 }
 else
 {
-   $username='arnab94';
-   $password='Arnabnath@95'; 
+   $username='u677776351_dental_project';
+   $password='Dental_project@2026'; 
 }
 $active_group = 'default';
 $query_builder = TRUE;
@@ -91,7 +91,7 @@ $db['default'] = array(
 	'hostname' => 'localhost',
 	'username' => $username,
 	'password' => $password,
-	'database' => 'dental_project',
+	'database' => 'u677776351_dental_project',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $host = $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? 'localhost';
-$config['base_url'] = 'http://'.$host.'/dental_project/';
+$config['base_url'] = 'https://'.$host.'/';
 
 
 /* $config['base_url'] = 'http://45.33.108.194/myscribd/';*/
