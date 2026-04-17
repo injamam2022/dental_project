@@ -75,6 +75,12 @@
                             <li><a href="<?php echo site_url('Whychooseus/faq');?>"><span class="fa fa-question-circle"></span> Why Choose Us — FAQ</a></li>
                             <li><a href="<?php echo site_url('Hometechnology');?>"><span class="fa fa-cog"></span> Latest Technology</a></li>
                             <li><a href="<?php echo site_url('Hometechnology/items');?>"><span class="fa fa-th"></span> Latest Technology — tiles</a></li>
+                            <li><a href="<?php echo site_url('Doctormanagement');?>"><span class="fa fa-user-md"></span> Doctors — list</a></li>
+                            <li><a href="<?php echo site_url('Doctormanagement/add');?>"><span class="fa fa-plus-circle"></span> Doctors — add</a></li>
+                            <li><a href="<?php echo site_url('Testimonialvideos');?>"><span class="fa fa-play-circle"></span> Video Testimonials — list</a></li>
+                            <li><a href="<?php echo site_url('Testimonialvideos/add');?>"><span class="fa fa-plus-circle"></span> Video Testimonials — add</a></li>
+                            <li><a href="<?php echo site_url('Dentalmedia');?>"><span class="fa fa-picture-o"></span> Dental Media — list</a></li>
+                            <li><a href="<?php echo site_url('Dentalmedia/add');?>"><span class="fa fa-plus-circle"></span> Dental Media — add</a></li>
                                  
                              </ul>
                      </li>

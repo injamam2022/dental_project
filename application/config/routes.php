@@ -52,3 +52,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Home/Home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+// SEO-friendly slugs
+$route['dental-services-in-kolkata'] = 'Dental/Dental/index';
+$route['about-us'] = 'About/About/index';
+$route['services'] = 'Services/Services/index';
+$route['why-choose-us'] = 'Whychooseus/Whychooseus/index';
+$route['contact-us'] = 'Contact/Contact/index';
+$route['blogs'] = 'Blog/Blog/index';
+$route['Dental'] = 'Dental/Dental/index';
+$route['best-dental-clinic-in-kolkata'] = 'Dental/Dental/index';
+$route['blog/(:any)'] = 'Blog/Blog/blogdetails/$1';

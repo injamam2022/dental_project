@@ -21,13 +21,16 @@ class Blog extends Frontend_Controller {
 		$this->load->view('layout/default',$content);
 	}
 	
-    public function blogdetails($id)
+    public function blogdetails($slug = '')
     {		
     	
 
         $content['banner_details']=$this->Blog_Model->GetDetailsBanner();
-       /* $id= $this->uri->segment(3, 0);*/
-        $content['single_data']=$this->Blog_Model->SingleBlog($id);
+        $content['single_data']=$this->Blog_Model->SingleBlogByIdentifier($slug);
+		if (empty($content['single_data'])) {
+			show_404();
+			return;
+		}
 		if ( ! empty($content['single_data'][0])) {
 			$b = $content['single_data'][0];
 			$excerpt = strip_tags((string) (isset($b->summernote) ? $b->summernote : ''));

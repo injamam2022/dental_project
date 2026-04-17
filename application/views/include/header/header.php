@@ -60,6 +60,12 @@ $h = static function ($s) {
 <!--Color Themes-->
 <link id="theme-color-file" href="<?php echo base_url('assets/'); ?>css/color-themes/blue-theme.css" rel="stylesheet">
 <link href="<?php echo base_url('assets/'); ?>css/dontia-brand.css" rel="stylesheet">
+<?php
+$router_class = strtolower((string) $this->router->fetch_class());
+if ($router_class === 'dental') {
+?>
+<link href="<?php echo base_url('assets/css/dental-react-look.css'); ?>" rel="stylesheet">
+<?php } ?>
 
 <link rel="shortcut icon" href="<?php echo base_url('assets/'); ?>images/favicon.png" type="image/x-icon">
 <!-- <link rel="icon" href="images/favicon.png" type="image/x-icon"> -->
@@ -182,8 +188,9 @@ $h = static function ($s) {
 
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navigation dontia-primary-nav">
-                                    <li><a href="<?php echo base_url(); ?>About">About</a></li>
-                                    <li class="dropdown"><a href="#">Services</a>
+                                    <li><a href="<?php echo base_url('dental-services-in-kolkata'); ?>">Dental</a></li>
+                                    <li><a href="<?php echo base_url('about-us'); ?>">About</a></li>
+                                    <li class="dropdown"><a href="<?php echo base_url('services'); ?>">Services</a>
                                         <ul>
                                             <?php
                                                 $services = GetServices();
@@ -221,8 +228,8 @@ $h = static function ($s) {
                                             ?>
                                         </ul>
                                     </li>
-                                    <li><a href="<?php echo base_url('Whychooseus'); ?>">Why Choose Us</a></li>
-                                    <li><a href="<?php echo base_url(); ?>Contact">Contact</a></li>
+                                    <li><a href="<?php echo base_url('why-choose-us'); ?>">Why Choose Us</a></li>
+                                    <li><a href="<?php echo base_url('contact-us'); ?>">Contact</a></li>
                                 </ul>
                             </div>
                         </nav>

@@ -2712,6 +2712,76 @@ header-style-seven .nav-toggler:hover{
 	border-color: #ffffff;
 }
 
+/* Home hero: full-slide YouTube (mute=1 required for autoplay in most browsers) */
+.home-hero-video-banner.banner-section:before{
+	display: none;
+}
+
+/* Taller hero + object-fit-style “cover” for 16:9 YouTube (matches full-bleed Elementor-style heroes) */
+.home-hero-video-banner.home-hero.banner-section .carousel,
+.home-hero-video-banner.home-hero.banner-section .carousel-inner{
+	max-height: min(900px, 92vh);
+	min-height: 480px;
+}
+.home-hero-video-banner.home-hero.banner-section .carousel-item{
+	max-height: min(900px, 92vh);
+	min-height: 480px;
+}
+
+.home-hero.banner-section .carousel-item .home-hero-youtube-cover{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	z-index: 0;
+	background: #000;
+}
+.home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-youtube-iframe{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100vw;
+	height: 56.25vw;
+	min-width: 177.78vh;
+	min-height: 100%;
+	border: 0;
+	transform: translate(-50%, -50%);
+	z-index: 0;
+}
+
+/* Live site: headline centred over video, lighter vignette */
+.home-hero-video-banner.home-hero.banner-section .carousel-item .hero-slide-overlay{
+	background:
+		radial-gradient(ellipse at center, rgba(12, 10, 9, 0.15) 0%, rgba(12, 10, 9, 0.55) 100%),
+		linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, transparent 35%, transparent 65%, rgba(0, 0, 0, 0.35) 100%);
+}
+.home-hero-video-banner.home-hero.banner-section .carousel .content-box{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	top: 50%;
+	left: 0;
+	right: 0;
+	width: 100%;
+	max-width: 100%;
+	padding: clamp(20px, 4vw, 48px) clamp(18px, 4vw, 40px);
+	transform: translateY(-50%);
+}
+.home-hero-video-banner.home-hero.banner-section .carousel .hero-content-card{
+	max-width: min(920px, 100%);
+	margin-left: auto;
+	margin-right: auto;
+	background: transparent;
+	border: 0;
+	box-shadow: none;
+}
+.home-hero-video-banner.home-hero.banner-section .carousel .hero-banner-cta{
+	justify-content: center;
+}
+
 @media (max-width: 991px){
 	.home-hero.banner-section .carousel .content-box{
 		top: 59%;
@@ -2788,6 +2858,28 @@ header-style-seven .nav-toggler:hover{
 		text-align: center;
 		line-height: 1.25;
 		hyphens: auto;
+	}
+
+	/* Video hero: keep full-bleed + centred copy like desktop / live site */
+	.home-hero-video-banner.home-hero.banner-section .carousel,
+	.home-hero-video-banner.home-hero.banner-section .carousel-inner,
+	.home-hero-video-banner.home-hero.banner-section .carousel-item{
+		max-height: min(720px, 88vh);
+		min-height: 420px;
+	}
+	.home-hero-video-banner.home-hero.banner-section .carousel .content-box{
+		top: 50%;
+		transform: translateY(-50%);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		padding: clamp(16px, 4vw, 32px) 14px;
+	}
+	.home-hero-video-banner.home-hero.banner-section .carousel .hero-content-card{
+		background: transparent;
+		border: 0;
+		box-shadow: none;
 	}
 }
 

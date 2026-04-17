@@ -66,12 +66,13 @@ $dontia_footer_social = array(
                     <div class="col-xl-4 col-lg-12 col-md-12 dontia-footer-links-col">
                         <h2 class="dontia-footer-heading">Useful links</h2>
                         <ul class="dontia-footer-links">
-                            <li><a href="<?php echo base_url('About'); ?>">About</a></li>
-                            <li><a href="<?php echo base_url('Blog'); ?>">Blog</a></li>
+                            <li><a href="<?php echo base_url('dental-services-in-kolkata'); ?>">Dental</a></li>
+                            <li><a href="<?php echo base_url('about-us'); ?>">About</a></li>
+                            <li><a href="<?php echo base_url('blogs'); ?>">Blog</a></li>
                             <li><a href="<?php echo base_url('Client'); ?>">Client</a></li>
                             <li><a href="<?php echo base_url('Gallery'); ?>">Gallery</a></li>
                             <li><a href="<?php echo base_url('Career'); ?>">Career</a></li>
-                            <li><a href="<?php echo base_url('Contact'); ?>">Contact us</a></li>
+                            <li><a href="<?php echo base_url('contact-us'); ?>">Contact us</a></li>
                         </ul>
                     </div>
                 </div>

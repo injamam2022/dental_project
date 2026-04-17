@@ -24,23 +24,28 @@
                     <div class="blog-classic">
                          <?php 
                 
-                  for($i=0;$i<count($blog_details);$i++)
+                  $blog_rows = is_array($blog_details) ? $blog_details : array();
+                  for($i=0;$i<count($blog_rows);$i++)
                   {
+                         $permalink = strtolower(trim((string) $blog_rows[$i]->Permalink));
+                         $permalink = preg_replace('/[^a-z0-9\s-]/', '', $permalink);
+                         $permalink = trim(preg_replace('/[\s-]+/', '-', $permalink), '-');
+                         $url = $permalink !== '' ? base_url('blog/'.$permalink) : base_url('Blog/blogdetails/'.$blog_rows[$i]->id);
                          ?>
                         
                         <div class="news-block-two wow fadeIn">
                             <div class="inner-box">
                                 <div class="image-box">
-                                    <figure class="image"> <a href="<?php echo base_url('Blog/blogdetails/'.$blog_details_asc[$i]->id); ?>"><img src="<?php echo base_url('/admin/webroot/uploads/blog/'.$blog_details[$i]->blog_image); ?>" alt=""></a></figure>
+                                    <figure class="image"> <a href="<?php echo $url; ?>"><img src="<?php echo base_url('/admin/webroot/uploads/blog/'.$blog_rows[$i]->blog_image); ?>" alt=""></a></figure>
                                 </div>
                                 <div class="caption-box">
                                     <div class="inner">
-                                        <h3><a href="<?php echo base_url('Blog/blogdetails/'.$blog_details_desc[$i]->id); ?>"><?php echo $blog_details[$i]->post_title; ?></a></h3>
+                                        <h3><a href="<?php echo $url; ?>"><?php echo $blog_rows[$i]->post_title; ?></a></h3>
                                         <ul class="info">
-                                            <li><?php  echo $deadline = date('d', strtotime($blog_details[$i]->dat)); ?>,<?php echo $deadline = date('Y', strtotime($blog_details[$i]->dat)); ?></li>
-                                            <li><a href="#">By <?php echo $blog_details[$i]->posted; ?></a></li>
+                                            <li><?php  echo $deadline = date('d', strtotime($blog_rows[$i]->dat)); ?>,<?php echo $deadline = date('Y', strtotime($blog_rows[$i]->dat)); ?></li>
+                                            <li><a href="#">By <?php echo $blog_rows[$i]->posted; ?></a></li>
                                         </ul>
-                                        <div class="text"><?php echo substr($blog_details[$i]->summernote, 0, 800);    ?>...more</div>
+                                        <div class="text"><?php echo substr($blog_rows[$i]->summernote, 0, 800);    ?>...more</div>
                                     </div>
                                 </div>
                             </div>
@@ -61,13 +66,18 @@
                                <?php
     
                            
-                           for($z=0;$z<count($blog_details_desc);$z++)
+                           $recent_posts = is_array($blog_details_desc) ? $blog_details_desc : array();
+                           for($z=0;$z<count($recent_posts);$z++)
                            {
+                               $permalink = strtolower(trim((string) $recent_posts[$z]->Permalink));
+                               $permalink = preg_replace('/[^a-z0-9\s-]/', '', $permalink);
+                               $permalink = trim(preg_replace('/[\s-]+/', '-', $permalink), '-');
+                               $url = $permalink !== '' ? base_url('blog/'.$permalink) : base_url('Blog/blogdetails/'.$recent_posts[$z]->id);
                                ?>  
                                 <article class="post">
-                                    <div class="post-thumb"> <a href="<?php echo base_url('Blog/blogdetails/'.$blog_details_desc[$z]->id); ?>"><img src="<?php echo base_url('/admin/webroot/uploads/blog/'.$blog_details_desc[$z]->blog_image); ?>" alt=""></a></div>
-                                    <h3> <a href="<?php echo base_url('Blog/blogdetails/'.$blog_details_desc[$z]->id); ?>"><?php echo  $blog_details_desc[$z]->post_title; ?></a></h3>
-                                    <div class="post-info">by <?php echo $blog_details_desc[$z]->posted; ?></div>
+                                    <div class="post-thumb"> <a href="<?php echo $url; ?>"><img src="<?php echo base_url('/admin/webroot/uploads/blog/'.$recent_posts[$z]->blog_image); ?>" alt=""></a></div>
+                                    <h3> <a href="<?php echo $url; ?>"><?php echo  $recent_posts[$z]->post_title; ?></a></h3>
+                                    <div class="post-info">by <?php echo $recent_posts[$z]->posted; ?></div>
                                 </article>
                                 
                         <?php } ?>

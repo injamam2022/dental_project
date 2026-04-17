@@ -1,0 +1,23 @@
+-- Skin service icons imported from https://dontiacareclinic.com/ (Elementor inline SVGs)
+SET NAMES utf8mb4;
+UPDATE product_master SET pro_image = 'skin-live-skin-analysis.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('Skin Analysis'));
+UPDATE product_master SET pro_image = 'skin-live-chemical-peels.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('Chemical Peels'));
+UPDATE product_master SET pro_image = 'skin-live-glow-drips.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('Glow Drips'));
+UPDATE product_master SET pro_image = 'skin-live-mft-microneedling.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('MFT & Microneedling'));
+UPDATE product_master SET pro_image = 'skin-live-acne-management.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('Acne Management'));
+UPDATE product_master SET pro_image = 'skin-live-scar-management.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('Scar Management'));
+UPDATE product_master SET pro_image = 'skin-live-paediatric-skin-treatment.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('Paediatric Skin Treatment'));
+UPDATE product_master SET pro_image = 'skin-live-skin-booster.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('Skin Booster'));
+UPDATE product_master SET pro_image = 'skin-live-mnrf-anti-ageing.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('MNRF Anti-Ageing'));
+UPDATE product_master SET pro_image = 'skin-live-anti-ageing-treatments.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('Anti-Ageing Treatments'));
+UPDATE product_master SET pro_image = 'skin-live-freckles-melasma.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('Freckles & Melasma'));
+UPDATE product_master SET pro_image = 'skin-live-keloid-cryotherapy.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('Keloid Cryotherapy'));
+UPDATE product_master SET pro_image = 'skin-live-corn-removal.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('Corn Removal'));
+UPDATE product_master SET pro_image = 'skin-live-tattoo-removal.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('Tattoo Removal'));
+UPDATE product_master SET pro_image = 'skin-live-moles-warts-tags-removal.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('Moles, Warts, Tags Removal'));
+UPDATE product_master SET pro_image = 'skin-live-laser-hair-reduction.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('Laser Hair Reduction'));
+UPDATE product_master SET pro_image = 'skin-live-q-switch-laser.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('Q-Switch Laser'));
+UPDATE product_master SET pro_image = 'skin-live-laser-regrowth.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('Laser Regrowth'));
+UPDATE product_master SET pro_image = 'skin-live-prp.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('PRP'));
+UPDATE product_master SET pro_image = 'skin-live-prp-with-gfc.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('PRP with GFC'));
+UPDATE product_master SET pro_image = 'skin-live-vampire-facial-face-prp.svg' WHERE status = 'active' AND LOWER(TRIM(product_name)) = LOWER(TRIM('Vampire Facial (Face PRP)'));

@@ -6,63 +6,44 @@ print_r($this->website['data']);*/
 ?>    
 
 
-    
-    <section class="banner-section home-hero">
-<div id="demo" class="carousel slide" data-ride="carousel">
+    <section class="banner-section home-hero home-hero-video-banner" aria-label="Clinic intro video">
+        <div id="demo" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <?php
+                $first_banner = (isset($banner_details) && is_array($banner_details) && count($banner_details) > 0) ? $banner_details[0] : null;
+                $hero_title = ($first_banner && isset($first_banner->image_seo_title) && trim((string) $first_banner->image_seo_title) !== '') ? $first_banner->image_seo_title : 'Welcome to Dontia Care Clinic';
+                $hero_subtitle = ($first_banner && isset($first_banner->image_url_link) && trim((string) $first_banner->image_url_link) !== '') ? $first_banner->image_url_link : 'Your One-Stop Destination For A Radiant Smile And Timeless Beauty!';
+                ?>
 
- 
-  <ul class="carousel-indicators">
-	  <?php for($i=0;$i<count($banner_details);$i++) {
-	?>
-	 <li data-target="#demo" data-slide-to="<?php echo $i; ?>" <?php if($i==0) { ?> class="active" <?php  } ?>></li>
-	  <?php
-      } ?>
-   
+                <div class="carousel-item active">
+                    <div class="home-hero-youtube-cover">
+                        <iframe
+                            class="home-hero-youtube-iframe"
+                            src="https://www.youtube.com/embed/PqdEzU6_2zg?autoplay=1&amp;mute=1&amp;playsinline=1&amp;rel=0&amp;modestbranding=1&amp;loop=1&amp;playlist=PqdEzU6_2zg"
+                            title="Dontia Care Clinic — welcome video"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="eager"
+                        ></iframe>
+                    </div>
 
-  </ul>
+                    <div class="hero-slide-overlay" aria-hidden="true"></div>
 
-  <div class="carousel-inner">
-	    <?php
-	  $m=0;
-                if(count($banner_details)>0){
-                    foreach($banner_details as $banner){
-            ?>
-	  
-	  
-    <div class="carousel-item <?php if($m == 0){ ?> active <?php } ?>">
-      <img src="<?php echo base_url('admin/webroot/uploads/banner/').$banner->image_name; ?>" alt="">
-		<div class="hero-slide-overlay" aria-hidden="true"></div>
-		<div class="content-box">
-			<div class="hero-content-card">
-			<div class="hero-banner-text">
-				<div class="hero-banner-title"><?php echo $banner->image_seo_title; ?></div>
-				<div class="hero-banner-subtitle"><?php echo $banner->image_url_link; ?></div>
-			</div>
-			<div class="hero-banner-cta">
-				<a href="#" class="hero-btn hero-btn-primary" data-toggle="modal" data-target="#dontiaAppointmentModal">Book Appointment</a>
-				<a href="<?php echo base_url('About'); ?>" class="hero-btn hero-btn-outline">Learn More</a>
-			</div>
-			</div>
-		</div>
-    </div>
-	  
-	   <?php
-						$m++;
-                    }
-                }
-            ?>
-	  
-  
-  </div>
-  
-
-  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </a>
-  <a class="carousel-control-next" href="#demo" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </a>
-</div>
+                    <div class="content-box">
+                        <div class="hero-content-card">
+                            <div class="hero-banner-text">
+                                <div class="hero-banner-title"><?php echo $hero_title; ?></div>
+                                <div class="hero-banner-subtitle"><?php echo $hero_subtitle; ?></div>
+                            </div>
+                            <div class="hero-banner-cta">
+                                <a href="#" class="hero-btn hero-btn-primary" data-toggle="modal" data-target="#dontiaAppointmentModal">Book Appointment</a>
+                                <a href="<?php echo base_url('about-us'); ?>" class="hero-btn hero-btn-outline">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
   
     <?php
@@ -103,7 +84,7 @@ print_r($this->website['data']);*/
                         <div class="inner-column wow fadeInLeft">
                             <div class="content-box dontia-about-card">
                                 <div class="text dontia-about-body"><?php echo $content[0][0]; ?></div>
-                                <div class="link-box"><a href="<?php echo base_url('About'); ?>" class="theme-btn btn-style-one dontia-about-cta">About Us</a></div>
+                                <div class="link-box"><a href="<?php echo base_url('about-us'); ?>" class="theme-btn btn-style-one dontia-about-cta">About Us</a></div>
                             </div>
                         </div>
                     </div>
@@ -277,45 +258,31 @@ $dontia_team_members = array(
 );
 $dontia_team_placeholder = base_url('assets/images/team/placeholder.svg');
 ?>
-<?php if (!empty($technology_items)) { ?>
-<section class="dontia-tech-section" id="latest-technology" aria-labelledby="dontia-tech-heading">
-    <div class="auto-container">
-        <header class="dontia-tech-intro">
-            <h2 id="dontia-tech-heading" class="dontia-tech-title"><?php echo htmlspecialchars($tech_title, ENT_QUOTES, 'UTF-8'); ?></h2>
-            <div class="dontia-tech-divider" aria-hidden="true">
-                <span class="dontia-tech-divider-line"></span>
-                <span class="dontia-tech-divider-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6c2.9 0 5.2 1.7 6.2 4.3.7 1.8.8 3.9.3 6.1l-1.7 8.6c-.4 1.9-.6 3.9-.4 5.9l.9 10.8c.2 2.2-1.3 4.1-3.4 4.1-1.6 0-2.9-1.1-3.3-2.8l-1.1-6.4c-.3-1.6-1.4-1.6-1.7 0l-1.1 6.4c-.4 1.7-1.7 2.8-3.3 2.8-2.1 0-3.6-1.9-3.4-4.1l.9-10.8c.2-2 0-4-.4-5.9l-1.7-8.6c-.5-2.2-.4-4.3.3-6.1 1-2.6 3.3-4.3 6.2-4.3z"/></svg>
-                </span>
-                <span class="dontia-tech-divider-line"></span>
+<?php if (!empty($technology_cards)) { ?>
+<section class="dr-section dr-tech home-tech-sync" id="latest-technology">
+    <div class="dr-container">
+        <div class="dr-tech-head">
+            <h2><?php echo htmlspecialchars($tech_title, ENT_QUOTES, 'UTF-8'); ?></h2>
+            <div class="dr-tech-divider" aria-hidden="true">
+                <span class="dr-tech-divider-line"></span>
+                <span class="dr-tech-divider-gem">💎</span>
+                <span class="dr-tech-divider-line"></span>
             </div>
-        </header>
-        <div class="dontia-tech-grid">
+        </div>
+        <div class="dr-tech-grid">
             <?php
-            foreach ($technology_items as $ti) {
-                $is_hero = !empty($ti->is_hero);
-                $img_esc = htmlspecialchars($ti->image_url, ENT_QUOTES, 'UTF-8');
-                $lab_esc = htmlspecialchars($ti->title, ENT_QUOTES, 'UTF-8');
-                $desc_esc = nl2br(htmlspecialchars($ti->description, ENT_QUOTES, 'UTF-8'));
-                $tile_class = 'dontia-tech-tile' . ($is_hero ? ' dontia-tech-tile--hero' : '');
+            foreach ($technology_cards as $ti) {
+                $img_esc = htmlspecialchars(isset($ti['image_url']) ? $ti['image_url'] : '', ENT_QUOTES, 'UTF-8');
+                $lab_esc = htmlspecialchars(isset($ti['title']) ? $ti['title'] : '', ENT_QUOTES, 'UTF-8');
+                $desc_esc = htmlspecialchars(isset($ti['description']) ? $ti['description'] : '', ENT_QUOTES, 'UTF-8');
                 ?>
-            <div class="<?php echo $tile_class; ?>" tabindex="0">
-                <div class="dontia-tech-flip">
-                    <div class="dontia-tech-flip-inner">
-                        <div class="dontia-tech-flip-face dontia-tech-flip-front">
-                            <span class="dontia-tech-tile-bg" style="background-image:url('<?php echo $img_esc; ?>')"></span>
-                            <span class="dontia-tech-tile-scrim" aria-hidden="true"></span>
-                            <span class="dontia-tech-tile-label"><?php echo $lab_esc; ?></span>
-                        </div>
-                        <div class="dontia-tech-flip-face dontia-tech-flip-back" aria-hidden="true">
-                            <div class="dontia-tech-flip-back-inner">
-                                <h3 class="dontia-tech-flip-back-title"><?php echo $lab_esc; ?></h3>
-                                <div class="dontia-tech-flip-back-text"><?php echo $desc_esc; ?></div>
-                            </div>
-                        </div>
-                    </div>
+            <article class="dr-tech-card">
+                <img src="<?php echo $img_esc; ?>" alt="<?php echo $lab_esc; ?>">
+                <div class="dr-tech-overlay">
+                    <h3><?php echo $lab_esc; ?></h3>
+                    <p class="dr-tech-desc"><?php echo $desc_esc; ?></p>
                 </div>
-            </div>
+            </article>
             <?php } ?>
         </div>
     </div>
@@ -324,10 +291,10 @@ $dontia_team_placeholder = base_url('assets/images/team/placeholder.svg');
 
 <section class="dontia-team-section" id="our-team" aria-labelledby="dontia-team-heading">
     <div class="auto-container">
-        <div class="row dontia-team-layout align-items-start">
+        <div class="row dontia-team-layout align-items-center">
             <div class="col-lg-4 col-md-12 dontia-team-heading-col">
                 <h2 id="dontia-team-heading" class="dontia-team-title">Meet Our Team Members</h2>
-                <p class="dontia-team-sub">Experienced clinicians dedicated to your smile and skin health.</p>
+                <p class="dontia-team-sub">Board-led care across <strong>dental</strong>, <strong>skin</strong>, and <strong>ENT</strong>—clear treatment plans and a calm, patient-first experience.</p>
             </div>
             <div class="col-lg-8 col-md-12">
                 <div class="dontia-team-grid">
@@ -392,11 +359,63 @@ $dontia_team_placeholder = base_url('assets/images/team/placeholder.svg');
 <?php
 $tes_list = (isset($tes_details) && is_array($tes_details)) ? $tes_details : array();
 $dontia_testimonial_videos = array();
+$tv_rows = isset($testimonial_videos) ? $testimonial_videos : array();
+if (!is_array($tv_rows)) {
+    $tv_rows = array();
+}
+$dontia_parse_youtube_id = function ($raw) {
+    $raw = trim((string) $raw);
+    if ($raw === '') {
+        return '';
+    }
+    if (preg_match('/^[a-zA-Z0-9_-]{6,32}$/', $raw)) {
+        return $raw;
+    }
+    $parts = @parse_url($raw);
+    if (!is_array($parts)) {
+        return '';
+    }
+    $host = isset($parts['host']) ? strtolower((string) $parts['host']) : '';
+    $path = isset($parts['path']) ? trim((string) $parts['path'], '/') : '';
+    if (strpos($host, 'youtu.be') !== false && $path !== '') {
+        $id = explode('/', $path)[0];
+        return preg_replace('/[^a-zA-Z0-9_-]/', '', $id);
+    }
+    if (strpos($host, 'youtube.com') !== false || strpos($host, 'youtube-nocookie.com') !== false) {
+        if (!empty($parts['query'])) {
+            parse_str($parts['query'], $q);
+            if (!empty($q['v'])) {
+                return preg_replace('/[^a-zA-Z0-9_-]/', '', (string) $q['v']);
+            }
+        }
+        $segments = $path !== '' ? explode('/', $path) : array();
+        foreach ($segments as $idx => $seg) {
+            if (($seg === 'embed' || $seg === 'shorts' || $seg === 'live') && isset($segments[$idx + 1])) {
+                return preg_replace('/[^a-zA-Z0-9_-]/', '', (string) $segments[$idx + 1]);
+            }
+        }
+    }
+    return '';
+};
+foreach ($tv_rows as $tv_row) {
+    if (!is_object($tv_row)) {
+        continue;
+    }
+    $yid = isset($tv_row->youtube_id) ? $dontia_parse_youtube_id((string) $tv_row->youtube_id) : '';
+    if ($yid === '') {
+        continue;
+    }
+    $dontia_testimonial_videos[] = array(
+        'id' => $yid,
+        'label' => isset($tv_row->title) ? (string) $tv_row->title : '',
+    );
+}
+unset($dontia_parse_youtube_id);
 ?>
     <section class="testimonial-section dontia-testimonial" aria-labelledby="dontia-testimonial-heading">
         <div class="auto-container dontia-testimonial-inner">
             <header class="dontia-testimonial-intro">
-                <h2 id="dontia-testimonial-heading" class="dontia-testimonial-title">Your Smile, Our Story</h2>
+                <h2 id="dontia-testimonial-heading" class="dontia-testimonial-title">Patient Testimonials</h2>
                 <div class="dontia-testimonial-divider" aria-hidden="true">
                     <span class="dontia-testimonial-divider-line"></span>
                     <span class="dontia-testimonial-divider-icon">
@@ -406,7 +425,7 @@ $dontia_testimonial_videos = array();
                     </span>
                     <span class="dontia-testimonial-divider-line"></span>
                 </div>
-                <p class="dontia-testimonial-lead">Our clients have benefited from our services and products. We are the right choice for their care.</p>
+                <p class="dontia-testimonial-lead">Real patient experiences and transformations shared directly from our patients.</p>
             </header>
 
             <?php if (count($tes_list) > 0) { ?>
@@ -498,6 +517,10 @@ $dontia_testimonial_videos = array();
                             
                            for($z=0;$z<count($blog_details_desc);$z++)
                            {
+                               $permalink = strtolower(trim((string) $blog_details_desc[$z]->Permalink));
+                               $permalink = preg_replace('/[^a-z0-9\s-]/', '', $permalink);
+                               $permalink = trim(preg_replace('/[\s-]+/', '-', $permalink), '-');
+                               $blog_url = $permalink !== '' ? base_url('blog/'.$permalink) : base_url('Blog/blogdetails/'.$blog_details_desc[$z]->id);
                          ?>
                 <div class="news-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
@@ -505,7 +528,7 @@ $dontia_testimonial_videos = array();
                             <figure class="image"><img src="<?php echo base_url('/admin/webroot/uploads/blog/'.$blog_details_desc[$z]->blog_image); ?>" alt=""></figure>
                         </div>
                         <div class="caption-box">
-                            <h3>  <a href="<?php echo base_url('Blog/blogdetails/'.$blog_details_desc[$z]->id); ?>"><?php echo  $blog_details_desc[$z]->post_title; ?> </a></h3>
+                            <h3>  <a href="<?php echo $blog_url; ?>"><?php echo  $blog_details_desc[$z]->post_title; ?> </a></h3>
                             <ul class="info">
                                 <li><?php  echo $deadline = date('d', strtotime($blog_details_desc[$z]->dat)); ?>, <?php echo $deadline = date('Y', strtotime($blog_details_desc[$z]->dat)); ?></li>
                                 <li>By Admin</li>
