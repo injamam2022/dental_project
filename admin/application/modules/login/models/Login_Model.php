@@ -8,6 +8,7 @@ class Login_Model  extends MY_Model{
 		$query=$this->db->get('admin_login');		
 		if($query->num_rows()!== 1)
 	    {
+		 log_message('error', 'Admin login model: no user found | email=' . trim((string) $mail));
 		 return false;
 	    }
 		$row = $query->row();
@@ -22,6 +23,9 @@ class Login_Model  extends MY_Model{
 			} elseif (function_exists('password_verify') && password_verify($raw, $stored)) {
 				$is_match = true;
 			}
+		}
+		if (!$is_match) {
+			log_message('error', 'Admin login model: password mismatch | email=' . trim((string) $mail) . ' | stored_len=' . strlen($stored));
 		}
 		return $is_match ? $row : false;
 		}

@@ -67,10 +67,13 @@ class Login extends MY_Controller {
 		$email =$this->security->xss_clean($this->input->post('user_email'));
 
 		$password = $this->security->xss_clean($this->input->post('password'));
+		$ip = $this->input->ip_address();
+		log_message('error', 'Admin login attempt started | email=' . (string) $email . ' | ip=' . (string) $ip);
 
 		if($email == "" or $password == "")
 
 		{
+		log_message('error', 'Admin login failed: empty email or password | ip=' . (string) $ip);
 
 		$this->session->set_flashdata('alert', array('message' => 'Please Enter valid login details','class' => 'error'));	
 
@@ -85,12 +88,15 @@ class Login extends MY_Controller {
 		if($result)
 
 		{
+		log_message('error', 'Admin login credentials matched | email=' . (string) $email . ' | active_status=' . (string) $result->active_status . ' | ip=' . (string) $ip);
 
 		if($result->active_status=="active")
 
 		{
 
 		$this->session->set_userdata('loginDetail',$result);
+		$session_ok = $this->session->userdata('loginDetail');
+		log_message('error', 'Admin login session set | email=' . (string) $email . ' | session_ok=' . ($session_ok ? 'yes' : 'no') . ' | ip=' . (string) $ip);
 
 		$this->session->set_flashdata('alert', array('message' => 'you have successfully logged in','class' => 'success'));
 
@@ -103,6 +109,7 @@ class Login extends MY_Controller {
 		redirect('dashboard');
 
 		} else {
+		log_message('error', 'Admin login blocked: account inactive | email=' . (string) $email . ' | ip=' . (string) $ip);
 
 		$this->session->set_flashdata('alert', array('message' => 'your accout in inactive mode.Contact administrator','class' => 'warning'));
 
@@ -113,6 +120,7 @@ class Login extends MY_Controller {
 		}
 
 		}else{
+		log_message('error', 'Admin login failed: invalid credentials | email=' . (string) $email . ' | ip=' . (string) $ip);
 
 		$this->session->set_flashdata('alert', array('message' => 'please Enter Valid Email and Password','class' => 'error'));
 
