@@ -53,6 +53,12 @@ $route['default_controller'] = 'login/login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+// Appointments (explicit mapping for Linux case-sensitive production)
+$route['appointments'] = 'appointments/appointments/index';
+$route['appointments/delete/(:num)'] = 'appointments/appointments/delete_row/$1';
+$route['Appointments'] = 'appointments/appointments/index';
+$route['Appointments/delete/(:num)'] = 'appointments/appointments/delete_row/$1';
+
 /*-------Start Adv Tour Package Routers---------*/
 
 $route['add-tour-package'] = 'tour/index';

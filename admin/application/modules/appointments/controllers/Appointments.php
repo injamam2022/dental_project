@@ -25,6 +25,6 @@ class Appointments extends MY_Controller {
 		} else {
 			$this->session->set_flashdata('alert', array('message' => 'Could not delete.', 'class' => 'error'));
 		}
-		redirect('Appointments');
+		redirect('appointments');
 	}
 }

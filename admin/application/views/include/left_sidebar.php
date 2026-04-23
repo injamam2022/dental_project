@@ -115,7 +115,7 @@
                     </li>
 
                     <li class="not-openable">
-                        <a href="<?php echo site_url('Appointments'); ?>"><span class="fa fa-calendar"></span> <span class="xn-text">Appointments</span></a>
+                        <a href="<?php echo site_url('appointments'); ?>"><span class="fa fa-calendar"></span> <span class="xn-text">Appointments</span></a>
                     </li>
 
                     <li class="not-openable">
