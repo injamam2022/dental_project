@@ -70,28 +70,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
-$username='';
-$password='';
-$server_name = $_SERVER['SERVER_NAME'] ?? $_SERVER['HTTP_HOST'] ?? 'localhost';
-if ($server_name === 'localhost' || str_starts_with($server_name, '127.'))
-{
-    $username='root';
-    $password='';
-}
-else
-{
-   $username='u677776351_dental_project';
-   $password='Dental_project@2026'; 
+$username = '';
+$password = '';
+$database_name = '';
+$db_host = getenv('DB_HOST') ?: 'localhost';
+$server_name = strtolower((string) ($_SERVER['SERVER_NAME'] ?? $_SERVER['HTTP_HOST'] ?? 'localhost'));
+$is_local = ($server_name === 'localhost' || strpos($server_name, '127.') === 0 || $server_name === '::1');
+if ($is_local) {
+	$username = getenv('DB_USER') ?: 'root';
+	$password = getenv('DB_PASS') ?: '';
+	$database_name = getenv('DB_NAME') ?: 'dental_project';
+} else {
+	$username = getenv('DB_USER') ?: 'u677776351_dental_project';
+	$password = getenv('DB_PASS') ?: 'Dental_project@2026';
+	$database_name = getenv('DB_NAME') ?: 'u677776351_dental_project';
 }
 $active_group = 'default';
 $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => $db_host,
 	'username' => $username,
 	'password' => $password,
-	'database' => 'u677776351_dental_project',
+	'database' => $database_name,
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

@@ -25,7 +25,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 $host = $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? 'localhost';
-$config['base_url'] = 'https://'.$host.'/';
+$https_on = (
+	(isset($_SERVER['HTTPS']) && strtolower((string) $_SERVER['HTTPS']) !== 'off' && (string) $_SERVER['HTTPS'] !== '')
+	|| (isset($_SERVER['SERVER_PORT']) && (string) $_SERVER['SERVER_PORT'] === '443')
+	|| (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower((string) $_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https')
+);
+$scheme = $https_on ? 'https' : 'http';
+$script_dir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+if ($script_dir === '/' || $script_dir === '\\' || $script_dir === '.') {
+	$script_dir = '';
+}
+$config['base_url'] = $scheme . '://' . $host . rtrim($script_dir, '/') . '/';
 
 
 /* $config['base_url'] = 'http://45.33.108.194/myscribd/';*/
@@ -384,19 +394,11 @@ $config['encryption_key'] = '417AC395C2B956FB3D91EB14A9B65';
 | except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-/* $config['sess_driver'] = 'database';
+$config['sess_driver'] = 'database';
 $config['sess_cookie_name'] = 'ci_sessions_front';
 $config['sess_expiration'] = 7200;
 $config['sess_save_path'] = 'ci_sessions_front';
 $config['sess_use_database'] = TRUE;
-$config['sess_match_ip'] = FALSE;
-$config['sess_time_to_update'] = 300;
-$config['sess_regenerate_destroy'] = FALSE; */
-
-$config['sess_driver'] = 'files';
-$config['sess_cookie_name'] = 'ci_session';
-$config['sess_expiration'] = 7200;
-$config['sess_save_path'] =  APPPATH . 'cache';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;

@@ -24,8 +24,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $host = $_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? 'localhost';
-$config['base_url'] = 'http://'.$host.'/dental_project/admin/';
-$config['ui_url'] = 'http://'.$host.'/dental_project/'; 
+$https_on = (
+	(isset($_SERVER['HTTPS']) && strtolower((string) $_SERVER['HTTPS']) !== 'off' && (string) $_SERVER['HTTPS'] !== '')
+	|| (isset($_SERVER['SERVER_PORT']) && (string) $_SERVER['SERVER_PORT'] === '443')
+	|| (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower((string) $_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https')
+);
+$scheme = $https_on ? 'https' : 'http';
+$script_dir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+if ($script_dir === '/' || $script_dir === '\\' || $script_dir === '.') {
+	$script_dir = '';
+}
+$admin_base = rtrim($script_dir, '/');
+$site_base = preg_replace('#/admin$#', '', $admin_base);
+$config['base_url'] = $scheme . '://' . $host . $admin_base . '/';
+$config['ui_url'] = $scheme . '://' . $host . ($site_base === '' ? '/' : $site_base . '/');
 
 /*
 |--------------------------------------------------------------------------
