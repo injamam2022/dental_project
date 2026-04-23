@@ -64,9 +64,9 @@
                         {
                       ?>
                     <div class="col-lg-4 col-md-6">
-                  <div class="img-gallery">
+                  <div class="img-gallery img-gallery--image">
                      <a class="gallery-popup" href="<?php echo base_url('admin/webroot/uploads/banner/').$gallery_details[$i]->image_name; ?>" title="Image 1">
-                        <img class="" src="<?php echo base_url('admin/webroot/uploads/banner').'/'.$gallery_details[$i]->image_name;?>" width="300px" height = "300px" alt="">
+                        <img class="" src="<?php echo base_url('admin/webroot/uploads/banner').'/'.$gallery_details[$i]->image_name;?>" alt="">
                            <div class="gallery-content">
                                 
                            </div>
@@ -101,9 +101,8 @@
                         {
                         ?>
                     <div class="col-lg-4 col-md-6">
-                  <div class="img-gallery">
-                  
-                        <iframe width="300" height="300" src="<?php echo $gallery_details[$i]->youtube_url_link ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" ></iframe>
+                  <div class="img-gallery img-gallery--video">
+                        <iframe src="<?php echo $gallery_details[$i]->youtube_url_link ?>" title="Gallery video" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
                    
                   </div>  
                   </div>

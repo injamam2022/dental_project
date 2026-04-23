@@ -55,7 +55,7 @@
                         ?>
                     <div class="project-block all mix landescape architecture col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <div class="image-box">
-                            <iframe width="400" height="300" src="<?php echo $gallery_details[$i]->youtube_url_link ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" ></iframe>
+                            <iframe src="<?php echo $gallery_details[$i]->youtube_url_link ?>" title="Gallery video" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
                            
                         </div>
                     </div>

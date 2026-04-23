@@ -2738,18 +2738,28 @@ header-style-seven .nav-toggler:hover{
 	z-index: 0;
 	background: #000;
 }
+/* 100% width (not 100vw) avoids scrollbar-width overflow; aspect + min-* keeps 16:9 cover in the hero box */
 .home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-youtube-iframe{
 	position: absolute;
 	top: 53%;
 	left: 50%;
-	width: 100vw;
-	height: 56.25vw;
-	min-width: 177.78vh;
+	width: auto;
+	height: 100%;
+	min-width: 100%;
 	min-height: 100%;
+	aspect-ratio: 16 / 9;
 	border: 0;
 	transform: translate(-50%, -50%);
 	z-index: 0;
 	pointer-events: none;
+}
+@supports not (aspect-ratio: 1) {
+	.home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-youtube-iframe {
+		width: 100%;
+		height: 56.25vw;
+		min-width: 177.78vh;
+		aspect-ratio: unset;
+	}
 }
 
 /* Live site: headline centred over video, lighter vignette */

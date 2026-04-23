@@ -167,9 +167,11 @@ body {
 	padding-top: 0 !important;
 }
 
-/* Reserve page space for fixed header */
+/* Reserve page space for fixed header; clip rare full-bleed heroes (e.g. 100vw math) from causing horizontal scroll */
 .page-wrapper {
 	padding-top: 136px;
+	overflow-x: hidden;
+	max-width: 100%;
 }
 
 @media (max-width: 991px) {
@@ -1221,8 +1223,9 @@ body {
 
 .page-wrapper .home-tech-sync .dr-tech-grid {
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(2, minmax(0, 1fr));
 	gap: 18px;
+	min-width: 0;
 }
 
 .page-wrapper .home-tech-sync .dr-tech-card {
@@ -3440,6 +3443,56 @@ select.dontia-appt-select::-ms-expand {
 .dontia-contact-side__text a {
 	color: var(--dcc-warm-deep);
 	font-weight: 600;
+}
+
+/* Legacy static contact page: responsive Google map embed */
+.ts-contact-us .mapouter,
+.dontia-map-embed {
+	position: relative;
+	width: 100%;
+	max-width: 100%;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+	border-radius: 8px;
+}
+.ts-contact-us .mapouter .gmap_canvas,
+.dontia-map-embed__inner {
+	position: absolute;
+	inset: 0;
+}
+.ts-contact-us .mapouter iframe,
+.dontia-map-embed__frame,
+.dontia-map-embed iframe {
+	position: absolute !important;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100% !important;
+	border: 0;
+}
+
+/* Legacy Page/gallery: YouTube iframes + image thumbs */
+.page-wrapper .img-gallery img {
+	max-width: 100%;
+	height: auto;
+}
+.page-wrapper .img-gallery--video {
+	position: relative;
+	width: 100%;
+	max-width: 100%;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+	border-radius: 8px;
+}
+.page-wrapper .img-gallery--video iframe {
+	position: absolute !important;
+	top: 0;
+	left: 0;
+	width: 100% !important;
+	height: 100% !important;
+	border: 0;
 }
 
 .dontia-contact-maps {

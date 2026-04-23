@@ -6,9 +6,9 @@
       <div class="container">
          <div class="row no-gutters">
             <div class="col-lg-8 col-md-12">
-               <div class="mapouter">
-                  <div class="gmap_canvas">
-                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58977.57019537731!2d88.35207819162942!3d22.50050086617226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0271a796bce1c3%3A0xad3d26b15eafdd9f!2sNet+Nest!5e0!3m2!1sen!2sin!4v1542465804364" width="800" height="410" frameborder="0" style="border:1" allowfullscreen></iframe>
+               <div class="mapouter dontia-map-embed" aria-label="Map location">
+                  <div class="gmap_canvas dontia-map-embed__inner">
+                      <iframe class="dontia-map-embed__frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58977.57019537731!2d88.35207819162942!3d22.50050086617226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0271a796bce1c3%3A0xad3d26b15eafdd9f!2sNet+Nest!5e0!3m2!1sen!2sin!4v1542465804364" style="border:0" allowfullscreen loading="lazy" title="Clinic on Google Maps"></iframe>
                   </div>
                </div>
                <!-- Map End -->
