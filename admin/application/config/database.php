@@ -81,9 +81,9 @@ if ($is_local) {
 	$password = getenv('DB_PASS') ?: '';
 	$database_name = getenv('DB_NAME') ?: 'dental_project';
 } else {
-	$username = getenv('DB_USER') ?: 'arnab94';
-	$password = getenv('DB_PASS') ?: 'Arnabnath@95';
-	$database_name = getenv('DB_NAME') ?: 'dental_project';
+	$username = getenv('DB_USER') ?: 'u677776351_dental_project';
+	$password = getenv('DB_PASS') ?: 'Dental_project@2026';
+	$database_name = getenv('DB_NAME') ?: 'u677776351_dental_project';
 }
 $active_group = 'default';
 $query_builder = TRUE;
