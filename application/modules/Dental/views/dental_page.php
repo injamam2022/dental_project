@@ -50,8 +50,8 @@ $stats = array(
     array('icon' => 'Dental_Implants_Placed.png', 'value' => '20,000+', 'label' => 'Dental Implants Placed'),
 );
 $doctors = array(
-    array('name' => 'Dr. Prabhjeet Sethi', 'role' => 'Implantologist & TMJ Specialist', 'image' => 'https://dontiacareclinic.com/wp-content/uploads/2025/07/IMG_2429-819x1024.jpg'),
-    array('name' => 'Dr. Harleen Sandhu', 'role' => 'Cosmetic Dentist', 'image' => 'https://dontiacareclinic.com/wp-content/uploads/2025/07/Copy-of-DSC_0433-1024x983.jpg'),
+    array('name' => 'Dr. Prabhjeet Sethi', 'role' => 'Implantologist & TMJ Specialist', 'image' => 'dr-prabhjeet-sethi.png'),
+    array('name' => 'Dr. Harleen Sandhu', 'role' => 'Cosmetic Dentist', 'image' => 'dr-harleen-sandhu.png'),
     array('name' => 'Dr. Aishi Sinha', 'role' => 'Endodontist', 'image' => 'Aishi_Sinha.png'),
     array('name' => 'Dr. Saibal Sen', 'role' => 'Dental Surgeon', 'image' => 'dr-saibal-sen-purnam-medicare-polyclinic--lala-lajpat-rai-sarani-kolkata-dentists-yjki7.jpg'),
     array('name' => 'Dr. Prasoon Killa', 'role' => 'Orthodontist', 'image' => 'Prasoon_Killa.png'),

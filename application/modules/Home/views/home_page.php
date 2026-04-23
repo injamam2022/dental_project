@@ -236,7 +236,7 @@ $dontia_team_members = array(
     array(
         'name' => 'Dr. Harleen Kaur Sethi',
         'role' => 'Principal Dentist',
-        'photo' => 'dr-harleen.jpg',
+        'photo' => 'dr-harleen.png',
         'social' => array(
             'facebook' => '',
             'twitter' => '',
@@ -247,7 +247,7 @@ $dontia_team_members = array(
     array(
         'name' => 'Dr. Prabhjeet Singh Sethi',
         'role' => 'Principal Dentist',
-        'photo' => 'dr-prabhjeet.jpg',
+        'photo' => 'dr-prabhjeet.png',
         'social' => array(
             'facebook' => '',
             'twitter' => '',
