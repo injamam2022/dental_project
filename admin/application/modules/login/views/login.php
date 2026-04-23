@@ -138,26 +138,8 @@
 </div>			
 <script>
 $(".login_form_btn").click(function(){	
-var siteurl=$("#siteurl").val();
-$('.login_form_btn').attr('disabled','disabled');	
-$.ajax({			
-url: siteurl+'login/checkloginattempt',
-type: "POST",
-dataType: "json",
-data: $("#login_form").serialize(),
-success: function(data){
-if(data['messagetype']=='Success'){
-$( "#login_form" ).submit();	
-}else if(data['messagetype']=='OTPSuccess'){				
-$('#MjVerifyOtpModal').modal({show:'true'});
-$('.verifymyotpsuccess').text(data['message']);			
-}else{
-$('.login_form_btn').removeAttr('disabled');	
-alert(data['message']);
-location.reload();
-}				
-}			
-});		
+$('.login_form_btn').attr('disabled','disabled');
+$("#login_form").submit();
 });
 /* ----------------------- otp Verify start ------------------*/
 $(".checkmjotp").click(function(){
