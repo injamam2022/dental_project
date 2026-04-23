@@ -168,7 +168,7 @@ if (function_exists('GetServices')) {
         <img src="<?php echo htmlspecialchars($hero_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Dental Clinic Banner">
         <div class="dr-hero-overlay"></div>
         <div class="dr-hero-content dr-container">
-            <h1>Dontia Care Clinic</h1>
+            <h2>Dontia Care Clinic</h2>
             <p>Your One-Stop Destination for a<br>Radiant Smile &amp; Dental Needs</p>
         </div>
     </section>
@@ -213,7 +213,7 @@ if (function_exists('GetServices')) {
 
     <section id="why" class="dr-section dr-why-dark">
         <div class="dr-container">
-            <h2>Why We Are the Best Dental Clinic in Kolkata</h2>
+            <h1>Why We Are the Best Dental Clinic in Kolkata</h1>
             <p class="dr-sub dr-sub-light">Why Choose Us</p>
             <div class="dr-choose-grid">
                 <?php
@@ -286,7 +286,7 @@ if (function_exists('GetServices')) {
 
     <section class="dr-section dr-stats">
         <div class="dr-container">
-            <h2>Our Dental Journey</h2>
+            <h3>Our Dental Journey</h3>
             <div class="dr-stats-grid">
                 <?php
                 $stats_source = count($media_stats_list) > 0 ? $media_stats_list : array_map(function ($st) {
@@ -375,7 +375,7 @@ if (function_exists('GetServices')) {
 
     <section class="dr-section dr-procedures">
         <div class="dr-container">
-            <h2>Dental Procedures</h2>
+            <h3>Dental Procedures</h3>
             <p class="dr-sub">Comprehensive dental care tailored to your needs.</p>
             <div class="dr-procedure-grid">
                 <?php foreach ($procedures as $pr) { ?>
@@ -391,7 +391,7 @@ if (function_exists('GetServices')) {
     <section class="dr-section dr-tech">
         <div class="dr-container">
             <div class="dr-tech-head">
-                <h2>Dental Technology</h2>
+                <h3>Dental Technology</h3>
                 <div class="dr-tech-divider" aria-hidden="true">
                     <span class="dr-tech-divider-line"></span>
                     <span class="dr-tech-divider-gem">💎</span>
@@ -419,7 +419,7 @@ if (function_exists('GetServices')) {
 
     <section class="dr-section dr-before-after">
         <div class="dr-container">
-            <h2>Successful Transformations</h2>
+            <h3>Successful Transformations</h3>
             <div class="dr-ba-grid">
                 <?php
                 $ba_source = count($media_before_after_list) > 0 ? $media_before_after_list : array_map(function ($ba) {
@@ -453,7 +453,7 @@ if (function_exists('GetServices')) {
 
     <section class="dr-section dr-testimonials">
         <div class="dr-container">
-            <h2>Patient Testimonials</h2>
+            <h3>Patient Testimonials</h3>
             <p class="dr-sub dr-sub-light">Real patient experiences and transformations shared directly from our patients</p>
             <div class="dr-video-wrap">
                 <button type="button" class="dr-video-nav dr-video-nav-left" aria-label="Scroll left">&#10094;</button>
@@ -512,7 +512,7 @@ if (function_exists('GetServices')) {
 
     <section class="dr-section dr-google">
         <div class="dr-container">
-            <h2>Google Reviews</h2>
+            <h4>Google Reviews</h4>
             <p class="dr-sub">See what our patients are saying about their experience at Dontia Dental Clinic</p>
             <a class="dr-btn dr-btn-inline" href="https://maps.app.goo.gl/Ujpqv8hHVHVkWBeL9" target="_blank" rel="noopener noreferrer">View All Reviews on Google</a>
         </div>
@@ -520,7 +520,7 @@ if (function_exists('GetServices')) {
 
     <section class="dr-section dr-gallery">
         <div class="dr-container">
-            <h2>Our Gallery</h2>
+            <h4>Our Gallery</h4>
             <p class="dr-sub">Meet our team and see our commitment to excellence</p>
             <?php if (count($gallery) > 0) { ?>
             <div class="dr-gallery-grid">
@@ -541,7 +541,7 @@ if (function_exists('GetServices')) {
 
     <section class="dr-section dr-certs">
         <div class="dr-container">
-            <h2>Dental Certificates &amp; Awards</h2>
+            <h4>Dental Certificates &amp; Awards</h4>
             <p class="dr-sub">Our commitment to excellence recognized through prestigious certifications and awards</p>
             <div class="dr-certs-grid">
                 <?php
@@ -573,7 +573,7 @@ if (function_exists('GetServices')) {
         <div class="dr-container">
             <div class="dr-blog-header">
                 <div class="dr-blog-head-text">
-                    <h2>Latest From Our Blog</h2>
+                    <h4>Latest From Our Blog</h4>
                     <p class="dr-sub dr-blog-lead">Stay informed with our latest articles on dental health and care</p>
                 </div>
                 <div class="dr-blog-nav" role="group" aria-label="Blog carousel controls">
@@ -626,7 +626,7 @@ if (function_exists('GetServices')) {
 
     <section class="dr-section dr-faq">
         <div class="dr-container">
-            <h2>Frequently Asked Questions</h2>
+            <h4>Frequently Asked Questions</h4>
             <p class="dr-sub">Find answers to common questions about our dental services</p>
             <div class="dr-faq-list">
                 <?php foreach ($faqs as $faq) { ?>

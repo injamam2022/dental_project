@@ -47,8 +47,8 @@
 							 
                      </li>
                     
-            <li><a href="<?php echo site_url('partner/').base64_encode('list').'/'.EncryptID(1);?>"><span class="fa fa-list"></span> Clients Management</a>
-            </li>
+            <!-- <li><a href="<?php echo site_url('partner/').base64_encode('list').'/'.EncryptID(1);?>"><span class="fa fa-list"></span> Clients Management</a>
+            </li> -->
                    
                     
                     <li class="xn-openable">

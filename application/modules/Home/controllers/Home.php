@@ -14,6 +14,10 @@ class Home extends Frontend_Controller {
     
 	public function index()
 	{
+		$this->seo_overrides = array(
+			'title' => 'Multispeciality clinic in Kolkata, WB | Dental | Skin & Hair | ENT',
+			'description' => 'Experience world-class Dental, ENT, and Aesthetic Skin & Hair care at Dontia Care Clinic, Kolkata. Book your appointment for expert health solutions.',
+		);
         $content['Services']=$this->Home_Model->GetProduct();
         $content['banner_details']=$this->Home_Model->GetBanner();
         $content['partner_details']=$this->Home_Model->GetPartner();

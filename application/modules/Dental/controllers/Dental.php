@@ -14,6 +14,14 @@ class Dental extends Frontend_Controller {
 
     public function index()
     {
+        if (strtolower(trim((string) $this->uri->uri_string())) === 'dental-services-in-kolkata') {
+            redirect(base_url('best-dental-clinic-in-kolkata'), 'location', 301);
+            return;
+        }
+        $this->seo_overrides = array(
+            'title' => 'Best Dental Clinic in Kolkata, WB | 25+ Experience in Dental Care',
+            'description' => 'Experience gentle, professional dental care in Kolkata from our 25+ years experienced dentist. From checkup to advanced treatment, we make your smile shine.',
+        );
         $products = $this->homeModel->GetProduct();
         $dental_services = array();
         if (is_array($products)) {

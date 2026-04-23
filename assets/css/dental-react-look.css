@@ -135,6 +135,7 @@ a { text-decoration: none; }
   min-height: 420px;
   max-height: 85vh;
   object-fit: cover;
+  object-position: center 18%;
   display: block;
 }
 
@@ -1028,9 +1029,16 @@ body.dr-modal-open { overflow: hidden; }
 /* Keep Dental page text readable even with global theme CSS loaded */
 .dental-page-view .dr-hero-content,
 .dental-page-view .dr-hero-content h1,
+.dental-page-view .dr-hero-content h2,
 .dental-page-view .dr-hero-content p {
   color: #ffffff !important;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+/* If hero media is switched to video/iframe, keep it non-interactive */
+.dental-page-view .dr-hero iframe,
+.dental-page-view .dr-hero video {
+  pointer-events: none;
 }
 
 .dental-page-view .dr-section h2,
@@ -1052,6 +1060,7 @@ body.dr-modal-open { overflow: hidden; }
   color: #ffffff !important;
 }
 
+.dental-page-view .dr-why-dark h1,
 .dental-page-view .dr-why-dark h2,
 .dental-page-view .dr-why-dark h3,
 .dental-page-view .dr-why-dark p,

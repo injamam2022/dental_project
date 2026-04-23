@@ -19,7 +19,7 @@ print_r($this->website['data']);*/
                     <div class="home-hero-youtube-cover">
                         <iframe
                             class="home-hero-youtube-iframe"
-                            src="https://www.youtube.com/embed/PqdEzU6_2zg?autoplay=1&amp;mute=1&amp;playsinline=1&amp;rel=0&amp;modestbranding=1&amp;loop=1&amp;playlist=PqdEzU6_2zg"
+                            src="https://www.youtube.com/embed/PqdEzU6_2zg?autoplay=1&amp;mute=1&amp;playsinline=1&amp;controls=0&amp;disablekb=1&amp;fs=0&amp;iv_load_policy=3&amp;rel=0&amp;modestbranding=1&amp;loop=1&amp;playlist=PqdEzU6_2zg"
                             title="Dontia Care Clinic — welcome video"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowfullscreen
@@ -53,7 +53,7 @@ print_r($this->website['data']);*/
     <section class="about-section dontia-home-about" style="background-image: url(<?php echo base_url('assets/'); ?>images/background/1.jpg);">
         <div class="auto-container">
             <header class="dontia-about-intro">
-                <h2 class="dontia-about-intro-title">About <?php echo $dontia_about_company_esc; ?></h2>
+                <h1 class="dontia-about-intro-title">About Dontiacareclinic</h1>
                 <div class="dontia-about-intro-divider" aria-hidden="true">
                     <span class="dontia-about-intro-line"></span>
                     <span class="dontia-about-intro-icon">
@@ -258,11 +258,13 @@ $dontia_team_members = array(
 );
 $dontia_team_placeholder = base_url('assets/images/team/placeholder.svg');
 ?>
+<h3 class="sr-only">Dental Services</h3>
+<h3 class="sr-only">Skin Care Services</h3>
 <?php if (!empty($technology_cards)) { ?>
 <section class="dr-section dr-tech home-tech-sync" id="latest-technology">
     <div class="dr-container">
         <div class="dr-tech-head">
-            <h2><?php echo htmlspecialchars($tech_title, ENT_QUOTES, 'UTF-8'); ?></h2>
+            <h3>Latest Technology</h3>
             <div class="dr-tech-divider" aria-hidden="true">
                 <span class="dr-tech-divider-line"></span>
                 <span class="dr-tech-divider-gem">💎</span>
@@ -415,7 +417,7 @@ unset($dontia_parse_youtube_id);
     <section class="testimonial-section dontia-testimonial" aria-labelledby="dontia-testimonial-heading">
         <div class="auto-container dontia-testimonial-inner">
             <header class="dontia-testimonial-intro">
-                <h2 id="dontia-testimonial-heading" class="dontia-testimonial-title">Patient Testimonials</h2>
+                <h3 id="dontia-testimonial-heading" class="dontia-testimonial-title">Patient Testimonials</h3>
                 <div class="dontia-testimonial-divider" aria-hidden="true">
                     <span class="dontia-testimonial-divider-line"></span>
                     <span class="dontia-testimonial-divider-icon">
