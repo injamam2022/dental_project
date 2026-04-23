@@ -66,7 +66,7 @@ class Login extends MY_Controller {
 
 		$email =$this->security->xss_clean($this->input->post('user_email'));
 
-		$password = MD5($this->security->xss_clean($this->input->post('password')));
+		$password = $this->security->xss_clean($this->input->post('password'));
 
 		if($email == "" or $password == "")
 
@@ -251,7 +251,7 @@ class Login extends MY_Controller {
 
 		$email =$this->security->xss_clean($this->input->post('user_email'));
 
-		$password = MD5($this->security->xss_clean($this->input->post('password')));
+		$password = $this->security->xss_clean($this->input->post('password'));
 
 		$result=$this->Login_Model->check_email_address($this->input->post('user_email'));
 
