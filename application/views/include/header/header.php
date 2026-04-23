@@ -67,8 +67,9 @@ if ($router_class === 'dental') {
 <link href="<?php echo base_url('assets/css/dental-react-look.css'); ?>" rel="stylesheet">
 <?php } ?>
 
-<link rel="shortcut icon" href="<?php echo base_url('assets/'); ?>images/favicon.png" type="image/x-icon">
-<!-- <link rel="icon" href="images/favicon.png" type="image/x-icon"> -->
+<link rel="icon" type="image/svg+xml" href="<?php echo base_url('assets/images/favicon.svg'); ?>">
+<link rel="alternate icon" href="<?php echo base_url('assets/images/favicon.svg'); ?>" type="image/svg+xml">
+<link rel="apple-touch-icon" href="<?php echo base_url('assets/images/favicon.svg'); ?>">
 <!-- Responsive -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Clinic">
+  <defs>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d4b47a"/>
+      <stop offset="1" stop-color="#8a6640"/>
+    </linearGradient>
+  </defs>
+  <circle cx="16" cy="16" r="15" fill="#1f1916"/>
+  <circle cx="16" cy="16" r="12.2" fill="none" stroke="url(#ring)" stroke-width="1.4"/>
+  <text x="16" y="20.5" text-anchor="middle" font-size="12" font-weight="700" font-family="Georgia, 'Times New Roman', serif" fill="#f7f0e8" letter-spacing="-0.5">DC</text>
+</svg>

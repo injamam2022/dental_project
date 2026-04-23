@@ -6,8 +6,19 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        
-        <!--<link rel="icon" href="<?php echo site_url('webroot'); ?>/uploads/logo_fab/<?php echo $this->website['data']->company_favicon;?>" type="image/x-icon" />-->
+        <?php
+        $fab = isset($this->website['data']->company_favicon) ? trim((string) $this->website['data']->company_favicon) : '';
+        if ($fab !== '') {
+            $fav_href = site_url('webroot/uploads/logo_fab/' . $fab);
+            $ext = strtolower(pathinfo($fab, PATHINFO_EXTENSION));
+            $fav_type = $ext === 'svg' ? 'image/svg+xml' : ($ext === 'png' ? 'image/png' : ($ext === 'gif' ? 'image/gif' : 'image/x-icon'));
+        } else {
+            $site_root = rtrim(preg_replace('#/admin/?$#', '', rtrim(base_url(), '/')), '/');
+            $fav_href = $site_root . '/assets/images/favicon.svg';
+            $fav_type = 'image/svg+xml';
+        }
+        ?>
+        <link rel="icon" type="<?php echo htmlspecialchars($fav_type, ENT_QUOTES, 'UTF-8'); ?>" href="<?php echo htmlspecialchars($fav_href, ENT_QUOTES, 'UTF-8'); ?>">
         <!-- END META SECTION -->
         <!-- CSS INCLUDE -->        
         <link rel="stylesheet" type="text/css" id="theme" href="<?php echo site_url('webroot/backend') ?>/css/theme-default.css"/>
