@@ -46,7 +46,7 @@
                     </form>
                 </div>
                 <div class="login-footer">
-                    <div class="pull-left"> &copy; Decode Infotech </div>
+                    <div class="pull-left"></div>
                     <div class="pull-right">
                         <a href="#">About</a> |
                         <a href="#">Privacy</a> |

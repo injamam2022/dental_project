@@ -1,11 +1,25 @@
+# CodeIgniter — try this first (works on most Apache/XAMPP)
+# On Hostinger / LiteSpace, if you get 404 on all routes, try the ALT block below
+# (comment this block and uncomment ALT).
+
 <IfModule mod_rewrite.c>
+	Options +FollowSymLinks -Indexes
+	RewriteEngine On
 
- Options +FollowSymLinks
+	# If the app lives in a subfolder, set the base, e.g.:
+	# RewriteBase /dental_project/
 
- RewriteEngine On
- #Send request via index.php
- RewriteCond %{REQUEST_FILENAME} !-f
- RewriteCond %{REQUEST_FILENAME} !-d
- RewriteRule ^(.*)$ index.php/$1 [L]
-
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^(.*)$ index.php/$1 [L,QSA]
 </IfModule>
+
+# --- ALT: LiteSpeed / some shared hosts (uncomment, comment block above) ---
+# <IfModule mod_rewrite.c>
+# 	Options +FollowSymLinks -Indexes
+# 	RewriteEngine On
+# 	# RewriteBase /
+# 	RewriteCond %{REQUEST_FILENAME} !-f
+# 	RewriteCond %{REQUEST_FILENAME} !-d
+# 	RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
+# </IfModule>

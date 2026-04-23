@@ -168,7 +168,7 @@
 
 				 
 				   <?php } ?>
-<li class="xn-title">Developed By Decode Infotech </li>				
+<li class="xn-title"></li>				
                    
                 </ul>
                 <!-- END X-NAVIGATION -->
