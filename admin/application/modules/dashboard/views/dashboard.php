@@ -51,26 +51,6 @@
                         </div>
                         <div class="col-md-3">
                             
-                            <!-- START WIDGET MESSAGES onclick="location.href='pages-messages.html';" -->
-                            <div class="widget widget-default widget-item-icon" >
-                                <div class="widget-item-left">
-                                     <!--<span class="fa fa-inr"></span>-->
-                                </div>
-																
-                                <div class="widget-data">
-                                     <div class="widget-int num-count"> Total Cvs </div>
-                                  <div class="widget-title"><?php //echo $ApiBalance;  ?></div>
-                                    <div class="widget-subtitle"> </div>
-                                </div>      
-                                <div class="widget-controls">                                
-                                    <a href="#" class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="top" title="Remove Widget"><span class="fa fa-times"></span></a>
-                                </div>
-                            </div>                            
-                            <!-- END WIDGET MESSAGES -->
-                            
-                        </div>
-                        <div class="col-md-3">
-                            
                            <!-- START WIDGET SLIDER -->
                             <!--<div class="widget widget-default widget-carousel">
                                 <div class="owl-carousel" id="owl-example">

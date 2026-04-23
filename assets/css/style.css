@@ -2720,12 +2720,12 @@ header-style-seven .nav-toggler:hover{
 /* Taller hero + object-fit-style “cover” for 16:9 YouTube (matches full-bleed Elementor-style heroes) */
 .home-hero-video-banner.home-hero.banner-section .carousel,
 .home-hero-video-banner.home-hero.banner-section .carousel-inner{
-	max-height: min(900px, 92vh);
-	min-height: 480px;
+	max-height: min(980px, 96vh);
+	min-height: 560px;
 }
 .home-hero-video-banner.home-hero.banner-section .carousel-item{
-	max-height: min(900px, 92vh);
-	min-height: 480px;
+	max-height: min(980px, 96vh);
+	min-height: 560px;
 }
 
 .home-hero.banner-section .carousel-item .home-hero-youtube-cover{
@@ -2740,7 +2740,7 @@ header-style-seven .nav-toggler:hover{
 }
 .home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-youtube-iframe{
 	position: absolute;
-	top: 50%;
+	top: 53%;
 	left: 50%;
 	width: 100vw;
 	height: 56.25vw;
@@ -2749,6 +2749,7 @@ header-style-seven .nav-toggler:hover{
 	border: 0;
 	transform: translate(-50%, -50%);
 	z-index: 0;
+	pointer-events: none;
 }
 
 /* Live site: headline centred over video, lighter vignette */
@@ -2824,6 +2825,12 @@ header-style-seven .nav-toggler:hover{
 		background: rgba(22, 19, 17, 0.45);
 		border: 1px solid rgba(255, 255, 255, 0.18);
 		box-sizing: border-box;
+	}
+	.home-hero-video-banner.home-hero.banner-section .carousel,
+	.home-hero-video-banner.home-hero.banner-section .carousel-inner,
+	.home-hero-video-banner.home-hero.banner-section .carousel-item{
+		max-height: min(700px, 90vh);
+		min-height: 500px;
 	}
 	.home-hero.banner-section .carousel .hero-banner-title{
 		font-size: clamp(1.2rem, 5.2vw, 1.65rem);

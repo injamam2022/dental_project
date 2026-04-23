@@ -15,3 +15,9 @@ CREATE TABLE IF NOT EXISTS `appointment_details` (
 
 ALTER TABLE `website_setting`
   ADD COLUMN `appointment_notify_email` varchar(255) NOT NULL DEFAULT '' AFTER `support_email`;
+
+ALTER TABLE `website_setting`
+  ADD COLUMN `appointment_admin_subject` varchar(255) NOT NULL DEFAULT '' AFTER `appointment_notify_email`,
+  ADD COLUMN `appointment_admin_body` text AFTER `appointment_admin_subject`,
+  ADD COLUMN `appointment_customer_subject` varchar(255) NOT NULL DEFAULT '' AFTER `appointment_admin_body`,
+  ADD COLUMN `appointment_customer_body` text AFTER `appointment_customer_subject`;

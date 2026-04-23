@@ -429,6 +429,31 @@
 											<span class="help-block">Submissions from the website &ldquo;Book an appointment&rdquo; form are emailed here. If empty, Support Email ID (Company Details) is used.</span>
 										</div>
 									</div>
+									<div class="form-group">
+										<label class="col-md-3 col-xs-12 control-label">Admin email subject</label>
+										<div class="col-md-6 col-xs-12">
+											<input type="text" name="appointment_admin_subject" value="<?php echo isset($this->website['data']->appointment_admin_subject) ? htmlspecialchars($this->website['data']->appointment_admin_subject, ENT_QUOTES, 'UTF-8') : ''; ?>" class="form-control" placeholder="New appointment request - {company_name}"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 col-xs-12 control-label">Admin email body</label>
+										<div class="col-md-6 col-xs-12">
+											<textarea name="appointment_admin_body" class="form-control" rows="6" placeholder="New booking from {name}. Service: {service_name}, Date: {appointment_date}"><?php echo isset($this->website['data']->appointment_admin_body) ? htmlspecialchars($this->website['data']->appointment_admin_body, ENT_QUOTES, 'UTF-8') : ''; ?></textarea>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 col-xs-12 control-label">Patient email subject</label>
+										<div class="col-md-6 col-xs-12">
+											<input type="text" name="appointment_customer_subject" value="<?php echo isset($this->website['data']->appointment_customer_subject) ? htmlspecialchars($this->website['data']->appointment_customer_subject, ENT_QUOTES, 'UTF-8') : ''; ?>" class="form-control" placeholder="Thank you for booking with {company_name}"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 col-xs-12 control-label">Patient email body</label>
+										<div class="col-md-6 col-xs-12">
+											<textarea name="appointment_customer_body" class="form-control" rows="6" placeholder="Thank you {name}. Your booking for {service_name} on {appointment_date} is received."><?php echo isset($this->website['data']->appointment_customer_body) ? htmlspecialchars($this->website['data']->appointment_customer_body, ENT_QUOTES, 'UTF-8') : ''; ?></textarea>
+											<span class="help-block">Supported placeholders: {name}, {email}, {phone}, {service_name}, {appointment_date}, {company_name}, {company_email}, {company_phone}, {company_address}, {company_corporate_address}, {website_url}</span>
+										</div>
+									</div>
 								</div>
 								<!-- Tab Fourth Start -->	
 									<div class="tab-pane" id="tab-fourth">

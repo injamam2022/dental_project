@@ -188,9 +188,9 @@ if ($router_class === 'dental') {
 
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navigation dontia-primary-nav">
-                                    <li><a href="<?php echo base_url('dental-services-in-kolkata'); ?>">Dental</a></li>
+                                    <li><a href="<?php echo base_url('best-dental-clinic-in-kolkata'); ?>">Dental</a></li>
                                     <li><a href="<?php echo base_url('about-us'); ?>">About</a></li>
-                                    <li class="dropdown"><a href="<?php echo base_url('services'); ?>">Services</a>
+                                    <li class="dropdown"><a href="#">Services</a>
                                         <ul>
                                             <?php
                                                 $services = GetServices();
@@ -201,7 +201,7 @@ if ($router_class === 'dental') {
                                                         $achor = '#';
                                                     } else {
                                                         $dropdownClass = '';
-                                                        $achor = base_url().'Services/'.$service['cat_id'].'/0';
+                                                        $achor = '#';
                                                     }
                                             ?>
                                             <li class="<?php echo $dropdownClass; ?>"><a href="<?php echo $achor; ?>"><?php echo $service['cat_name']; ?></a>
@@ -211,7 +211,7 @@ if ($router_class === 'dental') {
                                                 <ul>
                                                 <?php
                                                         foreach ($service['subcategory'] as $subcategory) {
-                                                            $sub_achor = base_url().'Services/'.$service['cat_id'].'/'.$subcategory['sub_catid'];
+                                                            $sub_achor = '#';
                                                 ?>
                                                     <li><a href="<?php echo $sub_achor; ?>"><?php echo $subcategory['subcat_name']; ?></a></li>
                                                 <?php

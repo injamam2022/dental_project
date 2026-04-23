@@ -13,11 +13,9 @@ $addr1 = isset($w->address) ? trim((string) $w->address) : '';
 $addr2 = isset($w->corporate_address) ? trim((string) $w->corporate_address) : '';
 $copy = isset($w->copy_right) ? trim((string) $w->copy_right) : ('© ' . date('Y') . ' ' . $company_esc);
 $dontia_footer_social = array(
-    array('link' => isset($w->facebook_link) ? trim((string) $w->facebook_link) : '', 'icon' => 'fa-facebook', 'label' => 'Facebook'),
     array('link' => isset($w->instagram_link) ? trim((string) $w->instagram_link) : '', 'icon' => 'fa-instagram', 'label' => 'Instagram'),
     array('link' => isset($w->youtube_link) ? trim((string) $w->youtube_link) : '', 'icon' => 'fa-youtube-play', 'label' => 'YouTube'),
     array('link' => isset($w->linkedin_link) ? trim((string) $w->linkedin_link) : '', 'icon' => 'fa-linkedin', 'label' => 'LinkedIn'),
-    array('link' => isset($w->twitter_link) ? trim((string) $w->twitter_link) : '', 'icon' => 'fa-twitter', 'label' => 'Twitter'),
 );
 ?>
     <footer class="main-footer dontia-footer">
@@ -66,12 +64,10 @@ $dontia_footer_social = array(
                     <div class="col-xl-4 col-lg-12 col-md-12 dontia-footer-links-col">
                         <h2 class="dontia-footer-heading">Useful links</h2>
                         <ul class="dontia-footer-links">
-                            <li><a href="<?php echo base_url('dental-services-in-kolkata'); ?>">Dental</a></li>
+                            <li><a href="<?php echo base_url('best-dental-clinic-in-kolkata'); ?>">Dental</a></li>
                             <li><a href="<?php echo base_url('about-us'); ?>">About</a></li>
                             <li><a href="<?php echo base_url('blogs'); ?>">Blog</a></li>
-                            <li><a href="<?php echo base_url('Client'); ?>">Client</a></li>
                             <li><a href="<?php echo base_url('Gallery'); ?>">Gallery</a></li>
-                            <li><a href="<?php echo base_url('Career'); ?>">Career</a></li>
                             <li><a href="<?php echo base_url('contact-us'); ?>">Contact us</a></li>
                         </ul>
                     </div>

@@ -6,6 +6,25 @@ class Websitemanage extends MY_Controller {
 	 $this->load->helper('websitemanage');
 	 $this->load->model('Websitemanage_Model');
 	}
+
+	private function website_setting_payload($post_data)
+	{
+		if (!is_array($post_data)) {
+			return array();
+		}
+		$fields = $this->db->list_fields('website_setting');
+		if (!is_array($fields) || count($fields) === 0) {
+			return $post_data;
+		}
+		$allowed = array_flip($fields);
+		$out = array();
+		foreach ($post_data as $k => $v) {
+			if (isset($allowed[$k])) {
+				$out[$k] = $v;
+			}
+		}
+		return $out;
+	}
 	public function index()
 	{	
 		$RequestMethod = $this->input->server('REQUEST_METHOD');
@@ -32,7 +51,8 @@ class Websitemanage extends MY_Controller {
 					   }
 					   unset($_POST['seo_og_image_current']);
 					   
-					   $this->Websitemanage_Model->insert_website_data($this->input->post());
+					   $payload = $this->website_setting_payload($this->input->post());
+					   $this->Websitemanage_Model->insert_website_data($payload);
 					   
                        $this->session->set_flashdata('alert', array('message' => 'Data successfully Saved','class' => 'success'));
 				       redirect('websitemanage');					   
@@ -78,7 +98,8 @@ class Websitemanage extends MY_Controller {
 							unset($_POST['seo_og_image_current']);
 							
 								
-					  $this->Websitemanage_Model->update_website_data($this->input->post());
+					  $payload = $this->website_setting_payload($this->input->post());
+					  $this->Websitemanage_Model->update_website_data($payload);
 					  
 					  
                       $this->session->set_flashdata('alert', array('message' => 'Data successfully Updated','class' => 'success'));
