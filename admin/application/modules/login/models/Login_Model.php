@@ -11,12 +11,13 @@ class Login_Model  extends MY_Model{
 		 return false;
 	    }
 		$row = $query->row();
-		$stored = isset($row->password) ? (string) $row->password : '';
-		$raw = (string) $password_raw;
+		$stored = trim(isset($row->password) ? (string) $row->password : '');
+		$raw = trim((string) $password_raw);
 		$md5 = md5($raw);
 		$is_match = false;
 		if ($stored !== '') {
-			if (hash_equals($stored, $md5) || hash_equals($stored, $raw)) {
+			$stored_l = strtolower($stored);
+			if (hash_equals($stored, $md5) || hash_equals($stored, $raw) || hash_equals($stored_l, $md5)) {
 				$is_match = true;
 			} elseif (function_exists('password_verify') && password_verify($raw, $stored)) {
 				$is_match = true;
