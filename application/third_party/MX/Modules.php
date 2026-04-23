@@ -178,6 +178,53 @@ class Modules
 		return $result;
 	}
 
+	/**
+	 * Resolve a module directory name for case-sensitive filesystems.
+	 * MX Loader lowercases model paths; Windows matches anyway, Linux does not.
+	 */
+	protected static function resolve_module_dir($location, $module)
+	{
+		if ($module === '' OR ! is_dir($location))
+		{
+			return $module;
+		}
+		if (is_dir($location.$module))
+		{
+			return $module;
+		}
+		$dirs = @scandir($location);
+		if ($dirs === FALSE)
+		{
+			return $module;
+		}
+		foreach ($dirs as $dir)
+		{
+			if ($dir === '.' OR $dir === '..')
+			{
+				continue;
+			}
+			if (is_dir($location.$dir) && strcasecmp($dir, $module) === 0)
+			{
+				return $dir;
+			}
+		}
+		return $module;
+	}
+
+	/**
+	 * CI-style class basename from a lowercased filename (dental_model -> Dental_Model).
+	 * ucfirst alone yields Dental_model, which does not match Dental_Model.php on Linux.
+	 */
+	protected static function ci_class_basename_from_file_ext($file_ext)
+	{
+		$stem = pathinfo($file_ext, PATHINFO_FILENAME);
+		if (strpos($stem, '_') !== FALSE)
+		{
+			return implode('_', array_map('ucfirst', explode('_', $stem)));
+		}
+		return ucfirst($stem);
+	}
+
 	/** 
 	* Find a file
 	* Scans for files located within modules directories.
@@ -203,11 +250,20 @@ class Modules
 		{					
 			foreach($modules as $module => $subpath) 
 			{			
-				$fullpath = $location.$module.'/'.$base.$subpath;
+				$resolved_module = self::resolve_module_dir($location, $module);
+				$fullpath = $location.$resolved_module.'/'.$base.$subpath;
 				
 				if ($base == 'libraries/' OR $base == 'models/')
 				{
-					if(is_file($fullpath.ucfirst($file_ext))) return array($fullpath, ucfirst($file));
+					$ci_basename = self::ci_class_basename_from_file_ext($file_ext);
+					if (is_file($fullpath.$ci_basename.EXT))
+					{
+						return array($fullpath, $ci_basename);
+					}
+					if (is_file($fullpath.ucfirst($file_ext)))
+					{
+						return array($fullpath, ucfirst(pathinfo($file_ext, PATHINFO_FILENAME)));
+					}
 				}
 				else
 				/* load non-class files */
