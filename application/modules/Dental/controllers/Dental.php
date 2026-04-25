@@ -209,4 +209,37 @@ class Dental extends Frontend_Controller {
 
         $this->load->view('Dental/dental_page', $content);
     }
+
+    public function orthodontist()
+    {
+        $this->seo_overrides = array(
+            'title' => 'Best Orthodontist in Kolkata | Braces & Invisalign Treatment',
+            'description' => 'Transform your smile with expert orthodontic treatment in Kolkata. Explore braces, aligners, retainers, and personalized care at Dontia Care Clinic.',
+        );
+
+        $content = array();
+        $content['doctor_list'] = $this->dentalModel->get_active_doctors();
+        $content['technology_cards'] = array(
+            array(
+                'title' => 'Digital Treatment Planning',
+                'description' => 'Advanced diagnostics and smile planning for precise and predictable orthodontic outcomes.',
+                'image_url' => base_url('admin/webroot/uploads/dental_page/technology/hf_20260408_141453_072419cd-d779-4092-9401-4e7427a126ad.png'),
+            ),
+            array(
+                'title' => 'Modern Braces Systems',
+                'description' => 'Updated orthodontic systems designed for better comfort and efficient tooth movement.',
+                'image_url' => base_url('admin/webroot/uploads/dental_page/technology/Cerec.png'),
+            ),
+            array(
+                'title' => 'Comfort-Focused Care',
+                'description' => 'Patient-friendly treatment process from consultation to post-treatment retention.',
+                'image_url' => base_url('admin/webroot/uploads/dental_page/technology/Dental-Laser.jpg'),
+            ),
+        );
+        $content['media_before_after'] = $this->dentalModel->get_media_by_section('before_after');
+        $content['media_certificates'] = $this->dentalModel->get_media_by_section('certificates');
+        $content['blog_carousel'] = $this->dentalModel->get_blog_posts_for_dental(6);
+
+        $this->load->view('Dental/orthodontist_page', $content);
+    }
 }

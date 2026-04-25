@@ -523,15 +523,21 @@ if (function_exists('GetServices')) {
             <h4>Our Gallery</h4>
             <p class="dr-sub">Meet our team and see our commitment to excellence</p>
             <?php if (count($gallery) > 0) { ?>
-            <div class="dr-gallery-grid">
-                <?php foreach ($gallery as $gi) {
-                    if (!is_object($gi) || !isset($gi->image_name) || trim((string) $gi->image_name) === '') {
-                        continue;
-                    }
-                    $g_src = base_url('admin/webroot/uploads/banner/' . $gi->image_name);
-                ?>
-                <img src="<?php echo htmlspecialchars($g_src, ENT_QUOTES, 'UTF-8'); ?>" alt="Clinic gallery image">
-                <?php } ?>
+            <div class="dr-gallery-slider-wrap">
+                <button type="button" class="dr-gallery-nav dr-gallery-nav-left" aria-label="Scroll gallery left">&#10094;</button>
+                <div class="dr-gallery-slider" id="drGallerySlider">
+                    <?php foreach ($gallery as $gi) {
+                        if (!is_object($gi) || !isset($gi->image_name) || trim((string) $gi->image_name) === '') {
+                            continue;
+                        }
+                        $g_src = base_url('admin/webroot/uploads/banner/' . $gi->image_name);
+                    ?>
+                    <article class="dr-gallery-slide">
+                        <img src="<?php echo htmlspecialchars($g_src, ENT_QUOTES, 'UTF-8'); ?>" alt="Clinic gallery image">
+                    </article>
+                    <?php } ?>
+                </div>
+                <button type="button" class="dr-gallery-nav dr-gallery-nav-right" aria-label="Scroll gallery right">&#10095;</button>
             </div>
             <?php } else { ?>
             <p class="dr-blog-empty">No gallery images found. Add images from Admin → Gallery Management.</p>
@@ -720,6 +726,44 @@ if (function_exists('GetServices')) {
             blogNext.addEventListener('click', function () {
                 blogCar.scrollBy({ left: 340, behavior: 'smooth' });
             });
+        }
+
+        var galSlider = document.getElementById('drGallerySlider');
+        var galWrap = document.querySelector('.dr-gallery-slider-wrap');
+        var galLeft = document.querySelector('.dr-gallery-nav-left');
+        var galRight = document.querySelector('.dr-gallery-nav-right');
+        var galAutoTimer = null;
+        function galStopAuto() {
+            if (galAutoTimer) {
+                clearInterval(galAutoTimer);
+                galAutoTimer = null;
+            }
+        }
+        function galStartAuto() {
+            galStopAuto();
+            if (!galSlider) return;
+            galAutoTimer = setInterval(function () {
+                var maxScroll = galSlider.scrollWidth - galSlider.clientWidth;
+                if (maxScroll <= 4) return;
+                if (galSlider.scrollLeft >= maxScroll - 4) {
+                    galSlider.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    galSlider.scrollBy({ left: 420, behavior: 'smooth' });
+                }
+            }, 3000);
+        }
+        if (galSlider && galLeft && galRight) {
+            galLeft.addEventListener('click', function () {
+                galSlider.scrollBy({ left: -420, behavior: 'smooth' });
+            });
+            galRight.addEventListener('click', function () {
+                galSlider.scrollBy({ left: 420, behavior: 'smooth' });
+            });
+        }
+        if (galWrap && galSlider) {
+            galWrap.addEventListener('mouseenter', galStopAuto);
+            galWrap.addEventListener('mouseleave', galStartAuto);
+            galStartAuto();
         }
 
     })();

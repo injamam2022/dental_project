@@ -179,7 +179,7 @@ if ($router_class === 'dental') {
                     </div>
 
                     <div class="nav-outer dontia-nav-outer">
-                        <nav class="main-menu navbar-expand-md ">
+                        <nav class="main-menu navbar-expand-lg ">
                             <div class="navbar-header">
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                     <span class="icon flaticon-menu-button"></span>
@@ -196,7 +196,10 @@ if ($router_class === 'dental') {
                                                 $services = GetServices();
                                                 if ($services) {
                                                 foreach ($services as $service) {
-                                                    if (count($service['subcategory']) > 0) {
+                                                    $cat_name = isset($service['cat_name']) ? trim((string) $service['cat_name']) : '';
+                                                    $cat_name_l = strtolower($cat_name);
+                                                    $is_dental_service = (strpos($cat_name_l, 'dental') !== false);
+                                                    if (count($service['subcategory']) > 0 || $is_dental_service) {
                                                         $dropdownClass = 'dropdown';
                                                         $achor = '#';
                                                     } else {
@@ -206,10 +209,15 @@ if ($router_class === 'dental') {
                                             ?>
                                             <li class="<?php echo $dropdownClass; ?>"><a href="<?php echo $achor; ?>"><?php echo $service['cat_name']; ?></a>
                                                 <?php
-                                                    if (count($service['subcategory']) > 0) {
+                                                    if (count($service['subcategory']) > 0 || $is_dental_service) {
                                                 ?>
                                                 <ul>
                                                 <?php
+                                                        if ($is_dental_service) {
+                                                ?>
+                                                    <li><a href="<?php echo base_url('best-orthodontist-in-kolkata'); ?>">Braces</a></li>
+                                                <?php
+                                                        }
                                                         foreach ($service['subcategory'] as $subcategory) {
                                                             $sub_achor = '#';
                                                 ?>

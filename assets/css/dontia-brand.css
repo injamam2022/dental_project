@@ -474,7 +474,7 @@ body {
 	}
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 991px) {
 	/* Kill template overlap that pulls the menu over the logo */
 	.page-wrapper .main-header.dontia-main-header .nav-outer {
 		margin-top: 0 !important;
