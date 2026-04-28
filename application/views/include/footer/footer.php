@@ -12,6 +12,7 @@ $email = isset($w->support_email) ? trim((string) $w->support_email) : '';
 $addr1 = isset($w->address) ? trim((string) $w->address) : '';
 $addr2 = isset($w->corporate_address) ? trim((string) $w->corporate_address) : '';
 $copy = isset($w->copy_right) ? trim((string) $w->copy_right) : ('© ' . date('Y') . ' ' . $company_esc);
+$brand_logo_url = 'https://dontiacareclinic.com/admin//webroot/uploads/profile-pic/DCC_Logo-03.png';
 $dontia_footer_social = array(
     array('link' => isset($w->instagram_link) ? trim((string) $w->instagram_link) : '', 'icon' => 'fa-instagram', 'label' => 'Instagram'),
     array('link' => isset($w->youtube_link) ? trim((string) $w->youtube_link) : '', 'icon' => 'fa-youtube-play', 'label' => 'YouTube'),
@@ -25,7 +26,7 @@ $dontia_footer_social = array(
                     <div class="col-xl-4 col-lg-6 col-md-12 dontia-footer-brand-col">
                         <div class="dontia-footer-brand">
                             <a href="<?php echo base_url(); ?>" class="dontia-footer-logo-link">
-                                <img src="<?php echo base_url('admin/webroot/uploads/logo/') . $w->company_logo; ?>" alt="<?php echo $company_esc; ?>">
+                                <img src="<?php echo htmlspecialchars($brand_logo_url, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo $company_esc; ?>">
                             </a>
                             <p class="dontia-footer-tagline"><?php echo $company_esc; ?></p>
                             <p class="dontia-footer-about">

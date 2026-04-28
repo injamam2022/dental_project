@@ -1,6 +1,7 @@
 <?php
 $this->load->model('Seo_meta_model');
 $seo = $this->Seo_meta_model->resolve(is_array($this->seo_overrides) ? $this->seo_overrides : array());
+$brand_logo_url = 'https://dontiacareclinic.com/admin//webroot/uploads/profile-pic/DCC_Logo-03.png';
 $h = static function ($s) {
 	return htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8');
 };
@@ -83,13 +84,10 @@ if ($router_class === 'dental') {
 <body>
 
 	<?php
-	$preloader_logo_url = '';
+	$preloader_logo_url = $brand_logo_url;
 	$preloader_alt = 'Loading';
 	if (isset($this->website['data'])) {
 		$wd = $this->website['data'];
-		if (! empty($wd->company_logo)) {
-			$preloader_logo_url = base_url('admin/webroot/uploads/logo/' . $wd->company_logo);
-		}
 		if (isset($wd->company_name) && trim((string) $wd->company_name) !== '') {
 			$preloader_alt = $h(trim((string) $wd->company_name));
 		}
@@ -172,7 +170,7 @@ if ($router_class === 'dental') {
                         <div class="logo dontia-logo-brand">
                             <a href="<?php echo base_url(); ?>" class="dontia-logo-link">
                                 <span class="dontia-logo-mark">
-                                    <img src="<?php echo base_url('admin/webroot/uploads/logo/').$this->website['data']->company_logo; ?>" alt="<?php echo $company_esc; ?>">
+                                    <img src="<?php echo $h($brand_logo_url); ?>" alt="<?php echo $company_esc; ?>">
                                 </span>
                             </a>
                         </div>
