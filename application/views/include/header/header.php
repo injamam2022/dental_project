@@ -1,7 +1,8 @@
 <?php
 $this->load->model('Seo_meta_model');
 $seo = $this->Seo_meta_model->resolve(is_array($this->seo_overrides) ? $this->seo_overrides : array());
-$brand_logo_url = 'https://dontiacareclinic.com/admin//webroot/uploads/profile-pic/DCC_Logo-03.png';
+$brand_logo_url = base_url('admin/webroot/uploads/profile-pic/DCC_Logo-03.png');
+$header_logo_url = base_url('admin/webroot/uploads/profile-pic/DCC_Logo-08-transparent.png');
 $h = static function ($s) {
 	return htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8');
 };
@@ -170,7 +171,7 @@ if ($router_class === 'dental') {
                         <div class="logo dontia-logo-brand">
                             <a href="<?php echo base_url(); ?>" class="dontia-logo-link">
                                 <span class="dontia-logo-mark">
-                                    <img src="<?php echo $h($brand_logo_url); ?>" alt="<?php echo $company_esc; ?>">
+                                    <img src="<?php echo $h($header_logo_url); ?>" alt="<?php echo $company_esc; ?>">
                                 </span>
                             </a>
                         </div>
