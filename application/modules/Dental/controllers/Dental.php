@@ -274,4 +274,37 @@ class Dental extends Frontend_Controller {
 
         $this->load->view('Dental/dental_implant_page', $content);
     }
+
+    public function tmj_specialist()
+    {
+        $this->seo_overrides = array(
+            'title' => 'Best TMJ Specialist in Kolkata, India | Expert Treatment for TMJ Disorders',
+            'description' => 'Jaw pain, clicking, headaches, or ear symptoms? Visit Dontia Care Clinic for TMJ / TMD care in Kolkata — Dawson Certified specialist, splints, physiotherapy, Botox for TMJ, and conservative-first treatment.',
+            'canonical' => base_url('tmj-specialist-in-kolkata'),
+        );
+
+        $content = array();
+        $content['doctor_list'] = $this->dentalModel->get_active_doctors();
+        $content['technology_cards'] = array(
+            array(
+                'title' => 'Digital imaging & diagnosis',
+                'description' => 'Digital X-rays and 3D imaging when needed to map your bite, joint, and airway — supporting accurate TMJ diagnosis.',
+                'image_url' => base_url('admin/webroot/uploads/dental_page/technology/hf_20260408_141453_072419cd-d779-4092-9401-4e7427a126ad.png'),
+            ),
+            array(
+                'title' => 'Splints & occlusal therapy',
+                'description' => 'Custom night guards and splints designed to protect teeth from bruxism and unload the jaw joints.',
+                'image_url' => base_url('admin/webroot/uploads/dental_page/technology/Cerec.png'),
+            ),
+            array(
+                'title' => 'Comfort-focused TMJ care',
+                'description' => 'From first consultation through physiotherapy or advanced options — we prioritise clear explanations and gentle, staged care.',
+                'image_url' => base_url('admin/webroot/uploads/dental_page/technology/Dental-Laser.jpg'),
+            ),
+        );
+        $content['media_certificates'] = $this->dentalModel->get_media_by_section('certificates');
+        $content['blog_carousel'] = $this->dentalModel->get_blog_posts_for_dental(6);
+
+        $this->load->view('Dental/tmj_page', $content);
+    }
 }
