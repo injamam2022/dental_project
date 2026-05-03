@@ -38,7 +38,7 @@ $patient_story_captions = array(
 .implant-page .implant-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,.62) 100%)}
 .implant-page .implant-hero-inner{position:relative;z-index:2;text-align:center;max-width:980px;margin:0 15px;padding:20px 24px;background:rgba(0,0,0,.4);border-radius:10px}
 .implant-page .implant-hero h1{color:#fff !important;margin:0 0 12px;font-size:38px;line-height:1.2;text-shadow:0 2px 12px rgba(0,0,0,.65)}
-.implant-page .implant-hero-sub{margin:0;color:#f5f0ea;font-size:18px;line-height:1.5;text-shadow:0 1px 8px rgba(0,0,0,.55)}
+.implant-page .implant-hero-sub{margin:0;color:#fff!important;font-size:18px;line-height:1.5;text-shadow:0 1px 8px rgba(0,0,0,.55)}
 @media (max-width:900px){.implant-page .implant-hero{min-height:400px}.implant-page .implant-hero h1{font-size:28px}}
 .implant-page .implant-proc-steps{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:16px}
 .implant-page .implant-proc-steps li{margin:0;background:#fff;border:1px solid #ece6df;border-radius:12px;padding:18px 20px;box-shadow:0 8px 20px rgba(0,0,0,.07)}
