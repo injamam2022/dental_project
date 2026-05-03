@@ -242,4 +242,36 @@ class Dental extends Frontend_Controller {
 
         $this->load->view('Dental/orthodontist_page', $content);
     }
+
+    public function dental_implant()
+    {
+        $this->seo_overrides = array(
+            'title' => 'Best Dental Implant Clinic in Kolkata | Expert Implant Specialists',
+            'description' => 'Restore missing teeth with expert dental implantologists, advanced implant systems, and personalized care at Dontia Dental Care in Kolkata.',
+        );
+
+        $content = array();
+        $content['doctor_list'] = $this->dentalModel->get_active_doctors();
+        $content['technology_cards'] = array(
+            array(
+                'title' => 'Digital Planning & Diagnostics',
+                'description' => 'Careful assessment and treatment planning with modern imaging for precise implant placement.',
+                'image_url' => base_url('admin/webroot/uploads/dental_page/technology/hf_20260408_141453_072419cd-d779-4092-9401-4e7427a126ad.png'),
+            ),
+            array(
+                'title' => 'Globally Renowned Implant Systems',
+                'description' => 'International-quality implant systems chosen for reliability and long-term outcomes.',
+                'image_url' => base_url('admin/webroot/uploads/dental_page/technology/Cerec.png'),
+            ),
+            array(
+                'title' => 'Sedation & Comfortable Surgery',
+                'description' => 'Sedation dentistry and local anaesthesia so your surgical visit stays as comfortable as possible.',
+                'image_url' => base_url('admin/webroot/uploads/dental_page/technology/Baldus.jpg'),
+            ),
+        );
+        $content['media_certificates'] = $this->dentalModel->get_media_by_section('certificates');
+        $content['blog_carousel'] = $this->dentalModel->get_blog_posts_for_dental(6);
+
+        $this->load->view('Dental/dental_implant_page', $content);
+    }
 }

@@ -215,6 +215,7 @@ if ($router_class === 'dental') {
                                                         if ($is_dental_service) {
                                                 ?>
                                                     <li><a href="<?php echo base_url('best-orthodontist-in-kolkata'); ?>">Braces</a></li>
+                                                    <li><a href="<?php echo base_url('best-dental-implant-clinic-in-kolkata'); ?>">Dental Implant</a></li>
                                                 <?php
                                                         }
                                                         foreach ($service['subcategory'] as $subcategory) {

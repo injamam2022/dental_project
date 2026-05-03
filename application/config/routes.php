@@ -63,4 +63,5 @@ $route['blogs'] = 'Blog/Blog/index';
 $route['Dental'] = 'Dental/Dental/index';
 $route['best-dental-clinic-in-kolkata'] = 'Dental/Dental/index';
 $route['best-orthodontist-in-kolkata'] = 'Dental/Dental/orthodontist';
+$route['best-dental-implant-clinic-in-kolkata'] = 'Dental/Dental/dental_implant';
 $route['blog/(:any)'] = 'Blog/Blog/blogdetails/$1';
