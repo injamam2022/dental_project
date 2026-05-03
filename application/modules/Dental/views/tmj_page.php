@@ -24,7 +24,8 @@ if ($tmj_img_dir !== '' && is_dir($tmj_img_dir)) {
 $tmj_youtube_id = 'dszEUoxTmKk';
 $tmj_youtube_list = 'PLFAPmv-L_bnYlz18NK5mEEzPaVN_a9umj';
 $tmj_embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($tmj_youtube_id)
-    . '?list=' . rawurlencode($tmj_youtube_list) . '&rel=0';
+    . '?list=' . rawurlencode($tmj_youtube_list)
+    . '&rel=0&autoplay=1&mute=1&playsinline=1';
 ?>
 <style>
 .tmj-page{overflow-x:hidden}
@@ -104,8 +105,7 @@ $tmj_embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($tmj_youtu
                     <iframe src="<?php echo htmlspecialchars($tmj_embed, ENT_QUOTES, 'UTF-8'); ?>"
                         title="TMJ and jaw health — Dontia Care Clinic, Kolkata"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen
-                        loading="lazy"></iframe>
+                        allowfullscreen></iframe>
                 </div>
             </div>
         </div>
