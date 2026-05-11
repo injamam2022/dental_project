@@ -238,6 +238,7 @@ if ($router_class === 'dental') {
                                         </ul>
                                     </li>
                                     <li><a href="<?php echo base_url('why-choose-us'); ?>">Why Choose Us</a></li>
+                                    <li><a href="<?php echo base_url('blogs'); ?>">Blogs</a></li>
                                     <li><a href="<?php echo base_url('contact-us'); ?>">Contact</a></li>
                                 </ul>
                             </div>

@@ -831,10 +831,29 @@ a { text-decoration: none; }
   transition: transform 0.22s ease, box-shadow 0.22s ease;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 .dr-blog-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1);
+}
+.dr-blog-card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  text-indent: -9999px;
+  white-space: nowrap;
+  overflow: hidden;
+  background: transparent;
+}
+.dr-blog-card-link:focus-visible {
+  outline: 2px solid #8b7355;
+  outline-offset: -3px;
+  border-radius: 14px;
+}
+.dr-blog-card .dr-blog-read {
+  position: relative;
+  z-index: 3;
 }
 .dr-blog-card-image-wrap {
   position: relative;
