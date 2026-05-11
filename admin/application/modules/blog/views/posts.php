@@ -48,7 +48,25 @@
                                                
                                                 <td><?php echo $key+1;?></td>
 												<td style="padding: 0;"><label class="check"><input type="checkbox" name="checklist[]" value="<?php echo $post_lists->id; ?>" class="checkbox1"/></label></td>
-                                                <td><img src="<?php echo site_url('webroot/uploads/blog').'/'.$post_lists->blog_image;?>" alt="Smiley face" height="42" width="42"/></td>
+                                                <?php
+                                                    $row_img_raw = isset($post_lists->blog_image) ? trim((string) $post_lists->blog_image) : '';
+                                                    $row_first_img = '';
+                                                    if ($row_img_raw !== '') {
+                                                        $row_parts = array_filter(array_map('trim', explode(',', $row_img_raw)));
+                                                        $row_first_img = $row_parts ? reset($row_parts) : '';
+                                                    }
+                                                ?>
+                                                <td>
+                                                    <?php if ($row_first_img !== '') { ?>
+                                                        <img src="<?php echo site_url('webroot/uploads/blog/' . rawurlencode($row_first_img)); ?>"
+                                                             alt="<?php echo htmlspecialchars((string) $post_lists->post_title, ENT_QUOTES, 'UTF-8'); ?>"
+                                                             height="42" width="60"
+                                                             style="object-fit:cover;border-radius:4px;border:1px solid #e7ebf0;"
+                                                             onerror="this.outerHTML='<span style=&quot;color:#b94a48;font-size:11px;&quot;>missing</span>';" />
+                                                    <?php } else { ?>
+                                                        <span style="color:#888;font-size:11px;font-style:italic;">no image</span>
+                                                    <?php } ?>
+                                                </td>
                                                 <td><?php echo $post_lists->post_title;?></td>
 												 <!--<td><?php  $post_lists->category; $catid=$post_lists->category; 
 												 $id=$this->Blog_Model->get_catid($catid);

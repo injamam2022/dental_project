@@ -104,6 +104,8 @@ class Blog extends MY_Controller {
 	
 		 if($_POST)
 		  {
+		  $posted = trim((string) $this->input->post('posted'));
+		  if ($posted === '') { $posted = 'Admin'; }
 		  $data=array(
 		 'post_title'=>$this->input->post('post_title'),
 		 'Permalink'=>$this->input->post('category_title'),
@@ -113,6 +115,8 @@ class Blog extends MY_Controller {
 		 'category'=>$this->input->post('category'),
 		 'relatedposts'=>serialize($this->input->post('relatedposts')),
 		 'blog_image'=>$image_name,
+		 'posted'=>$posted,
+		 'dat'=>date('Y-m-d H:i:s'),
 		 );
 		
 		 $res=$this->db->insert('tbl_posts_blog',$data);
@@ -212,6 +216,8 @@ class Blog extends MY_Controller {
 
 			 if($_POST)
 			  {
+			  $posted = trim((string) $this->input->post('posted'));
+			  if ($posted === '') { $posted = 'Admin'; }
 			  $data=array(
 			 'post_title'=>$this->input->post('post_title'),
 			 'Permalink'=>$this->input->post('category_title'),
@@ -221,6 +227,7 @@ class Blog extends MY_Controller {
 			 'category'=>$this->input->post('category'),
 			 'relatedposts'=>serialize($this->input->post('relatedposts')),
 			 'blog_image'=>$image_name,
+			 'posted'=>$posted,
 			 );
 			 
 			 
