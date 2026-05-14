@@ -56,8 +56,10 @@ $route['translate_uri_dashes'] = FALSE;
 // Appointments (explicit mapping for Linux case-sensitive production)
 $route['appointments'] = 'appointments/appointments/index';
 $route['appointments/delete/(:num)'] = 'appointments/appointments/delete_row/$1';
+$route['appointments/delete_row/(:num)'] = 'appointments/appointments/delete_row/$1';
 $route['Appointments'] = 'appointments/appointments/index';
 $route['Appointments/delete/(:num)'] = 'appointments/appointments/delete_row/$1';
+$route['Appointments/delete_row/(:num)'] = 'appointments/appointments/delete_row/$1';
 
 /*-------Start Adv Tour Package Routers---------*/
 

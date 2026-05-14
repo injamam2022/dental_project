@@ -1,7 +1,7 @@
                <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
                     <li><a href="<?php echo site_url('dashboard'); ?>">Home</a></li>
-                    <li class="active"><a href="<?php echo site_url('website-setting'); ?>">WebSite Setting</a></li>
+                    <li class="active"><a href="<?php echo site_url('websitemanage'); ?>">WebSite Setting</a></li>
                    
                 </ul>
                 <!-- END BREADCRUMB -->
@@ -417,6 +417,77 @@
 										<label class="col-md-3 col-xs-12 control-label">Facebook App ID</label>
 										<div class="col-md-6 col-xs-12">
 											<input type="text" name="seo_facebook_app_id" value="<?php echo isset($this->website['data']->seo_facebook_app_id) ? htmlspecialchars($this->website['data']->seo_facebook_app_id, ENT_QUOTES, 'UTF-8') : ''; ?>" class="form-control" placeholder="Optional fb:app_id"/>
+										</div>
+									</div>
+									<hr class="col-md-offset-3 col-md-6"/>
+									<p class="text-muted col-md-offset-3 col-md-6">Structured data (JSON-LD) for the <strong>TMJ specialist</strong> page and similar local listings. Run <code>database/schema_org_clinic_migration.sql</code> once if these fields do not save. If street line is empty, the first line of Registered office Address is used.</p>
+									<div class="form-group">
+										<label class="col-md-3 col-xs-12 control-label">Schema business name</label>
+										<div class="col-md-6 col-xs-12">
+											<input type="text" name="schema_business_name" value="<?php echo isset($this->website['data']->schema_business_name) ? htmlspecialchars($this->website['data']->schema_business_name, ENT_QUOTES, 'UTF-8') : ''; ?>" class="form-control" placeholder="e.g. Dontia Care Clinic - Dental (falls back to Company Name + &quot; - Dental&quot;)"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 col-xs-12 control-label">Schema image URL or path</label>
+										<div class="col-md-6 col-xs-12">
+											<input type="text" name="schema_clinic_image" value="<?php echo isset($this->website['data']->schema_clinic_image) ? htmlspecialchars($this->website['data']->schema_clinic_image, ENT_QUOTES, 'UTF-8') : ''; ?>" class="form-control" placeholder="https://… or admin/webroot/uploads/… (optional)"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 col-xs-12 control-label">Schema street address</label>
+										<div class="col-md-6 col-xs-12">
+											<input type="text" name="schema_street_address" value="<?php echo isset($this->website['data']->schema_street_address) ? htmlspecialchars($this->website['data']->schema_street_address, ENT_QUOTES, 'UTF-8') : ''; ?>" class="form-control" placeholder="Single line for Google (optional if address is set)"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 col-xs-12 control-label">City / locality</label>
+										<div class="col-md-6 col-xs-12">
+											<input type="text" name="schema_address_locality" value="<?php echo isset($this->website['data']->schema_address_locality) ? htmlspecialchars($this->website['data']->schema_address_locality, ENT_QUOTES, 'UTF-8') : 'Kolkata'; ?>" class="form-control"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 col-xs-12 control-label">Postal code</label>
+										<div class="col-md-6 col-xs-12">
+											<input type="text" name="schema_postal_code" value="<?php echo isset($this->website['data']->schema_postal_code) ? htmlspecialchars($this->website['data']->schema_postal_code, ENT_QUOTES, 'UTF-8') : '700020'; ?>" class="form-control"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 col-xs-12 control-label">Country (ISO)</label>
+										<div class="col-md-6 col-xs-12">
+											<input type="text" name="schema_address_country" value="<?php echo isset($this->website['data']->schema_address_country) ? htmlspecialchars($this->website['data']->schema_address_country, ENT_QUOTES, 'UTF-8') : 'IN'; ?>" class="form-control" maxlength="8"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 col-xs-12 control-label">Latitude</label>
+										<div class="col-md-6 col-xs-12">
+											<input type="text" name="schema_latitude" value="<?php echo isset($this->website['data']->schema_latitude) ? htmlspecialchars($this->website['data']->schema_latitude, ENT_QUOTES, 'UTF-8') : '22.5379731'; ?>" class="form-control"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 col-xs-12 control-label">Longitude</label>
+										<div class="col-md-6 col-xs-12">
+											<input type="text" name="schema_longitude" value="<?php echo isset($this->website['data']->schema_longitude) ? htmlspecialchars($this->website['data']->schema_longitude, ENT_QUOTES, 'UTF-8') : '88.34470440000001'; ?>" class="form-control"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 col-xs-12 control-label">Price range</label>
+										<div class="col-md-6 col-xs-12">
+											<input type="text" name="schema_price_range" value="<?php echo isset($this->website['data']->schema_price_range) ? htmlspecialchars($this->website['data']->schema_price_range, ENT_QUOTES, 'UTF-8') : '$$'; ?>" class="form-control" placeholder="$$"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 col-xs-12 control-label">Opens / closes (HH:MM)</label>
+										<div class="col-md-3 col-xs-6">
+											<input type="text" name="schema_opens" value="<?php echo isset($this->website['data']->schema_opens) ? htmlspecialchars($this->website['data']->schema_opens, ENT_QUOTES, 'UTF-8') : '10:00'; ?>" class="form-control" placeholder="10:00"/>
+										</div>
+										<div class="col-md-3 col-xs-6">
+											<input type="text" name="schema_closes" value="<?php echo isset($this->website['data']->schema_closes) ? htmlspecialchars($this->website['data']->schema_closes, ENT_QUOTES, 'UTF-8') : '20:00'; ?>" class="form-control" placeholder="20:00"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-3 col-xs-12 control-label">Opening days</label>
+										<div class="col-md-6 col-xs-12">
+											<input type="text" name="schema_opening_days" value="<?php echo isset($this->website['data']->schema_opening_days) ? htmlspecialchars($this->website['data']->schema_opening_days, ENT_QUOTES, 'UTF-8') : 'Monday,Tuesday,Wednesday,Thursday,Friday,Saturday'; ?>" class="form-control" placeholder="Comma-separated weekday names"/>
 										</div>
 									</div>
 								</div>

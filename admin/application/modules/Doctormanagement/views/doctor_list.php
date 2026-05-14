@@ -13,6 +13,16 @@
         </div>
     </div>
     <div class="panel-body">
+        <?php
+        $doctor_list = isset($doctor_list) && is_array($doctor_list) ? $doctor_list : array();
+        if (count($doctor_list) === 0) {
+        ?>
+        <div class="alert alert-info" style="margin-bottom:16px;">
+            <p style="margin:0 0 8px;"><strong>This screen is connected.</strong> It reads from the database table <code>doctor_management</code> — the same source the public dental pages use for the dynamic doctor carousel (when status is <em>active</em>).</p>
+            <p style="margin:0 0 8px;">The list is empty because <strong>no rows have been added yet</strong> (or all are inactive). The homepage can still show doctor names from <strong>built-in fallback</strong> data in the template when the table is empty — that is not the same as records stored here.</p>
+            <p style="margin:0;"><a href="<?php echo site_url('Doctormanagement/add'); ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle"></i> Add your first doctor</a></p>
+        </div>
+        <?php } ?>
         <table class="table datatable">
             <thead>
             <tr>

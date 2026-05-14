@@ -1,7 +1,7 @@
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb">
 	<li><a href="<?php echo site_url();?>">Home</a></li>
-	<li><a href="<?php echo site_url('Carrerpagecontent/add_data');?>">About Content</a></li>
+	<li><a href="<?php echo site_url('Carrerpagecontent');?>">Career Content</a></li>
 </ul>
 
 

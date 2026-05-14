@@ -21,9 +21,10 @@ class Appointments extends MY_Controller {
 		$id = (int) $this->uri->segment(3);
 		if ($id > 0) {
 			$this->Appointments_model->delete_by_id($id);
-			$this->session->set_flashdata('alert', array('message' => 'Appointment deleted.', 'class' => 'success'));
+			// Own flash key so this toast is not confused with other admin actions on other pages
+			$this->session->set_flashdata('appointments_alert', array('message' => 'Appointment deleted.', 'class' => 'success'));
 		} else {
-			$this->session->set_flashdata('alert', array('message' => 'Could not delete.', 'class' => 'error'));
+			$this->session->set_flashdata('appointments_alert', array('message' => 'Could not delete.', 'class' => 'error'));
 		}
 		redirect('appointments');
 	}

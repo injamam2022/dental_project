@@ -1,7 +1,7 @@
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb">
 	<li><a href="<?php echo site_url('dashboard');?>">Home</a></li>
-	<li><a href="<?php echo site_url('edit-banner/');?>">Edit Gallery Image</a></li>
+	<li><a href="<?php echo site_url('gallery');?>">Edit Gallery Image</a></li>
 	<li class="active">Edit Banner</li>
 </ul>
 <!-- END BREADCRUMB -->

@@ -1,7 +1,7 @@
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb">
 	<li><a href="<?php echo site_url();?>">Home</a></li>
-	<li><a href="<?php echo site_url('Custompagecontent/add_data');?>">Add Custompage Content</a></li>
+	<li><a href="<?php echo site_url('Custompagecontent/add_data_custom');?>">Add Custompage Content</a></li>
 </ul>
 <!-- END BREADCRUMB -->
 <!-- PAGE CONTENT WRAPPER -->

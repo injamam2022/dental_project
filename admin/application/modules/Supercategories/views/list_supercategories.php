@@ -21,7 +21,7 @@
     </div>
     <!-- END HEADER SCETION -->
     <div class="panel-body">
-        <form id="form1" method="post" action="<?php echo site_url("supercategories/multi_cat_del");?>">
+        <form id="form1" method="post" action="<?php echo site_url("Supercategories/multi_cat_del");?>">
             <table id="customers2" class="table datatable">
                 <thead>
                     <tr>

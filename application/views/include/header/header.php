@@ -11,6 +11,18 @@ $h = static function ($s) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://www.youtube.com">
+<link rel="preconnect" href="https://i.ytimg.com">
+<link rel="preconnect" href="https://img.youtube.com">
+<link rel="preconnect" href="https://stackpath.bootstrapcdn.com">
+<?php
+$dcc_fonts_href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@400;500;600;700&display=swap';
+?>
+<link rel="preload" href="<?php echo $h($dcc_fonts_href); ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="<?php echo $h($dcc_fonts_href); ?>"></noscript>
 <title><?php echo $h($seo['title']); ?></title>
 <?php if ($seo['description'] !== '') { ?>
 <meta name="description" content="<?php echo $h($seo['description']); ?>">
@@ -53,7 +65,8 @@ $h = static function ($s) {
 <!-- Stylesheets -->
 <link href="<?php echo base_url('assets/'); ?>css/bootstrap.css" rel="stylesheet">
 <link href="<?php echo base_url('assets/'); ?>css/slick.css" rel="stylesheet">
-	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="preload" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" as="style" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"></noscript>
 <link href="<?php echo base_url('assets/'); ?>css/style.css" rel="stylesheet">
 <link href="<?php echo base_url('assets/'); ?>css/responsive.css" rel="stylesheet">   
 <!--Color Switcher Mockup-->
@@ -73,14 +86,26 @@ if ($router_class === 'dental') {
 <link rel="apple-touch-icon" href="<?php echo base_url('assets/images/favicon.svg'); ?>">
 <!-- Responsive -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<?php
+$router_class_head = strtolower((string) $this->router->fetch_class());
+$router_method_head = strtolower((string) $this->router->fetch_method());
+if ($router_class_head === 'dental' && $router_method_head === 'tmj_specialist' && isset($this->website['data'])) {
+	$this->load->helper('schema_org');
+	$tmj_canonical = isset($seo['canonical']) ? trim((string) $seo['canonical']) : '';
+	if ($tmj_canonical === '') {
+		$tmj_canonical = current_url();
+	}
+	$tmj_ld = schema_dentist_local_graph($this->website['data'], $tmj_canonical);
+	if (is_array($tmj_ld)) {
+		$tmj_json = json_encode($tmj_ld, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+		if ($tmj_json !== false) {
+			echo "<script type=\"application/ld+json\">\n" . $tmj_json . "\n</script>\n";
+		}
+	}
+}
+?>
 
 </head>
-    
-    
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <body>
 
@@ -171,7 +196,7 @@ if ($router_class === 'dental') {
                         <div class="logo dontia-logo-brand">
                             <a href="<?php echo base_url(); ?>" class="dontia-logo-link">
                                 <span class="dontia-logo-mark">
-                                    <img src="<?php echo $h($header_logo_url); ?>" alt="<?php echo $company_esc; ?>">
+                                    <img src="<?php echo $h($header_logo_url); ?>" alt="<?php echo $company_esc; ?>" width="200" height="56" decoding="async" fetchpriority="high">
                                 </span>
                             </a>
                         </div>

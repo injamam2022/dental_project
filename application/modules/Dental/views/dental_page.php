@@ -165,7 +165,7 @@ if (function_exists('GetServices')) {
             $hero_img = base_url('admin/webroot/uploads/banner/' . $hero_banner->image_name);
         }
         ?>
-        <img src="<?php echo htmlspecialchars($hero_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Dental Clinic Banner">
+        <img src="<?php echo htmlspecialchars($hero_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Dental Clinic Banner" width="1920" height="1080" decoding="async" fetchpriority="high">
         <div class="dr-hero-overlay"></div>
         <div class="dr-hero-content dr-container">
             <h2>Dontia Care Clinic</h2>
@@ -206,7 +206,7 @@ if (function_exists('GetServices')) {
                     $about_img = site_url('admin/webroot/uploads/dental_media/' . $media_about_list[0]->image_name);
                 }
                 ?>
-                <img src="<?php echo htmlspecialchars($about_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Dontia Clinic">
+                <img src="<?php echo htmlspecialchars($about_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Dontia Clinic" loading="lazy" decoding="async">
             </div>
         </div>
     </section>
@@ -239,7 +239,7 @@ if (function_exists('GetServices')) {
                             : $dental_page_defaults . $wci->image_name)
                         : base_url('assets/images/favicon.png');
                 ?>
-                <article><img src="<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?>"><h3><?php echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?></h3><?php if ($desc !== '') { ?><p><?php echo htmlspecialchars($desc, ENT_QUOTES, 'UTF-8'); ?></p><?php } ?></article>
+                <article><img src="<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async"><h3><?php echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?></h3><?php if ($desc !== '') { ?><p><?php echo htmlspecialchars($desc, ENT_QUOTES, 'UTF-8'); ?></p><?php } ?></article>
                 <?php } ?>
             </div>
         </div>
@@ -275,7 +275,7 @@ if (function_exists('GetServices')) {
                             : $dental_page_defaults . $sp->image_name)
                         : base_url('assets/images/favicon.png');
                     ?>
-                    <span><img src="<?php echo htmlspecialchars($sp_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($sp_title, ENT_QUOTES, 'UTF-8'); ?>"></span>
+                    <span><img src="<?php echo htmlspecialchars($sp_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($sp_title, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async"></span>
                     <h3><?php echo htmlspecialchars($sp_title, ENT_QUOTES, 'UTF-8'); ?></h3>
                     <?php if ($sp_desc !== '') { ?><p><?php echo htmlspecialchars($sp_desc, ENT_QUOTES, 'UTF-8'); ?></p><?php } ?>
                 </article>
@@ -303,7 +303,7 @@ if (function_exists('GetServices')) {
                             : $dental_page_defaults . $st->image_name)
                         : base_url('assets/images/favicon.png');
                     ?>
-                    <img src="<?php echo htmlspecialchars($st_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($st_desc, ENT_QUOTES, 'UTF-8'); ?>">
+                    <img src="<?php echo htmlspecialchars($st_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($st_desc, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
                     <h3><?php echo htmlspecialchars($st_title, ENT_QUOTES, 'UTF-8'); ?></h3>
                     <p><?php echo htmlspecialchars($st_desc, ENT_QUOTES, 'UTF-8'); ?></p>
                 </article>
@@ -329,7 +329,7 @@ if (function_exists('GetServices')) {
                 ?>
                 <article class="dr-card">
                     <div class="dr-icon">
-                        <img src="<?php echo htmlspecialchars($svc_icon, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($svc_name, ENT_QUOTES, 'UTF-8'); ?>">
+                        <img src="<?php echo htmlspecialchars($svc_icon, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($svc_name, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
                     </div>
                     <h3><?php echo htmlspecialchars($svc_name, ENT_QUOTES, 'UTF-8'); ?></h3>
                     <p><?php echo htmlspecialchars($svc_desc, ENT_QUOTES, 'UTF-8'); ?></p>
@@ -362,7 +362,7 @@ if (function_exists('GetServices')) {
                     }
                     ?>
                 <article class="dr-doctor-slide-card">
-                    <img src="<?php echo htmlspecialchars($dr_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($dr_name, ENT_QUOTES, 'UTF-8'); ?>">
+                    <img src="<?php echo htmlspecialchars($dr_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($dr_name, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
                     <h3><?php echo htmlspecialchars($dr_name, ENT_QUOTES, 'UTF-8'); ?></h3>
                     <p><?php echo htmlspecialchars($dr_role, ENT_QUOTES, 'UTF-8'); ?></p>
                 </article>
@@ -406,7 +406,7 @@ if (function_exists('GetServices')) {
                     $tech_img = isset($tech['image_url']) ? (string) $tech['image_url'] : $dental_page_technology . 'Cerec.png';
                 ?>
                 <article class="dr-tech-card" data-tech-id="<?php echo $tech_id; ?>">
-                    <img src="<?php echo htmlspecialchars($tech_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($tech_title, ENT_QUOTES, 'UTF-8'); ?>">
+                    <img src="<?php echo htmlspecialchars($tech_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($tech_title, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
                     <div class="dr-tech-overlay">
                         <h3><?php echo htmlspecialchars($tech_title, ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p class="dr-tech-desc"><?php echo htmlspecialchars($tech_desc, ENT_QUOTES, 'UTF-8'); ?></p>
@@ -441,8 +441,8 @@ if (function_exists('GetServices')) {
                                 : $dental_page_defaults . $ba->image_name_2)
                             : $ba_before;
                         ?>
-                        <img src="<?php echo htmlspecialchars($ba_before, ENT_QUOTES, 'UTF-8'); ?>" alt="Before">
-                        <img src="<?php echo htmlspecialchars($ba_after, ENT_QUOTES, 'UTF-8'); ?>" alt="After">
+                        <img src="<?php echo htmlspecialchars($ba_before, ENT_QUOTES, 'UTF-8'); ?>" alt="Before" loading="lazy" decoding="async">
+                        <img src="<?php echo htmlspecialchars($ba_after, ENT_QUOTES, 'UTF-8'); ?>" alt="After" loading="lazy" decoding="async">
                     </div>
                     <h3><?php echo htmlspecialchars($ba_title, ENT_QUOTES, 'UTF-8'); ?></h3>
                 </article>
@@ -498,7 +498,7 @@ if (function_exists('GetServices')) {
                     ?>
                     <article class="dr-video-card" data-video-id="<?php echo htmlspecialchars($vid, ENT_QUOTES, 'UTF-8'); ?>">
                         <div class="dr-video-thumb">
-                            <img src="<?php echo htmlspecialchars($thumb, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?>">
+                            <img src="<?php echo htmlspecialchars($thumb, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
                             <span class="dr-video-play">&#9658;</span>
                         </div>
                         <h3><?php echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?></h3>
@@ -533,7 +533,7 @@ if (function_exists('GetServices')) {
                         $g_src = base_url('admin/webroot/uploads/banner/' . $gi->image_name);
                     ?>
                     <article class="dr-gallery-slide">
-                        <img src="<?php echo htmlspecialchars($g_src, ENT_QUOTES, 'UTF-8'); ?>" alt="Clinic gallery image">
+                        <img src="<?php echo htmlspecialchars($g_src, ENT_QUOTES, 'UTF-8'); ?>" alt="Clinic gallery image" loading="lazy" decoding="async">
                     </article>
                     <?php } ?>
                 </div>
@@ -568,7 +568,7 @@ if (function_exists('GetServices')) {
                     $cert_cap_esc = htmlspecialchars($cert_cap, ENT_QUOTES, 'UTF-8');
                 ?>
                 <a class="dr-cert-zoom" href="<?php echo $cert_img_esc; ?>" data-fancybox="dental-certificates" data-caption="<?php echo $cert_cap_esc; ?>" data-type="image">
-                    <img src="<?php echo $cert_img_esc; ?>" alt="<?php echo $cert_cap_esc; ?>">
+                    <img src="<?php echo $cert_img_esc; ?>" alt="<?php echo $cert_cap_esc; ?>" loading="lazy" decoding="async">
                 </a>
                 <?php } ?>
             </div>
@@ -608,7 +608,7 @@ if (function_exists('GetServices')) {
                         <a class="dr-blog-card-link" href="<?php echo htmlspecialchars($b_link, ENT_QUOTES, 'UTF-8'); ?>"
                            aria-label="Read article: <?php echo htmlspecialchars($b_title, ENT_QUOTES, 'UTF-8'); ?>"></a>
                         <div class="dr-blog-card-image-wrap">
-                            <img src="<?php echo htmlspecialchars($b_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($b_title, ENT_QUOTES, 'UTF-8'); ?>">
+                            <img src="<?php echo htmlspecialchars($b_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($b_title, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
                             <span class="dr-blog-tag"><i class="fa fa-book" aria-hidden="true"></i> <?php echo htmlspecialchars($cat, ENT_QUOTES, 'UTF-8'); ?></span>
                         </div>
                         <div class="dr-blog-card-body">

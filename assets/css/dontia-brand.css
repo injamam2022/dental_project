@@ -1,9 +1,8 @@
 /**
  * Dontia Care Clinic — light theme + warm accent rgb(173, 140, 128)
  * Loaded after color-themes to override accent colours sitewide.
+ * Google Fonts are loaded from the document head (non-blocking) for better PageSpeed.
  */
-
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
 
 :root {
 	--dcc-page: #faf8f7;

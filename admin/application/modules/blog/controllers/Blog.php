@@ -167,7 +167,7 @@ class Blog extends MY_Controller {
 				$this->Blog_Model->delete_data_post($enqid);
 			  }
 			  $this->session->set_flashdata('alert', array('message' => 'Row successfully deleted !','class' => 'success'));
-			  redirect('Blog');
+			  redirect('blog');
 
 		}
 		function edit_comment($id)
@@ -189,7 +189,7 @@ class Blog extends MY_Controller {
 		   $id=$this->input->post('id');
 		   $this->Blog_Model->update_comment($data,$id); 
 		   $this->session->set_flashdata('alert', array('message' => 'Comment Update Successfully','class' => 'success'));
-		   redirect('comment-list');
+		   redirect('blog/Comment_list');
 	    }
 		
 	
@@ -272,7 +272,7 @@ class Blog extends MY_Controller {
 		      
 			  $this->Blog_Model->delete_comment($id);
 			  $this->session->set_flashdata('alert', array('message' => 'Row successfully deleted !','class' => 'success'));
-			  redirect('Comment-list');
+			  redirect('blog/Comment_list');
 
 		}
 		
@@ -282,7 +282,7 @@ class Blog extends MY_Controller {
 				$this->Blog_Model->delete_comment($enqid);
 			  }
 			  $this->session->set_flashdata('alert', array('message' => 'Row successfully deleted !','class' => 'success'));
-			  redirect('Comment-list');
+			  redirect('blog/Comment_list');
 
 		}
 	public function change_status_comment()
@@ -301,7 +301,7 @@ class Blog extends MY_Controller {
 		$this->db->where('id',$this->uri->segment(3));
 		$this->db->update('blog_comments',$data);
 		$this->session->set_flashdata('alert', array('message' => 'Status Successfully Changed !!!','class' => 'success'));
-		redirect('Comment-list');
+		redirect('blog/Comment_list');
 	
 
 	}
@@ -333,7 +333,7 @@ class Blog extends MY_Controller {
 		    
 			  $this->Blog_Model->delete_review($id);
 			  $this->session->set_flashdata('alert', array('message' => 'Row successfully deleted !','class' => 'success'));
-			  redirect('Client-Review');
+			  redirect('blog/client_review');
 
 		}
 	function delete_all_review(){
@@ -343,7 +343,7 @@ class Blog extends MY_Controller {
 				$this->Blog_Model->delete_review($revid);
 			  }
 			  $this->session->set_flashdata('alert', array('message' => 'Row successfully deleted !','class' => 'success'));
-			  redirect('Client-Review');
+			  redirect('blog/client_review');
 
 		}
 	
@@ -364,12 +364,12 @@ class Blog extends MY_Controller {
 			   {
 				   $this->db->where('id',$aid);
 				   $this->db->update('client_reviews',$data);
-				   redirect('Client-Review');
+				   redirect('blog/client_review');
 			   }
 			  else{
 				  $this->db->where('id',$aid);
 				   $this->db->update('client_reviews',$datas);
-				   redirect('Client-Review');
+				   redirect('blog/client_review');
 			  }
 		 }	 
 		

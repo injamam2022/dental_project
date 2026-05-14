@@ -42,7 +42,7 @@
                                                 <td><?php echo htmlspecialchars($r->appointment_date, ENT_QUOTES, 'UTF-8'); ?></td>
                                                 <td><?php echo htmlspecialchars($r->created_at, ENT_QUOTES, 'UTF-8'); ?></td>
                                                 <td>
-                                                    <a href="<?php echo site_url('Appointments/delete_row/'.$r->id); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Delete this row?');">Delete</a>
+                                                    <a href="<?php echo site_url('appointments/delete/'.(int)$r->id); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Delete this row?');">Delete</a>
                                                 </td>
                                             </tr>
                                         <?php

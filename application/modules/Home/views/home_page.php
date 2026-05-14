@@ -17,14 +17,9 @@ print_r($this->website['data']);*/
 
                 <div class="carousel-item active">
                     <div class="home-hero-youtube-cover">
-                        <iframe
-                            class="home-hero-youtube-iframe"
-                            src="https://www.youtube.com/embed/PqdEzU6_2zg?autoplay=1&amp;mute=1&amp;playsinline=1&amp;controls=0&amp;disablekb=1&amp;fs=0&amp;iv_load_policy=3&amp;rel=0&amp;modestbranding=1&amp;loop=1&amp;playlist=PqdEzU6_2zg"
-                            title="Dontia Care Clinic — welcome video"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen
-                            loading="eager"
-                        ></iframe>
+                        <button type="button" class="home-hero-youtube-facade" id="homeHeroYoutubeFacade" data-youtube-id="PqdEzU6_2zg" style="background-image:url(https://i.ytimg.com/vi/PqdEzU6_2zg/hqdefault.jpg)" aria-label="Play welcome video">
+                            <span class="home-hero-yt-play" aria-hidden="true">&#9654;</span>
+                        </button>
                     </div>
 
                     <div class="hero-slide-overlay" aria-hidden="true"></div>
@@ -75,7 +70,7 @@ print_r($this->website['data']);*/
                         <div class="inner-column dontia-about-visual">
                             <div class="image-box dontia-about-photos">
                                 <figure class="image wow fadeInRight" data-wow-delay="200ms">
-                                    <img src="<?php echo base_url('admin/webroot/uploads/home/').$content[0][1]; ?>" alt="<?php echo $dontia_about_company_esc; ?>">
+                                    <img src="<?php echo base_url('admin/webroot/uploads/home/').$content[0][1]; ?>" alt="<?php echo $dontia_about_company_esc; ?>" loading="lazy" decoding="async">
                                 </figure>
                             </div>
                         </div>
@@ -548,4 +543,32 @@ unset($dontia_parse_youtube_id);
         </div>
     </section> -->
    
+<script>
+(function () {
+	var btn = document.getElementById('homeHeroYoutubeFacade');
+	if (!btn) return;
+	var vid = btn.getAttribute('data-youtube-id') || 'PqdEzU6_2zg';
+	function mountIframe() {
+		var wrap = btn.parentNode;
+		if (!wrap) return;
+		var iframe = document.createElement('iframe');
+		iframe.className = 'home-hero-youtube-iframe';
+		iframe.setAttribute('title', 'Dontia Care Clinic — welcome video');
+		iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+		iframe.setAttribute('allowfullscreen', '');
+		iframe.setAttribute('loading', 'eager');
+		iframe.src = 'https://www.youtube.com/embed/' + encodeURIComponent(vid)
+			+ '?autoplay=1&mute=1&playsinline=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&rel=0&modestbranding=1&loop=1&playlist='
+			+ encodeURIComponent(vid);
+		wrap.replaceChild(iframe, btn);
+	}
+	btn.addEventListener('click', mountIframe);
+	btn.addEventListener('keydown', function (e) {
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			mountIframe();
+		}
+	});
+})();
+</script>
 

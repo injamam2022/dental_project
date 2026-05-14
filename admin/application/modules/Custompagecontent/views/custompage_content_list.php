@@ -14,7 +14,7 @@
             <button class="btn btn-danger" onClick="ischeckbox()"><i class="fa fa-trash-o"></i> Remove </button>
         </div>
         <div class="btn-group pull-right" style="margin-right: 2%;">
-            <a href="<?php echo site_url('Custompagecontent/add_data');?>">
+            <a href="<?php echo site_url('Custompagecontent/add_data_custom');?>">
                 <button class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add Custom Page Content</button>
             </a>
         </div>

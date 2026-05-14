@@ -1,7 +1,7 @@
                <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
                     <li><a href="<?php echo site_url('dashboard');?>">Home</a></li>
-                    <li><a href="<?php echo site_url('Comment-list');?>">Blog</a></li>
+                    <li><a href="<?php echo site_url('blog/Comment_list');?>">Blog</a></li>
                     <li class="active">Blog  List</li>
                 </ul>
                 <!-- END BREADCRUMB -->
@@ -49,7 +49,7 @@
 								
                                 <div class="panel-body">
 								   <div class="table-responsive">
-								   <form id="form1"  method="post" action="<?php echo site_url("Blog/delete_multiple_comment");?>">
+								   <form id="form1"  method="post" action="<?php echo site_url("blog/delete_multiple_comment");?>">
                                     <table id="customers2" class="table table-striped table-actions datatable">
                                         <thead>
                                             <tr>
@@ -94,7 +94,7 @@
 												  
 												  <td>
 												  <?php $id=$comments_lists->id;?>
-												<a class="btn btn-default btn-rounded btn-sm" href="<?php echo site_url("Blog/edit_comment/$id");?>" ><span class="fa fa-pencil"></span></a>
+												<a class="btn btn-default btn-rounded btn-sm" href="<?php echo site_url("blog/edit_comment/$id");?>" ><span class="fa fa-pencil"></span></a>
 												  
 												  
        <a href="" class="changestatus<?php echo $comments_lists->id;?>" thisId="<?php echo $comments_lists->id; ?>" status="<?php echo $comments_lists->status; ?>">
@@ -116,14 +116,14 @@ var sts =  $(this).attr("status");//alert(sts);
 
  $.ajax({
          type: "POST",
-         url:"<?php echo site_url(); ?>Blog/change_status_comment/"+thisId, 
+         url:"<?php echo site_url(); ?>blog/change_status_comment/"+thisId, 
          cache:false,
 		data: { status:sts},
         success: 
               function(data){
                if(data == "true")
 			   {
-window.location.href="<?php echo site_url();?>Comment-list";
+window.location.href="<?php echo site_url();?>blog/Comment_list";
 				} 
 				
 						}       
@@ -165,7 +165,7 @@ window.location.href="<?php echo site_url();?>Comment-list";
 				}
 				function delete_single()
 				{   
-				window.location.href="<?php echo site_url('Blog/delete_single_comment');?>/"+id;
+				window.location.href="<?php echo site_url('blog/delete_single_comment');?>/"+id;
 				}
 				</script>
 				
@@ -175,7 +175,7 @@ window.location.href="<?php echo site_url();?>Comment-list";
 				function Deactive_package(getids)
 				{   
 				
-				window.location.href="<?php echo site_url('Blog/delete_multiple_comment');?>/"+getids;
+				window.location.href="<?php echo site_url('blog/delete_multiple_comment');?>/"+getids;
 				}
 				</script>
 				<script>

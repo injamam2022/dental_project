@@ -1,7 +1,7 @@
                <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
                     <li><a href="<?php echo site_url('dashboard');?>">Home</a></li>
-                    <li><a href="<?php echo site_url('Comment-list');?>">Blog</a></li>
+                    <li><a href="<?php echo site_url('blog/Comment_list');?>">Blog</a></li>
                     <li class="active">Blog  List</li>
                 </ul>
                 <!-- END BREADCRUMB -->
@@ -49,7 +49,7 @@
 								
                                 <div class="panel-body">
 								   <div class="table-responsive">
-								   <form id="form1"  method="post" action="<?php echo site_url("Blog/delete_multiple_comment");?>">
+								   <form id="form1"  method="post" action="<?php echo site_url("blog/delete_multiple_comment");?>">
                                     <table id="customers2" class="table table-striped table-actions datatable">
                                         <thead>
                                             <tr>
@@ -120,7 +120,7 @@
 				}
 				function delete_single()
 				{   
-				window.location.href="<?php echo site_url('Blog/delete_single_comment');?>/"+id;
+				window.location.href="<?php echo site_url('blog/delete_single_comment');?>/"+id;
 				}
 				</script>
 				
@@ -130,7 +130,7 @@
 				function Deactive_package(getids)
 				{   
 				
-				window.location.href="<?php echo site_url('Blog/delete_multiple_comment');?>/"+getids;
+				window.location.href="<?php echo site_url('blog/delete_multiple_comment');?>/"+getids;
 				}
 				</script>
 				<script>

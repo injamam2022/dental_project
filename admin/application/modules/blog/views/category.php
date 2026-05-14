@@ -83,7 +83,7 @@
 								
                                 <div class="panel-body">
 								   <div class="table-responsive">
-								   <form id="form1"  method="post" action="<?php echo site_url("Blog/delete_multiple_blog");?>">
+								   <form id="form1"  method="post" action="<?php echo site_url("blog/delete_multiple_blog");?>">
                                     <table id="customers2" class="table table-striped table-actions datatable">
                                         <thead>
                                             <tr>
@@ -200,7 +200,7 @@
 				}
 				function delete_single()
 				{   
-				window.location.href="<?php echo site_url('Blog/delete_single_blog');?>/"+id;
+				window.location.href="<?php echo site_url('blog/delete_single_blog');?>/"+id;
 				}
 				</script>
 				
@@ -210,7 +210,7 @@
 				function Deactive_package(getids)
 				{   
 				
-				window.location.href="<?php echo site_url('Blog/delete_multiple_blog');?>/"+getids;
+				window.location.href="<?php echo site_url('blog/delete_multiple_blog');?>/"+getids;
 				}
 				</script>
 				<script>

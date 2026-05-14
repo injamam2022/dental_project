@@ -38,6 +38,10 @@ $tmj_embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($tmj_youtu
 .tmj-page .tmj-hero-video-wrap{width:100%;max-width:880px;margin:0 auto}
 .tmj-page .tmj-hero-video-aspect{position:relative;padding-bottom:56.25%;height:0;border-radius:12px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.45);border:1px solid rgba(255,248,240,.12)}
 .tmj-page .tmj-hero-video-aspect iframe{position:absolute;left:0;top:0;width:100%;height:100%;border:0}
+.tmj-page .tmj-hero-yt-facade{position:absolute;left:0;top:0;width:100%;height:100%;margin:0;padding:0;border:0;cursor:pointer;background:#0a0a0a center/cover no-repeat;border-radius:12px}
+.tmj-page .tmj-hero-yt-facade:focus{outline:2px solid rgba(255,248,240,.75);outline-offset:-2px}
+.tmj-page .tmj-hero-yt-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:44px;border:0;border-radius:10px;background:rgba(0,0,0,.62);color:#fff;font-size:20px;line-height:1;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.45);pointer-events:none}
+.tmj-page .tmj-hero-yt-facade:hover .tmj-hero-yt-play,.tmj-page .tmj-hero-yt-facade:focus .tmj-hero-yt-play{background:rgba(173,140,128,.95);color:#1a120e}
 .tmj-page .ortho-sec{padding:52px 0}
 .tmj-page .ortho-sec h2,.tmj-page .ortho-sec h3,.tmj-page .ortho-sec h4{margin:0 0 14px}
 .tmj-page .ortho-sub{font-size:18px;line-height:1.78;color:#3a3836}
@@ -102,10 +106,9 @@ $tmj_embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($tmj_youtu
             <p class="tmj-hero-lead">Expert assessment and treatment for jaw pain, clicking, headaches, and TMJ disorders — conservative-first care at Dontia Care Clinic.</p>
             <div class="tmj-hero-video-wrap">
                 <div class="tmj-hero-video-aspect">
-                    <iframe src="<?php echo htmlspecialchars($tmj_embed, ENT_QUOTES, 'UTF-8'); ?>"
-                        title="TMJ and jaw health — Dontia Care Clinic, Kolkata"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
+                    <button type="button" class="tmj-hero-yt-facade" id="tmjHeroYoutubeFacade" data-embed="<?php echo htmlspecialchars($tmj_embed, ENT_QUOTES, 'UTF-8'); ?>" style="background-image:url(https://i.ytimg.com/vi/<?php echo htmlspecialchars($tmj_youtube_id, ENT_QUOTES, 'UTF-8'); ?>/hqdefault.jpg)" aria-label="Play TMJ information video">
+                        <span class="tmj-hero-yt-play" aria-hidden="true">&#9654;</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -245,9 +248,12 @@ $tmj_embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($tmj_youtu
                                     ? site_url('admin/webroot/uploads/doctors/' . $dr->image_name)
                                     : base_url('admin/webroot/uploads/dental_page/defaults/dr-prabhjeet-sethi.png');
                                 $tmj_dr_shown++;
+                                $tmj_dr_img_attr = ($tmj_dr_shown === 1)
+                                    ? ' width="400" height="260" decoding="async" fetchpriority="high"'
+                                    : ' loading="lazy" decoding="async"';
                         ?>
                         <article class="tmj-doctor-card">
-                            <img src="<?php echo htmlspecialchars($dimg, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $dr->doctor_name, ENT_QUOTES, 'UTF-8'); ?>">
+                            <img src="<?php echo htmlspecialchars($dimg, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $dr->doctor_name, ENT_QUOTES, 'UTF-8'); ?>"<?php echo $tmj_dr_img_attr; ?>>
                             <h3><?php echo htmlspecialchars((string) $dr->doctor_name, ENT_QUOTES, 'UTF-8'); ?></h3>
                             <p><?php echo htmlspecialchars(isset($dr->designation) ? (string) $dr->designation : 'TMJ &amp; restorative dentistry', ENT_QUOTES, 'UTF-8'); ?></p>
                         </article>
@@ -256,7 +262,7 @@ $tmj_embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($tmj_youtu
                         }
                         if ($tmj_dr_shown === 0) { ?>
                         <article class="tmj-doctor-card">
-                            <img src="<?php echo base_url('admin/webroot/uploads/dental_page/defaults/dr-prabhjeet-sethi.png'); ?>" alt="Dr. Prabhjeet Singh Sethi — TMJ specialist Kolkata">
+                            <img src="<?php echo base_url('admin/webroot/uploads/dental_page/defaults/dr-prabhjeet-sethi.png'); ?>" alt="Dr. Prabhjeet Singh Sethi — TMJ specialist Kolkata" width="400" height="260" decoding="async" fetchpriority="high">
                             <h3>Dr. Prabhjeet Singh Sethi</h3>
                             <p>Dawson Certified — TMJ, occlusion, and full-mouth rehabilitation.</p>
                         </article>
@@ -309,7 +315,7 @@ $tmj_embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($tmj_youtu
             <div class="ortho-grid-2" style="margin-top:16px;">
                 <?php foreach ($tech_cards as $tc) { ?>
                 <article class="ortho-card">
-                    <img src="<?php echo htmlspecialchars((string) $tc['image_url'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $tc['title'], ENT_QUOTES, 'UTF-8'); ?>">
+                    <img src="<?php echo htmlspecialchars((string) $tc['image_url'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $tc['title'], ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
                     <h4><?php echo htmlspecialchars((string) $tc['title'], ENT_QUOTES, 'UTF-8'); ?></h4>
                     <p class="ortho-sub" style="font-size:16px;margin:0;"><?php echo htmlspecialchars((string) $tc['description'], ENT_QUOTES, 'UTF-8'); ?></p>
                 </article>
@@ -342,11 +348,11 @@ $tmj_embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($tmj_youtu
                     foreach (array_slice($certs, 0, 6) as $ci) {
                         $cert_img = !empty($ci->image_name) ? site_url('admin/webroot/uploads/dental_media/' . $ci->image_name) : base_url('admin/webroot/uploads/dental_page/defaults/Implantology_Cetificate.jpg');
                 ?>
-                <article class="ortho-cert-card"><img src="<?php echo htmlspecialchars($cert_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Certificate"></article>
+                <article class="ortho-cert-card"><img src="<?php echo htmlspecialchars($cert_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Certificate" loading="lazy" decoding="async"></article>
                 <?php
                     }
                 } else { ?>
-                <article class="ortho-cert-card"><img src="<?php echo base_url('admin/webroot/uploads/dental_page/defaults/Implantology_Cetificate.jpg'); ?>" alt="Certificate"></article>
+                <article class="ortho-cert-card"><img src="<?php echo base_url('admin/webroot/uploads/dental_page/defaults/Implantology_Cetificate.jpg'); ?>" alt="Certificate" loading="lazy" decoding="async"></article>
                 <?php } ?>
             </div>
         </div>
@@ -366,7 +372,7 @@ $tmj_embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($tmj_youtu
                         $b_link = $b_permalink !== '' ? base_url('blog/' . $b_permalink) : '#';
                 ?>
                 <article class="ortho-card">
-                    <img src="<?php echo htmlspecialchars($b_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($b_title, ENT_QUOTES, 'UTF-8'); ?>">
+                    <img src="<?php echo htmlspecialchars($b_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($b_title, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
                     <h4><?php echo htmlspecialchars($b_title, ENT_QUOTES, 'UTF-8'); ?></h4>
                     <a href="<?php echo htmlspecialchars($b_link, ENT_QUOTES, 'UTF-8'); ?>">Read blog</a>
                 </article>
@@ -379,6 +385,34 @@ $tmj_embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($tmj_youtu
         </div>
     </section>
 </div>
+
+<script>
+(function () {
+	var btn = document.getElementById('tmjHeroYoutubeFacade');
+	if (!btn) return;
+	var embed = btn.getAttribute('data-embed');
+	if (!embed) return;
+	function mountIframe() {
+		var aspect = btn.parentNode;
+		if (!aspect) return;
+		var iframe = document.createElement('iframe');
+		iframe.src = embed;
+		iframe.setAttribute('title', 'TMJ and jaw health — Dontia Care Clinic, Kolkata');
+		iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+		iframe.setAttribute('allowfullscreen', '');
+		iframe.setAttribute('loading', 'eager');
+		iframe.style.cssText = 'position:absolute;left:0;top:0;width:100%;height:100%;border:0';
+		aspect.replaceChild(iframe, btn);
+	}
+	btn.addEventListener('click', mountIframe);
+	btn.addEventListener('keydown', function (e) {
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			mountIframe();
+		}
+	});
+})();
+</script>
 
 <?php $this->load->view('include/footer/footer'); ?>
 <?php $this->load->view('include/modal_master/modal_master'); ?>

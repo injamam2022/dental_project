@@ -146,7 +146,7 @@ $patient_story_captions = array(
                             $img = !empty($featured_doctor->image_name) ? site_url('admin/webroot/uploads/doctors/' . $featured_doctor->image_name) : base_url('admin/webroot/uploads/dental_page/defaults/dr-prabhjeet-sethi.png');
                     ?>
                     <article class="ortho-doctor-card">
-                        <img class="ortho-doctor-photo" src="<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $featured_doctor->doctor_name, ENT_QUOTES, 'UTF-8'); ?>">
+                        <img class="ortho-doctor-photo" src="<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $featured_doctor->doctor_name, ENT_QUOTES, 'UTF-8'); ?>" width="400" height="250" decoding="async" fetchpriority="high">
                         <h3><?php echo htmlspecialchars((string) $featured_doctor->doctor_name, ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p><?php echo htmlspecialchars(isset($featured_doctor->designation) ? (string) $featured_doctor->designation : 'Implant & restorative specialist', ENT_QUOTES, 'UTF-8'); ?></p>
                     </article>
@@ -154,7 +154,7 @@ $patient_story_captions = array(
                         }
                     } else { ?>
                     <article class="ortho-doctor-card">
-                        <img class="ortho-doctor-photo" src="<?php echo base_url('admin/webroot/uploads/dental_page/defaults/dr-prabhjeet-sethi.png'); ?>" alt="Dental implant specialist">
+                        <img class="ortho-doctor-photo" src="<?php echo base_url('admin/webroot/uploads/dental_page/defaults/dr-prabhjeet-sethi.png'); ?>" alt="Dental implant specialist" width="400" height="250" decoding="async" fetchpriority="high">
                         <h3>Expert Implant Team</h3>
                         <p>MDS implantologists, oral surgeons, and prosthodontists focused on predictable, long-lasting results.</p>
                     </article>
@@ -213,7 +213,7 @@ $patient_story_captions = array(
             <div class="ortho-grid-2">
                 <?php foreach ($tech_cards as $tc) { ?>
                 <article class="ortho-card">
-                    <img src="<?php echo htmlspecialchars((string) $tc['image_url'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $tc['title'], ENT_QUOTES, 'UTF-8'); ?>">
+                    <img src="<?php echo htmlspecialchars((string) $tc['image_url'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $tc['title'], ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
                     <h4><?php echo htmlspecialchars((string) $tc['title'], ENT_QUOTES, 'UTF-8'); ?></h4>
                     <p><?php echo htmlspecialchars((string) $tc['description'], ENT_QUOTES, 'UTF-8'); ?></p>
                 </article>
@@ -266,7 +266,7 @@ $patient_story_captions = array(
                     ?>
                     <article class="dr-gallery-slide implant-patient-story-slide">
                         <div class="implant-story-slide-inner">
-                            <img src="<?php echo htmlspecialchars($_img_url, ENT_QUOTES, 'UTF-8'); ?>" alt="Patient story — implant treatment in Kolkata">
+                            <img src="<?php echo htmlspecialchars($_img_url, ENT_QUOTES, 'UTF-8'); ?>" alt="Patient story — implant treatment in Kolkata" loading="lazy" decoding="async">
                             <p><?php echo htmlspecialchars($_cap, ENT_QUOTES, 'UTF-8'); ?></p>
                         </div>
                     </article>
@@ -314,11 +314,11 @@ $patient_story_captions = array(
                     foreach ($certs as $ci) {
                         $cert_img = !empty($ci->image_name) ? site_url('admin/webroot/uploads/dental_media/' . $ci->image_name) : base_url('admin/webroot/uploads/dental_page/defaults/Implantology_Cetificate.jpg');
                 ?>
-                <article class="ortho-cert-card"><img src="<?php echo htmlspecialchars($cert_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Certificate"></article>
+                <article class="ortho-cert-card"><img src="<?php echo htmlspecialchars($cert_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Certificate" loading="lazy" decoding="async"></article>
                 <?php
                     }
                 } else { ?>
-                <article class="ortho-cert-card"><img src="<?php echo base_url('admin/webroot/uploads/dental_page/defaults/Implantology_Cetificate.jpg'); ?>" alt="Certificate"></article>
+                <article class="ortho-cert-card"><img src="<?php echo base_url('admin/webroot/uploads/dental_page/defaults/Implantology_Cetificate.jpg'); ?>" alt="Certificate" loading="lazy" decoding="async"></article>
                 <?php } ?>
             </div>
         </div>
@@ -350,7 +350,7 @@ $patient_story_captions = array(
                         $b_link = $b_permalink !== '' ? base_url('blog/' . $b_permalink) : '#';
                 ?>
                 <article class="ortho-card">
-                    <img src="<?php echo htmlspecialchars($b_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($b_title, ENT_QUOTES, 'UTF-8'); ?>">
+                    <img src="<?php echo htmlspecialchars($b_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($b_title, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
                     <h4><?php echo htmlspecialchars($b_title, ENT_QUOTES, 'UTF-8'); ?></h4>
                     <a href="<?php echo htmlspecialchars($b_link, ENT_QUOTES, 'UTF-8'); ?>">Read blog</a>
                 </article>

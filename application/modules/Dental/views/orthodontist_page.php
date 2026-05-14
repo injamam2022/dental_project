@@ -155,7 +155,7 @@ box-shadow:0 12px 24px rgba(183,131,51,.35);
                             $img = !empty($featured_doctor->image_name) ? site_url('admin/webroot/uploads/doctors/' . $featured_doctor->image_name) : base_url('admin/webroot/uploads/dental_page/defaults/dr-prabhjeet-sethi.png');
                     ?>
                     <article class="ortho-doctor-card">
-                        <img class="ortho-doctor-photo" src="<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $featured_doctor->doctor_name, ENT_QUOTES, 'UTF-8'); ?>">
+                        <img class="ortho-doctor-photo" src="<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $featured_doctor->doctor_name, ENT_QUOTES, 'UTF-8'); ?>" width="400" height="250" decoding="async" fetchpriority="high">
                         <h3><?php echo htmlspecialchars((string) $featured_doctor->doctor_name, ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p><?php echo htmlspecialchars(isset($featured_doctor->designation) ? (string) $featured_doctor->designation : 'Orthodontic Specialist', ENT_QUOTES, 'UTF-8'); ?></p>
                     </article>
@@ -163,7 +163,7 @@ box-shadow:0 12px 24px rgba(183,131,51,.35);
                         }
                     } else { ?>
                     <article class="ortho-doctor-card">
-                        <img class="ortho-doctor-photo" src="<?php echo base_url('admin/webroot/uploads/dental_page/defaults/Prasoon_Killa.png'); ?>" alt="Orthodontist">
+                        <img class="ortho-doctor-photo" src="<?php echo base_url('admin/webroot/uploads/dental_page/defaults/Prasoon_Killa.png'); ?>" alt="Orthodontist" width="400" height="250" decoding="async" fetchpriority="high">
                         <h3>Expert Orthodontic Team</h3>
                         <p>Trained orthodontists focused on delivering predictable and long-term smile correction results.</p>
                     </article>
@@ -206,7 +206,7 @@ box-shadow:0 12px 24px rgba(183,131,51,.35);
             <div class="ortho-grid-2">
                 <?php foreach ($tech_cards as $tc) { ?>
                 <article class="ortho-card">
-                    <img src="<?php echo htmlspecialchars((string) $tc['image_url'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $tc['title'], ENT_QUOTES, 'UTF-8'); ?>">
+                    <img src="<?php echo htmlspecialchars((string) $tc['image_url'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $tc['title'], ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
                     <h4><?php echo htmlspecialchars((string) $tc['title'], ENT_QUOTES, 'UTF-8'); ?></h4>
                     <p><?php echo htmlspecialchars((string) $tc['description'], ENT_QUOTES, 'UTF-8'); ?></p>
                 </article>
@@ -235,7 +235,7 @@ box-shadow:0 12px 24px rgba(183,131,51,.35);
             <div class="ortho-ba-grid">
                 <?php foreach ($uploaded_ba_images as $uploaded_img) { ?>
                 <article class="ortho-ba-card ortho-ba-card--full">
-                    <img src="<?php echo htmlspecialchars($uploaded_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Braces treatment before and after">
+                    <img src="<?php echo htmlspecialchars($uploaded_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Braces treatment before and after" loading="lazy" decoding="async">
                 </article>
                 <?php } ?>
                 <?php if (count($before_after) > 0) {
@@ -245,8 +245,8 @@ box-shadow:0 12px 24px rgba(183,131,51,.35);
                 ?>
                 <article class="ortho-ba-card">
                     <div class="ortho-ba-pair">
-                        <img src="<?php echo htmlspecialchars($before, ENT_QUOTES, 'UTF-8'); ?>" alt="Before treatment">
-                        <img src="<?php echo htmlspecialchars($after, ENT_QUOTES, 'UTF-8'); ?>" alt="After treatment">
+                        <img src="<?php echo htmlspecialchars($before, ENT_QUOTES, 'UTF-8'); ?>" alt="Before treatment" loading="lazy" decoding="async">
+                        <img src="<?php echo htmlspecialchars($after, ENT_QUOTES, 'UTF-8'); ?>" alt="After treatment" loading="lazy" decoding="async">
                     </div>
                 </article>
                 <?php
@@ -254,8 +254,8 @@ box-shadow:0 12px 24px rgba(183,131,51,.35);
                 } else { ?>
                 <article class="ortho-ba-card">
                     <div class="ortho-ba-pair">
-                        <img src="<?php echo base_url('admin/webroot/uploads/dental_page/defaults/01_before.png'); ?>" alt="Before">
-                        <img src="<?php echo base_url('admin/webroot/uploads/dental_page/defaults/01_after.jpg'); ?>" alt="After">
+                        <img src="<?php echo base_url('admin/webroot/uploads/dental_page/defaults/01_before.png'); ?>" alt="Before" loading="lazy" decoding="async">
+                        <img src="<?php echo base_url('admin/webroot/uploads/dental_page/defaults/01_after.jpg'); ?>" alt="After" loading="lazy" decoding="async">
                     </div>
                 </article>
                 <?php } ?>
@@ -299,11 +299,11 @@ box-shadow:0 12px 24px rgba(183,131,51,.35);
                     foreach ($certs as $ci) {
                         $cert_img = !empty($ci->image_name) ? site_url('admin/webroot/uploads/dental_media/' . $ci->image_name) : base_url('admin/webroot/uploads/dental_page/defaults/Implantology_Cetificate.jpg');
                 ?>
-                <article class="ortho-cert-card"><img src="<?php echo htmlspecialchars($cert_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Certificate"></article>
+                <article class="ortho-cert-card"><img src="<?php echo htmlspecialchars($cert_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Certificate" loading="lazy" decoding="async"></article>
                 <?php
                     }
                 } else { ?>
-                <article class="ortho-cert-card"><img src="<?php echo base_url('admin/webroot/uploads/dental_page/defaults/Implantology_Cetificate.jpg'); ?>" alt="Certificate"></article>
+                <article class="ortho-cert-card"><img src="<?php echo base_url('admin/webroot/uploads/dental_page/defaults/Implantology_Cetificate.jpg'); ?>" alt="Certificate" loading="lazy" decoding="async"></article>
                 <?php } ?>
             </div>
         </div>
@@ -347,7 +347,7 @@ box-shadow:0 12px 24px rgba(183,131,51,.35);
                         $b_link = $b_permalink !== '' ? base_url('blog/' . $b_permalink) : '#';
                 ?>
                 <article class="ortho-card">
-                    <img src="<?php echo htmlspecialchars($b_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($b_title, ENT_QUOTES, 'UTF-8'); ?>">
+                    <img src="<?php echo htmlspecialchars($b_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($b_title, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
                     <h4><?php echo htmlspecialchars($b_title, ENT_QUOTES, 'UTF-8'); ?></h4>
                     <a href="<?php echo htmlspecialchars($b_link, ENT_QUOTES, 'UTF-8'); ?>">Read Blog</a>
                 </article>

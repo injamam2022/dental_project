@@ -1,7 +1,7 @@
 <!-- START BREADCRUMB -->
                 <ul class="breadcrumb">
                     <li><a href="<?php echo site_url('dashboard');?>">Home</a></li>
-                    <li><a href="<?php echo site_url('add-page');?>">Blog Management</a></li>
+                    <li><a href="<?php echo site_url('blog');?>">Blog Management</a></li>
                     <li class="active"> Edit Blog</li>
                 </ul>
                 <!-- END BREADCRUMB -->
@@ -11,7 +11,7 @@
                     <div class="col-md-12">
 					<?php  foreach ($get_edit_comment as $data){ 
 					?>
-                        <form id="add_page"class="form-horizontal" method="post" action="<?php echo site_url("Blog/update_comment");?>" enctype="multipart/form-data" >
+                        <form id="add_page"class="form-horizontal" method="post" action="<?php echo site_url("blog/update_comment");?>" enctype="multipart/form-data" >
                             <div class="panel panel-default">
 							    <div class="row">
 									<?php $log_s= $this->session->flashdata('msg'); ?>

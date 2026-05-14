@@ -21,8 +21,19 @@
         <link rel="icon" type="<?php echo htmlspecialchars($fav_type, ENT_QUOTES, 'UTF-8'); ?>" href="<?php echo htmlspecialchars($fav_href, ENT_QUOTES, 'UTF-8'); ?>">
         <link rel="apple-touch-icon" href="<?php echo htmlspecialchars($fav_href, ENT_QUOTES, 'UTF-8'); ?>">
         <!-- END META SECTION -->
-        <?php $message = $this->session->flashdata('alert');
-           if($message){ echo "<script language=javascript> window.onload = function(msg) { noty({text: '".$message['message']."', layout: 'topRight', type: '".$message['class']."'}); };</script>"; } ?>
+        <?php
+        // Appointments use a dedicated flash key so a failed redirect / 404 does not leave a generic
+        // "Appointment deleted" toast showing on unrelated admin pages (e.g. Doctormanagement).
+        $message = $this->session->flashdata('appointments_alert');
+        if (!$message) {
+            $message = $this->session->flashdata('alert');
+        }
+        if ($message && isset($message['message'], $message['class'])) {
+            $toast_text = json_encode((string) $message['message'], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE);
+            $toast_type = json_encode((string) $message['class'], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE);
+            echo '<script>window.onload=function(){noty({text:' . $toast_text . ',layout:"topRight",type:' . $toast_type . '});};</script>';
+        }
+        ?>
         <!-- CSS INCLUDE -->        
         <link rel="stylesheet" type="text/css" id="theme" href="<?php echo site_url('webroot/backend') ?>/css/theme-default.css"/>
         <!-- EOF CSS INCLUDE -->                                    
