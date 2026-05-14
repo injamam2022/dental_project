@@ -282,6 +282,7 @@ class Dental extends Frontend_Controller {
             'description' => 'Jaw pain, clicking, headaches, or ear symptoms? Visit Dontia Care Clinic for TMJ / TMD care in Kolkata — Dawson Certified specialist, splints, physiotherapy, Botox for TMJ, and conservative-first treatment.',
             'canonical' => base_url('tmj-specialist-in-kolkata'),
             'lcp_preload_images' => array(
+                base_url('assets/images/branding/dr-prabhjeet-tmj-360w.jpg'),
                 'https://i.ytimg.com/vi/dszEUoxTmKk/hqdefault.jpg',
             ),
         );

@@ -1,12 +1,17 @@
 <?php
 $this->load->model('Seo_meta_model');
-$seo = $this->Seo_meta_model->resolve(is_array($this->seo_overrides) ? $this->seo_overrides : array());
-$brand_logo_url = base_url('assets/images/branding/preloader-logo-400w.png');
-$header_logo_src = base_url('assets/images/branding/header-logo-240w.png');
-$header_logo_src_2x = base_url('assets/images/branding/header-logo-480w.png');
+$_dcc_seo_ov = is_array($this->seo_overrides) ? $this->seo_overrides : array();
+$seo = $this->Seo_meta_model->resolve($_dcc_seo_ov);
 $h = static function ($s) {
 	return htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8');
 };
+$_dcc_br = rtrim(base_url('assets/images/branding/'), '/') . '/';
+$brand_logo_url = $_dcc_br . 'preloader-logo-200w.png';
+$header_logo_src = $_dcc_br . 'header-logo-96w.png';
+$header_logo_160 = $_dcc_br . 'header-logo-160w.png';
+$header_logo_240 = $_dcc_br . 'header-logo-240w.png';
+$header_logo_480 = $_dcc_br . 'header-logo-480w.png';
+$header_logo_srcset = $h($header_logo_src) . ' 96w, ' . $h($header_logo_160) . ' 160w, ' . $h($header_logo_240) . ' 240w, ' . $h($header_logo_480) . ' 480w';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,10 +20,22 @@ $h = static function ($s) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://i.ytimg.com">
-<link rel="preconnect" href="https://stackpath.bootstrapcdn.com">
 <?php
-$ov_head = is_array($this->seo_overrides) ? $this->seo_overrides : array();
+$_dcc_preconnect_youtube = !empty($_dcc_seo_ov['preconnect_youtube']);
+if (!$_dcc_preconnect_youtube && !empty($_dcc_seo_ov['lcp_preload_images']) && is_array($_dcc_seo_ov['lcp_preload_images'])) {
+	foreach ($_dcc_seo_ov['lcp_preload_images'] as $_lcp_u) {
+		if (strpos((string) $_lcp_u, 'i.ytimg.com') !== false) {
+			$_dcc_preconnect_youtube = true;
+			break;
+		}
+	}
+}
+if ($_dcc_preconnect_youtube) {
+?>
+<link rel="preconnect" href="https://i.ytimg.com">
+<?php } ?>
+<?php
+$ov_head = $_dcc_seo_ov;
 if (!empty($ov_head['lcp_preload_images']) && is_array($ov_head['lcp_preload_images'])) {
 	foreach (array_slice($ov_head['lcp_preload_images'], 0, 2) as $_lcp_img) {
 		$_u = trim((string) $_lcp_img);
@@ -87,8 +104,10 @@ $dcc_fonts_href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;
 <?php
 $router_class = strtolower((string) $this->router->fetch_class());
 if ($router_class === 'dental') {
+	$_drlook_href = base_url('assets/css/dental-react-look.css');
 ?>
-<link href="<?php echo base_url('assets/css/dental-react-look.css'); ?>" rel="stylesheet">
+<link rel="preload" href="<?php echo $h($_drlook_href); ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="<?php echo $h($_drlook_href); ?>" rel="stylesheet"></noscript>
 <?php } ?>
 <?php
 $_dcc_legacy_fonts = 'https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&family=BenchNine:wght@300;400;700&display=swap';
@@ -154,7 +173,7 @@ if ($router_class_head === 'dental' && $router_method_head === 'tmj_specialist' 
     <div class="preloader">
 		<div class="preloader__inner">
 			<?php if ($preloader_logo_url !== '') { ?>
-			<img class="preloader__logo" src="<?php echo $h($preloader_logo_url); ?>" alt="<?php echo $preloader_alt; ?>" width="400" height="309" decoding="async" fetchpriority="low">
+			<img class="preloader__logo" src="<?php echo $h($preloader_logo_url); ?>" alt="<?php echo $preloader_alt; ?>" width="200" height="155" decoding="async" fetchpriority="low">
 			<?php } else { ?>
 			<span class="preloader__fallback" role="status" aria-label="Loading"></span>
 			<?php } ?>
@@ -226,7 +245,7 @@ if ($router_class_head === 'dental' && $router_method_head === 'tmj_specialist' 
                         <div class="logo dontia-logo-brand">
                             <a href="<?php echo base_url(); ?>" class="dontia-logo-link">
                                 <span class="dontia-logo-mark">
-                                    <img src="<?php echo $h($header_logo_src); ?>" srcset="<?php echo $h($header_logo_src); ?> 240w, <?php echo $h($header_logo_src_2x); ?> 480w" sizes="(max-width: 991px) 160px, 200px" alt="<?php echo $company_esc; ?>" width="240" height="185" decoding="async" fetchpriority="high">
+                                    <img src="<?php echo $h($header_logo_src); ?>" srcset="<?php echo $header_logo_srcset; ?>" sizes="80px" alt="<?php echo $company_esc; ?>" width="96" height="74" decoding="async" fetchpriority="high">
                                 </span>
                             </a>
                         </div>

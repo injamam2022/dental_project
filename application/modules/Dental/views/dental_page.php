@@ -128,7 +128,17 @@ $media_certificates_list = (isset($media_certificates) && is_array($media_certif
 $media_about_list = (isset($media_about) && is_array($media_about) && count($media_about) > 0) ? $media_about : array();
 $dental_page_defaults = base_url('admin/webroot/uploads/dental_page/defaults/');
 $dental_page_technology = base_url('admin/webroot/uploads/dental_page/technology/');
-$dontia_dr_prabhjeet_photo = base_url('assets/images/branding/dr-prabhjeet-tmj-560w.jpg');
+$dontia_branding_dir = rtrim(base_url('assets/images/branding/'), '/');
+$dontia_dr_prabhjeet_photo = $dontia_branding_dir . '/dr-prabhjeet-tmj-360w.jpg';
+$dontia_dr_prabhjeet_srcset = htmlspecialchars(
+    $dontia_branding_dir . '/dr-prabhjeet-tmj-360w.jpg 360w, ' .
+    $dontia_branding_dir . '/dr-prabhjeet-tmj-480w.jpg 480w, ' .
+    $dontia_branding_dir . '/dr-prabhjeet-tmj-560w.jpg 560w',
+    ENT_QUOTES,
+    'UTF-8'
+);
+$dontia_dr_sizes_esc = htmlspecialchars('(max-width: 768px) 50vw, 260px', ENT_QUOTES, 'UTF-8');
+$dontia_dr_resp_attrs = ' srcset="' . $dontia_dr_prabhjeet_srcset . '" sizes="' . $dontia_dr_sizes_esc . '"';
 $blog_carousel_rows = isset($blog_carousel) && is_array($blog_carousel) ? $blog_carousel : array();
 $service_nav_links = array(
     'Dental' => base_url('Services'),
@@ -364,9 +374,10 @@ if (function_exists('GetServices')) {
                         $dr_name = (string) $dr['name'];
                         $dr_role = (string) $dr['role'];
                     }
+                    $dental_dr_srcset = (strpos($dr_img, '/dr-prabhjeet-tmj-') !== false) ? $dontia_dr_resp_attrs : '';
                     ?>
                 <article class="dr-doctor-slide-card">
-                    <img src="<?php echo htmlspecialchars($dr_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($dr_name, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
+                    <img src="<?php echo htmlspecialchars($dr_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($dr_name, ENT_QUOTES, 'UTF-8'); ?>"<?php echo $dental_dr_srcset; ?> loading="lazy" decoding="async">
                     <h3><?php echo htmlspecialchars($dr_name, ENT_QUOTES, 'UTF-8'); ?></h3>
                     <p><?php echo htmlspecialchars($dr_role, ENT_QUOTES, 'UTF-8'); ?></p>
                 </article>

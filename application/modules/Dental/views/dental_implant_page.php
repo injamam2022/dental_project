@@ -4,7 +4,17 @@ $doctors = isset($doctor_list) && is_array($doctor_list) ? $doctor_list : array(
 $tech_cards = isset($technology_cards) && is_array($technology_cards) ? $technology_cards : array();
 $certs = isset($media_certificates) && is_array($media_certificates) ? $media_certificates : array();
 $blogs = isset($blog_carousel) && is_array($blog_carousel) ? $blog_carousel : array();
-$dontia_dr_prabhjeet_photo = base_url('assets/images/branding/dr-prabhjeet-tmj-560w.jpg');
+$dontia_branding_dir = rtrim(base_url('assets/images/branding/'), '/');
+$dontia_dr_prabhjeet_photo = $dontia_branding_dir . '/dr-prabhjeet-tmj-360w.jpg';
+$dontia_dr_prabhjeet_srcset = htmlspecialchars(
+    $dontia_branding_dir . '/dr-prabhjeet-tmj-360w.jpg 360w, ' .
+    $dontia_branding_dir . '/dr-prabhjeet-tmj-480w.jpg 480w, ' .
+    $dontia_branding_dir . '/dr-prabhjeet-tmj-560w.jpg 560w',
+    ENT_QUOTES,
+    'UTF-8'
+);
+$dontia_dr_sizes_esc = htmlspecialchars('(max-width: 640px) min(94vw, 400px), min(520px, 45vw)', ENT_QUOTES, 'UTF-8');
+$dontia_dr_resp_attrs = ' srcset="' . $dontia_dr_prabhjeet_srcset . '" sizes="' . $dontia_dr_sizes_esc . '"';
 $patient_story_dir = defined('FCPATH') ? FCPATH . 'assets/images/dental-implant/patient-stories/' : '';
 $patient_story_images = array();
 $story_ext_ok = array('jpg' => true, 'jpeg' => true, 'png' => true, 'webp' => true);
@@ -145,9 +155,10 @@ $patient_story_captions = array(
                         }
                         if ($featured_doctor) {
                             $img = !empty($featured_doctor->image_name) ? site_url('admin/webroot/uploads/doctors/' . $featured_doctor->image_name) : $dontia_dr_prabhjeet_photo;
+                            $impl_dr_srcset = (strpos($img, '/dr-prabhjeet-tmj-') !== false) ? $dontia_dr_resp_attrs : '';
                     ?>
                     <article class="ortho-doctor-card">
-                        <img class="ortho-doctor-photo" src="<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $featured_doctor->doctor_name, ENT_QUOTES, 'UTF-8'); ?>" width="400" height="250" decoding="async" fetchpriority="high">
+                        <img class="ortho-doctor-photo" src="<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $featured_doctor->doctor_name, ENT_QUOTES, 'UTF-8'); ?>"<?php echo $impl_dr_srcset; ?> width="360" height="225" decoding="async" fetchpriority="high">
                         <h3><?php echo htmlspecialchars((string) $featured_doctor->doctor_name, ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p><?php echo htmlspecialchars(isset($featured_doctor->designation) ? (string) $featured_doctor->designation : 'Implant & restorative specialist', ENT_QUOTES, 'UTF-8'); ?></p>
                     </article>
@@ -155,7 +166,7 @@ $patient_story_captions = array(
                         }
                     } else { ?>
                     <article class="ortho-doctor-card">
-                        <img class="ortho-doctor-photo" src="<?php echo htmlspecialchars($dontia_dr_prabhjeet_photo, ENT_QUOTES, 'UTF-8'); ?>" alt="Dental implant specialist" width="400" height="250" decoding="async" fetchpriority="high">
+                        <img class="ortho-doctor-photo" src="<?php echo htmlspecialchars($dontia_dr_prabhjeet_photo, ENT_QUOTES, 'UTF-8'); ?>" alt="Dental implant specialist"<?php echo $dontia_dr_resp_attrs; ?> width="360" height="225" decoding="async" fetchpriority="high">
                         <h3>Expert Implant Team</h3>
                         <p>MDS implantologists, oral surgeons, and prosthodontists focused on predictable, long-lasting results.</p>
                     </article>
