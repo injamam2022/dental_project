@@ -4,6 +4,7 @@ $doctors = isset($doctor_list) && is_array($doctor_list) ? $doctor_list : array(
 $tech_cards = isset($technology_cards) && is_array($technology_cards) ? $technology_cards : array();
 $certs = isset($media_certificates) && is_array($media_certificates) ? $media_certificates : array();
 $blogs = isset($blog_carousel) && is_array($blog_carousel) ? $blog_carousel : array();
+$dontia_dr_prabhjeet_photo = base_url('assets/images/branding/dr-prabhjeet-tmj-560w.jpg');
 
 $tmj_img_dir = defined('FCPATH') ? FCPATH . 'assets/images/tmj/' : '';
 $tmj_ext_ok = array('jpg' => true, 'jpeg' => true, 'png' => true, 'webp' => true);
@@ -246,7 +247,7 @@ $tmj_embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($tmj_youtu
                                 }
                                 $dimg = !empty($dr->image_name)
                                     ? site_url('admin/webroot/uploads/doctors/' . $dr->image_name)
-                                    : base_url('admin/webroot/uploads/dental_page/defaults/dr-prabhjeet-sethi.png');
+                                    : $dontia_dr_prabhjeet_photo;
                                 $tmj_dr_shown++;
                                 $tmj_dr_img_attr = ($tmj_dr_shown === 1)
                                     ? ' width="400" height="260" decoding="async" fetchpriority="high"'
@@ -262,7 +263,7 @@ $tmj_embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($tmj_youtu
                         }
                         if ($tmj_dr_shown === 0) { ?>
                         <article class="tmj-doctor-card">
-                            <img src="<?php echo base_url('admin/webroot/uploads/dental_page/defaults/dr-prabhjeet-sethi.png'); ?>" alt="Dr. Prabhjeet Singh Sethi — TMJ specialist Kolkata" width="400" height="260" decoding="async" fetchpriority="high">
+                            <img src="<?php echo htmlspecialchars($dontia_dr_prabhjeet_photo, ENT_QUOTES, 'UTF-8'); ?>" alt="Dr. Prabhjeet Singh Sethi — TMJ specialist Kolkata" width="400" height="260" decoding="async" fetchpriority="high">
                             <h3>Dr. Prabhjeet Singh Sethi</h3>
                             <p>Dawson Certified — TMJ, occlusion, and full-mouth rehabilitation.</p>
                         </article>

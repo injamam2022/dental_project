@@ -1,8 +1,9 @@
 <?php
 $this->load->model('Seo_meta_model');
 $seo = $this->Seo_meta_model->resolve(is_array($this->seo_overrides) ? $this->seo_overrides : array());
-$brand_logo_url = base_url('admin/webroot/uploads/profile-pic/DCC_Logo-03.png');
-$header_logo_url = base_url('admin/webroot/uploads/profile-pic/DCC_Logo-08-transparent.png');
+$brand_logo_url = base_url('assets/images/branding/preloader-logo-400w.png');
+$header_logo_src = base_url('assets/images/branding/header-logo-240w.png');
+$header_logo_src_2x = base_url('assets/images/branding/header-logo-480w.png');
 $h = static function ($s) {
 	return htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8');
 };
@@ -69,26 +70,47 @@ $dcc_fonts_href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;
 <?php if ($seo['fb_app_id'] !== '') { ?>
 <meta property="fb:app_id" content="<?php echo $h($seo['fb_app_id']); ?>">
 <?php } ?>
-<!-- Stylesheets -->
-<link href="<?php echo base_url('assets/'); ?>css/bootstrap.css" rel="stylesheet">
-<link rel="preload" href="<?php echo base_url('assets/'); ?>css/slick.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="<?php echo base_url('assets/'); ?>css/slick.css" rel="stylesheet"></noscript>
-<link rel="preload" href="<?php echo base_url('assets/'); ?>css/color-switcher-design.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="<?php echo base_url('assets/'); ?>css/color-switcher-design.css" rel="stylesheet"></noscript>
+<!-- Stylesheets: avoid @import inside style.css (chains blocking requests). -->
+<?php $_css = rtrim(base_url('assets/css/'), '/') . '/'; ?>
+<link href="<?php echo $_css; ?>bootstrap.css" rel="stylesheet">
+<link href="<?php echo $_css; ?>flaticon.css" rel="stylesheet">
+<link rel="preload" href="<?php echo $_css; ?>slick.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="<?php echo $_css; ?>slick.css" rel="stylesheet"></noscript>
+<link rel="preload" href="<?php echo $_css; ?>color-switcher-design.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="<?php echo $_css; ?>color-switcher-design.css" rel="stylesheet"></noscript>
 <link rel="preload" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" as="style" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"></noscript>
-<link href="<?php echo base_url('assets/'); ?>css/style.css" rel="stylesheet">
-<link href="<?php echo base_url('assets/'); ?>css/responsive.css" rel="stylesheet">   
-<!--Color Switcher Mockup-->
-<link id="theme-color-file" href="<?php echo base_url('assets/'); ?>css/color-themes/blue-theme.css" rel="stylesheet">
-<link href="<?php echo base_url('assets/'); ?>css/dontia-brand.css" rel="stylesheet">
+<link href="<?php echo $_css; ?>style.css" rel="stylesheet">
+<link href="<?php echo $_css; ?>responsive.css" rel="stylesheet">
+<link id="theme-color-file" href="<?php echo $_css; ?>color-themes/blue-theme.css" rel="stylesheet">
+<link href="<?php echo $_css; ?>dontia-brand.css" rel="stylesheet">
 <?php
 $router_class = strtolower((string) $this->router->fetch_class());
 if ($router_class === 'dental') {
 ?>
 <link href="<?php echo base_url('assets/css/dental-react-look.css'); ?>" rel="stylesheet">
 <?php } ?>
-
+<?php
+$_dcc_legacy_fonts = 'https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&family=BenchNine:wght@300;400;700&display=swap';
+$_defer_css = array(
+	$_dcc_legacy_fonts,
+	$_css . 'animate.css',
+	$_css . 'jquery.mCustomScrollbar.min.css',
+	$_css . 'owl.css',
+	$_css . 'jquery.bootstrap-touchspin.css',
+	$_css . 'jquery-ui.css',
+	$_css . 'jquery.fancybox.min.css',
+);
+foreach ($_defer_css as $_href) {
+	if (strpos($_href, 'http') === 0) {
+		echo '<link rel="preload" href="' . $h($_href) . '" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">' . "\n";
+		echo '<noscript><link rel="stylesheet" href="' . $h($_href) . '"></noscript>' . "\n";
+	} else {
+		echo '<link rel="preload" href="' . $h($_href) . '" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">' . "\n";
+		echo '<noscript><link href="' . $h($_href) . '" rel="stylesheet"></noscript>' . "\n";
+	}
+}
+?>
 <link rel="icon" type="image/svg+xml" href="<?php echo base_url('assets/images/favicon.svg'); ?>">
 <link rel="alternate icon" href="<?php echo base_url('assets/images/favicon.svg'); ?>" type="image/svg+xml">
 <link rel="apple-touch-icon" href="<?php echo base_url('assets/images/favicon.svg'); ?>">
@@ -132,7 +154,7 @@ if ($router_class_head === 'dental' && $router_method_head === 'tmj_specialist' 
     <div class="preloader">
 		<div class="preloader__inner">
 			<?php if ($preloader_logo_url !== '') { ?>
-			<img class="preloader__logo" src="<?php echo $h($preloader_logo_url); ?>" alt="<?php echo $preloader_alt; ?>" width="200" height="80" decoding="async" fetchpriority="low">
+			<img class="preloader__logo" src="<?php echo $h($preloader_logo_url); ?>" alt="<?php echo $preloader_alt; ?>" width="400" height="309" decoding="async" fetchpriority="low">
 			<?php } else { ?>
 			<span class="preloader__fallback" role="status" aria-label="Loading"></span>
 			<?php } ?>
@@ -204,7 +226,7 @@ if ($router_class_head === 'dental' && $router_method_head === 'tmj_specialist' 
                         <div class="logo dontia-logo-brand">
                             <a href="<?php echo base_url(); ?>" class="dontia-logo-link">
                                 <span class="dontia-logo-mark">
-                                    <img src="<?php echo $h($header_logo_url); ?>" alt="<?php echo $company_esc; ?>" width="200" height="56" decoding="async" fetchpriority="high">
+                                    <img src="<?php echo $h($header_logo_src); ?>" srcset="<?php echo $h($header_logo_src); ?> 240w, <?php echo $h($header_logo_src_2x); ?> 480w" sizes="(max-width: 991px) 160px, 200px" alt="<?php echo $company_esc; ?>" width="240" height="185" decoding="async" fetchpriority="high">
                                 </span>
                             </a>
                         </div>

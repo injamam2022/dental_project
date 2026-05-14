@@ -128,6 +128,7 @@ $media_certificates_list = (isset($media_certificates) && is_array($media_certif
 $media_about_list = (isset($media_about) && is_array($media_about) && count($media_about) > 0) ? $media_about : array();
 $dental_page_defaults = base_url('admin/webroot/uploads/dental_page/defaults/');
 $dental_page_technology = base_url('admin/webroot/uploads/dental_page/technology/');
+$dontia_dr_prabhjeet_photo = base_url('assets/images/branding/dr-prabhjeet-tmj-560w.jpg');
 $blog_carousel_rows = isset($blog_carousel) && is_array($blog_carousel) ? $blog_carousel : array();
 $service_nav_links = array(
     'Dental' => base_url('Services'),
@@ -357,6 +358,9 @@ if (function_exists('GetServices')) {
                     } else {
                         $dr = $_dc['fb'];
                         $dr_img = strpos($dr['image'], 'http') === 0 ? $dr['image'] : $dental_page_defaults . $dr['image'];
+                        if (isset($dr['image']) && (string) $dr['image'] === 'dr-prabhjeet-sethi.png') {
+                            $dr_img = $dontia_dr_prabhjeet_photo;
+                        }
                         $dr_name = (string) $dr['name'];
                         $dr_role = (string) $dr['role'];
                     }

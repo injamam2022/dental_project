@@ -4,6 +4,7 @@ $doctors = isset($doctor_list) && is_array($doctor_list) ? $doctor_list : array(
 $tech_cards = isset($technology_cards) && is_array($technology_cards) ? $technology_cards : array();
 $certs = isset($media_certificates) && is_array($media_certificates) ? $media_certificates : array();
 $blogs = isset($blog_carousel) && is_array($blog_carousel) ? $blog_carousel : array();
+$dontia_dr_prabhjeet_photo = base_url('assets/images/branding/dr-prabhjeet-tmj-560w.jpg');
 $patient_story_dir = defined('FCPATH') ? FCPATH . 'assets/images/dental-implant/patient-stories/' : '';
 $patient_story_images = array();
 $story_ext_ok = array('jpg' => true, 'jpeg' => true, 'png' => true, 'webp' => true);
@@ -143,7 +144,7 @@ $patient_story_captions = array(
                             }
                         }
                         if ($featured_doctor) {
-                            $img = !empty($featured_doctor->image_name) ? site_url('admin/webroot/uploads/doctors/' . $featured_doctor->image_name) : base_url('admin/webroot/uploads/dental_page/defaults/dr-prabhjeet-sethi.png');
+                            $img = !empty($featured_doctor->image_name) ? site_url('admin/webroot/uploads/doctors/' . $featured_doctor->image_name) : $dontia_dr_prabhjeet_photo;
                     ?>
                     <article class="ortho-doctor-card">
                         <img class="ortho-doctor-photo" src="<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $featured_doctor->doctor_name, ENT_QUOTES, 'UTF-8'); ?>" width="400" height="250" decoding="async" fetchpriority="high">
@@ -154,7 +155,7 @@ $patient_story_captions = array(
                         }
                     } else { ?>
                     <article class="ortho-doctor-card">
-                        <img class="ortho-doctor-photo" src="<?php echo base_url('admin/webroot/uploads/dental_page/defaults/dr-prabhjeet-sethi.png'); ?>" alt="Dental implant specialist" width="400" height="250" decoding="async" fetchpriority="high">
+                        <img class="ortho-doctor-photo" src="<?php echo htmlspecialchars($dontia_dr_prabhjeet_photo, ENT_QUOTES, 'UTF-8'); ?>" alt="Dental implant specialist" width="400" height="250" decoding="async" fetchpriority="high">
                         <h3>Expert Implant Team</h3>
                         <p>MDS implantologists, oral surgeons, and prosthodontists focused on predictable, long-lasting results.</p>
                     </article>

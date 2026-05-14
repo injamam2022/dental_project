@@ -9,6 +9,7 @@ $uploaded_ba_images = array(
 );
 $certs = isset($media_certificates) && is_array($media_certificates) ? $media_certificates : array();
 $blogs = isset($blog_carousel) && is_array($blog_carousel) ? $blog_carousel : array();
+$dontia_dr_prabhjeet_photo = base_url('assets/images/branding/dr-prabhjeet-tmj-560w.jpg');
 ?>
 <style>
 .ortho-page .ortho-hero{position:relative;min-height:560px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#111 url('<?php echo base_url('assets/images/orthodontist/braces-before-after-2.png'); ?>') center center/contain no-repeat}
@@ -152,7 +153,7 @@ box-shadow:0 12px 24px rgba(183,131,51,.35);
                             }
                         }
                         if ($featured_doctor) {
-                            $img = !empty($featured_doctor->image_name) ? site_url('admin/webroot/uploads/doctors/' . $featured_doctor->image_name) : base_url('admin/webroot/uploads/dental_page/defaults/dr-prabhjeet-sethi.png');
+                            $img = !empty($featured_doctor->image_name) ? site_url('admin/webroot/uploads/doctors/' . $featured_doctor->image_name) : $dontia_dr_prabhjeet_photo;
                     ?>
                     <article class="ortho-doctor-card">
                         <img class="ortho-doctor-photo" src="<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $featured_doctor->doctor_name, ENT_QUOTES, 'UTF-8'); ?>" width="400" height="250" decoding="async" fetchpriority="high">
