@@ -1,5 +1,6 @@
  
 <?php
+$dental_lite_scripts = (strtolower((string) $this->router->fetch_class()) === 'dental');
 $w = isset($this->website['data']) ? $this->website['data'] : new stdClass();
 $company = isset($w->company_name) ? trim((string) $w->company_name) : '';
 $company_esc = htmlspecialchars($company !== '' ? $company : 'Clinic', ENT_QUOTES, 'UTF-8');
@@ -114,12 +115,14 @@ $dontia_footer_social = array(
 <script src="<?php echo base_url('assets/'); ?>js/jquery.js"></script> 
 <script src="<?php echo base_url('assets/'); ?>js/popper.min.js"></script>
 <script src="<?php echo base_url('assets/'); ?>js/bootstrap.min.js"></script>
+<?php if (empty($dental_lite_scripts)) { ?>
 <script src="<?php echo base_url('assets/'); ?>js/jquery.fancybox.js"></script>
 <script src="<?php echo base_url('assets/'); ?>js/owl.js"></script>
 <script src="<?php echo base_url('assets/'); ?>js/wow.js"></script>
 <script src="<?php echo base_url('assets/'); ?>js/appear.js"></script>
 <script src="<?php echo base_url('assets/'); ?>js/mixitup.js"></script>
 <script src="<?php echo base_url('assets/'); ?>js/slick.js"></script>
+<?php } ?>
 <script src="<?php echo base_url('assets/'); ?>js/script.js"></script>
 <!-- Color Setting -->
 <script src="<?php echo base_url('assets/'); ?>js/color-settings.js"></script>

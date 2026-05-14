@@ -2753,50 +2753,6 @@ header-style-seven .nav-toggler:hover{
 	z-index: 0;
 	pointer-events: none;
 }
-/* Click-to-load: avoids heavy YouTube iframe on first paint (LCP / TBT). */
-.home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-youtube-facade{
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	margin: 0;
-	padding: 0;
-	border: 0;
-	cursor: pointer;
-	background-color: #0a0a0a;
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	z-index: 0;
-}
-.home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-youtube-facade:focus{
-	outline: 2px solid rgba(255, 248, 240, 0.75);
-	outline-offset: -4px;
-}
-.home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-yt-play{
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	width: 68px;
-	height: 48px;
-	padding: 0;
-	border: 0;
-	border-radius: 12px;
-	background: rgba(0, 0, 0, 0.62);
-	color: #fff;
-	font-size: 22px;
-	line-height: 1;
-	cursor: pointer;
-	box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
-	pointer-events: none;
-}
-.home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-youtube-facade:focus .home-hero-yt-play,
-.home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-youtube-facade:hover .home-hero-yt-play{
-	background: rgba(173, 140, 128, 0.95);
-	color: #1a120e;
-}
 @supports not (aspect-ratio: 1) {
 	.home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-youtube-iframe {
 		width: 100%;

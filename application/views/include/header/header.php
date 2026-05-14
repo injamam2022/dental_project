@@ -14,11 +14,18 @@ $h = static function ($s) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://www.youtube.com">
 <link rel="preconnect" href="https://i.ytimg.com">
-<link rel="preconnect" href="https://img.youtube.com">
 <link rel="preconnect" href="https://stackpath.bootstrapcdn.com">
 <?php
+$ov_head = is_array($this->seo_overrides) ? $this->seo_overrides : array();
+if (!empty($ov_head['lcp_preload_images']) && is_array($ov_head['lcp_preload_images'])) {
+	foreach (array_slice($ov_head['lcp_preload_images'], 0, 2) as $_lcp_img) {
+		$_u = trim((string) $_lcp_img);
+		if ($_u !== '') {
+			echo '<link rel="preload" as="image" href="' . $h($_u) . '">' . "\n";
+		}
+	}
+}
 $dcc_fonts_href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@400;500;600;700&display=swap';
 ?>
 <link rel="preload" href="<?php echo $h($dcc_fonts_href); ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -64,14 +71,15 @@ $dcc_fonts_href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;
 <?php } ?>
 <!-- Stylesheets -->
 <link href="<?php echo base_url('assets/'); ?>css/bootstrap.css" rel="stylesheet">
-<link href="<?php echo base_url('assets/'); ?>css/slick.css" rel="stylesheet">
+<link rel="preload" href="<?php echo base_url('assets/'); ?>css/slick.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="<?php echo base_url('assets/'); ?>css/slick.css" rel="stylesheet"></noscript>
+<link rel="preload" href="<?php echo base_url('assets/'); ?>css/color-switcher-design.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="<?php echo base_url('assets/'); ?>css/color-switcher-design.css" rel="stylesheet"></noscript>
 <link rel="preload" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" as="style" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"></noscript>
 <link href="<?php echo base_url('assets/'); ?>css/style.css" rel="stylesheet">
 <link href="<?php echo base_url('assets/'); ?>css/responsive.css" rel="stylesheet">   
 <!--Color Switcher Mockup-->
-<link href="<?php echo base_url('assets/'); ?>css/color-switcher-design.css" rel="stylesheet">
-<!--Color Themes-->
 <link id="theme-color-file" href="<?php echo base_url('assets/'); ?>css/color-themes/blue-theme.css" rel="stylesheet">
 <link href="<?php echo base_url('assets/'); ?>css/dontia-brand.css" rel="stylesheet">
 <?php
@@ -124,7 +132,7 @@ if ($router_class_head === 'dental' && $router_method_head === 'tmj_specialist' 
     <div class="preloader">
 		<div class="preloader__inner">
 			<?php if ($preloader_logo_url !== '') { ?>
-			<img class="preloader__logo" src="<?php echo $h($preloader_logo_url); ?>" alt="<?php echo $preloader_alt; ?>" width="200" height="80" decoding="async">
+			<img class="preloader__logo" src="<?php echo $h($preloader_logo_url); ?>" alt="<?php echo $preloader_alt; ?>" width="200" height="80" decoding="async" fetchpriority="low">
 			<?php } else { ?>
 			<span class="preloader__fallback" role="status" aria-label="Loading"></span>
 			<?php } ?>
