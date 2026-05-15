@@ -2,28 +2,30 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Homepage “About” image (admin/webroot/uploads/home).
+ * Build responsive src/srcset for files under admin/webroot/uploads/{subdir}/.
+ * Optional width derivatives: {stem}-480w.{ext}, {stem}-768w.{ext}, …
  *
- * Picks up optional width derivatives: {stem}-480w.{ext}, {stem}-768w.{ext}, …
- * If none exist, returns the original only (run scripts/generate_home_about_variants.php).
- *
- * @param string $filename Basename only, e.g. IMG_1707.jpg
- * @return array{src:string,srcset:string,sizes:string,width:int,height:int,preload:string}
+ * @param string $subdir Relative folder under uploads/, e.g. home | dental_media | dental_page/technology
+ * @param string $filename Basename only
+ * @param string $sizes Value for the sizes attribute
+ * @return array{src:string,srcset:string,sizes:string,width:int,height:int,has_variants:bool,preload_mid:string}
  */
-function dontia_home_about_responsive_attrs($filename)
+function dontia_responsive_upload_image($subdir, $filename, $sizes)
 {
+	$subdir = trim(str_replace(array('..', '\\'), array('', '/'), (string) $subdir), '/');
 	$filename = basename((string) $filename);
-	$dir_rel = 'admin/webroot/uploads/home/';
+	$dir_rel = 'admin/webroot/uploads/' . ($subdir !== '' ? $subdir . '/' : '');
 	$dir_fs = FCPATH . $dir_rel;
 	$dir_url = rtrim(base_url($dir_rel), '/') . '/';
 
 	$out = array(
 		'src' => '',
 		'srcset' => '',
-		'sizes' => '(max-width: 991px) 100vw, 50vw',
+		'sizes' => (string) $sizes,
 		'width' => 0,
 		'height' => 0,
-		'preload' => '',
+		'has_variants' => false,
+		'preload_mid' => '',
 	);
 
 	if ($filename === '' || !is_file($dir_fs . $filename)) {
@@ -67,6 +69,9 @@ function dontia_home_about_responsive_attrs($filename)
 		'file' => $path_orig,
 	);
 
+	$variant_count = count($parts) - 1;
+	$out['has_variants'] = $variant_count > 0;
+
 	$srcset_bits = array();
 	foreach ($parts as $p) {
 		$srcset_bits[] = $p['url'] . ' ' . (int) $p['w'] . 'w';
@@ -82,29 +87,85 @@ function dontia_home_about_responsive_attrs($filename)
 	}
 	$out['src'] = $pick['url'];
 
-	$variant_count = count($parts) - 1;
 	if ($variant_count > 0) {
 		foreach ($parts as $p) {
 			if ((int) $p['w'] >= 960 && (int) $p['w'] <= 1280) {
-				$out['preload'] = $p['url'];
+				$out['preload_mid'] = $p['url'];
 				break;
 			}
 		}
-		if ($out['preload'] === '') {
+		if ($out['preload_mid'] === '') {
 			foreach ($parts as $p) {
 				if ((int) $p['w'] >= 768 && $p['file'] !== $path_orig) {
-					$out['preload'] = $p['url'];
+					$out['preload_mid'] = $p['url'];
 					break;
 				}
 			}
 		}
 	}
-	if ($out['preload'] === '' && $variant_count === 0) {
-		$sz = @filesize($path_orig);
-		if (is_int($sz) && $sz < 600 * 1024) {
-			$out['preload'] = $dir_url . rawurlencode($filename);
-		}
-	}
 
 	return $out;
+}
+
+/**
+ * Add image_srcset / image_sizes / adjusted image_url when -480w variants exist (uploads folder).
+ *
+ * @param array $card technology card with image_url
+ */
+function dontia_enrich_technology_card_image(array &$card)
+{
+	$card['image_srcset'] = '';
+	$card['image_sizes'] = '(max-width: 767px) 100vw, 50vw';
+	$img_url_str = isset($card['image_url']) ? (string) $card['image_url'] : '';
+	if ($img_url_str === '') {
+		return;
+	}
+	$path_part = parse_url($img_url_str, PHP_URL_PATH);
+	$bn = is_string($path_part) ? basename($path_part) : '';
+	if ($bn === '') {
+		return;
+	}
+	$subdir = 'dental_page/technology';
+	if (strpos($img_url_str, '/dental_media/') !== false) {
+		$subdir = 'dental_media';
+	}
+	$resp = dontia_responsive_upload_image($subdir, $bn, '(max-width: 767px) 100vw, 50vw');
+	if ($resp['src'] !== '') {
+		$card['image_url'] = $resp['src'];
+	}
+	if (!empty($resp['has_variants']) && $resp['srcset'] !== '') {
+		$card['image_srcset'] = $resp['srcset'];
+		$card['image_sizes'] = $resp['sizes'];
+	}
+}
+
+/**
+ * Homepage “About” image — adds LCP preload when safe.
+ *
+ * @param string $filename Basename only, e.g. IMG_1707.jpg
+ * @return array{src:string,srcset:string,sizes:string,width:int,height:int,preload:string}
+ */
+function dontia_home_about_responsive_attrs($filename)
+{
+	$r = dontia_responsive_upload_image('home', $filename, '(max-width: 991px) 100vw, 50vw');
+	$preload = '';
+	if ($r['has_variants'] && $r['preload_mid'] !== '') {
+		$preload = $r['preload_mid'];
+	} else {
+		$path_orig = FCPATH . 'admin/webroot/uploads/home/' . basename((string) $filename);
+		if (is_file($path_orig)) {
+			$sz = @filesize($path_orig);
+			if (is_int($sz) && $sz < 600 * 1024) {
+				$preload = $r['src'] !== '' ? $r['src'] : (rtrim(base_url('admin/webroot/uploads/home/'), '/') . '/' . rawurlencode(basename((string) $filename)));
+			}
+		}
+	}
+	return array(
+		'src' => $r['src'],
+		'srcset' => $r['srcset'],
+		'sizes' => $r['sizes'],
+		'width' => $r['width'],
+		'height' => $r['height'],
+		'preload' => $preload,
+	);
 }

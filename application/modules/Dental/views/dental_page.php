@@ -419,9 +419,11 @@ if (function_exists('GetServices')) {
                     $tech_title = isset($tech['title']) ? (string) $tech['title'] : '';
                     $tech_desc = isset($tech['description']) ? (string) $tech['description'] : '';
                     $tech_img = isset($tech['image_url']) ? (string) $tech['image_url'] : $dental_page_technology . 'Cerec.png';
+                    $tech_srcset = isset($tech['image_srcset']) ? (string) $tech['image_srcset'] : '';
+                    $tech_sizes = isset($tech['image_sizes']) ? (string) $tech['image_sizes'] : '';
                 ?>
                 <article class="dr-tech-card" data-tech-id="<?php echo $tech_id; ?>">
-                    <img src="<?php echo htmlspecialchars($tech_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($tech_title, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
+                    <img src="<?php echo htmlspecialchars($tech_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($tech_title, ENT_QUOTES, 'UTF-8'); ?>"<?php if ($tech_srcset !== '') { ?> srcset="<?php echo htmlspecialchars($tech_srcset, ENT_QUOTES, 'UTF-8'); ?>" sizes="<?php echo htmlspecialchars($tech_sizes, ENT_QUOTES, 'UTF-8'); ?>"<?php } ?> loading="lazy" decoding="async">
                     <div class="dr-tech-overlay">
                         <h3><?php echo htmlspecialchars($tech_title, ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p class="dr-tech-desc"><?php echo htmlspecialchars($tech_desc, ENT_QUOTES, 'UTF-8'); ?></p>

@@ -26,6 +26,18 @@ class Dental extends Frontend_Controller {
         );
     }
 
+    protected function enrich_technology_cards(array $cards)
+    {
+        $this->load->helper('dontia_responsive_images');
+        foreach ($cards as &$row) {
+            if (is_array($row)) {
+                dontia_enrich_technology_card_image($row);
+            }
+        }
+        unset($row);
+        return $cards;
+    }
+
     public function index()
     {
         if (strtolower(trim((string) $this->uri->uri_string())) === 'dental-services-in-kolkata') {
@@ -158,6 +170,7 @@ class Dental extends Frontend_Controller {
         };
         $used_media_ids = array();
         $technology_cards = array();
+        $this->load->helper('dontia_responsive_images');
         foreach ($tech_defaults as $def) {
             $card = array(
                 'id' => (int) $def['id'],
@@ -200,6 +213,7 @@ class Dental extends Frontend_Controller {
                 $has_media_override = true;
                 break;
             }
+            dontia_enrich_technology_card_image($card);
             $technology_cards[] = $card;
         }
 
@@ -234,7 +248,7 @@ class Dental extends Frontend_Controller {
 
         $content = array();
         $content['doctor_list'] = $this->dentalModel->get_active_doctors();
-        $content['technology_cards'] = array(
+        $content['technology_cards'] = $this->enrich_technology_cards(array(
             array(
                 'title' => 'Digital Treatment Planning',
                 'description' => 'Advanced diagnostics and smile planning for precise and predictable orthodontic outcomes.',
@@ -250,7 +264,7 @@ class Dental extends Frontend_Controller {
                 'description' => 'Patient-friendly treatment process from consultation to post-treatment retention.',
                 'image_url' => base_url('admin/webroot/uploads/dental_page/technology/Dental-Laser.jpg'),
             ),
-        );
+        ));
         $content['media_before_after'] = $this->dentalModel->get_media_by_section('before_after');
         $content['media_certificates'] = $this->dentalModel->get_media_by_section('certificates');
         $content['blog_carousel'] = $this->dentalModel->get_blog_posts_for_dental(6);
@@ -268,7 +282,7 @@ class Dental extends Frontend_Controller {
 
         $content = array();
         $content['doctor_list'] = $this->dentalModel->get_active_doctors();
-        $content['technology_cards'] = array(
+        $content['technology_cards'] = $this->enrich_technology_cards(array(
             array(
                 'title' => 'Digital Planning & Diagnostics',
                 'description' => 'Careful assessment and treatment planning with modern imaging for precise implant placement.',
@@ -284,7 +298,7 @@ class Dental extends Frontend_Controller {
                 'description' => 'Sedation dentistry and local anaesthesia so your surgical visit stays as comfortable as possible.',
                 'image_url' => base_url('admin/webroot/uploads/dental_page/technology/Baldus.jpg'),
             ),
-        );
+        ));
         $content['media_certificates'] = $this->dentalModel->get_media_by_section('certificates');
         $content['blog_carousel'] = $this->dentalModel->get_blog_posts_for_dental(6);
 
@@ -305,7 +319,7 @@ class Dental extends Frontend_Controller {
 
         $content = array();
         $content['doctor_list'] = $this->dentalModel->get_active_doctors();
-        $content['technology_cards'] = array(
+        $content['technology_cards'] = $this->enrich_technology_cards(array(
             array(
                 'title' => 'Digital imaging & diagnosis',
                 'description' => 'Digital X-rays and 3D imaging when needed to map your bite, joint, and airway — supporting accurate TMJ diagnosis.',
@@ -321,7 +335,7 @@ class Dental extends Frontend_Controller {
                 'description' => 'From first consultation through physiotherapy or advanced options — we prioritise clear explanations and gentle, staged care.',
                 'image_url' => base_url('admin/webroot/uploads/dental_page/technology/Dental-Laser.jpg'),
             ),
-        );
+        ));
         $content['media_certificates'] = $this->dentalModel->get_media_by_section('certificates');
         $content['blog_carousel'] = $this->dentalModel->get_blog_posts_for_dental(6);
 

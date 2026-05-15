@@ -44,9 +44,12 @@ class Home extends Frontend_Controller {
 				$content['home_about_image'] = dontia_home_about_responsive_attrs($hp0[0][1]);
 			}
 		}
+		$lcp_preloads = array('https://i.ytimg.com/vi/PqdEzU6_2zg/hqdefault.jpg');
 		if (!empty($content['home_about_image']['preload'])) {
-			$this->seo_overrides['lcp_preload_images'] = array($content['home_about_image']['preload']);
+			$lcp_preloads[] = $content['home_about_image']['preload'];
 		}
+		$this->seo_overrides['lcp_preload_images'] = array_slice($lcp_preloads, 0, 2);
+		$this->seo_overrides['preconnect_youtube'] = true;
 
 		$content['subview']="home_page";
 //        echo "<pre>";print_r($content);die;
@@ -125,6 +128,7 @@ class Home extends Frontend_Controller {
 				}
 				break;
 			}
+			dontia_enrich_technology_card_image($card);
 			$card['img_width'] = 0;
 			$card['img_height'] = 0;
 			$img_url_str = isset($card['image_url']) ? (string) $card['image_url'] : '';

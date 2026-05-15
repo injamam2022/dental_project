@@ -42,6 +42,7 @@ if (!$_dcc_preconnect_youtube && !empty($_dcc_seo_ov['lcp_preload_images']) && i
 if ($_dcc_preconnect_youtube) {
 ?>
 <link rel="preconnect" href="https://i.ytimg.com">
+<link rel="preconnect" href="https://www.youtube.com">
 <?php } ?>
 <?php
 $ov_head = $_dcc_seo_ov;
@@ -113,7 +114,8 @@ $dcc_fonts_href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;
 <!-- Stylesheets: avoid @import inside style.css (chains blocking requests). -->
 <?php $_css = rtrim(base_url('assets/css/'), '/') . '/'; ?>
 <link href="<?php echo $_css; ?>bootstrap.css" rel="stylesheet">
-<link href="<?php echo $_css; ?>flaticon.css" rel="stylesheet">
+<link rel="preload" href="<?php echo $_css; ?>flaticon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="<?php echo $_css; ?>flaticon.css" rel="stylesheet"></noscript>
 <link rel="preload" href="<?php echo $_css; ?>slick.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="<?php echo $_css; ?>slick.css" rel="stylesheet"></noscript>
 <link rel="preload" href="<?php echo $_css; ?>color-switcher-design.css" as="style" onload="this.onload=null;this.rel='stylesheet'">

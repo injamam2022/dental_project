@@ -327,7 +327,11 @@ $tmj_embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($tmj_youtu
             <div class="ortho-grid-2" style="margin-top:16px;">
                 <?php foreach ($tech_cards as $tc) { ?>
                 <article class="ortho-card">
-                    <img src="<?php echo htmlspecialchars((string) $tc['image_url'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $tc['title'], ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
+                    <?php
+                    $_tc_srcset = isset($tc['image_srcset']) ? (string) $tc['image_srcset'] : '';
+                    $_tc_sizes = isset($tc['image_sizes']) ? (string) $tc['image_sizes'] : '';
+                    ?>
+                    <img src="<?php echo htmlspecialchars((string) $tc['image_url'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $tc['title'], ENT_QUOTES, 'UTF-8'); ?>"<?php if ($_tc_srcset !== '') { ?> srcset="<?php echo htmlspecialchars($_tc_srcset, ENT_QUOTES, 'UTF-8'); ?>" sizes="<?php echo htmlspecialchars($_tc_sizes, ENT_QUOTES, 'UTF-8'); ?>"<?php } ?> loading="lazy" decoding="async">
                     <h4><?php echo htmlspecialchars((string) $tc['title'], ENT_QUOTES, 'UTF-8'); ?></h4>
                     <p class="ortho-sub" style="font-size:16px;margin:0;"><?php echo htmlspecialchars((string) $tc['description'], ENT_QUOTES, 'UTF-8'); ?></p>
                 </article>

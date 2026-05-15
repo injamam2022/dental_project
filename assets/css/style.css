@@ -2750,6 +2750,65 @@ header-style-seven .nav-toggler:hover{
 	}
 }
 
+/* Home hero: lightweight poster first; iframe loads on user tap (mobile PageSpeed). */
+.home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-yt-facade{
+	position: absolute;
+	top: 53%;
+	left: 50%;
+	width: auto;
+	height: 100%;
+	min-width: 100%;
+	min-height: 100%;
+	aspect-ratio: 16 / 9;
+	border: 0;
+	transform: translate(-50%, -50%);
+	z-index: 0;
+	cursor: pointer;
+	padding: 0;
+	background-color: #000;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-yt-facade:focus{
+	outline: 2px solid rgba(255,248,240,.85);
+	outline-offset: -4px;
+}
+.home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-yt-play{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 68px;
+	height: 48px;
+	border-radius: 12px;
+	background: rgba(0,0,0,.55);
+	box-shadow: 0 6px 28px rgba(0,0,0,.45);
+	pointer-events: none;
+}
+.home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-yt-play::after{
+	content: '';
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-40%, -50%);
+	border-style: solid;
+	border-width: 10px 0 10px 16px;
+	border-color: transparent transparent transparent #fff;
+}
+.home-hero-video-banner.home-hero.banner-section .carousel .content-box{
+	pointer-events: none;
+}
+.home-hero-video-banner.home-hero.banner-section .carousel .content-box a{
+	pointer-events: auto;
+}
+.home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-youtube-iframe{
+	pointer-events: none;
+}
+.home-hero.banner-section .carousel-item .home-hero-youtube-cover.is-playing .home-hero-youtube-iframe{
+	pointer-events: auto;
+}
+
 /* Live site: headline centred over video, lighter vignette */
 .home-hero-video-banner.home-hero.banner-section .carousel-item .hero-slide-overlay{
 	background:

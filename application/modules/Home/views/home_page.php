@@ -20,16 +20,19 @@ if (!is_array($home_body)) {
                 $hero_subtitle = ($first_banner && isset($first_banner->image_url_link) && trim((string) $first_banner->image_url_link) !== '') ? $first_banner->image_url_link : 'Your One-Stop Destination For A Radiant Smile And Timeless Beauty!';
                 ?>
 
+                <?php
+                $home_hero_yt_id = 'PqdEzU6_2zg';
+                $home_hero_embed_url = 'https://www.youtube.com/embed/' . rawurlencode($home_hero_yt_id)
+                    . '?autoplay=1&mute=1&playsinline=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&rel=0&modestbranding=1'
+                    . '&loop=1&playlist=' . rawurlencode($home_hero_yt_id);
+                $home_hero_poster = 'https://i.ytimg.com/vi/' . rawurlencode($home_hero_yt_id) . '/hqdefault.jpg';
+                ?>
+
                 <div class="carousel-item active">
                     <div class="home-hero-youtube-cover">
-                        <iframe
-                            class="home-hero-youtube-iframe"
-                            src="https://www.youtube.com/embed/PqdEzU6_2zg?autoplay=1&amp;mute=1&amp;playsinline=1&amp;controls=0&amp;disablekb=1&amp;fs=0&amp;iv_load_policy=3&amp;rel=0&amp;modestbranding=1&amp;loop=1&amp;playlist=PqdEzU6_2zg"
-                            title="Dontia Care Clinic — welcome video"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen
-                            loading="eager"
-                        ></iframe>
+                        <button type="button" class="home-hero-yt-facade" id="homeHeroYtFacade" data-embed="<?php echo htmlspecialchars($home_hero_embed_url, ENT_QUOTES, 'UTF-8'); ?>" style="background-image:url(<?php echo htmlspecialchars($home_hero_poster, ENT_QUOTES, 'UTF-8'); ?>)" aria-label="Play welcome video">
+                            <span class="home-hero-yt-play" aria-hidden="true"></span>
+                        </button>
                     </div>
 
                     <div class="hero-slide-overlay" aria-hidden="true"></div>
@@ -292,6 +295,9 @@ $dontia_team_placeholder = base_url('assets/images/team/placeholder.svg');
             <?php
             foreach ($technology_cards as $ti) {
                 $img_esc = htmlspecialchars(isset($ti['image_url']) ? $ti['image_url'] : '', ENT_QUOTES, 'UTF-8');
+                $ti_srcset = isset($ti['image_srcset']) ? $ti['image_srcset'] : '';
+                $ti_srcset_esc = htmlspecialchars($ti_srcset, ENT_QUOTES, 'UTF-8');
+                $ti_sizes_esc = htmlspecialchars(isset($ti['image_sizes']) ? $ti['image_sizes'] : '', ENT_QUOTES, 'UTF-8');
                 $lab_esc = htmlspecialchars(isset($ti['title']) ? $ti['title'] : '', ENT_QUOTES, 'UTF-8');
                 $desc_esc = htmlspecialchars(isset($ti['description']) ? $ti['description'] : '', ENT_QUOTES, 'UTF-8');
                 ?>
@@ -300,7 +306,7 @@ $dontia_team_placeholder = base_url('assets/images/team/placeholder.svg');
                 $ti_w = isset($ti['img_width']) ? (int) $ti['img_width'] : 0;
                 $ti_h = isset($ti['img_height']) ? (int) $ti['img_height'] : 0;
                 ?>
-                <img src="<?php echo $img_esc; ?>" alt="<?php echo $lab_esc; ?>"<?php if ($ti_w > 0 && $ti_h > 0) { ?> width="<?php echo $ti_w; ?>" height="<?php echo $ti_h; ?>"<?php } ?> loading="lazy" decoding="async">
+                <img src="<?php echo $img_esc; ?>" alt="<?php echo $lab_esc; ?>"<?php if ($ti_srcset !== '') { ?> srcset="<?php echo $ti_srcset_esc; ?>" sizes="<?php echo $ti_sizes_esc; ?>"<?php } ?><?php if ($ti_w > 0 && $ti_h > 0) { ?> width="<?php echo $ti_w; ?>" height="<?php echo $ti_h; ?>"<?php } ?> loading="lazy" decoding="async">
                 <div class="dr-tech-overlay">
                     <h3><?php echo $lab_esc; ?></h3>
                     <p class="dr-tech-desc"><?php echo $desc_esc; ?></p>
@@ -548,7 +554,7 @@ unset($dontia_parse_youtube_id);
                 <div class="news-block col-lg-4 col-md-6 col-sm-12">
                     <div class="inner-box">
                         <div class="image-box">
-                            <figure class="image"><img src="<?php echo base_url('/admin/webroot/uploads/blog/'.$blog_details_desc[$z]->blog_image); ?>" alt=""></figure>
+                            <figure class="image"><img src="<?php echo base_url('/admin/webroot/uploads/blog/'.$blog_details_desc[$z]->blog_image); ?>" alt="" loading="lazy" decoding="async"></figure>
                         </div>
                         <div class="caption-box">
                             <h3>  <a href="<?php echo $blog_url; ?>"><?php echo  $blog_details_desc[$z]->post_title; ?> </a></h3>
@@ -569,3 +575,24 @@ unset($dontia_parse_youtube_id);
         </div>
     </section> -->
    
+<script>
+(function () {
+	var btn = document.getElementById('homeHeroYtFacade');
+	if (!btn) return;
+	var embed = btn.getAttribute('data-embed');
+	if (!embed) return;
+	var cover = btn.parentElement;
+	if (!cover) return;
+	btn.addEventListener('click', function () {
+		var iframe = document.createElement('iframe');
+		iframe.className = 'home-hero-youtube-iframe';
+		iframe.setAttribute('title', 'Dontia Care Clinic — welcome video');
+		iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+		iframe.setAttribute('allowfullscreen', '');
+		iframe.setAttribute('loading', 'lazy');
+		iframe.src = embed;
+		cover.classList.add('is-playing');
+		cover.replaceChild(iframe, btn);
+	});
+})();
+</script>
