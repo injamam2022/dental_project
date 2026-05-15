@@ -13,7 +13,7 @@ $dontia_dr_prabhjeet_srcset = htmlspecialchars(
     ENT_QUOTES,
     'UTF-8'
 );
-$dontia_dr_sizes_esc = htmlspecialchars('(max-width: 640px) min(94vw, 400px), min(500px, 50vw)', ENT_QUOTES, 'UTF-8');
+$dontia_dr_sizes_esc = htmlspecialchars('(max-width: 900px) min(92vw, 360px), min(480px, 48vw)', ENT_QUOTES, 'UTF-8');
 $dontia_dr_resp_attrs = ' srcset="' . $dontia_dr_prabhjeet_srcset . '" sizes="' . $dontia_dr_sizes_esc . '"';
 
 $tmj_img_dir = defined('FCPATH') ? FCPATH . 'assets/images/tmj/' : '';

@@ -24,7 +24,16 @@ $header_logo_srcset = $h($header_logo_src) . ' 96w, ' . $h($header_logo_160) . '
 $_dcc_preconnect_youtube = !empty($_dcc_seo_ov['preconnect_youtube']);
 if (!$_dcc_preconnect_youtube && !empty($_dcc_seo_ov['lcp_preload_images']) && is_array($_dcc_seo_ov['lcp_preload_images'])) {
 	foreach ($_dcc_seo_ov['lcp_preload_images'] as $_lcp_u) {
-		if (strpos((string) $_lcp_u, 'i.ytimg.com') !== false) {
+		$_lcp_scan = '';
+		if (is_array($_lcp_u)) {
+			$_lcp_scan = isset($_lcp_u['href']) ? (string) $_lcp_u['href'] : '';
+			if (strpos($_lcp_scan, 'i.ytimg.com') === false && !empty($_lcp_u['imagesrcset'])) {
+				$_lcp_scan = (string) $_lcp_u['imagesrcset'];
+			}
+		} else {
+			$_lcp_scan = (string) $_lcp_u;
+		}
+		if (strpos($_lcp_scan, 'i.ytimg.com') !== false) {
 			$_dcc_preconnect_youtube = true;
 			break;
 		}
@@ -38,6 +47,20 @@ if ($_dcc_preconnect_youtube) {
 $ov_head = $_dcc_seo_ov;
 if (!empty($ov_head['lcp_preload_images']) && is_array($ov_head['lcp_preload_images'])) {
 	foreach (array_slice($ov_head['lcp_preload_images'], 0, 2) as $_lcp_img) {
+		if (is_array($_lcp_img)) {
+			$_href = isset($_lcp_img['href']) ? trim((string) $_lcp_img['href']) : '';
+			if ($_href === '') {
+				continue;
+			}
+			$_iss = isset($_lcp_img['imagesrcset']) ? trim((string) $_lcp_img['imagesrcset']) : '';
+			$_isz = isset($_lcp_img['imagesizes']) ? trim((string) $_lcp_img['imagesizes']) : '';
+			echo '<link rel="preload" as="image" href="' . $h($_href) . '"';
+			if ($_iss !== '' && $_isz !== '') {
+				echo ' imagesrcset="' . $h($_iss) . '" imagesizes="' . $h($_isz) . '"';
+			}
+			echo '>' . "\n";
+			continue;
+		}
 		$_u = trim((string) $_lcp_img);
 		if ($_u !== '') {
 			echo '<link rel="preload" as="image" href="' . $h($_u) . '">' . "\n";

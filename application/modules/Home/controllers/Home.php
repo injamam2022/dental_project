@@ -18,6 +18,7 @@ class Home extends Frontend_Controller {
 			'title' => 'Multispeciality clinic in Kolkata, WB | Dental | Skin & Hair | ENT',
 			'description' => 'Experience world-class Dental, ENT, and Aesthetic Skin & Hair care at Dontia Care Clinic, Kolkata. Book your appointment for expert health solutions.',
 		);
+		$this->load->helper('dontia_responsive_images');
         $content['Services']=$this->Home_Model->GetProduct();
         $content['banner_details']=$this->Home_Model->GetBanner();
         $content['partner_details']=$this->Home_Model->GetPartner();
@@ -28,6 +29,25 @@ class Home extends Frontend_Controller {
 		$content['technology_cards'] = $this->build_dental_technology_cards();
 		$tv = $this->dentalModel->get_active_testimonial_videos();
 		$content['testimonial_videos'] = is_array($tv) ? $tv : array();
+
+		$content['home_about_image'] = array(
+			'src' => '',
+			'srcset' => '',
+			'sizes' => '(max-width: 991px) 100vw, 50vw',
+			'width' => 0,
+			'height' => 0,
+			'preload' => '',
+		);
+		if (!empty($content['home_page_con']) && is_array($content['home_page_con']) && !empty($content['home_page_con'][0])) {
+			$hp0 = @unserialize($content['home_page_con'][0]->banner_description);
+			if (is_array($hp0) && !empty($hp0[0][1])) {
+				$content['home_about_image'] = dontia_home_about_responsive_attrs($hp0[0][1]);
+			}
+		}
+		if (!empty($content['home_about_image']['preload'])) {
+			$this->seo_overrides['lcp_preload_images'] = array($content['home_about_image']['preload']);
+		}
+
 		$content['subview']="home_page";
 //        echo "<pre>";print_r($content);die;
 		$this->load->view('layout/default', $content);
@@ -105,9 +125,42 @@ class Home extends Frontend_Controller {
 				}
 				break;
 			}
+			$card['img_width'] = 0;
+			$card['img_height'] = 0;
+			$img_url_str = isset($card['image_url']) ? (string) $card['image_url'] : '';
+			if ($img_url_str !== '') {
+				$fs = $this->local_upload_path_from_url($img_url_str);
+				if ($fs !== '' && is_file($fs)) {
+					$dim = @getimagesize($fs);
+					if (is_array($dim)) {
+						$card['img_width'] = (int) $dim[0];
+						$card['img_height'] = (int) $dim[1];
+					}
+				}
+			}
 			$out[] = $card;
 		}
 		return $out;
+	}
+
+	/**
+	 * Map public upload URL to filesystem path when under admin/webroot/uploads.
+	 */
+	private function local_upload_path_from_url($url)
+	{
+		$path = parse_url((string) $url, PHP_URL_PATH);
+		if (!is_string($path) || $path === '') {
+			return '';
+		}
+		$path = '/' . trim(str_replace('\\', '/', $path), '/');
+		$needle = 'admin/webroot/uploads/';
+		$pos = strpos($path, $needle);
+		if ($pos === false) {
+			return '';
+		}
+		$rel = substr($path, $pos + strlen($needle));
+		$rel = ltrim(str_replace('..', '', $rel), '/');
+		return FCPATH . 'admin/webroot/uploads/' . $rel;
 	}
  	
 }

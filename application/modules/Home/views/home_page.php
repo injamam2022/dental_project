@@ -1,9 +1,14 @@
 <?php
 /*echo "<pre>";
 print_r($this->website['data']);*/
-    $content = unserialize($home_page_con[0]->banner_description);
-//echo "<pre>";print_r($content);
-?>    
+$home_body = array(array('', ''));
+if (!empty($home_page_con) && is_array($home_page_con) && isset($home_page_con[0]) && !empty($home_page_con[0]->banner_description)) {
+	$home_body = @unserialize($home_page_con[0]->banner_description);
+}
+if (!is_array($home_body)) {
+    $home_body = array(array('', ''));
+}
+?>
 
 
     <section class="banner-section home-hero home-hero-video-banner" aria-label="Clinic intro video">
@@ -75,7 +80,19 @@ print_r($this->website['data']);*/
                         <div class="inner-column dontia-about-visual">
                             <div class="image-box dontia-about-photos">
                                 <figure class="image wow fadeInRight" data-wow-delay="200ms">
-                                    <img src="<?php echo base_url('admin/webroot/uploads/home/').$content[0][1]; ?>" alt="<?php echo $dontia_about_company_esc; ?>" loading="lazy" decoding="async">
+                                    <?php
+                                    $about_fn = isset($home_body[0][1]) ? (string) $home_body[0][1] : '';
+                                    $hai = isset($home_about_image) && is_array($home_about_image) ? $home_about_image : array();
+                                    if (empty($hai['src']) && $about_fn !== '') {
+                                        $hai['src'] = base_url('admin/webroot/uploads/home/') . $about_fn;
+                                    }
+                                    $about_src_esc = htmlspecialchars(isset($hai['src']) ? $hai['src'] : '', ENT_QUOTES, 'UTF-8');
+                                    ?>
+                                    <img src="<?php echo $about_src_esc; ?>"
+                                        <?php if (!empty($hai['srcset'])) { ?>srcset="<?php echo htmlspecialchars($hai['srcset'], ENT_QUOTES, 'UTF-8'); ?>" sizes="<?php echo htmlspecialchars(isset($hai['sizes']) ? $hai['sizes'] : '(max-width: 991px) 100vw, 50vw', ENT_QUOTES, 'UTF-8'); ?>"<?php } ?>
+                                        alt="<?php echo $dontia_about_company_esc; ?>"
+                                        <?php if (!empty($hai['width']) && !empty($hai['height'])) { ?>width="<?php echo (int) $hai['width']; ?>" height="<?php echo (int) $hai['height']; ?>"<?php } ?>
+                                        decoding="async" fetchpriority="high">
                                 </figure>
                             </div>
                         </div>
@@ -83,7 +100,7 @@ print_r($this->website['data']);*/
                     <div class="content-column col-lg-6 col-md-12 col-sm-12">
                         <div class="inner-column wow fadeInLeft">
                             <div class="content-box dontia-about-card">
-                                <div class="text dontia-about-body"><?php echo $content[0][0]; ?></div>
+                                <div class="text dontia-about-body"><?php echo $home_body[0][0]; ?></div>
                                 <div class="link-box"><a href="<?php echo base_url('about-us'); ?>" class="theme-btn btn-style-one dontia-about-cta">About Us</a></div>
                             </div>
                         </div>
@@ -279,7 +296,11 @@ $dontia_team_placeholder = base_url('assets/images/team/placeholder.svg');
                 $desc_esc = htmlspecialchars(isset($ti['description']) ? $ti['description'] : '', ENT_QUOTES, 'UTF-8');
                 ?>
             <article class="dr-tech-card">
-                <img src="<?php echo $img_esc; ?>" alt="<?php echo $lab_esc; ?>">
+                <?php
+                $ti_w = isset($ti['img_width']) ? (int) $ti['img_width'] : 0;
+                $ti_h = isset($ti['img_height']) ? (int) $ti['img_height'] : 0;
+                ?>
+                <img src="<?php echo $img_esc; ?>" alt="<?php echo $lab_esc; ?>"<?php if ($ti_w > 0 && $ti_h > 0) { ?> width="<?php echo $ti_w; ?>" height="<?php echo $ti_h; ?>"<?php } ?> loading="lazy" decoding="async">
                 <div class="dr-tech-overlay">
                     <h3><?php echo $lab_esc; ?></h3>
                     <p class="dr-tech-desc"><?php echo $desc_esc; ?></p>

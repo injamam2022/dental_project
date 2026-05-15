@@ -12,6 +12,20 @@ class Dental extends Frontend_Controller {
         $this->dentalModel->ensure_table();
     }
 
+    /**
+     * Responsive preload for the TMJ / doctor branding photo (matches srcset + sizes on TMJ, ortho, implant views).
+     */
+    protected function lcp_preload_dr_prabhjeet_responsive()
+    {
+        return array(
+            'href' => base_url('assets/images/branding/dr-prabhjeet-tmj-480w.jpg'),
+            'imagesrcset' => base_url('assets/images/branding/dr-prabhjeet-tmj-360w.jpg') . ' 360w, '
+                . base_url('assets/images/branding/dr-prabhjeet-tmj-480w.jpg') . ' 480w, '
+                . base_url('assets/images/branding/dr-prabhjeet-tmj-560w.jpg') . ' 560w',
+            'imagesizes' => '(max-width: 900px) min(92vw, 360px), min(480px, 48vw)',
+        );
+    }
+
     public function index()
     {
         if (strtolower(trim((string) $this->uri->uri_string())) === 'dental-services-in-kolkata') {
@@ -215,6 +229,7 @@ class Dental extends Frontend_Controller {
         $this->seo_overrides = array(
             'title' => 'Best Orthodontist in Kolkata | Braces & Invisalign Treatment',
             'description' => 'Transform your smile with expert orthodontic treatment in Kolkata. Explore braces, aligners, retainers, and personalized care at Dontia Care Clinic.',
+            'lcp_preload_images' => array($this->lcp_preload_dr_prabhjeet_responsive()),
         );
 
         $content = array();
@@ -248,6 +263,7 @@ class Dental extends Frontend_Controller {
         $this->seo_overrides = array(
             'title' => 'Best Dental Implant Clinic in Kolkata | Expert Implant Specialists',
             'description' => 'Restore missing teeth with expert dental implantologists, advanced implant systems, and personalized care at Dontia Dental Care in Kolkata.',
+            'lcp_preload_images' => array($this->lcp_preload_dr_prabhjeet_responsive()),
         );
 
         $content = array();
@@ -282,7 +298,7 @@ class Dental extends Frontend_Controller {
             'description' => 'Jaw pain, clicking, headaches, or ear symptoms? Visit Dontia Care Clinic for TMJ / TMD care in Kolkata — Dawson Certified specialist, splints, physiotherapy, Botox for TMJ, and conservative-first treatment.',
             'canonical' => base_url('tmj-specialist-in-kolkata'),
             'lcp_preload_images' => array(
-                base_url('assets/images/branding/dr-prabhjeet-tmj-360w.jpg'),
+                $this->lcp_preload_dr_prabhjeet_responsive(),
                 'https://i.ytimg.com/vi/dszEUoxTmKk/hqdefault.jpg',
             ),
         );

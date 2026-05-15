@@ -338,10 +338,10 @@ $dontia_clinic_label = isset($CI->website['data']->company_name) ? $CI->website[
                  
 
 
-    <script src="<?php echo base_url(); ?>assets/mainjs/userinfo.js"></script>
-    <script src="<?php echo base_url(); ?>assets/js/Carousel.js"></script>
-    <script src="<?php echo base_url(); ?>assets/js/lightslider.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.3.0/js/iziToast.min.js"></script> 
+    <script defer src="<?php echo base_url(); ?>assets/mainjs/userinfo.js"></script>
+    <script defer src="<?php echo base_url(); ?>assets/js/Carousel.js"></script>
+    <script defer src="<?php echo base_url(); ?>assets/js/lightslider.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.3.0/js/iziToast.min.js"></script>
 
 
  
