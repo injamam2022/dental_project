@@ -339,8 +339,13 @@ $dontia_clinic_label = isset($CI->website['data']->company_name) ? $CI->website[
 
 
     <script defer src="<?php echo base_url(); ?>assets/mainjs/userinfo.js"></script>
+<?php
+$_dcc_dental_lite_js = (strtolower((string) $this->router->fetch_class()) === 'dental');
+if (empty($_dcc_dental_lite_js)) {
+?>
     <script defer src="<?php echo base_url(); ?>assets/js/Carousel.js"></script>
     <script defer src="<?php echo base_url(); ?>assets/js/lightslider.js"></script>
+<?php } ?>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.3.0/js/iziToast.min.js"></script>
 
 

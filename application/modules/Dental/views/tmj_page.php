@@ -37,21 +37,14 @@ $tmj_youtube_list = 'PLFAPmv-L_bnYlz18NK5mEEzPaVN_a9umj';
 $tmj_embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($tmj_youtube_id)
     . '?list=' . rawurlencode($tmj_youtube_list)
     . '&rel=0&autoplay=1&mute=1&playsinline=1';
+$tmj_yt_poster = 'https://i.ytimg.com/vi/' . rawurlencode($tmj_youtube_id) . '/hqdefault.jpg';
 ?>
 <style>
 .tmj-page{overflow-x:hidden}
 .tmj-page .container{max-width:min(1140px,94vw);width:100%;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));box-sizing:border-box}
-.tmj-page .tmj-hero{position:relative;padding:48px 0 56px;background:linear-gradient(165deg,#1a120e 0%,#2d1810 45%,#1f1512 100%);overflow:hidden}
 .tmj-page .tmj-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(173,140,128,.12),transparent 55%);pointer-events:none}
-.tmj-page .tmj-hero-inner{position:relative;z-index:2;text-align:center;max-width:960px;margin:0 auto;padding:0 16px}
-.tmj-page .tmj-hero h1{color:#fff!important;margin:0 0 10px;font-size:clamp(26px,4.5vw,40px);line-height:1.2;text-shadow:0 2px 14px rgba(0,0,0,.55)}
-.tmj-page .tmj-hero-lead{margin:0 0 28px;color:#fff!important;font-size:clamp(15px,2.2vw,18px);line-height:1.55;text-shadow:0 1px 8px rgba(0,0,0,.45)}
-.tmj-page .tmj-hero-video-wrap{width:100%;max-width:880px;margin:0 auto}
-.tmj-page .tmj-hero-video-aspect{position:relative;padding-bottom:56.25%;height:0;border-radius:12px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.45);border:1px solid rgba(255,248,240,.12)}
 .tmj-page .tmj-hero-video-aspect iframe{position:absolute;left:0;top:0;width:100%;height:100%;border:0}
-.tmj-page .tmj-hero-yt-facade{position:absolute;left:0;top:0;width:100%;height:100%;margin:0;padding:0;border:0;cursor:pointer;background:#0a0a0a center/cover no-repeat;border-radius:12px}
 .tmj-page .tmj-hero-yt-facade:focus{outline:2px solid rgba(255,248,240,.75);outline-offset:-2px}
-.tmj-page .tmj-hero-yt-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:44px;border:0;border-radius:10px;background:rgba(0,0,0,.62);color:#fff;font-size:20px;line-height:1;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.45);pointer-events:none}
 .tmj-page .tmj-hero-yt-facade:hover .tmj-hero-yt-play,.tmj-page .tmj-hero-yt-facade:focus .tmj-hero-yt-play{background:rgba(173,140,128,.95);color:#1a120e}
 .tmj-page .ortho-sec{padding:52px 0}
 .tmj-page .ortho-sec h2,.tmj-page .ortho-sec h3,.tmj-page .ortho-sec h4{margin:0 0 14px}
@@ -117,7 +110,8 @@ $tmj_embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($tmj_youtu
             <p class="tmj-hero-lead">Expert assessment and treatment for jaw pain, clicking, headaches, and TMJ disorders — conservative-first care at Dontia Care Clinic.</p>
             <div class="tmj-hero-video-wrap">
                 <div class="tmj-hero-video-aspect">
-                    <button type="button" class="tmj-hero-yt-facade" id="tmjHeroYoutubeFacade" data-embed="<?php echo htmlspecialchars($tmj_embed, ENT_QUOTES, 'UTF-8'); ?>" style="background-image:url(https://i.ytimg.com/vi/<?php echo htmlspecialchars($tmj_youtube_id, ENT_QUOTES, 'UTF-8'); ?>/hqdefault.jpg)" aria-label="Play TMJ information video">
+                    <button type="button" class="tmj-hero-yt-facade" id="tmjHeroYoutubeFacade" data-embed="<?php echo htmlspecialchars($tmj_embed, ENT_QUOTES, 'UTF-8'); ?>" aria-label="Play TMJ information video">
+                        <img class="tmj-hero-yt-poster" src="<?php echo htmlspecialchars($tmj_yt_poster, ENT_QUOTES, 'UTF-8'); ?>" alt="" width="480" height="360" decoding="async" fetchpriority="high">
                         <span class="tmj-hero-yt-play" aria-hidden="true">&#9654;</span>
                     </button>
                 </div>
