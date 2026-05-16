@@ -44,11 +44,13 @@ class Home extends Frontend_Controller {
 				$content['home_about_image'] = dontia_home_about_responsive_attrs($hp0[0][1]);
 			}
 		}
-		$lcp_preloads = array('https://i.ytimg.com/vi/PqdEzU6_2zg/hqdefault.jpg');
+		$lcp_preloads = array();
 		if (!empty($content['home_about_image']['preload'])) {
 			$lcp_preloads[] = $content['home_about_image']['preload'];
 		}
-		$this->seo_overrides['lcp_preload_images'] = array_slice($lcp_preloads, 0, 2);
+		if (!empty($lcp_preloads)) {
+			$this->seo_overrides['lcp_preload_images'] = $lcp_preloads;
+		}
 		$this->seo_overrides['preconnect_youtube'] = true;
 
 		$content['subview']="home_page";

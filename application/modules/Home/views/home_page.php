@@ -22,17 +22,21 @@ if (!is_array($home_body)) {
 
                 <?php
                 $home_hero_yt_id = 'PqdEzU6_2zg';
-                $home_hero_embed_url = 'https://www.youtube.com/embed/' . rawurlencode($home_hero_yt_id)
+                $home_hero_embed_url = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($home_hero_yt_id)
                     . '?autoplay=1&mute=1&playsinline=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&rel=0&modestbranding=1'
                     . '&loop=1&playlist=' . rawurlencode($home_hero_yt_id);
-                $home_hero_poster = 'https://i.ytimg.com/vi/' . rawurlencode($home_hero_yt_id) . '/hqdefault.jpg';
                 ?>
 
                 <div class="carousel-item active">
-                    <div class="home-hero-youtube-cover">
-                        <button type="button" class="home-hero-yt-facade" id="homeHeroYtFacade" data-embed="<?php echo htmlspecialchars($home_hero_embed_url, ENT_QUOTES, 'UTF-8'); ?>" style="background-image:url(<?php echo htmlspecialchars($home_hero_poster, ENT_QUOTES, 'UTF-8'); ?>)" aria-label="Play welcome video">
-                            <span class="home-hero-yt-play" aria-hidden="true"></span>
-                        </button>
+                    <div class="home-hero-youtube-cover is-playing">
+                        <iframe
+                            class="home-hero-youtube-iframe"
+                            src="<?php echo htmlspecialchars($home_hero_embed_url, ENT_QUOTES, 'UTF-8'); ?>"
+                            title="Dontia Care Clinic — welcome video"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="eager"
+                        ></iframe>
                     </div>
 
                     <div class="hero-slide-overlay" aria-hidden="true"></div>
@@ -575,24 +579,3 @@ unset($dontia_parse_youtube_id);
         </div>
     </section> -->
    
-<script>
-(function () {
-	var btn = document.getElementById('homeHeroYtFacade');
-	if (!btn) return;
-	var embed = btn.getAttribute('data-embed');
-	if (!embed) return;
-	var cover = btn.parentElement;
-	if (!cover) return;
-	btn.addEventListener('click', function () {
-		var iframe = document.createElement('iframe');
-		iframe.className = 'home-hero-youtube-iframe';
-		iframe.setAttribute('title', 'Dontia Care Clinic — welcome video');
-		iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-		iframe.setAttribute('allowfullscreen', '');
-		iframe.setAttribute('loading', 'lazy');
-		iframe.src = embed;
-		cover.classList.add('is-playing');
-		cover.replaceChild(iframe, btn);
-	});
-})();
-</script>
