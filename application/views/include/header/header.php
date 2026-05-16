@@ -131,7 +131,25 @@ $_dcc_emit_deferred_css = static function ($href) use ($h) {
 	echo '<noscript><link href="' . $h($href) . '" rel="stylesheet"></noscript>' . "\n";
 };
 ?>
+<?php if ($dental_lite_css) { ?>
+<style id="dcc-dental-shell-critical">
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5;color:#1a1a1a}
+img{max-width:100%;height:auto;display:block}
+.page-wrapper{min-height:100vh}
+.main-header,.dontia-main-header{position:relative;z-index:100}
+.auto-container,.container{width:100%;max-width:1140px;margin-left:auto;margin-right:auto;padding-left:15px;padding-right:15px}
+.row{display:flex;flex-wrap:wrap;margin-left:-15px;margin-right:-15px}
+[class*="col-"]{position:relative;width:100%;padding-left:15px;padding-right:15px}
+.dontia-main-header .navbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.dontia-main-header .navbar-brand,.dontia-main-header a{color:inherit;text-decoration:none}
+.list-unstyled{padding-left:0;list-style:none;margin:0}
+</style>
+<?php
+	$_dcc_emit_deferred_css($_css . 'bootstrap.css');
+} else { ?>
 <link href="<?php echo $_css; ?>bootstrap.css" rel="stylesheet">
+<?php } ?>
 <link rel="preload" href="<?php echo $_css; ?>flaticon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="<?php echo $_css; ?>flaticon.css" rel="stylesheet"></noscript>
 <link rel="preload" href="<?php echo $_css; ?>slick.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -140,15 +158,18 @@ $_dcc_emit_deferred_css = static function ($href) use ($h) {
 <noscript><link href="<?php echo $_css; ?>color-switcher-design.css" rel="stylesheet"></noscript>
 <link rel="preload" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" as="style" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"></noscript>
-<link href="<?php echo $_css; ?>style.css" rel="stylesheet">
+<style>@font-face{font-family:FontAwesome;font-display:swap;src:url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0) format("woff2");font-weight:400;font-style:normal}</style>
 <?php if ($dental_lite_css) {
+	$_dcc_emit_deferred_css($_css . 'style.css');
+	$_dcc_emit_deferred_css($_css . 'dontia-brand.css');
 	$_dcc_emit_deferred_css($_css . 'responsive.css');
 	$_dcc_emit_deferred_css($_css . 'color-themes/blue-theme.css');
 } else { ?>
+<link href="<?php echo $_css; ?>style.css" rel="stylesheet">
 <link href="<?php echo $_css; ?>responsive.css" rel="stylesheet">
 <link id="theme-color-file" href="<?php echo $_css; ?>color-themes/blue-theme.css" rel="stylesheet">
-<?php } ?>
 <link href="<?php echo $_css; ?>dontia-brand.css" rel="stylesheet">
+<?php } ?>
 <?php
 if ($router_class === 'dental') {
 	$_drlook_href = base_url('assets/css/dental-react-look.css');
@@ -186,19 +207,7 @@ foreach ($_defer_css as $_href) {
 $router_class_head = strtolower((string) $this->router->fetch_class());
 $router_method_head = strtolower((string) $this->router->fetch_method());
 if ($router_class_head === 'dental' && $router_method_head === 'tmj_specialist') {
-?>
-<style>
-.tmj-page .tmj-hero{position:relative;padding:48px 0 56px;background:linear-gradient(165deg,#1a120e 0%,#2d1810 45%,#1f1512 100%);overflow:hidden}
-.tmj-page .tmj-hero-inner{position:relative;z-index:2;text-align:center;max-width:960px;margin:0 auto;padding:0 16px}
-.tmj-page .tmj-hero h1{color:#fff!important;margin:0 0 10px;font-size:clamp(26px,4.5vw,40px);line-height:1.2}
-.tmj-page .tmj-hero-lead{margin:0 0 28px;color:#fff!important;font-size:clamp(15px,2.2vw,18px);line-height:1.55}
-.tmj-page .tmj-hero-video-wrap{width:100%;max-width:880px;margin:0 auto}
-.tmj-page .tmj-hero-video-aspect{position:relative;padding-bottom:56.25%;height:0;border-radius:12px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.45);border:1px solid rgba(255,248,240,.12)}
-.tmj-page .tmj-hero-yt-facade{position:absolute;inset:0;margin:0;padding:0;border:0;cursor:pointer;background:#0a0a0a;border-radius:12px;display:block;width:100%;height:100%}
-.tmj-page .tmj-hero-yt-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:12px;display:block}
-.tmj-page .tmj-hero-yt-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:44px;border:0;border-radius:10px;background:rgba(0,0,0,.62);color:#fff;font-size:20px;line-height:1;pointer-events:none;z-index:2}
-</style>
-<?php
+	$this->load->view('Dental/partials/tmj_page_styles');
 }
 if ($router_class_head === 'dental' && $router_method_head === 'tmj_specialist' && isset($this->website['data'])) {
 	$this->load->helper('schema_org');

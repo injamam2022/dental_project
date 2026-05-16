@@ -112,8 +112,9 @@ $dontia_footer_social = array(
 
 <!--Scroll to top-->
 <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-arrow-circle-o-up"></span></div>
-<script src="<?php echo base_url('assets/'); ?>js/jquery.js"></script> 
-<script src="<?php echo base_url('assets/'); ?>js/popper.min.js"></script>
+<?php $_dcc_js_defer = $dental_lite_scripts ? ' defer' : ''; ?>
+<script src="<?php echo base_url('assets/'); ?>js/jquery.js"></script>
+<script<?php echo $_dcc_js_defer; ?> src="<?php echo base_url('assets/'); ?>js/popper.min.js"></script>
 <script src="<?php echo base_url('assets/'); ?>js/bootstrap.min.js"></script>
 <?php if (empty($dental_lite_scripts)) { ?>
 <script src="<?php echo base_url('assets/'); ?>js/jquery.fancybox.js"></script>
@@ -123,11 +124,14 @@ $dontia_footer_social = array(
 <script src="<?php echo base_url('assets/'); ?>js/mixitup.js"></script>
 <script src="<?php echo base_url('assets/'); ?>js/slick.js"></script>
 <?php } ?>
-<script src="<?php echo base_url('assets/'); ?>js/script.js"></script>
-<!-- Color Setting -->
+<script<?php echo $_dcc_js_defer; ?> src="<?php echo base_url('assets/'); ?>js/script.js"></script>
+<?php if (empty($dental_lite_scripts)) { ?>
 <script src="<?php echo base_url('assets/'); ?>js/color-settings.js"></script>
+<?php } ?>
 
 <script>
+document.addEventListener('DOMContentLoaded',function(){
+	if (typeof jQuery === 'undefined') return;
 	if (jQuery('.product-slide').length) {
 		jQuery('.product-slide').slick({
 			dots: false,
@@ -180,6 +184,7 @@ $dontia_footer_social = array(
 			$sec.find('#' + id).removeAttr('hidden');
 		});
 	})(jQuery);
+});
 </script>
 
 
