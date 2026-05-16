@@ -124,8 +124,10 @@ $dontia_footer_social = array(
 <script src="<?php echo base_url('assets/'); ?>js/slick.js"></script>
 <?php } ?>
 <script src="<?php echo base_url('assets/'); ?>js/script.js"></script>
+<?php if (empty($dental_lite_scripts)) { ?>
 <!-- Color Setting -->
 <script src="<?php echo base_url('assets/'); ?>js/color-settings.js"></script>
+<?php } ?>
 
 <script>
 	if (jQuery('.product-slide').length) {

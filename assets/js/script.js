@@ -707,6 +707,10 @@
    When document is loading, do
    ========================================================================== */
 	
+	$(function () {
+		handlePreloader();
+	});
+
 	$(window).on('load', function() {
 		handlePreloader();
 	});

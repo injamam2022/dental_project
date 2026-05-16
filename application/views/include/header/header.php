@@ -80,13 +80,21 @@ if (!empty($ov_head['lcp_preload_images']) && is_array($ov_head['lcp_preload_ima
 }
 $_dcc_router_class_early = strtolower((string) $this->router->fetch_class());
 $_dcc_router_method_early = strtolower((string) $this->router->fetch_method());
-if ($_dcc_router_class_early === 'dental' && $_dcc_router_method_early === 'tmj_specialist') {
+$_dcc_tmj_lite_head = ($_dcc_router_class_early === 'dental' && $_dcc_router_method_early === 'tmj_specialist');
+$_dcc_marketing_no_preloader = ($_dcc_router_class_early === 'dental' || $_dcc_router_class_early === 'home');
+$_dcc_site_origin = preg_replace('#/[^/]*$#', '', rtrim(base_url(), '/'));
+if ($_dcc_site_origin !== '') {
+	echo '<link rel="preconnect" href="' . $h($_dcc_site_origin) . '">' . "\n";
+}
+if ($_dcc_tmj_lite_head) {
 	$this->load->view('Dental/partials/tmj_page_critical_styles');
 }
 $dcc_fonts_href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@400;500;600;700&display=swap';
+if (!$_dcc_tmj_lite_head) {
 ?>
 <link rel="preload" href="<?php echo $h($dcc_fonts_href); ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="<?php echo $h($dcc_fonts_href); ?>"></noscript>
+<?php } ?>
 <title><?php echo $h($seo['title']); ?></title>
 <?php if ($seo['description'] !== '') { ?>
 <meta name="description" content="<?php echo $h($seo['description']); ?>">
@@ -131,18 +139,23 @@ $dcc_fonts_href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;
 $_css = rtrim(base_url('assets/css/'), '/') . '/';
 $router_class = strtolower((string) $this->router->fetch_class());
 $dental_lite_css = ($router_class === 'dental');
+if (!isset($_dcc_tmj_lite_head)) {
+	$_dcc_tmj_lite_head = ($router_class === 'dental' && strtolower((string) $this->router->fetch_method()) === 'tmj_specialist');
+}
 $_dcc_emit_deferred_css = static function ($href) use ($h) {
 	echo '<link rel="preload" href="' . $h($href) . '" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">' . "\n";
 	echo '<noscript><link href="' . $h($href) . '" rel="stylesheet"></noscript>' . "\n";
 };
 ?>
 <link href="<?php echo $_css; ?>bootstrap.css" rel="stylesheet">
+<?php if (!$_dcc_tmj_lite_head) { ?>
 <link rel="preload" href="<?php echo $_css; ?>flaticon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="<?php echo $_css; ?>flaticon.css" rel="stylesheet"></noscript>
 <link rel="preload" href="<?php echo $_css; ?>slick.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="<?php echo $_css; ?>slick.css" rel="stylesheet"></noscript>
 <link rel="preload" href="<?php echo $_css; ?>color-switcher-design.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="<?php echo $_css; ?>color-switcher-design.css" rel="stylesheet"></noscript>
+<?php } ?>
 <link rel="preload" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" as="style" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"></noscript>
 <link href="<?php echo $_css; ?>style.css" rel="stylesheet">
@@ -191,7 +204,7 @@ foreach ($_defer_css as $_href) {
 $router_class_head = strtolower((string) $this->router->fetch_class());
 $router_method_head = strtolower((string) $this->router->fetch_method());
 if ($router_class_head === 'dental' && $router_method_head === 'tmj_specialist') {
-	$this->load->view('Dental/partials/tmj_page_styles');
+	$_dcc_emit_deferred_css($_css . 'tmj-page.css');
 }
 if ($router_class_head === 'dental' && $router_method_head === 'tmj_specialist' && isset($this->website['data'])) {
 	$this->load->helper('schema_org');
@@ -214,16 +227,22 @@ if ($router_class_head === 'dental' && $router_method_head === 'tmj_specialist' 
 <body>
 
 	<?php
-	$preloader_logo_url = $brand_logo_url;
-	$preloader_alt = 'Loading';
-	if (isset($this->website['data'])) {
-		$wd = $this->website['data'];
-		if (isset($wd->company_name) && trim((string) $wd->company_name) !== '') {
-			$preloader_alt = $h(trim((string) $wd->company_name));
-		}
+	if (!isset($_dcc_marketing_no_preloader)) {
+		$_dcc_marketing_no_preloader = (strtolower((string) $this->router->fetch_class()) === 'dental'
+			|| strtolower((string) $this->router->fetch_class()) === 'home');
 	}
 	?>
 	<div class="page-wrapper">
+    <?php if (empty($_dcc_marketing_no_preloader)) {
+		$preloader_logo_url = $brand_logo_url;
+		$preloader_alt = 'Loading';
+		if (isset($this->website['data'])) {
+			$wd = $this->website['data'];
+			if (isset($wd->company_name) && trim((string) $wd->company_name) !== '') {
+				$preloader_alt = $h(trim((string) $wd->company_name));
+			}
+		}
+	?>
     <!-- Preloader -->
     <div class="preloader">
 		<div class="preloader__inner">
@@ -234,6 +253,7 @@ if ($router_class_head === 'dental' && $router_method_head === 'tmj_specialist' 
 			<?php } ?>
 		</div>
 	</div>
+    <?php } ?>
     
     <!-- Main Header-->
     <header class="main-header header-style-one dontia-main-header">

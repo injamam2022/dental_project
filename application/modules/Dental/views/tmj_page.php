@@ -37,7 +37,10 @@ $tmj_youtube_list = 'PLFAPmv-L_bnYlz18NK5mEEzPaVN_a9umj';
 $tmj_embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($tmj_youtube_id)
     . '?list=' . rawurlencode($tmj_youtube_list)
     . '&rel=0&autoplay=1&mute=1&playsinline=1';
-$tmj_yt_poster = 'https://i.ytimg.com/vi/' . rawurlencode($tmj_youtube_id) . '/hqdefault.jpg';
+$tmj_yt_poster_local = FCPATH . 'assets/images/tmj/yt-lcp-poster.jpg';
+$tmj_yt_poster = (is_file($tmj_yt_poster_local))
+    ? base_url('assets/images/tmj/yt-lcp-poster.jpg')
+    : 'https://i.ytimg.com/vi/' . rawurlencode($tmj_youtube_id) . '/hqdefault.jpg';
 ?>
 
 <div class="ortho-page tmj-page">

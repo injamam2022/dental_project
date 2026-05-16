@@ -311,9 +311,8 @@ class Dental extends Frontend_Controller {
             'title' => 'Best TMJ Specialist in Kolkata, India | Expert Treatment for TMJ Disorders',
             'description' => 'Jaw pain, clicking, headaches, or ear symptoms? Visit Dontia Care Clinic for TMJ / TMD care in Kolkata — Dawson Certified specialist, splints, physiotherapy, Botox for TMJ, and conservative-first treatment.',
             'canonical' => base_url('tmj-specialist-in-kolkata'),
-            'preconnect_youtube' => true,
             'lcp_preload_images' => array(
-                'https://i.ytimg.com/vi/dszEUoxTmKk/hqdefault.jpg',
+                base_url('assets/images/tmj/yt-lcp-poster.jpg'),
             ),
         );
 
