@@ -1,0 +1,18 @@
+/* Above-the-fold only — full styles load async (bootstrap, style, dontia-brand). */
+:root{--dcc-page:#faf8f7;--dcc-header-bar:#311300;--dcc-warm:rgb(173,140,128)}
+body{margin:0;background:var(--dcc-page);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.page-wrapper{position:relative;overflow:hidden}
+.dontia-top-bar{background:var(--dcc-header-bar);color:#fff;font-size:13px}
+.dontia-main-header{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.dontia-header-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:12px 0}
+.dontia-logo-mark img{display:block;height:auto;max-height:74px;width:auto}
+.home-hero-video-banner.banner-section .carousel,
+.home-hero-video-banner.banner-section .carousel-inner,
+.home-hero-video-banner.banner-section .carousel-item{min-height:min(560px,85vh);max-height:min(980px,96vh);position:relative}
+.home-hero.banner-section .carousel-item .home-hero-youtube-cover{position:absolute;inset:0;overflow:hidden;background:#000}
+.home-hero-yt-facade{position:absolute;top:53%;left:50%;min-width:100%;min-height:100%;width:auto;height:100%;aspect-ratio:16/9;border:0;padding:0;margin:0;transform:translate(-50%,-50%);cursor:pointer;background:#000}
+.home-hero-yt-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.home-hero-yt-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:68px;height:48px;border-radius:12px;background:rgba(0,0,0,.55);pointer-events:none}
+.hero-slide-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(0,0,0,.25),rgba(0,0,0,.45))}
+.home-hero .content-box{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;min-height:inherit;padding:24px 16px}
+.hero-banner-title,.hero-banner-subtitle{color:#fff;text-align:center;text-shadow:0 2px 12px rgba(0,0,0,.5)}

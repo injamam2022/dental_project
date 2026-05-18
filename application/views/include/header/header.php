@@ -148,26 +148,32 @@ $_dcc_emit_deferred_css = static function ($href) use ($h) {
 	echo '<noscript><link href="' . $h($href) . '" rel="stylesheet"></noscript>' . "\n";
 };
 ?>
+<?php if ($dental_lite_css) { ?>
+<link href="<?php echo $_css; ?>critical-marketing.css" rel="stylesheet">
+<?php $_dcc_emit_deferred_css($_css . 'bootstrap.css'); ?>
+<?php $_dcc_emit_deferred_css($_css . 'style.css'); ?>
+<?php $_dcc_emit_deferred_css($_css . 'dontia-brand.css'); ?>
+<?php $_dcc_emit_deferred_css($_css . 'responsive.css'); ?>
+<?php $_dcc_emit_deferred_css($_css . 'color-themes/blue-theme.css'); ?>
+<?php } else { ?>
 <link href="<?php echo $_css; ?>bootstrap.css" rel="stylesheet">
+<link href="<?php echo $_css; ?>style.css" rel="stylesheet">
+<link href="<?php echo $_css; ?>responsive.css" rel="stylesheet">
+<link id="theme-color-file" href="<?php echo $_css; ?>color-themes/blue-theme.css" rel="stylesheet">
+<link href="<?php echo $_css; ?>dontia-brand.css" rel="stylesheet">
+<?php } ?>
 <?php if (!$_dcc_tmj_lite_head) { ?>
 <link rel="preload" href="<?php echo $_css; ?>flaticon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="<?php echo $_css; ?>flaticon.css" rel="stylesheet"></noscript>
+<?php if (!$dental_lite_css) { ?>
 <link rel="preload" href="<?php echo $_css; ?>slick.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="<?php echo $_css; ?>slick.css" rel="stylesheet"></noscript>
 <link rel="preload" href="<?php echo $_css; ?>color-switcher-design.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="<?php echo $_css; ?>color-switcher-design.css" rel="stylesheet"></noscript>
 <?php } ?>
+<?php } ?>
 <link rel="preload" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" as="style" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"></noscript>
-<link href="<?php echo $_css; ?>style.css" rel="stylesheet">
-<?php if ($dental_lite_css) {
-	$_dcc_emit_deferred_css($_css . 'responsive.css');
-	$_dcc_emit_deferred_css($_css . 'color-themes/blue-theme.css');
-} else { ?>
-<link href="<?php echo $_css; ?>responsive.css" rel="stylesheet">
-<link id="theme-color-file" href="<?php echo $_css; ?>color-themes/blue-theme.css" rel="stylesheet">
-<?php } ?>
-<link href="<?php echo $_css; ?>dontia-brand.css" rel="stylesheet">
 <?php
 if ($router_class === 'dental') {
 	$_drlook_href = base_url('assets/css/dental-react-look.css');

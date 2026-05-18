@@ -2766,9 +2766,16 @@ header-style-seven .nav-toggler:hover{
 	cursor: pointer;
 	padding: 0;
 	background-color: #000;
-	background-position: center;
-	background-size: cover;
-	background-repeat: no-repeat;
+	overflow: hidden;
+}
+.home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-yt-poster{
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	pointer-events: none;
 }
 .home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-yt-facade:focus{
 	outline: 2px solid rgba(255,248,240,.85);

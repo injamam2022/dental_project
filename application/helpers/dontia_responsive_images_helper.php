@@ -159,6 +159,16 @@ function dontia_enrich_technology_card_image(array &$card)
 function dontia_home_about_responsive_attrs($filename)
 {
 	$r = dontia_responsive_upload_image('home', $filename, '(max-width: 991px) 100vw, 50vw');
+	$CI =& get_instance();
+	$CI->load->helper('dontia_performance');
+	$smaller = dontia_upload_smaller_src_override('home', $filename);
+	if ($smaller !== '') {
+		$orig_fs = FCPATH . 'admin/webroot/uploads/home/' . basename((string) $filename);
+		if (is_file($orig_fs) && filesize($orig_fs) > 400000) {
+			$r['src'] = $smaller;
+			$r['has_variants'] = true;
+		}
+	}
 	$preload = '';
 	if ($r['preload_mid'] !== '') {
 		$preload = $r['preload_mid'];

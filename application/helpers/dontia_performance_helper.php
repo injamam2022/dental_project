@@ -27,7 +27,75 @@ function dontia_youtube_poster_url($video_id)
 	if ($id === '') {
 		return '';
 	}
-	return 'https://i.ytimg.com/vi/' . $id . '/hqdefault.jpg';
+	return 'https://i.ytimg.com/vi/' . $id . '/mqdefault.jpg';
+}
+
+/**
+ * Hero facade poster: local asset first, then lighter YouTube mqdefault.
+ *
+ * @return array{src:string,preload:string,width:int,height:int,local:bool}
+ */
+function dontia_home_hero_poster($video_id)
+{
+	$id = preg_replace('/[^a-zA-Z0-9_-]/', '', (string) $video_id);
+	$out = array(
+		'src' => '',
+		'preload' => '',
+		'width' => 320,
+		'height' => 180,
+		'local' => false,
+	);
+	if ($id === '') {
+		return $out;
+	}
+	$hero_dir = FCPATH . 'assets/images/hero/';
+	$hero_url = rtrim(base_url('assets/images/hero/'), '/') . '/';
+	foreach (array($id . '-poster.webp', $id . '-poster.jpg', 'home-hero-poster.webp', 'home-hero-poster.jpg') as $fn) {
+		if (is_file($hero_dir . $fn)) {
+			$out['src'] = $hero_url . rawurlencode($fn);
+			$out['preload'] = $out['src'];
+			$out['local'] = true;
+			$dim = @getimagesize($hero_dir . $fn);
+			if (is_array($dim)) {
+				$out['width'] = (int) $dim[0];
+				$out['height'] = (int) $dim[1];
+			}
+			return $out;
+		}
+	}
+	$out['src'] = 'https://i.ytimg.com/vi/' . $id . '/mqdefault.jpg';
+	$out['preload'] = $out['src'];
+	$out['width'] = 320;
+	$out['height'] = 180;
+	return $out;
+}
+
+/**
+ * When the original upload is huge and width variants exist, force a smaller src.
+ */
+function dontia_upload_smaller_src_override($subdir, $filename, $max_bytes = 400000)
+{
+	$filename = basename((string) $filename);
+	$subdir = trim(str_replace(array('..', '\\'), array('', '/'), (string) $subdir), '/');
+	$dir_fs = FCPATH . 'admin/webroot/uploads/' . ($subdir !== '' ? $subdir . '/' : '');
+	$path = $dir_fs . $filename;
+	if ($filename === '' || !is_file($path) || filesize($path) <= $max_bytes) {
+		return '';
+	}
+	$pi = pathinfo($filename);
+	$stem = isset($pi['filename']) ? $pi['filename'] : $filename;
+	$ext = isset($pi['extension']) ? strtolower($pi['extension']) : 'jpg';
+	$dir_url = rtrim(base_url('admin/webroot/uploads/' . ($subdir !== '' ? $subdir . '/' : '')), '/') . '/';
+	$try_ext = array_unique(array_filter(array('webp', 'jpg', 'jpeg', $ext)));
+	foreach (array(480, 768, 1024, 1280) as $w) {
+		foreach ($try_ext as $e) {
+			$cand = $stem . '-' . $w . 'w.' . $e;
+			if (is_file($dir_fs . $cand)) {
+				return $dir_url . rawurlencode($cand);
+			}
+		}
+	}
+	return '';
 }
 
 /**

@@ -21,20 +21,30 @@ if (!is_array($home_body)) {
                 ?>
 
                 <?php
-                $this->load->helper('dontia_performance');
                 $home_hero_yt_id = 'PqdEzU6_2zg';
                 $home_hero_embed_url = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($home_hero_yt_id)
                     . '?autoplay=1&mute=1&playsinline=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&rel=0&modestbranding=1'
                     . '&loop=1&playlist=' . rawurlencode($home_hero_yt_id);
-                $home_hero_yt_poster = dontia_youtube_poster_url($home_hero_yt_id);
+                $hero_poster = isset($home_hero_poster) && is_array($home_hero_poster) ? $home_hero_poster : array();
+                if (empty($hero_poster['src'])) {
+                    $this->load->helper('dontia_performance');
+                    $hero_poster = dontia_home_hero_poster($home_hero_yt_id);
+                }
+                $hero_poster_src = isset($hero_poster['src']) ? (string) $hero_poster['src'] : '';
+                $hero_poster_w = isset($hero_poster['width']) ? (int) $hero_poster['width'] : 320;
+                $hero_poster_h = isset($hero_poster['height']) ? (int) $hero_poster['height'] : 180;
                 ?>
 
                 <div class="carousel-item active">
                     <div class="home-hero-youtube-cover" id="homeHeroYoutubeCover">
                         <button type="button" class="home-hero-yt-facade" id="homeHeroYoutubeFacade"
                             data-embed="<?php echo htmlspecialchars($home_hero_embed_url, ENT_QUOTES, 'UTF-8'); ?>"
-                            aria-label="Play welcome video"
-                            style="background-image:url('<?php echo htmlspecialchars($home_hero_yt_poster, ENT_QUOTES, 'UTF-8'); ?>')">
+                            aria-label="Play welcome video">
+                            <?php if ($hero_poster_src !== '') { ?>
+                            <img class="home-hero-yt-poster" src="<?php echo htmlspecialchars($hero_poster_src, ENT_QUOTES, 'UTF-8'); ?>"
+                                alt="" width="<?php echo $hero_poster_w; ?>" height="<?php echo $hero_poster_h; ?>"
+                                fetchpriority="high" decoding="async">
+                            <?php } ?>
                             <span class="home-hero-yt-play" aria-hidden="true"></span>
                         </button>
                     </div>
@@ -99,7 +109,7 @@ if (!is_array($home_body)) {
                                         <?php if (!empty($hai['srcset'])) { ?>srcset="<?php echo htmlspecialchars($hai['srcset'], ENT_QUOTES, 'UTF-8'); ?>" sizes="<?php echo htmlspecialchars(isset($hai['sizes']) ? $hai['sizes'] : '(max-width: 991px) 100vw, 50vw', ENT_QUOTES, 'UTF-8'); ?>"<?php } ?>
                                         alt="<?php echo $dontia_about_company_esc; ?>"
                                         <?php if (!empty($hai['width']) && !empty($hai['height'])) { ?>width="<?php echo (int) $hai['width']; ?>" height="<?php echo (int) $hai['height']; ?>"<?php } ?>
-                                        decoding="async" fetchpriority="high">
+                                        loading="lazy" decoding="async">
                                 </figure>
                             </div>
                         </div>
