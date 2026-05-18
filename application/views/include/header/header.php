@@ -151,9 +151,12 @@ $_dcc_emit_deferred_css = static function ($href) use ($h) {
 	if ($_dcc_crit_css !== '') {
 		echo '<style id="dontia-critical-marketing">' . $_dcc_crit_css . '</style>' . "\n";
 	}
-	$_dcc_emit_deferred_css($_css . 'bootstrap.css');
+	echo '<style id="dontia-appt-modal-stack">#dontiaAppointmentModal.modal{z-index:10060!important}body>.modal-backdrop{z-index:10050!important}body.modal-open .dontia-main-header{z-index:1030!important}.dontia-appt-modal .modal-content,.dontia-appt-modal .dontia-appt-input,.dontia-appt-modal select,.dontia-appt-modal button{pointer-events:auto!important}</style>' . "\n";
+?>
+<link href="<?php echo $_css; ?>bootstrap.css" rel="stylesheet">
+<link href="<?php echo $_css; ?>dontia-brand.css" rel="stylesheet">
+<?php
 	$_dcc_emit_deferred_css($_css . 'style.css');
-	$_dcc_emit_deferred_css($_css . 'dontia-brand.css');
 	$_dcc_emit_deferred_css($_css . 'responsive.css');
 	$_dcc_emit_deferred_css($_css . 'color-themes/blue-theme.css');
 } else { ?>
@@ -347,7 +350,7 @@ if ($router_class_head === 'dental' && $router_method_head === 'tmj_specialist' 
                         <div class="logo dontia-logo-brand">
                             <a href="<?php echo base_url(); ?>" class="dontia-logo-link">
                                 <span class="dontia-logo-mark">
-                                    <img src="<?php echo $h($header_logo_src); ?>" srcset="<?php echo $header_logo_srcset; ?>" sizes="80px" alt="<?php echo $company_esc; ?>" width="96" height="74" decoding="async" fetchpriority="high">
+                                    <img src="<?php echo $h($header_logo_src); ?>" srcset="<?php echo $header_logo_srcset; ?>" sizes="80px" alt="<?php echo $company_esc; ?>" width="96" height="74" decoding="async">
                                 </span>
                             </a>
                         </div>

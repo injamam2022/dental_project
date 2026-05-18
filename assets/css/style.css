@@ -2750,7 +2750,7 @@ header-style-seven .nav-toggler:hover{
 	}
 }
 
-/* Home hero: lightweight poster first; iframe loads on user tap (mobile PageSpeed). */
+/* Home hero: background YouTube embed (muted autoplay). */
 .home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-yt-facade{
 	position: absolute;
 	top: 53%;

@@ -107,18 +107,14 @@ $dontia_footer_social = array(
             </div>
         </div>
     </footer>
-    
-
-</div>
-  
-     
 
 <!--Scroll to top-->
 <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-arrow-circle-o-up"></span></div>
 <?php $_dcc_assets = rtrim(base_url('assets/'), '/') . '/'; ?>
-<script defer src="<?php echo $_dcc_assets; ?>js/jquery.js"></script>
-<script defer src="<?php echo $_dcc_assets; ?>js/popper.min.js"></script>
-<script defer src="<?php echo $_dcc_assets; ?>js/bootstrap.min.js"></script>
+<script src="<?php echo $_dcc_assets; ?>js/jquery.js"></script>
+<script src="<?php echo $_dcc_assets; ?>js/popper.min.js"></script>
+<script src="<?php echo $_dcc_assets; ?>js/bootstrap.min.js"></script>
+<script src="<?php echo $_dcc_assets; ?>js/dontia-appointment-modal.js"></script>
 <?php if (empty($dental_lite_scripts)) { ?>
 <script defer src="<?php echo $_dcc_assets; ?>js/owl.js"></script>
 <?php } ?>

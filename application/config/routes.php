@@ -53,6 +53,9 @@ $route['default_controller'] = 'Home/Home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['appointment/submit-booking'] = 'Appointment/Appointment/submit_booking';
+$route['Appointment/submit_booking'] = 'Appointment/Appointment/submit_booking';
+
 // SEO-friendly slugs
 $route['dental-services-in-kolkata'] = 'Dental/Dental/index';
 $route['about-us'] = 'About/About/index';

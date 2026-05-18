@@ -25,31 +25,20 @@ if (!is_array($home_body)) {
                 $home_hero_embed_url = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($home_hero_yt_id)
                     . '?autoplay=1&mute=1&playsinline=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&rel=0&modestbranding=1'
                     . '&loop=1&playlist=' . rawurlencode($home_hero_yt_id);
-                $hero_poster = isset($home_hero_poster) && is_array($home_hero_poster) ? $home_hero_poster : array();
-                if (empty($hero_poster['src'])) {
-                    $this->load->helper('dontia_performance');
-                    $hero_poster = dontia_home_hero_poster($home_hero_yt_id);
-                }
-                $hero_poster_src = '';
-                if (!empty($hero_poster['local']) && !empty($hero_poster['src'])) {
-                    $hero_poster_src = (string) $hero_poster['src'];
-                }
-                $hero_poster_w = isset($hero_poster['width']) ? (int) $hero_poster['width'] : 320;
-                $hero_poster_h = isset($hero_poster['height']) ? (int) $hero_poster['height'] : 180;
+                $home_hero_embed_esc = htmlspecialchars($home_hero_embed_url, ENT_QUOTES, 'UTF-8');
                 ?>
 
                 <div class="carousel-item active">
-                    <div class="home-hero-youtube-cover" id="homeHeroYoutubeCover">
-                        <button type="button" class="home-hero-yt-facade<?php echo $hero_poster_src === '' ? ' home-hero-yt-facade--gradient' : ''; ?>" id="homeHeroYoutubeFacade"
-                            data-embed="<?php echo htmlspecialchars($home_hero_embed_url, ENT_QUOTES, 'UTF-8'); ?>"
-                            aria-label="Play welcome video">
-                            <?php if ($hero_poster_src !== '') { ?>
-                            <img class="home-hero-yt-poster" src="<?php echo htmlspecialchars($hero_poster_src, ENT_QUOTES, 'UTF-8'); ?>"
-                                alt="" width="<?php echo $hero_poster_w; ?>" height="<?php echo $hero_poster_h; ?>"
-                                decoding="async" loading="eager">
-                            <?php } ?>
-                            <span class="home-hero-yt-play" aria-hidden="true"></span>
-                        </button>
+                    <div class="home-hero-youtube-cover is-playing" id="homeHeroYoutubeCover">
+                        <iframe class="home-hero-youtube-iframe"
+                            id="homeHeroYoutubeIframe"
+                            src="<?php echo $home_hero_embed_esc; ?>"
+                            title="Dontia Care Clinic — welcome video"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="eager"
+                            tabindex="-1"
+                            aria-hidden="true"></iframe>
                     </div>
 
                     <div class="hero-slide-overlay" aria-hidden="true"></div>
@@ -617,28 +606,13 @@ unset($dontia_parse_youtube_id);
 
 <script>
 (function () {
-	var btn = document.getElementById('homeHeroYoutubeFacade');
-	if (!btn) return;
-	var cover = document.getElementById('homeHeroYoutubeCover');
-	var embed = btn.getAttribute('data-embed');
-	if (!embed || !cover) return;
-	function mountIframe() {
-		var iframe = document.createElement('iframe');
-		iframe.className = 'home-hero-youtube-iframe';
-		iframe.src = embed;
-		iframe.setAttribute('title', 'Dontia Care Clinic — welcome video');
-		iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-		iframe.setAttribute('allowfullscreen', '');
-		iframe.setAttribute('loading', 'eager');
-		cover.classList.add('is-playing');
-		cover.replaceChild(iframe, btn);
-	}
-	btn.addEventListener('click', mountIframe);
-	btn.addEventListener('keydown', function (e) {
-		if (e.key === 'Enter' || e.key === ' ') {
-			e.preventDefault();
-			mountIframe();
-		}
+	var iframe = document.getElementById('homeHeroYoutubeIframe');
+	if (!iframe) return;
+	var src = iframe.getAttribute('src');
+	if (!src) return;
+	document.addEventListener('visibilitychange', function () {
+		if (document.hidden) return;
+		iframe.src = src;
 	});
 })();
 </script>

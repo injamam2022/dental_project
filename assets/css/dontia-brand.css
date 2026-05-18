@@ -2781,9 +2781,32 @@ body {
 	color: #ffffff !important;
 }
 
-/* —— Book appointment modal —— */
+/* —— Book appointment modal (above fixed header z-index 10000) —— */
+#dontiaAppointmentModal.modal {
+	z-index: 10060 !important;
+}
+
+body > .modal-backdrop {
+	z-index: 10050 !important;
+}
+
+body.modal-open .dontia-main-header {
+	z-index: 1030 !important;
+}
+
+.dontia-appt-modal,
+.dontia-appt-modal .modal-dialog,
+.dontia-appt-modal .modal-content,
+.dontia-appt-modal .dontia-appt-input,
+.dontia-appt-modal select,
+.dontia-appt-modal button,
+.dontia-appt-modal a {
+	pointer-events: auto !important;
+}
+
 .dontia-appt-modal .modal-dialog {
 	margin-top: 8vh;
+	pointer-events: none;
 }
 
 .dontia-appt-modal__content {
