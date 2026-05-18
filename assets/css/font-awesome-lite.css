@@ -1,0 +1,31 @@
+/* Subset of Font Awesome 4.7 for Home/Dental marketing pages (icons used on site). */
+@font-face{
+	font-family:FontAwesome;
+	font-display:swap;
+	font-weight:400;
+	font-style:normal;
+	src:url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0) format("woff2");
+}
+.fa{
+	display:inline-block;
+	font:normal normal normal 14px/1 FontAwesome;
+	font-size:inherit;
+	text-rendering:auto;
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+}
+.fa-map-marker:before{content:"\f041"}
+.fa-phone:before{content:"\f095"}
+.fa-envelope:before{content:"\f0e0"}
+.fa-clock-o:before{content:"\f017"}
+.fa-facebook:before{content:"\f09a"}
+.fa-instagram:before{content:"\f16d"}
+.fa-youtube-play:before{content:"\f16a"}
+.fa-linkedin:before{content:"\f0e1"}
+.fa-twitter:before{content:"\f099"}
+.fa-star:before{content:"\f005"}
+.fa-arrow-circle-o-up:before{content:"\f01b"}
+.fa-long-arrow-left:before{content:"\f177"}
+.fa-long-arrow-right:before{content:"\f178"}
+.fa-book:before{content:"\f02d"}
+.fa-calendar:before{content:"\f073"}

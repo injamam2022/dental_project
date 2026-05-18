@@ -45,6 +45,12 @@ class Home extends Frontend_Controller {
 			}
 		}
 		$content['home_hero_poster'] = dontia_home_hero_poster('PqdEzU6_2zg');
+		$lcp_preloads = array();
+		if (!empty($content['home_hero_poster']['local']) && !empty($content['home_hero_poster']['src'])) {
+			$lcp_preloads[] = array('href' => $content['home_hero_poster']['src']);
+		}
+		$lcp_preloads[] = array('href' => rtrim(base_url('assets/images/branding/'), '/') . '/header-logo-96w.png');
+		$this->seo_overrides['lcp_preload_images'] = $lcp_preloads;
 
 		$content['subview']="home_page";
 //        echo "<pre>";print_r($content);die;

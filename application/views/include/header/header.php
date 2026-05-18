@@ -88,12 +88,12 @@ if ($_dcc_tmj_lite_head) {
 	$this->load->view('Dental/partials/tmj_page_critical_styles');
 }
 $dcc_fonts_href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@400;500;600;700&display=swap';
-if (!$_dcc_tmj_lite_head) {
 ?>
+<title><?php echo $h($seo['title']); ?></title>
+<?php if (!$_dcc_tmj_lite_head) { ?>
 <link rel="preload" href="<?php echo $h($dcc_fonts_href); ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="<?php echo $h($dcc_fonts_href); ?>"></noscript>
 <?php } ?>
-<title><?php echo $h($seo['title']); ?></title>
 <?php if ($seo['description'] !== '') { ?>
 <meta name="description" content="<?php echo $h($seo['description']); ?>">
 <?php } ?>
@@ -146,35 +146,47 @@ $_dcc_emit_deferred_css = static function ($href) use ($h) {
 	echo '<noscript><link href="' . $h($href) . '" rel="stylesheet"></noscript>' . "\n";
 };
 ?>
-<?php if ($dental_lite_css) { ?>
-<link href="<?php echo $_css; ?>bootstrap.css" rel="stylesheet">
-<link href="<?php echo $_css; ?>style.css" rel="stylesheet">
-<link href="<?php echo $_css; ?>dontia-brand.css" rel="stylesheet">
-<?php $_dcc_emit_deferred_css($_css . 'responsive.css'); ?>
-<?php $_dcc_emit_deferred_css($_css . 'color-themes/blue-theme.css'); ?>
-<?php } else { ?>
+<?php if ($dental_lite_css) {
+	$_dcc_crit_css = dontia_marketing_critical_css();
+	if ($_dcc_crit_css !== '') {
+		echo '<style id="dontia-critical-marketing">' . $_dcc_crit_css . '</style>' . "\n";
+	}
+	$_dcc_emit_deferred_css($_css . 'bootstrap.css');
+	$_dcc_emit_deferred_css($_css . 'style.css');
+	$_dcc_emit_deferred_css($_css . 'dontia-brand.css');
+	$_dcc_emit_deferred_css($_css . 'responsive.css');
+	$_dcc_emit_deferred_css($_css . 'color-themes/blue-theme.css');
+} else { ?>
 <link href="<?php echo $_css; ?>bootstrap.css" rel="stylesheet">
 <link href="<?php echo $_css; ?>style.css" rel="stylesheet">
 <link href="<?php echo $_css; ?>responsive.css" rel="stylesheet">
 <link id="theme-color-file" href="<?php echo $_css; ?>color-themes/blue-theme.css" rel="stylesheet">
 <link href="<?php echo $_css; ?>dontia-brand.css" rel="stylesheet">
 <?php } ?>
-<?php if (!$_dcc_tmj_lite_head) { ?>
+<?php if (!$_dcc_tmj_lite_head && !$dental_lite_css) { ?>
 <link rel="preload" href="<?php echo $_css; ?>flaticon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="<?php echo $_css; ?>flaticon.css" rel="stylesheet"></noscript>
-<?php if (!$dental_lite_css) { ?>
+<?php } elseif ($dental_lite_css) {
+	$_dcc_emit_deferred_css($_css . 'flaticon.css');
+}
+if (!$_dcc_tmj_lite_head && !$dental_lite_css) { ?>
 <link rel="preload" href="<?php echo $_css; ?>slick.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="<?php echo $_css; ?>slick.css" rel="stylesheet"></noscript>
 <link rel="preload" href="<?php echo $_css; ?>color-switcher-design.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="<?php echo $_css; ?>color-switcher-design.css" rel="stylesheet"></noscript>
 <?php } ?>
-<?php } ?>
-<?php if ($dental_lite_css) { ?>
-<link rel="dns-prefetch" href="https://stackpath.bootstrapcdn.com">
-<?php } ?>
+<?php
+$_dcc_fa_href = $dental_lite_css
+	? $_css . 'font-awesome-lite.css'
+	: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
+if ($dental_lite_css) {
+	$_dcc_emit_deferred_css($_dcc_fa_href);
+} else {
+?>
 <link rel="preload" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" as="style" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"></noscript>
 <style>@font-face{font-family:FontAwesome;font-display:swap;src:url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0) format("woff2")}</style>
+<?php } ?>
 <?php
 if ($router_class === 'dental') {
 	$_drlook_href = base_url('assets/css/dental-react-look.css');

@@ -173,10 +173,16 @@ function dontia_upload_picture_attrs($subdir, $filename, $sizes = '100px')
 
 	if ($subdir === 'product') {
 		$orig_path = $dir_fs . $filename;
-		if (is_file($orig_path) && filesize($orig_path) > 80000) {
-			$smaller = dontia_upload_smaller_src_override('product', $filename, 80000);
+		if (is_file($orig_path) && filesize($orig_path) > 50000) {
+			$smaller = dontia_upload_smaller_src_override('product', $filename, 50000);
 			if ($smaller !== '') {
 				$out['src'] = $smaller;
+			} elseif ($out['srcset'] !== '') {
+				$first = trim(explode(',', $out['srcset'])[0]);
+				$first_url = trim(explode(' ', $first)[0]);
+				if ($first_url !== '' && strpos($first_url, rawurlencode($filename)) === false) {
+					$out['src'] = $first_url;
+				}
 			}
 		}
 	}
