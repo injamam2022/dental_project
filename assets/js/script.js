@@ -670,8 +670,8 @@
 		});
 	}
 	
-	// Elements Animation
-	if($('.wow').length){
+	// Elements Animation (skip when wow.js not loaded — home lite bundle)
+	if($('.wow').length && typeof WOW !== 'undefined'){
 		var wow = new WOW(
 		  {
 			boxClass:     'wow',      // animated element css class (default is wow)

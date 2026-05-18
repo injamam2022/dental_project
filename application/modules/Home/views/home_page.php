@@ -105,7 +105,7 @@ if (!is_array($home_body)) {
                         </div>
                     </div>
                     <div class="content-column col-lg-6 col-md-12 col-sm-12">
-                        <div class="inner-column wow fadeInLeft">
+                        <div class="inner-column dontia-about-content">
                             <div class="content-box dontia-about-card">
                                 <div class="text dontia-about-body"><?php echo $home_body[0][0]; ?></div>
                                 <div class="link-box"><a href="<?php echo base_url('about-us'); ?>" class="theme-btn btn-style-one dontia-about-cta">About Us</a></div>

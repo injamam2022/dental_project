@@ -64,7 +64,11 @@ $dontia_clinic_label = isset($CI->website['data']->company_name) ? $CI->website[
     </div>
 </div>
 <script>
-(function ($) {
+document.addEventListener('DOMContentLoaded', function () {
+    if (typeof jQuery === 'undefined') {
+        return;
+    }
+    (function ($) {
     var allowedServices = ['Skin Treatment', 'Dental', 'ENT'];
 
     function resetApptModalView() {
@@ -210,7 +214,8 @@ $dontia_clinic_label = isset($CI->website['data']->company_name) ? $CI->website[
             $btn.prop('disabled', false);
         });
     });
-})(jQuery);
+    })(jQuery);
+});
 </script>
 
 <div class="modal fade" id="Signup_modal" role="dialog">
