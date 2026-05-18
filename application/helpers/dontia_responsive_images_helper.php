@@ -137,6 +137,12 @@ function dontia_enrich_technology_card_image(array &$card)
 		$card['image_srcset'] = $resp['srcset'];
 		$card['image_sizes'] = $resp['sizes'];
 	}
+	$CI =& get_instance();
+	$CI->load->helper('dontia_performance');
+	$pic = dontia_upload_picture_attrs($subdir, $bn, $card['image_sizes']);
+	if ($pic['webp_srcset'] !== '') {
+		$card['image_webp_srcset'] = $pic['webp_srcset'];
+	}
 }
 
 /**
@@ -149,16 +155,10 @@ function dontia_home_about_responsive_attrs($filename)
 {
 	$r = dontia_responsive_upload_image('home', $filename, '(max-width: 991px) 100vw, 50vw');
 	$preload = '';
-	if ($r['has_variants'] && $r['preload_mid'] !== '') {
+	if ($r['preload_mid'] !== '') {
 		$preload = $r['preload_mid'];
-	} else {
-		$path_orig = FCPATH . 'admin/webroot/uploads/home/' . basename((string) $filename);
-		if (is_file($path_orig)) {
-			$sz = @filesize($path_orig);
-			if (is_int($sz) && $sz < 600 * 1024) {
-				$preload = $r['src'] !== '' ? $r['src'] : (rtrim(base_url('admin/webroot/uploads/home/'), '/') . '/' . rawurlencode(basename((string) $filename)));
-			}
-		}
+	} elseif ($r['has_variants'] && $r['src'] !== '') {
+		$preload = $r['src'];
 	}
 	return array(
 		'src' => $r['src'],

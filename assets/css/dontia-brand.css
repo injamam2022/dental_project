@@ -1665,6 +1665,13 @@ body {
 	padding: 6px;
 	text-decoration: none !important;
 	box-shadow: none !important;
+	overflow: hidden;
+}
+
+.page-wrapper .dontia-services-section .dontia-service-card-ring picture {
+	display: block;
+	width: 100%;
+	height: 100%;
 }
 
 .page-wrapper .dontia-services-section .dontia-service-card-img {
@@ -1672,8 +1679,8 @@ body {
 	width: 100%;
 	height: 100%;
 	border-radius: 50%;
-	background-size: cover;
-	background-position: center;
+	object-fit: cover;
+	object-position: center;
 	background-color: #e8e0dc;
 }
 

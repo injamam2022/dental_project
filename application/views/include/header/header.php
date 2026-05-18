@@ -137,8 +137,9 @@ if (!$_dcc_tmj_lite_head) {
 <!-- Stylesheets: avoid @import inside style.css (chains blocking requests). -->
 <?php
 $_css = rtrim(base_url('assets/css/'), '/') . '/';
+$this->load->helper('dontia_performance');
 $router_class = strtolower((string) $this->router->fetch_class());
-$dental_lite_css = ($router_class === 'dental');
+$dental_lite_css = dontia_is_marketing_lite_page();
 if (!isset($_dcc_tmj_lite_head)) {
 	$_dcc_tmj_lite_head = ($router_class === 'dental' && strtolower((string) $this->router->fetch_method()) === 'tmj_specialist');
 }

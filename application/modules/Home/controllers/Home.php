@@ -51,7 +51,6 @@ class Home extends Frontend_Controller {
 		if (!empty($lcp_preloads)) {
 			$this->seo_overrides['lcp_preload_images'] = $lcp_preloads;
 		}
-		$this->seo_overrides['preconnect_youtube'] = true;
 
 		$content['subview']="home_page";
 //        echo "<pre>";print_r($content);die;

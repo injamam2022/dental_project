@@ -1,8 +1,8 @@
 <?php $this->load->view('include/header/header'); ?>
 
-<!--  ####################### load page ##########################   -->
+<main id="main-content">
 <?php $this->load->view($subview);?>
-<!--  ####################### load page ##########################   -->
+</main>
 <?php $this->load->view('include/footer/footer'); ?>
 
 <?php $this->load->view('include/modal_master/modal_master'); ?>
