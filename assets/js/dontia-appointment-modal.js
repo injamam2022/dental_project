@@ -173,11 +173,14 @@
 		return true;
 	}
 
+	var tries = 0;
 	function tryBind() {
 		if (bindAppointmentModal()) {
 			return;
 		}
-		window.setTimeout(tryBind, 50);
+		if (tries++ < 120) {
+			window.setTimeout(tryBind, 50);
+		}
 	}
 
 	if (document.readyState === 'loading') {
@@ -185,4 +188,5 @@
 	} else {
 		tryBind();
 	}
+	window.addEventListener('load', tryBind, { once: true });
 })();

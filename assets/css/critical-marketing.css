@@ -26,6 +26,8 @@ body{margin:0;background:var(--dcc-page);font-family:system-ui,-apple-system,"Se
 .home-hero.banner-section .carousel .hero-btn-primary{color:#fff;background:linear-gradient(135deg,rgb(130,102,92),rgb(100,78,70))}
 .home-hero.banner-section .carousel .hero-btn-outline{color:#fff;border:2px solid rgba(255,255,255,.85);background:rgba(255,255,255,.1)}
 .home-hero.banner-section .carousel-item .home-hero-yt-facade.home-hero-yt-facade--gradient{background:linear-gradient(145deg,#0f0c0b 0%,#311300 45%,#5c3d2e 100%)}
+.home-hero-video-banner.home-hero.banner-section .carousel .content-box{pointer-events:none}
+.home-hero-video-banner.home-hero.banner-section .carousel .content-box a{pointer-events:auto}
 .carousel-inner>.carousel-item{display:none;position:relative}
 .carousel-inner>.carousel-item.active{display:block}
 .auto-container{width:100%;max-width:1200px;margin-left:auto;margin-right:auto;padding:0 15px;box-sizing:border-box}

@@ -111,12 +111,14 @@ $dontia_footer_social = array(
 <!--Scroll to top-->
 <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-arrow-circle-o-up"></span></div>
 <?php $_dcc_assets = rtrim(base_url('assets/'), '/') . '/'; ?>
-<script src="<?php echo $_dcc_assets; ?>js/jquery.js"></script>
-<script src="<?php echo $_dcc_assets; ?>js/popper.min.js"></script>
-<script src="<?php echo $_dcc_assets; ?>js/bootstrap.min.js"></script>
-<script src="<?php echo $_dcc_assets; ?>js/dontia-appointment-modal.js"></script>
-<?php if (empty($dental_lite_scripts)) { ?>
+<script defer src="<?php echo $_dcc_assets; ?>js/jquery.js"></script>
+<script defer src="<?php echo $_dcc_assets; ?>js/popper.min.js"></script>
+<script defer src="<?php echo $_dcc_assets; ?>js/bootstrap.min.js"></script>
+<script defer src="<?php echo $_dcc_assets; ?>js/dontia-appointment-modal.js"></script>
+<?php if (empty($dental_lite_scripts) && empty($home_lite_scripts)) { ?>
 <script defer src="<?php echo $_dcc_assets; ?>js/owl.js"></script>
+<?php } elseif (!empty($home_lite_scripts)) { ?>
+<script>window.__dontiaOwlSrc=<?php echo json_encode($_dcc_assets . 'js/owl.js'); ?>;</script>
 <?php } ?>
 <?php if (empty($dental_lite_scripts) && empty($home_lite_scripts)) { ?>
 <script defer src="<?php echo $_dcc_assets; ?>js/wow.js"></script>
@@ -189,11 +191,16 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 <script>
-(function(c,l,a,r,i,t,y){
-	c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-	t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-	y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-})(window, document, "clarity", "script", "wrx8wpb91v");
+window.addEventListener('load', function () {
+	(function (c, l, a, r, i, t, y) {
+		c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+		t = l.createElement(r);
+		t.async = 1;
+		t.src = 'https://www.clarity.ms/tag/' + i;
+		y = l.getElementsByTagName(r)[0];
+		y.parentNode.insertBefore(t, y);
+	})(window, document, 'clarity', 'script', 'wrx8wpb91v');
+}, { once: true });
 </script>
 
 

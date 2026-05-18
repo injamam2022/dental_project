@@ -273,10 +273,37 @@
 	// Home — full-width testimonial hero (reference layout)
 	if ($('.dontia-testimonial-carousel').length) {
 		var $dccTestimonial = $('.dontia-testimonial-carousel');
+		var dontiaEnsureOwl = function (cb) {
+			if ($.fn.owlCarousel) {
+				cb();
+				return;
+			}
+			var src = window.__dontiaOwlSrc;
+			if (!src) {
+				return;
+			}
+			var pending = window.__dontiaOwlPending;
+			if (!pending) {
+				pending = [];
+				window.__dontiaOwlPending = pending;
+				var s = document.createElement('script');
+				s.src = src;
+				s.async = true;
+				s.onload = function () {
+					var q = window.__dontiaOwlPending || [];
+					window.__dontiaOwlPending = null;
+					q.forEach(function (fn) { fn(); });
+				};
+				document.body.appendChild(s);
+			}
+			pending.push(cb);
+		};
 		var dccInitTestimonialOwl = function () {
 			if ($dccTestimonial.data('owl.carousel')) {
 				return;
 			}
+			dontiaEnsureOwl(function () {
+			if (!$dccTestimonial.data('owl.carousel')) {
 			$dccTestimonial.owlCarousel({
 			loop: true,
 			margin: 0,
@@ -291,6 +318,8 @@
 				600: { items: 1 },
 				800: { items: 1 },
 				1024: { items: 1 }
+			}
+			});
 			}
 			});
 		};
