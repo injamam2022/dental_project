@@ -76,10 +76,6 @@ function dontia_home_hero_poster($video_id)
 			return $out;
 		}
 	}
-	$out['src'] = 'https://i.ytimg.com/vi/' . $id . '/mqdefault.jpg';
-	$out['preload'] = $out['src'];
-	$out['width'] = 320;
-	$out['height'] = 180;
 	return $out;
 }
 

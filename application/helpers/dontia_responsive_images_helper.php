@@ -67,13 +67,19 @@ function dontia_responsive_upload_image($subdir, $filename, $sizes, array $width
 	}
 
 	$orig_w = $out['width'] > 0 ? $out['width'] : 2400;
-	$parts[] = array(
-		'w' => $orig_w,
-		'url' => $dir_url . rawurlencode($filename),
-		'file' => $path_orig,
-	);
-
-	$variant_count = count($parts) - 1;
+	$variant_count = count($parts);
+	$orig_bytes = filesize($path_orig);
+	$skip_huge_orig = ($subdir === 'product' && $orig_bytes > 80000)
+		|| ($subdir === 'home' && $orig_bytes > 250000);
+	if (!$skip_huge_orig) {
+		$parts[] = array(
+			'w' => $orig_w,
+			'url' => $dir_url . rawurlencode($filename),
+			'file' => $path_orig,
+		);
+	} elseif ($variant_count === 0) {
+		return $out;
+	}
 	$out['has_variants'] = $variant_count > 0;
 
 	$srcset_bits = array();
@@ -169,12 +175,20 @@ function dontia_home_about_responsive_attrs($filename)
 			$r['has_variants'] = true;
 		}
 	}
-	$preload = '';
-	if ($r['preload_mid'] !== '') {
-		$preload = $r['preload_mid'];
-	} elseif ($r['has_variants'] && $r['src'] !== '') {
-		$preload = $r['src'];
+	$orig_fs = FCPATH . 'admin/webroot/uploads/home/' . basename((string) $filename);
+	if ($filename !== '' && is_file($orig_fs) && filesize($orig_fs) > 250000 && !$r['has_variants'] && $smaller === '') {
+		return array(
+			'src' => '',
+			'srcset' => '',
+			'sizes' => $r['sizes'],
+			'width' => 0,
+			'height' => 0,
+			'preload' => '',
+			'skip_huge' => true,
+		);
 	}
+
+	$preload = '';
 	return array(
 		'src' => $r['src'],
 		'srcset' => $r['srcset'],
@@ -182,5 +196,6 @@ function dontia_home_about_responsive_attrs($filename)
 		'width' => $r['width'],
 		'height' => $r['height'],
 		'preload' => $preload,
+		'skip_huge' => false,
 	);
 }

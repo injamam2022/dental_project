@@ -30,20 +30,23 @@ if (!is_array($home_body)) {
                     $this->load->helper('dontia_performance');
                     $hero_poster = dontia_home_hero_poster($home_hero_yt_id);
                 }
-                $hero_poster_src = isset($hero_poster['src']) ? (string) $hero_poster['src'] : '';
+                $hero_poster_src = '';
+                if (!empty($hero_poster['local']) && !empty($hero_poster['src'])) {
+                    $hero_poster_src = (string) $hero_poster['src'];
+                }
                 $hero_poster_w = isset($hero_poster['width']) ? (int) $hero_poster['width'] : 320;
                 $hero_poster_h = isset($hero_poster['height']) ? (int) $hero_poster['height'] : 180;
                 ?>
 
                 <div class="carousel-item active">
                     <div class="home-hero-youtube-cover" id="homeHeroYoutubeCover">
-                        <button type="button" class="home-hero-yt-facade" id="homeHeroYoutubeFacade"
+                        <button type="button" class="home-hero-yt-facade<?php echo $hero_poster_src === '' ? ' home-hero-yt-facade--gradient' : ''; ?>" id="homeHeroYoutubeFacade"
                             data-embed="<?php echo htmlspecialchars($home_hero_embed_url, ENT_QUOTES, 'UTF-8'); ?>"
                             aria-label="Play welcome video">
                             <?php if ($hero_poster_src !== '') { ?>
                             <img class="home-hero-yt-poster" src="<?php echo htmlspecialchars($hero_poster_src, ENT_QUOTES, 'UTF-8'); ?>"
                                 alt="" width="<?php echo $hero_poster_w; ?>" height="<?php echo $hero_poster_h; ?>"
-                                fetchpriority="high" decoding="async">
+                                decoding="async" loading="eager">
                             <?php } ?>
                             <span class="home-hero-yt-play" aria-hidden="true"></span>
                         </button>
@@ -51,7 +54,7 @@ if (!is_array($home_body)) {
 
                     <div class="hero-slide-overlay" aria-hidden="true"></div>
 
-                    <div class="content-box">
+                    <div class="content-box dontia-hero-content-box">
                         <div class="hero-content-card">
                             <div class="hero-banner-text">
                                 <div class="hero-banner-title"><?php echo $hero_title; ?></div>
@@ -100,16 +103,21 @@ if (!is_array($home_body)) {
                                     <?php
                                     $about_fn = isset($home_body[0][1]) ? (string) $home_body[0][1] : '';
                                     $hai = isset($home_about_image) && is_array($home_about_image) ? $home_about_image : array();
-                                    if (empty($hai['src']) && $about_fn !== '') {
+                                    $about_skip_huge = !empty($hai['skip_huge']);
+                                    if (!$about_skip_huge && empty($hai['src']) && $about_fn !== '') {
                                         $hai['src'] = base_url('admin/webroot/uploads/home/') . $about_fn;
                                     }
-                                    $about_src_esc = htmlspecialchars(isset($hai['src']) ? $hai['src'] : '', ENT_QUOTES, 'UTF-8');
+                                    $about_src_esc = (!$about_skip_huge && !empty($hai['src']))
+                                        ? htmlspecialchars((string) $hai['src'], ENT_QUOTES, 'UTF-8')
+                                        : '';
+                                    if ($about_src_esc !== '') {
                                     ?>
                                     <img src="<?php echo $about_src_esc; ?>"
                                         <?php if (!empty($hai['srcset'])) { ?>srcset="<?php echo htmlspecialchars($hai['srcset'], ENT_QUOTES, 'UTF-8'); ?>" sizes="<?php echo htmlspecialchars(isset($hai['sizes']) ? $hai['sizes'] : '(max-width: 991px) 100vw, 50vw', ENT_QUOTES, 'UTF-8'); ?>"<?php } ?>
                                         alt="<?php echo $dontia_about_company_esc; ?>"
                                         <?php if (!empty($hai['width']) && !empty($hai['height'])) { ?>width="<?php echo (int) $hai['width']; ?>" height="<?php echo (int) $hai['height']; ?>"<?php } ?>
                                         loading="lazy" decoding="async">
+                                    <?php } ?>
                                 </figure>
                             </div>
                         </div>
@@ -552,7 +560,7 @@ unset($dontia_parse_youtube_id);
                     $watch = 'https://www.youtube.com/watch?v=' . $yid;
                     ?>
                 <a class="dontia-testimonial-video-card" href="<?php echo htmlspecialchars($watch, ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener noreferrer">
-                    <span class="dontia-testimonial-video-thumb" style="background-image:url('<?php echo htmlspecialchars($thumb, ENT_QUOTES, 'UTF-8'); ?>')"></span>
+                    <img class="dontia-testimonial-video-thumb" src="<?php echo htmlspecialchars($thumb, ENT_QUOTES, 'UTF-8'); ?>" alt="" width="320" height="180" loading="lazy" decoding="async">
                     <span class="dontia-testimonial-video-play" aria-hidden="true"><span class="fa fa-youtube-play"></span></span>
                     <?php if ($vlabel !== '') { ?>
                     <span class="dontia-testimonial-video-label"><?php echo $vlabel; ?></span>

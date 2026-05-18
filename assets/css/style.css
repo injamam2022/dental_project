@@ -2768,6 +2768,9 @@ header-style-seven .nav-toggler:hover{
 	background-color: #000;
 	overflow: hidden;
 }
+.home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-yt-facade.home-hero-yt-facade--gradient{
+	background: linear-gradient(145deg, #0f0c0b 0%, #311300 45%, #5c3d2e 100%);
+}
 .home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-yt-poster{
 	position: absolute;
 	inset: 0;

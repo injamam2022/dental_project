@@ -272,7 +272,12 @@
 
 	// Home — full-width testimonial hero (reference layout)
 	if ($('.dontia-testimonial-carousel').length) {
-		$('.dontia-testimonial-carousel').owlCarousel({
+		var $dccTestimonial = $('.dontia-testimonial-carousel');
+		var dccInitTestimonialOwl = function () {
+			if ($dccTestimonial.data('owl.carousel')) {
+				return;
+			}
+			$dccTestimonial.owlCarousel({
 			loop: true,
 			margin: 0,
 			nav: true,
@@ -287,7 +292,23 @@
 				800: { items: 1 },
 				1024: { items: 1 }
 			}
-		});
+			});
+		};
+		var $dccTestimonialEl = $dccTestimonial.get(0);
+		if ($dccTestimonialEl && 'IntersectionObserver' in window) {
+			var dccTestimonialObs = new IntersectionObserver(function (entries, obs) {
+				entries.forEach(function (entry) {
+					if (!entry.isIntersecting) {
+						return;
+					}
+					dccInitTestimonialOwl();
+					obs.disconnect();
+				});
+			}, { rootMargin: '200px 0px' });
+			dccTestimonialObs.observe($dccTestimonialEl);
+		} else {
+			dccInitTestimonialOwl();
+		}
 	}
 
 	//Testimonial Carousel two

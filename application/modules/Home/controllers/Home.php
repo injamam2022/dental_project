@@ -45,12 +45,6 @@ class Home extends Frontend_Controller {
 			}
 		}
 		$content['home_hero_poster'] = dontia_home_hero_poster('PqdEzU6_2zg');
-		if (!empty($content['home_hero_poster']['preload'])) {
-			$this->seo_overrides['lcp_preload_images'] = array($content['home_hero_poster']['preload']);
-		}
-		if (empty($content['home_hero_poster']['local'])) {
-			$this->seo_overrides['dns_prefetch_yt'] = true;
-		}
 
 		$content['subview']="home_page";
 //        echo "<pre>";print_r($content);die;

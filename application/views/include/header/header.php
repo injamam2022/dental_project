@@ -146,17 +146,13 @@ $_dcc_emit_deferred_css = static function ($href) use ($h) {
 	echo '<noscript><link href="' . $h($href) . '" rel="stylesheet"></noscript>' . "\n";
 };
 ?>
-<?php if ($dental_lite_css) {
-	$_dcc_crit_css = dontia_marketing_critical_css();
-	if ($_dcc_crit_css !== '') {
-		echo '<style id="dontia-critical-marketing">' . $_dcc_crit_css . '</style>' . "\n";
-	}
-	$_dcc_emit_deferred_css($_css . 'bootstrap.css');
-	$_dcc_emit_deferred_css($_css . 'style.css');
-	$_dcc_emit_deferred_css($_css . 'dontia-brand.css');
-	$_dcc_emit_deferred_css($_css . 'responsive.css');
-	$_dcc_emit_deferred_css($_css . 'color-themes/blue-theme.css');
-} else { ?>
+<?php if ($dental_lite_css) { ?>
+<link href="<?php echo $_css; ?>bootstrap.css" rel="stylesheet">
+<link href="<?php echo $_css; ?>style.css" rel="stylesheet">
+<link href="<?php echo $_css; ?>dontia-brand.css" rel="stylesheet">
+<?php $_dcc_emit_deferred_css($_css . 'responsive.css'); ?>
+<?php $_dcc_emit_deferred_css($_css . 'color-themes/blue-theme.css'); ?>
+<?php } else { ?>
 <link href="<?php echo $_css; ?>bootstrap.css" rel="stylesheet">
 <link href="<?php echo $_css; ?>style.css" rel="stylesheet">
 <link href="<?php echo $_css; ?>responsive.css" rel="stylesheet">
