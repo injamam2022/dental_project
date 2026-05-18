@@ -19,6 +19,19 @@ function dontia_is_marketing_lite_page()
 }
 
 /**
+ * Critical above-the-fold CSS (inlined — avoids render-blocking request).
+ */
+function dontia_marketing_critical_css()
+{
+	$path = FCPATH . 'assets/css/critical-marketing.css';
+	if (!is_readable($path)) {
+		return '';
+	}
+	$css = file_get_contents($path);
+	return is_string($css) ? trim($css) : '';
+}
+
+/**
  * YouTube poster for facade / lazy embed (no iframe until interaction).
  */
 function dontia_youtube_poster_url($video_id)
@@ -87,7 +100,8 @@ function dontia_upload_smaller_src_override($subdir, $filename, $max_bytes = 400
 	$ext = isset($pi['extension']) ? strtolower($pi['extension']) : 'jpg';
 	$dir_url = rtrim(base_url('admin/webroot/uploads/' . ($subdir !== '' ? $subdir . '/' : '')), '/') . '/';
 	$try_ext = array_unique(array_filter(array('webp', 'jpg', 'jpeg', $ext)));
-	foreach (array(480, 768, 1024, 1280) as $w) {
+	$width_try = ($subdir === 'product') ? array(100, 200, 400, 480, 768) : array(480, 768, 1024, 1280);
+	foreach ($width_try as $w) {
 		foreach ($try_ext as $e) {
 			$cand = $stem . '-' . $w . 'w.' . $e;
 			if (is_file($dir_fs . $cand)) {
@@ -149,6 +163,9 @@ function dontia_upload_picture_attrs($subdir, $filename, $sizes = '100px')
 		$card_sizes = '(max-width: 767px) 100vw, 50vw';
 	}
 
+	$dir_rel = 'admin/webroot/uploads/' . ($subdir !== '' ? $subdir . '/' : '');
+	$dir_fs = FCPATH . $dir_rel;
+
 	$resp = dontia_responsive_upload_image($subdir, $filename, $card_sizes);
 	$out = array_merge($empty, array(
 		'src' => $resp['src'],
@@ -158,8 +175,16 @@ function dontia_upload_picture_attrs($subdir, $filename, $sizes = '100px')
 		'height' => (int) $resp['height'],
 	));
 
-	$dir_rel = 'admin/webroot/uploads/' . ($subdir !== '' ? $subdir . '/' : '');
-	$dir_fs = FCPATH . $dir_rel;
+	if ($subdir === 'product') {
+		$orig_path = $dir_fs . $filename;
+		if (is_file($orig_path) && filesize($orig_path) > 80000) {
+			$smaller = dontia_upload_smaller_src_override('product', $filename, 80000);
+			if ($smaller !== '') {
+				$out['src'] = $smaller;
+			}
+		}
+	}
+
 	$dir_url = rtrim(base_url($dir_rel), '/') . '/';
 
 	$pi = pathinfo($filename);

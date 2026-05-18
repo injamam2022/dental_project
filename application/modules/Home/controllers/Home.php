@@ -48,6 +48,9 @@ class Home extends Frontend_Controller {
 		if (!empty($content['home_hero_poster']['preload'])) {
 			$this->seo_overrides['lcp_preload_images'] = array($content['home_hero_poster']['preload']);
 		}
+		if (empty($content['home_hero_poster']['local'])) {
+			$this->seo_overrides['dns_prefetch_yt'] = true;
+		}
 
 		$content['subview']="home_page";
 //        echo "<pre>";print_r($content);die;
