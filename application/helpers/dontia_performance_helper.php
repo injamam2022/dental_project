@@ -2,21 +2,24 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Whether to load a reduced CSS/JS set (homepage + dental landings).
+ * Performance helpers: responsive/WebP picture attrs, marketing-page detection.
  */
-function dontia_is_marketing_lite_page($router = null)
+
+/**
+ * Home + dental landing pages use a reduced CSS/JS bundle.
+ */
+function dontia_is_marketing_lite_page()
 {
-	if ($router === null) {
-		$CI =& get_instance();
-		$class = strtolower((string) $CI->router->fetch_class());
-	} else {
-		$class = strtolower((string) $router->fetch_class());
+	$CI =& get_instance();
+	if (!is_object($CI) || !isset($CI->router)) {
+		return false;
 	}
+	$class = strtolower((string) $CI->router->fetch_class());
 	return in_array($class, array('home', 'dental'), true);
 }
 
 /**
- * YouTube max-res poster URL (no third-party script until play).
+ * YouTube poster for facade / lazy embed (no iframe until interaction).
  */
 function dontia_youtube_poster_url($video_id)
 {
@@ -24,58 +27,137 @@ function dontia_youtube_poster_url($video_id)
 	if ($id === '') {
 		return '';
 	}
-	return 'https://i.ytimg.com/vi_webp/' . $id . '/maxresdefault.webp';
+	return 'https://i.ytimg.com/vi/' . $id . '/hqdefault.jpg';
 }
 
 /**
- * Picture/srcset data for uploads under admin/webroot/uploads/{subdir}/.
+ * Service card on homepage (product uploads).
  *
- * @return array{webp_srcset:string,src:string,srcset:string,sizes:string,width:int,height:int}
+ * @return array{src:string,srcset:string,webp_srcset:string,sizes:string,width:int,height:int}|null
  */
-function dontia_upload_picture_attrs($subdir, $filename, $sizes)
+function dontia_service_card_picture($filename, $label = '')
+{
+	$filename = basename((string) $filename);
+	if ($filename === '') {
+		return null;
+	}
+	$pic = dontia_upload_picture_attrs('product', $filename, '100px');
+	if ($pic['src'] === '') {
+		return null;
+	}
+	return $pic;
+}
+
+/**
+ * Build src/srcset + optional WebP srcset for a file under admin/webroot/uploads/{subdir}/.
+ *
+ * @return array{src:string,srcset:string,webp_srcset:string,sizes:string,width:int,height:int}
+ */
+function dontia_upload_picture_attrs($subdir, $filename, $sizes = '100px')
 {
 	$CI =& get_instance();
 	$CI->load->helper('dontia_responsive_images');
-	$r = dontia_responsive_upload_image($subdir, $filename, $sizes);
 
-	$subdir = trim(str_replace(array('..', '\\'), array('', '/'), (string) $subdir), '/');
 	$filename = basename((string) $filename);
-	$dir_fs = FCPATH . 'admin/webroot/uploads/' . ($subdir !== '' ? $subdir . '/' : '');
-	$dir_url = rtrim(base_url('admin/webroot/uploads/' . ($subdir !== '' ? $subdir . '/' : '')), '/') . '/';
+	$subdir = trim(str_replace(array('..', '\\'), array('', '/'), (string) $subdir), '/');
 
-	$webp_bits = array();
+	$empty = array(
+		'src' => '',
+		'srcset' => '',
+		'webp_srcset' => '',
+		'sizes' => (string) $sizes,
+		'width' => 0,
+		'height' => 0,
+	);
+
+	if ($filename === '') {
+		return $empty;
+	}
+
+	$card_sizes = $sizes;
+	if ($subdir === 'product') {
+		$card_sizes = '100px';
+	} elseif ($subdir === 'dental_media' || strpos($subdir, 'technology') !== false) {
+		$card_sizes = '(max-width: 767px) 100vw, 50vw';
+	}
+
+	$resp = dontia_responsive_upload_image($subdir, $filename, $card_sizes);
+	$out = array_merge($empty, array(
+		'src' => $resp['src'],
+		'srcset' => $resp['srcset'],
+		'sizes' => $resp['sizes'],
+		'width' => (int) $resp['width'],
+		'height' => (int) $resp['height'],
+	));
+
+	$dir_rel = 'admin/webroot/uploads/' . ($subdir !== '' ? $subdir . '/' : '');
+	$dir_fs = FCPATH . $dir_rel;
+	$dir_url = rtrim(base_url($dir_rel), '/') . '/';
+
 	$pi = pathinfo($filename);
 	$stem = isset($pi['filename']) ? $pi['filename'] : $filename;
-	$widths = array(224, 336, 480, 768);
+	$orig_w = $out['width'] > 0 ? $out['width'] : 800;
 
-	foreach ($widths as $w) {
-		$cand = $stem . '-' . $w . 'w.webp';
-		if (is_file($dir_fs . $cand)) {
-			$webp_bits[] = $dir_url . rawurlencode($cand) . ' ' . $w . 'w';
-		}
-	}
-	$stem_webp = $stem . '.webp';
-	if (is_file($dir_fs . $stem_webp)) {
-		$ow = $r['width'] > 0 ? $r['width'] : 480;
-		$webp_bits[] = $dir_url . rawurlencode($stem_webp) . ' ' . (int) $ow . 'w';
+	$webp_widths = ($subdir === 'product')
+		? array(100, 200, 400)
+		: array(480, 768, 1024, 1280);
+
+	$webp_parts = dontia_collect_webp_srcset_parts($dir_fs, $dir_url, $stem, $webp_widths, $orig_w);
+	$out['webp_srcset'] = implode(', ', $webp_parts);
+
+	if ($out['src'] === '' && is_file($dir_fs . $filename)) {
+		$out['src'] = $dir_url . rawurlencode($filename);
 	}
 
-	return array(
-		'webp_srcset' => implode(', ', array_unique($webp_bits)),
-		'src' => $r['src'],
-		'srcset' => $r['srcset'],
-		'sizes' => $r['sizes'],
-		'width' => $r['width'],
-		'height' => $r['height'],
-	);
+	return $out;
 }
 
 /**
- * Service card icon (product upload) — ~112px ring, 2x srcset.
- *
- * @return array{webp_srcset:string,src:string,srcset:string,sizes:string,width:int,height:int,alt:string}
+ * @param int[] $widths
+ * @return string[]
  */
-function dontia_service_card_picture($filename, $alt = '')
+function dontia_collect_webp_srcset_parts($dir_fs, $dir_url, $stem, array $widths, $orig_w)
 {
-	return dontia_upload_picture_attrs('product', $filename, '112px');
+	$parts = array();
+	foreach ($widths as $w) {
+		if ($w >= $orig_w) {
+			continue;
+		}
+		$cand = $stem . '-' . (int) $w . 'w.webp';
+		if (is_file($dir_fs . $cand)) {
+			$parts[] = $dir_url . rawurlencode($cand) . ' ' . (int) $w . 'w';
+		}
+	}
+	$full = $stem . '.webp';
+	if (is_file($dir_fs . $full)) {
+		$parts[] = $dir_url . rawurlencode($full) . ' ' . (int) $orig_w . 'w';
+	}
+	return $parts;
+}
+
+/**
+ * LCP preload payload for responsive about image.
+ *
+ * @param array $hai from dontia_home_about_responsive_attrs()
+ * @return array<string, string>|string
+ */
+function dontia_lcp_preload_entry(array $hai)
+{
+	$href = '';
+	if (!empty($hai['preload'])) {
+		$href = (string) $hai['preload'];
+	} elseif (!empty($hai['src'])) {
+		$href = (string) $hai['src'];
+	}
+	if ($href === '') {
+		return '';
+	}
+	if (empty($hai['srcset'])) {
+		return $href;
+	}
+	return array(
+		'href' => $href,
+		'imagesrcset' => (string) $hai['srcset'],
+		'imagesizes' => isset($hai['sizes']) ? (string) $hai['sizes'] : '(max-width: 991px) 100vw, 50vw',
+	);
 }

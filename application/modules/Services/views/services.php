@@ -4,6 +4,7 @@ $cat_title = isset($services_cat_title) ? $services_cat_title : 'Services';
 $cat_esc = htmlspecialchars($cat_title, ENT_QUOTES, 'UTF-8');
 $appt_preset = isset($appointment_service_preset) ? $appointment_service_preset : '';
 $appt_preset_esc = htmlspecialchars($appt_preset, ENT_QUOTES, 'UTF-8');
+$this->load->helper('dontia_performance');
 ?>
 <section class="page-title dontia-services-page-title" style="background-image:url(<?php echo site_url('admin/webroot/uploads/banner/' . $banner->image_name); ?>);">
         <div class="auto-container">
@@ -30,8 +31,9 @@ $appt_preset_esc = htmlspecialchars($appt_preset, ENT_QUOTES, 'UTF-8');
             <?php
             foreach ($Services as $Service) {
                 $detail = base_url('Services/' . (int) $Service->pro_id . '/0/detail');
-                $img = !empty($Service->pro_image) ? base_url('admin/webroot/uploads/product/') . $Service->pro_image : '';
+                $pic = !empty($Service->pro_image) ? dontia_service_card_picture($Service->pro_image, $Service->product_name) : null;
                 $name = htmlspecialchars($Service->product_name, ENT_QUOTES, 'UTF-8');
+                $ring_label = htmlspecialchars('View ' . trim(strip_tags((string) $Service->product_name)), ENT_QUOTES, 'UTF-8');
                 $plain = trim(preg_replace('/\s+/', ' ', strip_tags((string) $Service->product_description)));
                 $excerpt = $plain;
                 if (strlen($excerpt) > 160) {
@@ -40,15 +42,24 @@ $appt_preset_esc = htmlspecialchars($appt_preset, ENT_QUOTES, 'UTF-8');
                 ?>
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <article class="dontia-service-card">
-                    <a href="<?php echo $detail; ?>" class="dontia-service-card-ring">
-                        <?php if ($img !== '') { ?>
-                        <span class="dontia-service-card-img" style="background-image:url('<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>')"></span>
+                    <a href="<?php echo $detail; ?>" class="dontia-service-card-ring" aria-label="<?php echo $ring_label; ?>">
+                        <?php if (is_array($pic) && $pic['src'] !== '') {
+                            $pic_alt = htmlspecialchars(trim(strip_tags((string) $Service->product_name)), ENT_QUOTES, 'UTF-8');
+                            ?>
+                    <picture>
+                        <?php if ($pic['webp_srcset'] !== '') { ?>
+                        <source type="image/webp" srcset="<?php echo htmlspecialchars($pic['webp_srcset'], ENT_QUOTES, 'UTF-8'); ?>" sizes="<?php echo htmlspecialchars($pic['sizes'], ENT_QUOTES, 'UTF-8'); ?>">
+                        <?php } ?>
+                        <img class="dontia-service-card-img" src="<?php echo htmlspecialchars($pic['src'], ENT_QUOTES, 'UTF-8'); ?>"
+                            <?php if ($pic['srcset'] !== '') { ?>srcset="<?php echo htmlspecialchars($pic['srcset'], ENT_QUOTES, 'UTF-8'); ?>" sizes="<?php echo htmlspecialchars($pic['sizes'], ENT_QUOTES, 'UTF-8'); ?>"<?php } ?>
+                            alt="<?php echo $pic_alt; ?>" width="100" height="100" loading="lazy" decoding="async">
+                    </picture>
                         <?php } else { ?>
-                        <span class="dontia-service-card-img dontia-service-card-img--placeholder"></span>
+                    <span class="dontia-service-card-img dontia-service-card-img--placeholder" aria-hidden="true"></span>
                         <?php } ?>
                     </a>
                     <h3 class="dontia-service-card-title"><a href="<?php echo $detail; ?>"><?php echo $name; ?></a></h3>
-                    <p class="dontia-service-card-desc"><em><?php echo htmlspecialchars($excerpt, ENT_QUOTES, 'UTF-8'); ?> <a href="<?php echo $detail; ?>" class="dontia-service-card-more">read more</a></em></p>
+                    <p class="dontia-service-card-desc"><em><?php echo htmlspecialchars($excerpt, ENT_QUOTES, 'UTF-8'); ?> <a href="<?php echo $detail; ?>" class="dontia-service-card-more">Read more about <?php echo $name; ?></a></em></p>
                     <a href="#" class="dontia-service-card-book" data-toggle="modal" data-target="#dontiaAppointmentModal"<?php echo $appt_preset !== '' ? ' data-preselect-service="'.$appt_preset_esc.'"' : ''; ?>>Book Now</a>
                 </article>
             </div>

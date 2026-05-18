@@ -1,37 +1,54 @@
 <?php
 /**
- * Generate responsive JPEG + WebP variants for uploads (home, product, dental_media).
+ * Generate responsive width + WebP variants for clinic uploads.
  *
- * Usage (project root):
+ * Usage (from project root):
  *   php scripts/generate_upload_variants.php
- *   php scripts/generate_upload_variants.php product svc-kids-dentistry.png
  *   php scripts/generate_upload_variants.php home IMG_1707.jpg
+ *   php scripts/generate_upload_variants.php product
+ *
+ * Requires PHP GD (JPEG/PNG/WebP).
  */
 
 $root = dirname(__DIR__);
-$targets_by_dir = array(
-	'home' => array(480, 768, 1024, 1280, 1600, 1920),
-	'product' => array(224, 336, 480),
-	'dental_media' => array(480, 768, 1024, 1400),
-	'dental_page/technology' => array(480, 768, 1024, 1400),
-);
+$uploads = $root . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR;
 
-$single_dir = null;
-$single_file = null;
-if (isset($argv[1], $argv[2]) && $argv[2] !== '') {
-	$single_dir = $argv[1];
-	$single_file = basename($argv[2]);
-}
+$presets = array(
+	'home' => array(
+		'dir' => 'home',
+		'widths' => array(480, 768, 1024, 1280, 1600, 1920),
+		'quality' => 82,
+		'webp_quality' => 80,
+	),
+	'product' => array(
+		'dir' => 'product',
+		'widths' => array(100, 200, 400),
+		'quality' => 85,
+		'webp_quality' => 82,
+	),
+	'dental_media' => array(
+		'dir' => 'dental_media',
+		'widths' => array(400, 700, 1024, 1400),
+		'quality' => 82,
+		'webp_quality' => 80,
+	),
+	'technology' => array(
+		'dir' => 'dental_page' . DIRECTORY_SEPARATOR . 'technology',
+		'widths' => array(400, 700, 1024),
+		'quality' => 82,
+		'webp_quality' => 80,
+	),
+);
 
 if (!function_exists('imagecreatefromjpeg')) {
 	fwrite(STDERR, "GD is required.\n");
 	exit(1);
 }
 
-function dontia_gd_load($path)
+function dcc_load_image($path)
 {
 	$ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
-	if (in_array($ext, array('jpg', 'jpeg'), true)) {
+	if ($ext === 'jpg' || $ext === 'jpeg') {
 		return @imagecreatefromjpeg($path);
 	}
 	if ($ext === 'png') {
@@ -42,43 +59,51 @@ function dontia_gd_load($path)
 		}
 		return $im;
 	}
-	return false;
-}
-
-function dontia_write_variant($dst_im, $out_path, $ext_l)
-{
-	if ($ext_l === 'webp' && function_exists('imagewebp')) {
-		return imagewebp($dst_im, $out_path, 82);
-	}
-	if (in_array($ext_l, array('jpg', 'jpeg'), true)) {
-		return imagejpeg($dst_im, $out_path, 82);
-	}
-	if ($ext_l === 'png') {
-		return imagepng($dst_im, $out_path, 8);
+	if ($ext === 'webp' && function_exists('imagecreatefromwebp')) {
+		return @imagecreatefromwebp($path);
 	}
 	return false;
 }
 
-function dontia_process_file($dir_fs, $basename, array $widths)
+function dcc_save_resized($dst, $path, $ext, $quality, $webp_quality)
 {
-	$src_path = $dir_fs . $basename;
-	if (!is_file($src_path)) {
-		fwrite(STDERR, "Missing: {$src_path}\n");
+	$ext = strtolower($ext);
+	if ($ext === 'jpg' || $ext === 'jpeg') {
+		return imagejpeg($dst, $path, $quality);
+	}
+	if ($ext === 'png') {
+		return imagepng($dst, $path, 6);
+	}
+	if ($ext === 'webp' && function_exists('imagewebp')) {
+		return imagewebp($dst, $path, $webp_quality);
+	}
+	return false;
+}
+
+function dcc_process_file($dir, array $preset, $basename)
+{
+	$path = $dir . $basename;
+	if (!is_file($path)) {
+		fwrite(STDERR, "Skip missing: {$basename}\n");
 		return;
 	}
-	$img = dontia_gd_load($src_path);
+	if (preg_match('/-\d+w\.(jpe?g|png|webp)$/i', $basename)) {
+		return;
+	}
+
+	$img = dcc_load_image($path);
 	if (!$img) {
-		fwrite(STDERR, "Could not read: {$src_path}\n");
+		fwrite(STDERR, "Could not read: {$basename}\n");
 		return;
 	}
+
 	$ow = imagesx($img);
 	$oh = imagesy($img);
 	$pi = pathinfo($basename);
 	$stem = $pi['filename'];
 	$ext = isset($pi['extension']) ? $pi['extension'] : 'jpg';
-	$ext_l = strtolower($ext);
 
-	foreach ($widths as $tw) {
+	foreach ($preset['widths'] as $tw) {
 		if ($tw >= $ow) {
 			continue;
 		}
@@ -87,65 +112,60 @@ function dontia_process_file($dir_fs, $basename, array $widths)
 		if (!$dst) {
 			continue;
 		}
-		if ($ext_l === 'png') {
+		if (strtolower($ext) === 'png') {
 			imagealphablending($dst, false);
 			imagesavealpha($dst, true);
-			$trans = imagecolorallocatealpha($dst, 0, 0, 0, 127);
-			imagefilledrectangle($dst, 0, 0, $tw, $th, $trans);
 		}
 		imagecopyresampled($dst, $img, 0, 0, 0, 0, $tw, $th, $ow, $oh);
-		$out = $dir_fs . $stem . '-' . $tw . 'w.' . $ext;
-		dontia_write_variant($dst, $out, $ext_l);
-		echo "  " . basename($out) . "\n";
+
+		$out_raster = $dir . $stem . '-' . $tw . 'w.' . $ext;
+		dcc_save_resized($dst, $out_raster, $ext, $preset['quality'], $preset['webp_quality']);
+		echo "  " . basename($out_raster) . "\n";
+
 		if (function_exists('imagewebp')) {
-			$out_w = $dir_fs . $stem . '-' . $tw . 'w.webp';
-			imagewebp($dst, $out_w, 82);
-			echo "  " . basename($out_w) . "\n";
+			$out_webp = $dir . $stem . '-' . $tw . 'w.webp';
+			imagewebp($dst, $out_webp, $preset['webp_quality']);
+			echo "  " . basename($out_webp) . "\n";
 		}
 		imagedestroy($dst);
 	}
 
-	if (function_exists('imagewebp') && $ow > 480) {
-		$tw = min(480, $ow);
-		$th = (int) max(1, round($oh * ($tw / $ow)));
-		$dst = imagecreatetruecolor($tw, $th);
-		imagecopyresampled($dst, $img, 0, 0, 0, 0, $tw, $th, $ow, $oh);
-		$out_w = $dir_fs . $stem . '.webp';
-		imagewebp($dst, $out_w, 82);
-		echo "  " . basename($out_w) . "\n";
-		imagedestroy($dst);
+	if (function_exists('imagewebp')) {
+		$full_webp = $dir . $stem . '.webp';
+		if (!is_file($full_webp)) {
+			imagewebp($img, $full_webp, $preset['webp_quality']);
+			echo "  " . basename($full_webp) . "\n";
+		}
 	}
 
 	imagedestroy($img);
 	echo "Done {$basename}\n";
 }
 
-foreach ($targets_by_dir as $rel => $widths) {
-	if ($single_dir !== null && $single_dir !== $rel) {
+$only_preset = isset($argv[1]) ? $argv[1] : '';
+$only_file = isset($argv[2]) ? basename($argv[2]) : '';
+
+foreach ($presets as $key => $preset) {
+	if ($only_preset !== '' && $only_preset !== $key) {
 		continue;
 	}
-	$dir_fs = $root . DIRECTORY_SEPARATOR . 'admin' . DIRECTORY_SEPARATOR . 'webroot'
-		. DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $rel)
-		. DIRECTORY_SEPARATOR;
-	if (!is_dir($dir_fs)) {
+	$dir = $uploads . str_replace('/', DIRECTORY_SEPARATOR, $preset['dir']) . DIRECTORY_SEPARATOR;
+	if (!is_dir($dir)) {
+		echo "Skip {$key} (no directory)\n";
 		continue;
 	}
-	$files = $single_file !== null ? array($single_file) : scandir($dir_fs);
+	echo "=== {$key} ===\n";
+	if ($only_file !== '') {
+		dcc_process_file($dir, $preset, $only_file);
+		continue;
+	}
+	$files = glob($dir . '*.{jpg,jpeg,png,JPG,JPEG,PNG}', GLOB_BRACE);
+	if (!$files) {
+		echo "  (no source images)\n";
+		continue;
+	}
 	foreach ($files as $f) {
-		if ($f === '.' || $f === '..' || is_dir($dir_fs . $f)) {
-			continue;
-		}
-		if ($single_file !== null && $f !== $single_file) {
-			continue;
-		}
-		if (!preg_match('/\.(jpe?g|png)$/i', $f)) {
-			continue;
-		}
-		if (preg_match('/-\d+w\.(jpe?g|png|webp)$/i', $f)) {
-			continue;
-		}
-		echo "{$rel}/{$f}\n";
-		dontia_process_file($dir_fs, $f, $widths);
+		dcc_process_file($dir, $preset, basename($f));
 	}
 }
 

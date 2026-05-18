@@ -115,26 +115,29 @@ $dontia_footer_social = array(
 
 <!--Scroll to top-->
 <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-arrow-circle-o-up"></span></div>
-<script src="<?php echo base_url('assets/'); ?>js/jquery.js"></script>
-<script src="<?php echo base_url('assets/'); ?>js/popper.min.js"></script>
-<script src="<?php echo base_url('assets/'); ?>js/bootstrap.min.js"></script>
+<?php $_dcc_assets = rtrim(base_url('assets/'), '/') . '/'; ?>
+<script defer src="<?php echo $_dcc_assets; ?>js/jquery.js"></script>
+<script defer src="<?php echo $_dcc_assets; ?>js/popper.min.js"></script>
+<script defer src="<?php echo $_dcc_assets; ?>js/bootstrap.min.js"></script>
 <?php if (empty($dental_lite_scripts)) { ?>
-<script src="<?php echo base_url('assets/'); ?>js/owl.js"></script>
-<script src="<?php echo base_url('assets/'); ?>js/wow.js"></script>
-<script src="<?php echo base_url('assets/'); ?>js/appear.js"></script>
+<script defer src="<?php echo $_dcc_assets; ?>js/owl.js"></script>
 <?php } ?>
 <?php if (empty($dental_lite_scripts) && empty($home_lite_scripts)) { ?>
-<script src="<?php echo base_url('assets/'); ?>js/jquery.fancybox.js"></script>
-<script src="<?php echo base_url('assets/'); ?>js/mixitup.js"></script>
-<script src="<?php echo base_url('assets/'); ?>js/slick.js"></script>
+<script defer src="<?php echo $_dcc_assets; ?>js/wow.js"></script>
+<script defer src="<?php echo $_dcc_assets; ?>js/appear.js"></script>
+<script defer src="<?php echo $_dcc_assets; ?>js/jquery.fancybox.js"></script>
+<script defer src="<?php echo $_dcc_assets; ?>js/mixitup.js"></script>
+<script defer src="<?php echo $_dcc_assets; ?>js/slick.js"></script>
 <?php } ?>
-<script src="<?php echo base_url('assets/'); ?>js/script.js"></script>
+<script defer src="<?php echo $_dcc_assets; ?>js/script.js"></script>
 <?php if (empty($dental_lite_scripts) && empty($home_lite_scripts)) { ?>
-<!-- Color Setting -->
-<script src="<?php echo base_url('assets/'); ?>js/color-settings.js"></script>
+<script defer src="<?php echo $_dcc_assets; ?>js/color-settings.js"></script>
 <?php } ?>
-
-<script>
+<script defer>
+document.addEventListener('DOMContentLoaded', function () {
+	if (typeof jQuery === 'undefined') {
+		return;
+	}
 	if (jQuery('.product-slide').length) {
 		jQuery('.product-slide').slick({
 			dots: false,
@@ -187,6 +190,14 @@ $dontia_footer_social = array(
 			$sec.find('#' + id).removeAttr('hidden');
 		});
 	})(jQuery);
+});
+</script>
+<script>
+(function(c,l,a,r,i,t,y){
+	c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+	t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+	y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "wrx8wpb91v");
 </script>
 
 
@@ -208,10 +219,12 @@ if ($flash_message != '') {
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(window).on('load', function () {
-        $('#flashMessageModal').modal('show');
-    });
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    if (typeof jQuery !== 'undefined' && jQuery('#flashMessageModal').length) {
+        jQuery('#flashMessageModal').modal('show');
+    }
+});
 </script>
 <?php } ?>
 </body>

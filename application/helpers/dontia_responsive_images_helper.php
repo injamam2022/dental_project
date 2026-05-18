@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @param string $sizes Value for the sizes attribute
  * @return array{src:string,srcset:string,sizes:string,width:int,height:int,has_variants:bool,preload_mid:string}
  */
-function dontia_responsive_upload_image($subdir, $filename, $sizes)
+function dontia_responsive_upload_image($subdir, $filename, $sizes, array $widths = null)
 {
 	$subdir = trim(str_replace(array('..', '\\'), array('', '/'), (string) $subdir), '/');
 	$filename = basename((string) $filename);
@@ -46,7 +46,11 @@ function dontia_responsive_upload_image($subdir, $filename, $sizes)
 	$stem = isset($pi['filename']) ? $pi['filename'] : $filename;
 	$ext = isset($pi['extension']) ? $pi['extension'] : '';
 
-	$widths = array(480, 768, 1024, 1280, 1600, 1920);
+	if ($widths === null) {
+		$widths = ($subdir === 'product')
+			? array(100, 200, 400)
+			: array(480, 768, 1024, 1280, 1600, 1920);
+	}
 	$ext_variants = array_unique(array_filter(array($ext, strtolower((string) $ext), strtoupper((string) $ext))));
 	$parts = array();
 	foreach ($widths as $w) {
@@ -79,8 +83,9 @@ function dontia_responsive_upload_image($subdir, $filename, $sizes)
 	$out['srcset'] = implode(', ', $srcset_bits);
 
 	$pick = $parts[0];
+	$pick_target = ($subdir === 'product') ? 200 : 768;
 	foreach ($parts as $p) {
-		if ((int) $p['w'] >= 768) {
+		if ((int) $p['w'] >= $pick_target) {
 			$pick = $p;
 			break;
 		}

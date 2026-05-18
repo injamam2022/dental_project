@@ -176,16 +176,23 @@ if ($router_class === 'dental') {
 <noscript><link href="<?php echo $h($_drlook_href); ?>" rel="stylesheet"></noscript>
 <?php } ?>
 <?php
-$_dcc_legacy_fonts = 'https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&family=BenchNine:wght@300;400;700&display=swap';
-$_defer_css = array(
-	$_dcc_legacy_fonts,
+$_defer_css = array();
+if (!$dental_lite_css) {
+	$_defer_css[] = 'https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&family=BenchNine:wght@300;400;700&display=swap';
+}
+$_defer_css = array_merge($_defer_css, array(
 	$_css . 'animate.css',
 	$_css . 'jquery.mCustomScrollbar.min.css',
 	$_css . 'owl.css',
 	$_css . 'jquery.bootstrap-touchspin.css',
 	$_css . 'jquery-ui.css',
 	$_css . 'jquery.fancybox.min.css',
-);
+));
+if ($dental_lite_css) {
+	$_defer_css = array(
+		$_css . 'owl.css',
+	);
+}
 foreach ($_defer_css as $_href) {
 	if (strpos($_href, 'http') === 0) {
 		echo '<link rel="preload" href="' . $h($_href) . '" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">' . "\n";
@@ -222,13 +229,6 @@ if ($router_class_head === 'dental' && $router_method_head === 'tmj_specialist' 
 	}
 }
 ?>
-<script type="text/javascript">
-(function(c,l,a,r,i,t,y){
-	c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-	t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-	y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-})(window, document, "clarity", "script", "wrx8wpb91v");
-</script>
 
 </head>
 

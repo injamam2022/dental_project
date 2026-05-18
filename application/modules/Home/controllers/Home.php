@@ -18,7 +18,7 @@ class Home extends Frontend_Controller {
 			'title' => 'Multispeciality clinic in Kolkata, WB | Dental | Skin & Hair | ENT',
 			'description' => 'Experience world-class Dental, ENT, and Aesthetic Skin & Hair care at Dontia Care Clinic, Kolkata. Book your appointment for expert health solutions.',
 		);
-		$this->load->helper('dontia_responsive_images');
+		$this->load->helper(array('dontia_responsive_images', 'dontia_performance'));
         $content['Services']=$this->Home_Model->GetProduct();
         $content['banner_details']=$this->Home_Model->GetBanner();
         $content['partner_details']=$this->Home_Model->GetPartner();
@@ -44,12 +44,9 @@ class Home extends Frontend_Controller {
 				$content['home_about_image'] = dontia_home_about_responsive_attrs($hp0[0][1]);
 			}
 		}
-		$lcp_preloads = array();
-		if (!empty($content['home_about_image']['preload'])) {
-			$lcp_preloads[] = $content['home_about_image']['preload'];
-		}
-		if (!empty($lcp_preloads)) {
-			$this->seo_overrides['lcp_preload_images'] = $lcp_preloads;
+		$lcp_entry = dontia_lcp_preload_entry($content['home_about_image']);
+		if ($lcp_entry !== '') {
+			$this->seo_overrides['lcp_preload_images'] = array($lcp_entry);
 		}
 
 		$content['subview']="home_page";

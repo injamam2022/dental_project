@@ -86,7 +86,7 @@ if (!is_array($home_body)) {
                     <div class="image-column col-lg-6 col-md-12 col-sm-12">
                         <div class="inner-column dontia-about-visual">
                             <div class="image-box dontia-about-photos">
-                                <figure class="image wow fadeInRight" data-wow-delay="200ms">
+                                <figure class="image dontia-about-figure">
                                     <?php
                                     $about_fn = isset($home_body[0][1]) ? (string) $home_body[0][1] : '';
                                     $hai = isset($home_about_image) && is_array($home_about_image) ? $home_about_image : array();
