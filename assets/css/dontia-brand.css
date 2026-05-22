@@ -2803,16 +2803,20 @@ body .main-footer.dontia-footer,
 	transform: translateY(-2px);
 }
 
+.scroll-to-top,
 body .scroll-to-top,
 .page-wrapper .scroll-to-top {
+	background-color: var(--dcc-warm-deep) !important;
 	background: var(--dcc-warm-deep) !important;
 	color: #ffffff !important;
 	border-radius: 50% !important;
 	box-shadow: 0 4px 14px rgba(49, 19, 0, 0.22);
 }
 
+.scroll-to-top:hover,
 body .scroll-to-top:hover,
 .page-wrapper .scroll-to-top:hover {
+	background-color: var(--dcc-header-bar) !important;
 	background: var(--dcc-header-bar) !important;
 	color: #ffffff !important;
 }

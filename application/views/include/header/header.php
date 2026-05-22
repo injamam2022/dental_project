@@ -225,6 +225,7 @@ foreach ($_defer_css as $_href) {
 	}
 }
 ?>
+<style id="dontia-scroll-top-theme">.scroll-to-top,body .scroll-to-top{background-color:#82665c!important;background:#82665c!important;color:#fff!important;border-radius:50%!important;box-shadow:0 4px 14px rgba(49,19,0,.22)}.scroll-to-top:hover,body .scroll-to-top:hover{background-color:#311300!important;background:#311300!important;color:#fff!important}</style>
 <link rel="icon" type="image/svg+xml" href="<?php echo base_url('assets/images/favicon.svg'); ?>">
 <link rel="alternate icon" href="<?php echo base_url('assets/images/favicon.svg'); ?>" type="image/svg+xml">
 <link rel="apple-touch-icon" href="<?php echo base_url('assets/images/favicon.svg'); ?>">
