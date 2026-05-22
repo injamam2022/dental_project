@@ -1,0 +1,17 @@
+/* Inlined in <head> on every page — footer + scroll-to-top (brown brand). */
+body .main-footer.dontia-footer,.page-wrapper .main-footer.dontia-footer{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:2!important;background:#f3eeeb!important;background-image:none!important}
+body .main-footer.dontia-footer:before,.page-wrapper .main-footer.dontia-footer:before{display:none!important;opacity:0!important}
+body .main-footer.dontia-footer .widgets-section.dontia-footer-widgets,.page-wrapper .main-footer.dontia-footer .widgets-section.dontia-footer-widgets{margin-top:0!important;padding:clamp(3rem,6vw,4.5rem) 0 clamp(2.5rem,5vw,3.5rem)!important}
+body .main-footer.dontia-footer .footer-bottom.dontia-footer-bottom,.page-wrapper .main-footer.dontia-footer .footer-bottom.dontia-footer-bottom{background:#311300!important;border-top:1px solid #e8e0d8!important}
+body .main-footer.dontia-footer .footer-bottom .inner-container:before,.page-wrapper .main-footer.dontia-footer .footer-bottom .inner-container:before{display:none!important;background:transparent!important}
+body .main-footer.dontia-footer .footer-bottom .copyright-text,.page-wrapper .main-footer.dontia-footer .footer-bottom .copyright-text{float:none!important;background:transparent!important;padding:14px 0!important}
+body .main-footer.dontia-footer .footer-bottom .copyright-text:before,.page-wrapper .main-footer.dontia-footer .footer-bottom .copyright-text:before{display:none!important;border:none!important}
+body .main-footer.dontia-footer .dontia-footer-copyright p,.page-wrapper .main-footer.dontia-footer .dontia-footer-copyright p{color:rgba(255,255,255,.88)!important;margin:0!important}
+body .main-footer.dontia-footer .dontia-footer-heading,.page-wrapper .main-footer.dontia-footer .dontia-footer-heading{color:#311300!important;text-transform:uppercase;font-size:13px;letter-spacing:.14em}
+body .main-footer.dontia-footer .dontia-footer-heading:before,.page-wrapper .main-footer.dontia-footer .dontia-footer-heading:before{display:none!important}
+body .main-footer.dontia-footer .dontia-footer-tagline,.page-wrapper .main-footer.dontia-footer .dontia-footer-tagline{color:#311300!important;font-weight:600}
+body .main-footer.dontia-footer .dontia-footer-about,.page-wrapper .main-footer.dontia-footer .dontia-footer-about{color:#4a3f36}
+body .main-footer.dontia-footer .dontia-footer-links a,.page-wrapper .main-footer.dontia-footer .dontia-footer-links a{color:#4a3f36!important;text-decoration:none!important}
+body .main-footer.dontia-footer .dontia-footer-contact-inline a,.page-wrapper .main-footer.dontia-footer .dontia-footer-contact-inline a{color:#5c4033!important}
+body .scroll-to-top{background:#82665c!important;color:#fff!important;border-radius:50%!important;box-shadow:0 4px 14px rgba(49,19,0,.22)!important}
+body .scroll-to-top:hover,body .scroll-to-top:focus{background:#311300!important;color:#fff!important}

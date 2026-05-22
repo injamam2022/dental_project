@@ -790,4 +790,3 @@ if (function_exists('GetServices')) {
 </div>
 
 <?php $this->load->view('include/footer/footer'); ?>
-<?php $this->load->view('include/modal_master/modal_master'); ?>

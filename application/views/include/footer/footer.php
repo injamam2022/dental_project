@@ -112,6 +112,12 @@ $dontia_footer_social = array(
 
 <!--Scroll to top-->
 <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-arrow-circle-o-up"></span></div>
+<?php
+if (empty($GLOBALS['__dontia_modal_loaded'])) {
+	$GLOBALS['__dontia_modal_loaded'] = true;
+	$this->load->view('include/modal_master/modal_master');
+}
+?>
 <?php $_dcc_assets = rtrim(base_url('assets/'), '/') . '/'; ?>
 <script defer src="<?php echo $_dcc_assets; ?>js/jquery.js"></script>
 <script defer src="<?php echo $_dcc_assets; ?>js/popper.min.js"></script>

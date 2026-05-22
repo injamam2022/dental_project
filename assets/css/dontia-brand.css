@@ -2567,37 +2567,37 @@ body .main-footer.dontia-footer,
 	box-shadow: inset 0 1px 0 var(--dcc-border);
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer:before,
 .page-wrapper .main-footer.dontia-footer:before {
 	opacity: 0 !important;
 	display: none !important;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .widgets-section.dontia-footer-widgets,
 .page-wrapper .main-footer.dontia-footer .widgets-section.dontia-footer-widgets {
 	margin-top: 0 !important;
 	padding: clamp(3rem, 6vw, 4.5rem) 0 clamp(2.5rem, 5vw, 3.5rem) !important;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-row,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-row {
 	align-items: flex-start;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-logo-link,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-logo-link {
 	display: inline-block;
 	margin-bottom: 8px;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-logo-link img,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-logo-link img {
 	max-height: 72px;
 	width: auto;
 	display: block;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-tagline,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-tagline {
 	font-family: 'Cinzel', Georgia, serif !important;
 	font-size: 17px !important;
@@ -2606,7 +2606,7 @@ body .main-footer.dontia-footer,
 	margin: 0 0 12px !important;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-about,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-about {
 	font-size: 14px !important;
 	line-height: 1.7 !important;
@@ -2615,19 +2615,19 @@ body .main-footer.dontia-footer,
 	max-width: 34em;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-contact-inline,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-contact-inline {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-contact-inline li,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-contact-inline li {
 	margin-bottom: 8px;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-contact-inline a,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-contact-inline a {
 	font-size: 14px !important;
 	color: var(--dcc-warm-deep) !important;
@@ -2638,12 +2638,12 @@ body .main-footer.dontia-footer,
 	gap: 10px;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-contact-inline a:hover,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-contact-inline a:hover {
 	color: var(--dcc-header-bar) !important;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-heading,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-heading {
 	font-family: 'Montserrat', sans-serif !important;
 	font-size: 13px !important;
@@ -2655,18 +2655,18 @@ body .main-footer.dontia-footer,
 	padding: 0 !important;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-heading:before,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-heading:before {
 	display: none !important;
 	content: none !important;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-location,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-location {
 	margin-bottom: 1.25rem;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-location-label,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-location-label {
 	display: block;
 	font-size: 12px !important;
@@ -2677,7 +2677,7 @@ body .main-footer.dontia-footer,
 	margin-bottom: 6px;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-location p,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-location p {
 	font-size: 14px !important;
 	line-height: 1.65 !important;
@@ -2685,14 +2685,14 @@ body .main-footer.dontia-footer,
 	margin: 0 !important;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-muted,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-muted {
 	font-size: 13px !important;
 	color: var(--dcc-muted) !important;
 	margin: 0 !important;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-links,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-links {
 	list-style: none;
 	margin: 0;
@@ -2701,13 +2701,13 @@ body .main-footer.dontia-footer,
 	column-gap: 1.5rem;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-links li,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-links li {
 	margin-bottom: 10px;
 	break-inside: avoid;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-links a,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-links a {
 	font-size: 14px !important;
 	color: var(--dcc-body) !important;
@@ -2716,24 +2716,24 @@ body .main-footer.dontia-footer,
 	transition: color 0.2s ease;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-links a:hover,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-links a:hover {
 	color: var(--dcc-warm-deep) !important;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .footer-bottom.dontia-footer-bottom,
 .page-wrapper .main-footer.dontia-footer .footer-bottom.dontia-footer-bottom {
 	border-top: 1px solid var(--dcc-border) !important;
 	background: var(--dcc-header-bar) !important;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .footer-bottom .inner-container:before,
 .page-wrapper .main-footer.dontia-footer .footer-bottom .inner-container:before {
 	display: none !important;
 	content: none !important;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-bottom-inner,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-bottom-inner {
 	display: flex !important;
 	flex-wrap: wrap;
@@ -2743,20 +2743,20 @@ body .main-footer.dontia-footer,
 	padding: 4px 0 !important;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-copyright,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-copyright {
 	float: none !important;
 	padding: 14px 0 !important;
 	background: transparent !important;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-copyright:before,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-copyright:before {
 	display: none !important;
 	content: none !important;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-copyright p,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-copyright p {
 	font-size: 13px !important;
 	line-height: 1.5 !important;
@@ -2765,13 +2765,13 @@ body .main-footer.dontia-footer,
 	margin: 0 !important;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-social,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-social {
 	float: none !important;
 	padding: 8px 0 !important;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-social-list,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-social-list {
 	list-style: none;
 	margin: 0;
@@ -2782,7 +2782,7 @@ body .main-footer.dontia-footer,
 	align-items: center;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-social-list a,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-social-list a {
 	display: inline-flex;
 	align-items: center;
@@ -2796,27 +2796,23 @@ body .main-footer.dontia-footer,
 	transition: background 0.2s ease, transform 0.2s ease;
 }
 
-body .main-footer.dontia-footer,
+body .main-footer.dontia-footer .dontia-footer-social-list a:hover,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-social-list a:hover {
 	background: rgba(255, 255, 255, 0.22);
 	color: #ffffff !important;
 	transform: translateY(-2px);
 }
 
-.scroll-to-top,
 body .scroll-to-top,
 .page-wrapper .scroll-to-top {
-	background-color: var(--dcc-warm-deep) !important;
 	background: var(--dcc-warm-deep) !important;
 	color: #ffffff !important;
 	border-radius: 50% !important;
 	box-shadow: 0 4px 14px rgba(49, 19, 0, 0.22);
 }
 
-.scroll-to-top:hover,
 body .scroll-to-top:hover,
 .page-wrapper .scroll-to-top:hover {
-	background-color: var(--dcc-header-bar) !important;
 	background: var(--dcc-header-bar) !important;
 	color: #ffffff !important;
 }

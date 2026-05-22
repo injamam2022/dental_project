@@ -1,7 +1,7 @@
 /* Inlined in <head> on Home/Dental — must match hero layout in style.css to prevent CLS. */
 :root{--dcc-page:#faf8f7;--dcc-header-bar:#311300;--dcc-warm:rgb(173,140,128)}
 body{margin:0;background:var(--dcc-page);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.page-wrapper{position:relative;overflow:hidden}
+.page-wrapper{position:relative;overflow-x:hidden;overflow-y:visible}
 .dontia-top-bar{background:var(--dcc-header-bar);color:#fff;font-size:13px;min-height:40px}
 .dontia-main-header{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.06)}
 .dontia-header-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:12px 0;min-height:74px}
@@ -40,13 +40,3 @@ body{margin:0;background:var(--dcc-page);font-family:system-ui,-apple-system,"Se
 @media (min-width:992px){.navbar-expand-lg .navbar-collapse{display:flex!important}}
 img{max-width:100%;height:auto}
 .fa{width:1em;text-align:center}
-body .main-footer.dontia-footer,.page-wrapper .main-footer.dontia-footer{background:#f3eeeb;background-image:none}
-body .main-footer.dontia-footer:before,.page-wrapper .main-footer.dontia-footer:before{display:none}
-body .main-footer.dontia-footer .footer-bottom.dontia-footer-bottom,.page-wrapper .main-footer.dontia-footer .footer-bottom.dontia-footer-bottom{background:#311300;border-top:1px solid #e8e0d8}
-body .main-footer.dontia-footer .dontia-footer-copyright p,.page-wrapper .main-footer.dontia-footer .dontia-footer-copyright p{color:rgba(255,255,255,.88);margin:0}
-body .main-footer.dontia-footer .dontia-footer-heading,.page-wrapper .main-footer.dontia-footer .dontia-footer-heading{color:#311300;text-transform:uppercase;font-size:13px;letter-spacing:.14em}
-body .main-footer.dontia-footer .dontia-footer-tagline,.page-wrapper .main-footer.dontia-footer .dontia-footer-tagline{color:#311300;font-weight:600}
-body .main-footer.dontia-footer .dontia-footer-links a,.page-wrapper .main-footer.dontia-footer .dontia-footer-links a{color:#4a3f36;text-decoration:none}
-body .main-footer.dontia-footer .dontia-footer-contact-inline a,.page-wrapper .main-footer.dontia-footer .dontia-footer-contact-inline a{color:#5c4033}
-body .scroll-to-top{background:#82665c!important;color:#fff!important;border-radius:50%!important;box-shadow:0 4px 14px rgba(49,19,0,.22)}
-body .scroll-to-top:hover{background:#311300!important;color:#fff!important}

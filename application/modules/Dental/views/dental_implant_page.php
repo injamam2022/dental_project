@@ -453,4 +453,3 @@ $patient_story_captions = array(
 </script>
 
 <?php $this->load->view('include/footer/footer'); ?>
-<?php $this->load->view('include/modal_master/modal_master'); ?>

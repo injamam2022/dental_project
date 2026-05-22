@@ -20,6 +20,10 @@ $header_logo_srcset = $h($header_logo_src) . ' 96w, ' . $h($header_logo_160) . '
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <?php
 $this->load->helper('dontia_performance');
+$_dcc_global_chrome_css = dontia_global_chrome_css();
+if ($_dcc_global_chrome_css !== '') {
+	echo '<style id="dontia-global-chrome">' . $_dcc_global_chrome_css . '</style>' . "\n";
+}
 $_dcc_marketing_lite_early = dontia_is_marketing_lite_page();
 if ($_dcc_marketing_lite_early) {
 	echo '<link rel="dns-prefetch" href="https://fonts.googleapis.com">' . "\n";
@@ -225,7 +229,6 @@ foreach ($_defer_css as $_href) {
 	}
 }
 ?>
-<style id="dontia-scroll-top-theme">.scroll-to-top,body .scroll-to-top{background-color:#82665c!important;background:#82665c!important;color:#fff!important;border-radius:50%!important;box-shadow:0 4px 14px rgba(49,19,0,.22)}.scroll-to-top:hover,body .scroll-to-top:hover{background-color:#311300!important;background:#311300!important;color:#fff!important}</style>
 <link rel="icon" type="image/svg+xml" href="<?php echo base_url('assets/images/favicon.svg'); ?>">
 <link rel="alternate icon" href="<?php echo base_url('assets/images/favicon.svg'); ?>" type="image/svg+xml">
 <link rel="apple-touch-icon" href="<?php echo base_url('assets/images/favicon.svg'); ?>">

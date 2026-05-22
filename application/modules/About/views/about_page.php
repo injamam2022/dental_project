@@ -11,59 +11,19 @@ if ($banner_ok) {
 	$banner_sub = 'Dontia Care Clinic';
 }
 
-$dontia_about_url = function ($raw) {
-	$u = trim((string) $raw);
-	if ($u === '') {
-		return '';
-	}
-	if (preg_match('#^https?://#i', $u)) {
-		return $u;
-	}
-	if (strpos($u, '//') === 0) {
-		return $u;
-	}
-	return base_url('admin/webroot/uploads/about/' . $u);
-};
-
+$this->load->helper('dontia_performance');
 $parsed = null;
 if (! empty($about_page_con) && is_array($about_page_con) && isset($about_page_con[0]->description)) {
 	$parsed = @unserialize($about_page_con[0]->description);
 }
 $ext = (is_array($parsed) && isset($parsed[4]) && is_array($parsed[4])) ? $parsed[4] : array();
 
-$case_base = 'https://dontiacareclinic.com/wp-content/uploads/2025/07/';
-$default_patient_cases = array(
-	array(
-		'before' => $case_base . 'Untitled-design-35.png',
-		'after'  => $case_base . 'IMG-20240826-WA0002.jpg',
-	),
-	array(
-		'before' => $case_base . '4.png',
-		'after'  => $case_base . '3.png',
-	),
-	array(
-		'before' => $case_base . '1.png',
-		'after'  => $case_base . '2.png',
-	),
-);
-
-$patient_cases = array();
-if (! empty($ext['cases']) && is_array($ext['cases'])) {
-	foreach ($ext['cases'] as $pair) {
-		if (! is_array($pair)) {
-			continue;
-		}
-		$b = isset($pair['before']) ? $pair['before'] : '';
-		$a = isset($pair['after']) ? $pair['after'] : '';
-		$bu = $dontia_about_url($b);
-		$au = $dontia_about_url($a);
-		if ($bu !== '' && $au !== '') {
-			$patient_cases[] = array('before' => $bu, 'after' => $au);
-		}
-	}
-}
-if (count($patient_cases) < 1) {
-	$patient_cases = $default_patient_cases;
+$dental_ba = isset($dental_before_after) && is_array($dental_before_after) ? $dental_before_after : array();
+$patient_cases = dontia_about_build_patient_cases($about_page_con, $dental_ba);
+$about_img_fallback = '';
+$fallback_cases = dontia_about_default_patient_cases();
+if (! empty($fallback_cases[0]['before'])) {
+	$about_img_fallback = $fallback_cases[0]['before'];
 }
 
 $patient_title = 'Patient Cases';
@@ -118,15 +78,11 @@ for ($i = 0; $i < 4; $i++) {
 }
 
 $stats_bg_url = base_url('assets/images/background/3.jpg');
-if (! empty($ext['stats_bg'])) {
+	if (! empty($ext['stats_bg'])) {
 	$u = trim((string) $ext['stats_bg']);
-	if (preg_match('#^https?://#i', $u) || strpos($u, '//') === 0) {
-		$stats_bg_url = $u;
-	} else {
-		$r = $dontia_about_url($u);
-		if ($r !== '') {
-			$stats_bg_url = $r;
-		}
+	$r = dontia_resolve_upload_image_url($u);
+	if ($r !== '') {
+		$stats_bg_url = $r;
 	}
 }
 ?>
@@ -169,15 +125,18 @@ if (! empty($ext['stats_bg'])) {
 			<?php foreach ($patient_cases as $idx => $pair) {
 				$b = htmlspecialchars($pair['before'], ENT_QUOTES, 'UTF-8');
 				$a = htmlspecialchars($pair['after'], ENT_QUOTES, 'UTF-8');
+				$fb_attr = $about_img_fallback !== ''
+					? ' data-dontia-img-fallback="' . htmlspecialchars($about_img_fallback, ENT_QUOTES, 'UTF-8') . '" onerror="if(this.dataset.dontiaImgFallback&&!this.dataset.dontiaImgFailed){this.dataset.dontiaImgFailed=1;this.src=this.dataset.dontiaImgFallback;}"'
+					: '';
 			?>
 			<div class="col-lg-4 col-md-6 col-sm-12 dontia-patient-cases__col">
 				<div class="dontia-ba" data-dontia-ba data-position="50">
 					<div class="dontia-ba__inner">
 						<div class="dontia-ba__base">
-							<img src="<?php echo $a; ?>" alt="After treatment" loading="lazy">
+							<img src="<?php echo $a; ?>" alt="After treatment" loading="lazy" decoding="async"<?php echo $fb_attr; ?>>
 						</div>
 						<div class="dontia-ba__clip" style="width:50%">
-							<img src="<?php echo $b; ?>" alt="Before treatment" loading="lazy">
+							<img src="<?php echo $b; ?>" alt="Before treatment" loading="lazy" decoding="async"<?php echo $fb_attr; ?>>
 						</div>
 						<button type="button" class="dontia-ba__handle" style="left:50%" aria-label="Drag to compare before and after">
 							<span class="dontia-ba__grip"><i class="fa fa-angle-left" aria-hidden="true"></i><i class="fa fa-angle-right" aria-hidden="true"></i></span>
