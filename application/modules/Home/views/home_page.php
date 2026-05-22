@@ -82,13 +82,12 @@ if (!is_array($home_body)) {
                             <div class="image-box dontia-about-photos">
                                 <figure class="image dontia-about-figure">
                                     <?php
-                                    $about_fn = isset($home_body[0][1]) ? (string) $home_body[0][1] : '';
+                                    $about_fn = isset($home_body[0][1]) ? basename((string) $home_body[0][1]) : '';
                                     $hai = isset($home_about_image) && is_array($home_about_image) ? $home_about_image : array();
-                                    $about_skip_huge = !empty($hai['skip_huge']);
-                                    if (!$about_skip_huge && empty($hai['src']) && $about_fn !== '') {
-                                        $hai['src'] = base_url('admin/webroot/uploads/home/') . $about_fn;
+                                    if (empty($hai['src']) && $about_fn !== '') {
+                                        $hai['src'] = rtrim(base_url('admin/webroot/uploads/home/'), '/') . '/' . rawurlencode($about_fn);
                                     }
-                                    $about_src_esc = (!$about_skip_huge && !empty($hai['src']))
+                                    $about_src_esc = !empty($hai['src'])
                                         ? htmlspecialchars((string) $hai['src'], ENT_QUOTES, 'UTF-8')
                                         : '';
                                     if ($about_src_esc !== '') {

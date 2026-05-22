@@ -151,7 +151,7 @@ $_dcc_emit_deferred_css = static function ($href) use ($h) {
 	if ($_dcc_crit_css !== '') {
 		echo '<style id="dontia-critical-marketing">' . $_dcc_crit_css . '</style>' . "\n";
 	}
-	echo '<style id="dontia-appt-modal-stack">#dontiaAppointmentModal.modal{z-index:10060!important}body>.modal-backdrop{z-index:10050!important}body.modal-open .dontia-main-header{z-index:1030!important}.dontia-appt-modal .modal-content,.dontia-appt-modal .dontia-appt-input,.dontia-appt-modal select,.dontia-appt-modal button{pointer-events:auto!important}</style>' . "\n";
+	echo '<style id="dontia-appt-modal-stack">#dontiaAppointmentModal.modal{z-index:10060!important}body>.modal-backdrop{z-index:10050!important}body.modal-open .dontia-main-header{z-index:1030!important}.dontia-appt-modal,.dontia-appt-modal .modal-dialog,.dontia-appt-modal .modal-content,.dontia-appt-modal .dontia-appt-input,.dontia-appt-modal select,.dontia-appt-modal button,.dontia-appt-modal a,.dontia-appt-modal label{pointer-events:auto!important}.dontia-appt-modal .modal-dialog{margin:8vh auto 1rem;max-width:calc(100% - 24px);width:440px}.dontia-appt-modal__content{background:#e8dcc8;border-radius:12px;padding:28px 24px 32px;max-width:100%}.dontia-appt-input{display:block;width:100%;box-sizing:border-box;background:#fff;border:1px solid #d4c9b8;border-radius:6px;min-height:42px;padding:9px 12px}.dontia-appt-row{display:flex;flex-wrap:wrap;margin:0 -8px}.dontia-appt-col{flex:1 1 100%;max-width:100%;padding:0 8px;box-sizing:border-box}@media(min-width:576px){.dontia-appt-col{flex:1 1 50%;max-width:50%}}</style>' . "\n";
 ?>
 <?php
 	$_dcc_emit_deferred_css($_css . 'bootstrap.css');

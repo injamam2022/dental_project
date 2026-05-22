@@ -108,6 +108,8 @@ $dontia_footer_social = array(
         </div>
     </footer>
 
+</div><!-- /.page-wrapper -->
+
 <!--Scroll to top-->
 <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-arrow-circle-o-up"></span></div>
 <?php $_dcc_assets = rtrim(base_url('assets/'), '/') . '/'; ?>

@@ -176,21 +176,20 @@ function dontia_home_about_responsive_attrs($filename)
 		}
 	}
 	$orig_fs = FCPATH . 'admin/webroot/uploads/home/' . basename((string) $filename);
-	if ($filename !== '' && is_file($orig_fs) && filesize($orig_fs) > 250000 && !$r['has_variants'] && $smaller === '') {
-		return array(
-			'src' => '',
-			'srcset' => '',
-			'sizes' => $r['sizes'],
-			'width' => 0,
-			'height' => 0,
-			'preload' => '',
-			'skip_huge' => true,
-		);
+	$src = $r['src'];
+	if ($src === '' && $filename !== '' && is_file($orig_fs)) {
+		$src = rtrim(base_url('admin/webroot/uploads/home/'), '/') . '/' . rawurlencode(basename((string) $filename));
+	}
+	if ($smaller !== '') {
+		$src = $smaller;
+	} elseif ($src === '' && $r['srcset'] !== '') {
+		$first = trim(explode(',', $r['srcset'])[0]);
+		$src = trim(explode(' ', $first)[0]);
 	}
 
-	$preload = '';
+	$preload = $r['preload_mid'] !== '' ? $r['preload_mid'] : $src;
 	return array(
-		'src' => $r['src'],
+		'src' => $src,
 		'srcset' => $r['srcset'],
 		'sizes' => $r['sizes'],
 		'width' => $r['width'],

@@ -19,15 +19,15 @@ $dontia_clinic_label = isset($CI->website['data']->company_name) ? $CI->website[
                     <input type="text" class="form-control dontia-appt-input" id="dontia_appt_name" name="name" placeholder="Enter Your Name" autocomplete="name"/>
                     <span class="dontia-appt-field-error" role="alert" aria-live="polite"></span>
                 </div>
-                <div class="row dontia-appt-row">
-                    <div class="col-sm-6">
+                <div class="dontia-appt-row">
+                    <div class="dontia-appt-col">
                         <div class="form-group">
                             <label class="sr-only" for="dontia_appt_email">Email</label>
                             <input type="email" class="form-control dontia-appt-input" id="dontia_appt_email" name="email" placeholder="Enter Your Email id" autocomplete="email"/>
                             <span class="dontia-appt-field-error" role="alert" aria-live="polite"></span>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="dontia-appt-col">
                         <div class="form-group">
                             <label class="sr-only" for="dontia_appt_phone">Phone</label>
                             <input type="tel" class="form-control dontia-appt-input" id="dontia_appt_phone" name="phone" placeholder="Enter Your Phone No." autocomplete="tel"/>

@@ -1692,6 +1692,7 @@ body {
 	margin: 0;
 }
 
+
 .page-wrapper .dontia-services-section .dontia-service-card-title {
 	font-family: 'Cinzel', Georgia, serif !important;
 	font-size: clamp(1rem, 2vw, 1.15rem) !important;
@@ -2559,37 +2560,44 @@ body {
 }
 
 /* ========== Footer ========== */
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer {
 	background: var(--dcc-surface-muted) !important;
 	background-image: none !important;
 	box-shadow: inset 0 1px 0 var(--dcc-border);
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer:before {
 	opacity: 0 !important;
 	display: none !important;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .widgets-section.dontia-footer-widgets {
 	margin-top: 0 !important;
 	padding: clamp(3rem, 6vw, 4.5rem) 0 clamp(2.5rem, 5vw, 3.5rem) !important;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-row {
 	align-items: flex-start;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-logo-link {
 	display: inline-block;
 	margin-bottom: 8px;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-logo-link img {
 	max-height: 72px;
 	width: auto;
 	display: block;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-tagline {
 	font-family: 'Cinzel', Georgia, serif !important;
 	font-size: 17px !important;
@@ -2598,6 +2606,7 @@ body {
 	margin: 0 0 12px !important;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-about {
 	font-size: 14px !important;
 	line-height: 1.7 !important;
@@ -2606,16 +2615,19 @@ body {
 	max-width: 34em;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-contact-inline {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-contact-inline li {
 	margin-bottom: 8px;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-contact-inline a {
 	font-size: 14px !important;
 	color: var(--dcc-warm-deep) !important;
@@ -2626,10 +2638,12 @@ body {
 	gap: 10px;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-contact-inline a:hover {
 	color: var(--dcc-header-bar) !important;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-heading {
 	font-family: 'Montserrat', sans-serif !important;
 	font-size: 13px !important;
@@ -2641,15 +2655,18 @@ body {
 	padding: 0 !important;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-heading:before {
 	display: none !important;
 	content: none !important;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-location {
 	margin-bottom: 1.25rem;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-location-label {
 	display: block;
 	font-size: 12px !important;
@@ -2660,6 +2677,7 @@ body {
 	margin-bottom: 6px;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-location p {
 	font-size: 14px !important;
 	line-height: 1.65 !important;
@@ -2667,12 +2685,14 @@ body {
 	margin: 0 !important;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-muted {
 	font-size: 13px !important;
 	color: var(--dcc-muted) !important;
 	margin: 0 !important;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-links {
 	list-style: none;
 	margin: 0;
@@ -2681,11 +2701,13 @@ body {
 	column-gap: 1.5rem;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-links li {
 	margin-bottom: 10px;
 	break-inside: avoid;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-links a {
 	font-size: 14px !important;
 	color: var(--dcc-body) !important;
@@ -2694,20 +2716,24 @@ body {
 	transition: color 0.2s ease;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-links a:hover {
 	color: var(--dcc-warm-deep) !important;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .footer-bottom.dontia-footer-bottom {
 	border-top: 1px solid var(--dcc-border) !important;
 	background: var(--dcc-header-bar) !important;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .footer-bottom .inner-container:before {
 	display: none !important;
 	content: none !important;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-bottom-inner {
 	display: flex !important;
 	flex-wrap: wrap;
@@ -2717,17 +2743,20 @@ body {
 	padding: 4px 0 !important;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-copyright {
 	float: none !important;
 	padding: 14px 0 !important;
 	background: transparent !important;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-copyright:before {
 	display: none !important;
 	content: none !important;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-copyright p {
 	font-size: 13px !important;
 	line-height: 1.5 !important;
@@ -2736,11 +2765,13 @@ body {
 	margin: 0 !important;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-social {
 	float: none !important;
 	padding: 8px 0 !important;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-social-list {
 	list-style: none;
 	margin: 0;
@@ -2751,6 +2782,7 @@ body {
 	align-items: center;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-social-list a {
 	display: inline-flex;
 	align-items: center;
@@ -2764,18 +2796,22 @@ body {
 	transition: background 0.2s ease, transform 0.2s ease;
 }
 
+body .main-footer.dontia-footer,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-social-list a:hover {
 	background: rgba(255, 255, 255, 0.22);
 	color: #ffffff !important;
 	transform: translateY(-2px);
 }
 
+body .scroll-to-top,
 .page-wrapper .scroll-to-top {
 	background: var(--dcc-warm-deep) !important;
 	color: #ffffff !important;
 	border-radius: 50% !important;
+	box-shadow: 0 4px 14px rgba(49, 19, 0, 0.22);
 }
 
+body .scroll-to-top:hover,
 .page-wrapper .scroll-to-top:hover {
 	background: var(--dcc-header-bar) !important;
 	color: #ffffff !important;
@@ -2805,8 +2841,10 @@ body.modal-open .dontia-main-header {
 }
 
 .dontia-appt-modal .modal-dialog {
-	margin-top: 8vh;
-	pointer-events: none;
+	margin: 8vh auto 1rem;
+	max-width: calc(100% - 24px);
+	width: 440px;
+	pointer-events: auto;
 }
 
 .dontia-appt-modal__content {
@@ -2914,8 +2952,25 @@ select.dontia-appt-select::-ms-expand {
 }
 
 .dontia-appt-row {
+	display: flex;
+	flex-wrap: wrap;
 	margin-left: -8px;
 	margin-right: -8px;
+}
+
+.dontia-appt-col {
+	flex: 1 1 100%;
+	max-width: 100%;
+	padding-left: 8px;
+	padding-right: 8px;
+	box-sizing: border-box;
+}
+
+@media (min-width: 576px) {
+	.dontia-appt-col {
+		flex: 1 1 50%;
+		max-width: 50%;
+	}
 }
 
 .dontia-appt-row > [class*="col-"] {

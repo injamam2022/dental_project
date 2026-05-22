@@ -95,8 +95,16 @@ function dontia_upload_smaller_src_override($subdir, $filename, $max_bytes = 400
 	$stem = isset($pi['filename']) ? $pi['filename'] : $filename;
 	$ext = isset($pi['extension']) ? strtolower($pi['extension']) : 'jpg';
 	$dir_url = rtrim(base_url('admin/webroot/uploads/' . ($subdir !== '' ? $subdir . '/' : '')), '/') . '/';
-	$try_ext = array_unique(array_filter(array('webp', 'jpg', 'jpeg', $ext)));
-	$width_try = ($subdir === 'product') ? array(100, 200, 400, 480, 768) : array(480, 768, 1024, 1280);
+	if ($subdir === 'product') {
+		$try_ext = array_unique(array_filter(array('webp', 'jpg', 'jpeg', $ext)));
+		$width_try = array(100, 200, 400, 480, 768);
+	} elseif ($subdir === 'banner') {
+		$try_ext = array_unique(array_filter(array('webp', 'jpg', 'jpeg', $ext)));
+		$width_try = array(640, 960, 1280, 1920);
+	} else {
+		$try_ext = array_unique(array_filter(array('jpg', 'jpeg', 'webp', $ext)));
+		$width_try = array(480, 768, 1024, 1280);
+	}
 	foreach ($width_try as $w) {
 		foreach ($try_ext as $e) {
 			$cand = $stem . '-' . $w . 'w.' . $e;

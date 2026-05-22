@@ -19,9 +19,9 @@
 			return false;
 		}
 
-		/* Bootstrap backdrop is on body — modal must be a direct body child too. */
+		/* Outside .page-wrapper (overflow:hidden) and direct under body for Bootstrap backdrop. */
 		if ($modal.parent()[0] !== document.body) {
-			$modal.appendTo(document.body);
+			$modal.detach().appendTo(document.body);
 		}
 
 		window.__dontiaApptModalBound = true;
