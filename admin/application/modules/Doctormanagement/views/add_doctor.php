@@ -29,7 +29,10 @@
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">Image</label>
-                            <div class="col-md-6"><input type="file" name="uploadedimages[]" class="fileinput btn-primary"></div>
+                            <div class="col-md-6">
+                                <input type="file" name="doctor_image" accept="image/jpeg,image/png,image/webp,image/gif">
+                                <span class="help-block">JPG, PNG, or WebP. Optional — a placeholder is used if empty.</span>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-3 control-label">Status</label>

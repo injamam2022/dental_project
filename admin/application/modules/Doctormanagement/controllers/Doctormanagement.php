@@ -17,16 +17,38 @@ class Doctormanagement extends MY_Controller {
         $this->load->view('layout', $content);
     }
 
+    public function import_template()
+    {
+        $result = $this->Doctormanagement_Model->import_template_doctors();
+        $msg = 'Template doctors: ' . (int) $result['inserted'] . ' added, ' . (int) $result['updated'] . ' updated.';
+        if (!empty($result['errors'])) {
+            $msg .= ' Issues: ' . implode('; ', $result['errors']);
+        }
+        $class = empty($result['errors']) ? 'success' : 'warning';
+        $this->session->set_flashdata('alert', array('message' => $msg, 'class' => $class));
+        redirect('Doctormanagement');
+    }
+
     public function add()
     {
         if (strtoupper($this->input->server('REQUEST_METHOD')) === 'POST') {
-            $image = $this->Doctormanagement_Model->upload_image('uploadedimages');
+            $name = trim((string) $this->input->post('doctor_name'));
+            $designation = trim((string) $this->input->post('designation'));
+            if ($name === '' || $designation === '') {
+                $this->session->set_flashdata('alert', array('message' => 'Doctor name and designation are required.', 'class' => 'danger'));
+                redirect('Doctormanagement/add');
+            }
+            $upload = $this->Doctormanagement_Model->upload_image('doctor_image');
+            if (!$upload['ok']) {
+                $this->session->set_flashdata('alert', array('message' => 'Image upload failed: ' . $upload['error'], 'class' => 'danger'));
+                redirect('Doctormanagement/add');
+            }
             $data = array(
-                'doctor_name' => trim((string) $this->input->post('doctor_name')),
-                'designation' => trim((string) $this->input->post('designation')),
+                'doctor_name' => $name,
+                'designation' => $designation,
                 'sort_order' => (int) $this->input->post('sort_order'),
                 'status' => (string) $this->input->post('status') === 'inactivate' ? 'inactivate' : 'active',
-                'image_name' => $image !== '' ? $image : null,
+                'image_name' => $upload['file'] !== '' ? $upload['file'] : null,
             );
             $this->Doctormanagement_Model->insert($data);
             $this->session->set_flashdata('alert', array('message' => 'Doctor added successfully', 'class' => 'success'));
@@ -57,14 +79,18 @@ class Doctormanagement extends MY_Controller {
         if (!$row) {
             redirect('Doctormanagement');
         }
-        $image = $this->Doctormanagement_Model->upload_image('uploadedimages');
+        $upload = $this->Doctormanagement_Model->upload_image('doctor_image');
+        if (!$upload['ok']) {
+            $this->session->set_flashdata('alert', array('message' => 'Image upload failed: ' . $upload['error'], 'class' => 'danger'));
+            redirect('Doctormanagement/edit/' . encode_url($id));
+        }
         $image_name = $row->image_name;
-        if ($image !== '') {
-            $old = FCPATH . '/webroot/uploads/doctors/' . $row->image_name;
+        if ($upload['file'] !== '') {
+            $old = rtrim(FCPATH, '/\\') . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'doctors' . DIRECTORY_SEPARATOR . $row->image_name;
             if (!empty($row->image_name) && is_file($old)) {
                 @unlink($old);
             }
-            $image_name = $image;
+            $image_name = $upload['file'];
         }
         $data = array(
             'doctor_name' => trim((string) $this->input->post('doctor_name')),
@@ -83,7 +109,7 @@ class Doctormanagement extends MY_Controller {
         $id = decode_url($enc_id);
         $row = $this->Doctormanagement_Model->find($id);
         if ($row) {
-            $img = FCPATH . '/webroot/uploads/doctors/' . $row->image_name;
+            $img = rtrim(FCPATH, '/\\') . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'doctors' . DIRECTORY_SEPARATOR . $row->image_name;
             if (!empty($row->image_name) && is_file($img)) {
                 @unlink($img);
             }

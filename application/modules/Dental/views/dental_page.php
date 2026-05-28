@@ -57,28 +57,9 @@ $doctors = array(
     array('name' => 'Dr. Prasoon Killa', 'role' => 'Orthodontist', 'image' => 'Prasoon_Killa.png'),
     array('name' => 'Dr. Navneet', 'role' => 'Periodontist', 'image' => 'Navneet_.png'),
 );
+$this->load->helper('dontia_doctors');
 $dynamic_doctors = isset($doctor_list) && is_array($doctor_list) ? $doctor_list : array();
-$doctor_display_list = array();
-$doctor_name_seen = array();
-foreach ($dynamic_doctors as $_dr_row) {
-    if (!is_object($_dr_row) || !isset($_dr_row->doctor_name)) {
-        continue;
-    }
-    $_nm = strtolower(trim((string) $_dr_row->doctor_name));
-    if ($_nm === '' || isset($doctor_name_seen[$_nm])) {
-        continue;
-    }
-    $doctor_name_seen[$_nm] = true;
-    $doctor_display_list[] = array('source' => 'db', 'db' => $_dr_row);
-}
-foreach ($doctors as $_dr_fb) {
-    $_nm = strtolower(trim((string) $_dr_fb['name']));
-    if ($_nm === '' || isset($doctor_name_seen[$_nm])) {
-        continue;
-    }
-    $doctor_name_seen[$_nm] = true;
-    $doctor_display_list[] = array('source' => 'fallback', 'fb' => $_dr_fb);
-}
+$doctor_display_list = dontia_build_doctor_display_list($dynamic_doctors, $doctors);
 $technology_cards_view = isset($technology_cards) && is_array($technology_cards) && count($technology_cards) > 0
     ? $technology_cards
     : array();
@@ -360,9 +341,7 @@ if (function_exists('GetServices')) {
                 foreach ($doctor_display_list as $_dc) {
                     if ($_dc['source'] === 'db') {
                         $dr = $_dc['db'];
-                        $dr_img = !empty($dr->image_name)
-                            ? site_url('admin/webroot/uploads/doctors/' . $dr->image_name)
-                            : base_url('assets/images/team/placeholder.svg');
+                        $dr_img = dontia_doctor_image_url(isset($dr->image_name) ? $dr->image_name : '');
                         $dr_name = (string) $dr->doctor_name;
                         $dr_role = isset($dr->designation) ? (string) $dr->designation : '';
                     } else {

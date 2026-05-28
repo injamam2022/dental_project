@@ -31,7 +31,8 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label">Image</label>
                             <div class="col-md-6">
-                                <input type="file" name="uploadedimages[]" class="fileinput btn-primary">
+                                <input type="file" name="doctor_image" accept="image/jpeg,image/png,image/webp,image/gif">
+                                <span class="help-block">Leave empty to keep the current photo.</span>
                                 <?php if (!empty($doctor->image_name)) { ?>
                                     <img src="<?php echo site_url('webroot/uploads/doctors/' . $doctor->image_name); ?>" width="60" height="60" alt="" style="margin-top:10px;">
                                 <?php } ?>

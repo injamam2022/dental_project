@@ -265,30 +265,36 @@ $dontia_render_skin_panel = ($dontia_has_skin || $dontia_show_tabs);
 $tech_title = (isset($technology_settings) && !empty($technology_settings->section_title))
     ? $technology_settings->section_title
     : 'Latest Technology';
-$dontia_team_members = array(
-    array(
-        'name' => 'Dr. Harleen Kaur Sethi',
-        'role' => 'Principal Dentist',
-        'photo' => 'dr-harleen.png',
-        'social' => array(
-            'facebook' => '',
-            'twitter' => '',
-            'youtube' => '',
-            'linkedin' => '',
+$this->load->helper('dontia_doctors');
+$db_team = isset($doctor_list) && is_array($doctor_list) ? dontia_home_team_from_doctors($doctor_list) : array();
+if (count($db_team) > 0) {
+    $dontia_team_members = $db_team;
+} else {
+    $dontia_team_members = array(
+        array(
+            'name' => 'Dr. Harleen Kaur Sethi',
+            'role' => 'Principal Dentist',
+            'photo' => 'dr-harleen.png',
+            'social' => array(
+                'facebook' => '',
+                'twitter' => '',
+                'youtube' => '',
+                'linkedin' => '',
+            ),
         ),
-    ),
-    array(
-        'name' => 'Dr. Prabhjeet Singh Sethi',
-        'role' => 'Principal Dentist',
-        'photo' => 'dr-prabhjeet.png',
-        'social' => array(
-            'facebook' => '',
-            'twitter' => '',
-            'youtube' => '',
-            'linkedin' => '',
+        array(
+            'name' => 'Dr. Prabhjeet Singh Sethi',
+            'role' => 'Principal Dentist',
+            'photo' => 'dr-prabhjeet.png',
+            'social' => array(
+                'facebook' => '',
+                'twitter' => '',
+                'youtube' => '',
+                'linkedin' => '',
+            ),
         ),
-    ),
-);
+    );
+}
 $dontia_team_placeholder = base_url('assets/images/team/placeholder.svg');
 ?>
 <h3 class="sr-only">Dental Services</h3>
@@ -351,11 +357,15 @@ $dontia_team_placeholder = base_url('assets/images/team/placeholder.svg');
                     foreach ($dontia_team_members as $member) {
                         $name_esc = htmlspecialchars($member['name'], ENT_QUOTES, 'UTF-8');
                         $role_esc = htmlspecialchars($member['role'], ENT_QUOTES, 'UTF-8');
-                        $photo_rel = isset($member['photo']) ? $member['photo'] : '';
-                        $photo_path = $photo_rel !== '' ? FCPATH . 'assets/images/team/' . $photo_rel : '';
-                        $photo_url = ($photo_rel !== '' && is_file($photo_path))
-                            ? base_url('assets/images/team/' . $photo_rel)
-                            : $dontia_team_placeholder;
+                        if (!empty($member['photo_url'])) {
+                            $photo_url = (string) $member['photo_url'];
+                        } else {
+                            $photo_rel = isset($member['photo']) ? $member['photo'] : '';
+                            $photo_path = $photo_rel !== '' ? FCPATH . 'assets/images/team/' . $photo_rel : '';
+                            $photo_url = ($photo_rel !== '' && is_file($photo_path))
+                                ? base_url('assets/images/team/' . $photo_rel)
+                                : $dontia_team_placeholder;
+                        }
                         $photo_url_esc = htmlspecialchars($photo_url, ENT_QUOTES, 'UTF-8');
                         $soc_map = array(
                             'facebook' => array('icon' => 'fa-facebook', 'label' => 'Facebook'),

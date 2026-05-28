@@ -44,10 +44,6 @@ class Dental extends Frontend_Controller {
             redirect(base_url('best-dental-clinic-in-kolkata'), 'location', 301);
             return;
         }
-        $this->seo_overrides = array(
-            'title' => 'Best Dental Clinic in Kolkata, WB | 25+ Experience in Dental Care',
-            'description' => 'Experience gentle, professional dental care in Kolkata from our 25+ years experienced dentist. From checkup to advanced treatment, we make your smile shine.',
-        );
         $products = $this->homeModel->GetProduct();
         $dental_services = array();
         if (is_array($products)) {
@@ -241,8 +237,6 @@ class Dental extends Frontend_Controller {
     public function orthodontist()
     {
         $this->seo_overrides = array(
-            'title' => 'Best Orthodontist in Kolkata | Braces & Invisalign Treatment',
-            'description' => 'Transform your smile with expert orthodontic treatment in Kolkata. Explore braces, aligners, retainers, and personalized care at Dontia Care Clinic.',
             'lcp_preload_images' => array($this->lcp_preload_dr_prabhjeet_responsive()),
         );
 
@@ -275,8 +269,6 @@ class Dental extends Frontend_Controller {
     public function dental_implant()
     {
         $this->seo_overrides = array(
-            'title' => 'Best Dental Implant Clinic in Kolkata | Expert Implant Specialists',
-            'description' => 'Restore missing teeth with expert dental implantologists, advanced implant systems, and personalized care at Dontia Dental Care in Kolkata.',
             'lcp_preload_images' => array($this->lcp_preload_dr_prabhjeet_responsive()),
         );
 
@@ -308,9 +300,6 @@ class Dental extends Frontend_Controller {
     public function tmj_specialist()
     {
         $this->seo_overrides = array(
-            'title' => 'Best TMJ Specialist in Kolkata, India | Expert Treatment for TMJ Disorders',
-            'description' => 'Jaw pain, clicking, headaches, or ear symptoms? Visit Dontia Care Clinic for TMJ / TMD care in Kolkata — Dawson Certified specialist, splints, physiotherapy, Botox for TMJ, and conservative-first treatment.',
-            'canonical' => base_url('tmj-specialist-in-kolkata'),
             'lcp_preload_images' => array(
                 base_url('assets/images/tmj/yt-lcp-poster.jpg'),
             ),

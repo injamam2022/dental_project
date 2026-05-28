@@ -29,6 +29,18 @@ class Seo_meta_model extends CI_Model {
 		if ($c === 'products' && $m === 'detail') {
 			return 'product_detail';
 		}
+		if ($c === 'dental') {
+			if ($m === 'orthodontist') {
+				return 'dental_orthodontist';
+			}
+			if ($m === 'dental_implant') {
+				return 'dental_implant';
+			}
+			if ($m === 'tmj_specialist') {
+				return 'dental_tmj';
+			}
+			return 'dental';
+		}
 
 		$map = array(
 			'home' => 'home',

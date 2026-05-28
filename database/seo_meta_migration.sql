@@ -35,7 +35,11 @@ INSERT IGNORE INTO `seo_page_meta` (`page_key`, `page_label`) VALUES
 ('product_detail', 'Product detail (template; item meta from product)'),
 ('page', 'CMS page'),
 ('client', 'Clients'),
-('appointment', 'Book appointment');
+('appointment', 'Book appointment'),
+('dental', 'Dental clinic (main landing)'),
+('dental_orthodontist', 'Orthodontist landing'),
+('dental_implant', 'Dental implant landing'),
+('dental_tmj', 'TMJ specialist landing');
 
 -- Sitewide Open Graph / social (skip any statement that errors with Duplicate column).
 ALTER TABLE `website_setting` ADD COLUMN `seo_og_image` VARCHAR(255) NOT NULL DEFAULT '' AFTER `meta_description`;

@@ -10,16 +10,19 @@
             <a href="<?php echo site_url('Doctormanagement/add'); ?>">
                 <button class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add Doctor</button>
             </a>
+            <a href="<?php echo site_url('Doctormanagement/import_template'); ?>" class="btn btn-default" onclick="return confirm('Import or refresh the six default clinic doctors (same names, order, and photos as the dental page template)?');">
+                <i class="fa fa-download"></i> Import template doctors
+            </a>
         </div>
     </div>
     <div class="panel-body">
         <?php
+        $this->load->helper('dontia_doctors');
         $doctor_list = isset($doctor_list) && is_array($doctor_list) ? $doctor_list : array();
         if (count($doctor_list) === 0) {
         ?>
         <div class="alert alert-info" style="margin-bottom:16px;">
-            <p style="margin:0 0 8px;"><strong>This screen is connected.</strong> It reads from the database table <code>doctor_management</code> — the same source the public dental pages use for the dynamic doctor carousel (when status is <em>active</em>).</p>
-            <p style="margin:0 0 8px;">The list is empty because <strong>no rows have been added yet</strong> (or all are inactive). The homepage can still show doctor names from <strong>built-in fallback</strong> data in the template when the table is empty — that is not the same as records stored here.</p>
+            <p style="margin:0 0 8px;"><strong>No doctors in the database yet.</strong> Add doctors here to control the team on the <strong>homepage</strong> and <strong>dental pages</strong>. Only <em>active</em> rows appear on the site.</p>
             <p style="margin:0;"><a href="<?php echo site_url('Doctormanagement/add'); ?>" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle"></i> Add your first doctor</a></p>
         </div>
         <?php } ?>
@@ -43,8 +46,11 @@
                     <td><?php echo htmlspecialchars($d->designation, ENT_QUOTES, 'UTF-8'); ?></td>
                     <td><?php echo (int) $d->sort_order; ?></td>
                     <td>
-                        <?php if (!empty($d->image_name)) { ?>
-                            <img src="<?php echo site_url('webroot/uploads/doctors/' . $d->image_name); ?>" width="50" height="50" alt="">
+                        <?php
+                        $thumb = dontia_doctor_admin_thumb_url($d->image_name);
+                        if ($thumb !== '') {
+                        ?>
+                            <img src="<?php echo htmlspecialchars($thumb, ENT_QUOTES, 'UTF-8'); ?>" width="50" height="50" alt="" style="object-fit:cover;border-radius:4px;">
                         <?php } ?>
                     </td>
                     <td><?php echo htmlspecialchars($d->status, ENT_QUOTES, 'UTF-8'); ?></td>
