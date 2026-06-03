@@ -78,6 +78,15 @@
 								<input type="text" name="canonical_url" class="form-control" value="<?php echo htmlspecialchars((string) $row->canonical_url, ENT_QUOTES, 'UTF-8'); ?>" placeholder="Leave empty to use current page URL"/>
 							</div>
 						</div>
+						<hr>
+						<p class="col-md-offset-3 text-muted">Head scripts &amp; verification (this page only)</p>
+						<div class="form-group">
+							<label class="col-md-3 control-label">Head scripts / meta</label>
+							<div class="col-md-6">
+								<textarea name="head_scripts" class="form-control" rows="8" placeholder="Paste &lt;script&gt;...&lt;/script&gt; or &lt;meta name=&quot;google-site-verification&quot; ...&gt;"><?php echo htmlspecialchars(isset($row->head_scripts) ? (string) $row->head_scripts : '', ENT_QUOTES, 'UTF-8'); ?></textarea>
+								<span class="help-block">Output in <code>&lt;head&gt;</code> on this page only, after sitewide scripts from Website Settings. Examples: Google Search Console verification meta tag, analytics snippets, Microsoft Clarity.</span>
+							</div>
+						</div>
 					</div>
 					<div class="panel-footer">
 						<a href="<?php echo site_url('seo'); ?>" class="btn btn-default">Cancel</a>

@@ -228,14 +228,10 @@ if ($router_class_head === 'dental' && $router_method_head === 'tmj_specialist' 
 		}
 	}
 }
+if (!empty($seo['head_scripts'])) {
+	echo trim((string) $seo['head_scripts']) . "\n";
+}
 ?>
-<script type="text/javascript">
-(function(c,l,a,r,i,t,y){
-	c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-	t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-	y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-})(window, document, "clarity", "script", "wrx8wpb91v");
-</script>
 
 </head>
 

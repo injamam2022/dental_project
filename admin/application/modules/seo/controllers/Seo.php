@@ -37,6 +37,7 @@ class Seo extends MY_Controller {
 				'twitter_card' => $this->input->post('twitter_card', true),
 				'robots' => $this->input->post('robots', true),
 				'canonical_url' => $this->input->post('canonical_url', true),
+				'head_scripts' => $this->input->post('head_scripts', false),
 			);
 			$this->Seo_model->update_row($id, $data);
 			$this->session->set_flashdata('alert', array('message' => 'SEO settings saved.', 'class' => 'success'));

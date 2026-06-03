@@ -419,6 +419,13 @@
 											<input type="text" name="seo_facebook_app_id" value="<?php echo isset($this->website['data']->seo_facebook_app_id) ? htmlspecialchars($this->website['data']->seo_facebook_app_id, ENT_QUOTES, 'UTF-8') : ''; ?>" class="form-control" placeholder="Optional fb:app_id"/>
 										</div>
 									</div>
+									<div class="form-group">
+										<label class="col-md-3 col-xs-12 control-label">Head scripts (all pages)</label>
+										<div class="col-md-6 col-xs-12">
+											<textarea name="seo_head_scripts" class="form-control" rows="8" placeholder="Paste &lt;script&gt;...&lt;/script&gt; or &lt;meta name=&quot;google-site-verification&quot; ...&gt;"><?php echo htmlspecialchars(isset($this->website['data']->seo_head_scripts) ? (string) $this->website['data']->seo_head_scripts : '', ENT_QUOTES, 'UTF-8'); ?></textarea>
+											<span class="help-block">Injected in <code>&lt;head&gt;</code> on every public page. Use for Google Search Console verification, Microsoft Clarity, Google Analytics, etc. Per-page extras are under <strong>SEO pages</strong>.</span>
+										</div>
+									</div>
 									<hr class="col-md-offset-3 col-md-6"/>
 									<p class="text-muted col-md-offset-3 col-md-6">Structured data (JSON-LD) for the <strong>TMJ specialist</strong> page and similar local listings. Run <code>database/schema_org_clinic_migration.sql</code> once if these fields do not save. If street line is empty, the first line of Registered office Address is used.</p>
 									<div class="form-group">

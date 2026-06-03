@@ -155,6 +155,13 @@ class Seo_meta_model extends CI_Model {
 		$fb_app = isset($w->seo_facebook_app_id) ? trim((string) $w->seo_facebook_app_id) : '';
 		$twitter_site = isset($w->seo_twitter_site) ? trim((string) $w->seo_twitter_site) : '';
 
+		$global_head_scripts = isset($w->seo_head_scripts) ? trim((string) $w->seo_head_scripts) : '';
+		$page_head_scripts = $this->coalesce(
+			$overrides['head_scripts'] ?? '',
+			($row_page && isset($row_page->head_scripts)) ? (string) $row_page->head_scripts : ''
+		);
+		$head_scripts = trim($global_head_scripts . ($global_head_scripts !== '' && $page_head_scripts !== '' ? "\n" : '') . $page_head_scripts);
+
 		return array(
 			'title' => $title,
 			'description' => $description,
@@ -170,6 +177,7 @@ class Seo_meta_model extends CI_Model {
 			'twitter_card' => $twitter_card,
 			'fb_app_id' => $fb_app,
 			'twitter_site' => $twitter_site,
+			'head_scripts' => $head_scripts,
 		);
 	}
 
@@ -194,6 +202,9 @@ class Seo_meta_model extends CI_Model {
 			isset($w->meta_keyword) ? (string) $w->meta_keyword : ''
 		);
 		$og_image = $this->absolute_og_image($overrides['og_image'] ?? '', $w);
+		$global_head_scripts = isset($w->seo_head_scripts) ? trim((string) $w->seo_head_scripts) : '';
+		$page_head_scripts = trim((string) ($overrides['head_scripts'] ?? ''));
+		$head_scripts = trim($global_head_scripts . ($global_head_scripts !== '' && $page_head_scripts !== '' ? "\n" : '') . $page_head_scripts);
 		return array(
 			'title' => $title,
 			'description' => $description,
@@ -209,6 +220,7 @@ class Seo_meta_model extends CI_Model {
 			'twitter_card' => 'summary_large_image',
 			'fb_app_id' => '',
 			'twitter_site' => '',
+			'head_scripts' => $head_scripts,
 		);
 	}
 
