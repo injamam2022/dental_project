@@ -1,7 +1,10 @@
 <?php
 $w = isset($this->website['data']) ? $this->website['data'] : new stdClass();
 /** Branding copy for /best-dental-clinic-in-kolkata only — not used in sitewide header/footer. */
-$dental_landing_brand = 'Dontia Care Clinic';
+$dental_landing_brand = 'Dontia Care Clinic - Dental';
+if (isset($w->schema_business_name) && trim((string) $w->schema_business_name) !== '') {
+	$dental_landing_brand = trim((string) $w->schema_business_name);
+}
 $dental_landing_brand_esc = htmlspecialchars($dental_landing_brand, ENT_QUOTES, 'UTF-8');
 $logo = !empty($w->company_logo) ? base_url('admin/webroot/uploads/logo/' . $w->company_logo) : base_url('assets/images/favicon.png');
 $address_1 = isset($w->address) ? trim((string) $w->address) : 'Avani Vision, 78 S.N Pandit Street, Kolkata 20';
@@ -191,8 +194,8 @@ if (function_exists('GetServices')) {
             <div>
                 <h2>Welcome To <span><?php echo $dental_landing_brand_esc; ?></span> in Kolkata</h2>
                 <p>Founded in 2001, <?php echo $dental_landing_brand_esc; ?> is Kolkata's premier destination for advanced dental care. We bring comprehensive care with precision, compassion, and cutting-edge technology for our patients. We are also termed as a celebrity dental clinic as one of our clients is Koel Mallick, a renowned Bengali actress making us the top dental clinic.</p>
-                <p>As the only <strong>Dawson Academy-trained dentist in Eastern India</strong>, Dontia is widely recognized for smile design, dental implants, root canals, braces, and more - performed by a team of best dentists in Kolkata using state-of-the-art equipment and techniques.</p>
-                <p>With an unwavering focus on safety, precision, and patient satisfaction, Dontia is where <strong>science meets artistry</strong> - creating brighter smiles.</p>
+                <p>As the only <strong>Dawson Academy-trained dentist in Eastern India</strong>, <?php echo $dental_landing_brand_esc; ?> is widely recognized for smile design, dental implants, root canals, braces, and more - performed by a team of best dentists in Kolkata using state-of-the-art equipment and techniques.</p>
+                <p>With an unwavering focus on safety, precision, and patient satisfaction, <?php echo $dental_landing_brand_esc; ?> is where <strong>science meets artistry</strong> - creating brighter smiles.</p>
 
                 <div class="dr-about-locations">
                     <h3>Our Locations in Kolkata</h3>
