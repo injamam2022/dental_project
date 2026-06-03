@@ -420,6 +420,13 @@
 										</div>
 									</div>
 									<div class="form-group">
+										<label class="col-md-3 col-xs-12 control-label">Google site verification</label>
+										<div class="col-md-6 col-xs-12">
+											<input type="text" name="seo_google_site_verification" value="<?php echo isset($this->website['data']->seo_google_site_verification) ? htmlspecialchars($this->website['data']->seo_google_site_verification, ENT_QUOTES, 'UTF-8') : ''; ?>" class="form-control" placeholder="e.g. lG64Bd6prDWbpFSQnbEu1O8wA7ElwF6Jed6SD-zr8js"/>
+											<span class="help-block">Paste only the <code>content</code> value from Google Search Console (not the full meta tag).</span>
+										</div>
+									</div>
+									<div class="form-group">
 										<label class="col-md-3 col-xs-12 control-label">Head scripts (all pages)</label>
 										<div class="col-md-6 col-xs-12">
 											<textarea name="seo_head_scripts" class="form-control" rows="8" placeholder="Paste &lt;script&gt;...&lt;/script&gt; or &lt;meta name=&quot;google-site-verification&quot; ...&gt;"><?php echo htmlspecialchars(isset($this->website['data']->seo_head_scripts) ? (string) $this->website['data']->seo_head_scripts : '', ENT_QUOTES, 'UTF-8'); ?></textarea>

@@ -162,6 +162,13 @@ class Seo_meta_model extends CI_Model {
 		);
 		$head_scripts = trim($global_head_scripts . ($global_head_scripts !== '' && $page_head_scripts !== '' ? "\n" : '') . $page_head_scripts);
 
+		$google_site_verification = isset($w->seo_google_site_verification)
+			? trim((string) $w->seo_google_site_verification)
+			: '';
+		if ($google_site_verification === '') {
+			$google_site_verification = 'lG64Bd6prDWbpFSQnbEu1O8wA7ElwF6Jed6SD-zr8js';
+		}
+
 		return array(
 			'title' => $title,
 			'description' => $description,
@@ -178,6 +185,7 @@ class Seo_meta_model extends CI_Model {
 			'fb_app_id' => $fb_app,
 			'twitter_site' => $twitter_site,
 			'head_scripts' => $head_scripts,
+			'google_site_verification' => $google_site_verification,
 		);
 	}
 
@@ -205,6 +213,12 @@ class Seo_meta_model extends CI_Model {
 		$global_head_scripts = isset($w->seo_head_scripts) ? trim((string) $w->seo_head_scripts) : '';
 		$page_head_scripts = trim((string) ($overrides['head_scripts'] ?? ''));
 		$head_scripts = trim($global_head_scripts . ($global_head_scripts !== '' && $page_head_scripts !== '' ? "\n" : '') . $page_head_scripts);
+		$google_site_verification = isset($w->seo_google_site_verification)
+			? trim((string) $w->seo_google_site_verification)
+			: '';
+		if ($google_site_verification === '') {
+			$google_site_verification = 'lG64Bd6prDWbpFSQnbEu1O8wA7ElwF6Jed6SD-zr8js';
+		}
 		return array(
 			'title' => $title,
 			'description' => $description,
@@ -221,6 +235,7 @@ class Seo_meta_model extends CI_Model {
 			'fb_app_id' => '',
 			'twitter_site' => '',
 			'head_scripts' => $head_scripts,
+			'google_site_verification' => $google_site_verification,
 		);
 	}
 
