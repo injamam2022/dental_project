@@ -22,7 +22,7 @@ function schema_dentist_local_graph($w, $page_url)
 	if (isset($w->schema_business_name) && trim((string) $w->schema_business_name) !== '') {
 		$name = trim((string) $w->schema_business_name);
 	} elseif (isset($w->company_name) && trim((string) $w->company_name) !== '') {
-		$name = trim((string) $w->company_name) . ' - Dental';
+		$name = trim((string) $w->company_name);
 	}
 	if ($name === '') {
 		return null;

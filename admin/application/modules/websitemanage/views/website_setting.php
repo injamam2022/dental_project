@@ -438,7 +438,7 @@
 									<div class="form-group">
 										<label class="col-md-3 col-xs-12 control-label">Schema business name</label>
 										<div class="col-md-6 col-xs-12">
-											<input type="text" name="schema_business_name" value="<?php echo isset($this->website['data']->schema_business_name) ? htmlspecialchars($this->website['data']->schema_business_name, ENT_QUOTES, 'UTF-8') : ''; ?>" class="form-control" placeholder="e.g. Dontia Care Clinic - Dental (falls back to Company Name + &quot; - Dental&quot;)"/>
+											<input type="text" name="schema_business_name" value="<?php echo isset($this->website['data']->schema_business_name) ? htmlspecialchars($this->website['data']->schema_business_name, ENT_QUOTES, 'UTF-8') : ''; ?>" class="form-control" placeholder="e.g. Dontia Care Clinic (falls back to Company Name)"/>
 										</div>
 									</div>
 									<div class="form-group">
