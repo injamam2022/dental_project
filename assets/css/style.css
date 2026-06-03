@@ -93,8 +93,7 @@ p,.text{
 	margin:0 auto;
 	width:100%;
 	min-width:300px;
-	overflow-x: hidden;
-	overflow-y: visible;
+	overflow: hidden;
 	z-index: 99;
 }
 
@@ -492,11 +491,10 @@ img{
 	text-align:center;
 	z-index:100;
 	cursor:pointer;
-	background:#82665c;
+	background:#0070c5;
 	display:none;
 	border-radius: 50%;
 	padding: 5px 0px;
-	box-shadow: 0 4px 14px rgba(49, 19, 0, 0.22);
 	-webkit-transition:all 300ms ease;
 	-moz-transition:all 300ms ease;
 	-ms-transition:all 300ms ease;
@@ -505,8 +503,8 @@ img{
 }
 
 .scroll-to-top:hover{
-	background:#311300;
-	color: #ffffff;
+	background:#ff8a00;
+	color: #222222;
 }
 
 /*** 
@@ -2752,7 +2750,7 @@ header-style-seven .nav-toggler:hover{
 	}
 }
 
-/* Home hero: background YouTube embed (muted autoplay). */
+/* Home hero: lightweight poster first; iframe loads on user tap (mobile PageSpeed). */
 .home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-yt-facade{
 	position: absolute;
 	top: 53%;
@@ -2768,19 +2766,9 @@ header-style-seven .nav-toggler:hover{
 	cursor: pointer;
 	padding: 0;
 	background-color: #000;
-	overflow: hidden;
-}
-.home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-yt-facade.home-hero-yt-facade--gradient{
-	background: linear-gradient(145deg, #0f0c0b 0%, #311300 45%, #5c3d2e 100%);
-}
-.home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-yt-poster{
-	position: absolute;
-	inset: 0;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	display: block;
-	pointer-events: none;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 .home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-yt-facade:focus{
 	outline: 2px solid rgba(255,248,240,.85);

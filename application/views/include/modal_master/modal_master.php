@@ -12,22 +12,21 @@ $dontia_clinic_label = isset($CI->website['data']->company_name) ? $CI->website[
             </div>
             <h2 class="dontia-appt-modal__title" id="dontiaAppointmentModalLabel">Book An Appointment</h2>
             <div id="dontiaAppointmentFormWrap">
-            <?php $dontia_appt_submit_url = site_url('appointment/submit-booking'); ?>
-            <form id="dontiaAppointmentForm" action="<?php echo htmlspecialchars($dontia_appt_submit_url, ENT_QUOTES, 'UTF-8'); ?>" data-submit-url="<?php echo htmlspecialchars($dontia_appt_submit_url, ENT_QUOTES, 'UTF-8'); ?>" method="post" novalidate>
+            <form id="dontiaAppointmentForm" action="<?php echo site_url('Appointment/submit_booking'); ?>" method="post" novalidate>
                 <div class="form-group">
                     <label class="sr-only" for="dontia_appt_name">Name</label>
                     <input type="text" class="form-control dontia-appt-input" id="dontia_appt_name" name="name" placeholder="Enter Your Name" autocomplete="name"/>
                     <span class="dontia-appt-field-error" role="alert" aria-live="polite"></span>
                 </div>
-                <div class="dontia-appt-row">
-                    <div class="dontia-appt-col">
+                <div class="row dontia-appt-row">
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <label class="sr-only" for="dontia_appt_email">Email</label>
                             <input type="email" class="form-control dontia-appt-input" id="dontia_appt_email" name="email" placeholder="Enter Your Email id" autocomplete="email"/>
                             <span class="dontia-appt-field-error" role="alert" aria-live="polite"></span>
                         </div>
                     </div>
-                    <div class="dontia-appt-col">
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <label class="sr-only" for="dontia_appt_phone">Phone</label>
                             <input type="tel" class="form-control dontia-appt-input" id="dontia_appt_phone" name="phone" placeholder="Enter Your Phone No." autocomplete="tel"/>
@@ -64,6 +63,156 @@ $dontia_clinic_label = isset($CI->website['data']->company_name) ? $CI->website[
         </div>
     </div>
 </div>
+<script>
+(function ($) {
+    var allowedServices = ['Skin Treatment', 'Dental', 'ENT'];
+
+    function resetApptModalView() {
+        $('#dontiaAppointmentFormWrap').show();
+        $('#dontiaAppointmentModalLabel').show();
+        $('#dontiaAppointmentSuccess').removeClass('is-visible').attr('aria-hidden', 'true');
+    }
+
+    function showApptSuccess() {
+        $('#dontiaAppointmentFormWrap').hide();
+        $('#dontiaAppointmentModalLabel').hide();
+        $('#dontiaAppointmentSuccess').addClass('is-visible').attr('aria-hidden', 'false');
+    }
+
+    function clearDontiaApptErrors($form) {
+        $form.find('.dontia-appt-field-error').text('');
+        $form.find('.form-group').removeClass('has-error');
+        $form.find('.dontia-appt-input').removeClass('input-error');
+    }
+
+    function setDontiaApptError($input, message) {
+        var $fg = $input.closest('.form-group');
+        $fg.addClass('has-error');
+        $input.addClass('input-error');
+        $fg.find('.dontia-appt-field-error').text(message);
+    }
+
+    function validateDontiaApptForm($form) {
+        clearDontiaApptErrors($form);
+        var ok = true;
+        var name = $.trim($('#dontia_appt_name').val());
+        if (!name) {
+            setDontiaApptError($('#dontia_appt_name'), 'This field is required');
+            ok = false;
+        }
+        var email = $.trim($('#dontia_appt_email').val());
+        if (!email) {
+            setDontiaApptError($('#dontia_appt_email'), 'This field is required');
+            ok = false;
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            setDontiaApptError($('#dontia_appt_email'), 'Please enter a valid email');
+            ok = false;
+        }
+        var phone = $.trim($('#dontia_appt_phone').val());
+        if (!phone) {
+            setDontiaApptError($('#dontia_appt_phone'), 'This field is required');
+            ok = false;
+        } else if (phone.replace(/\D/g, '').length < 7) {
+            setDontiaApptError($('#dontia_appt_phone'), 'Please enter a valid phone number');
+            ok = false;
+        }
+        var svc = $('#dontia_appt_service').val();
+        if (!svc || allowedServices.indexOf(svc) === -1) {
+            setDontiaApptError($('#dontia_appt_service'), 'This field is required');
+            ok = false;
+        }
+        var dateVal = $.trim($('#dontia_appt_date').val());
+        if (!dateVal) {
+            setDontiaApptError($('#dontia_appt_date'), 'This field is required');
+            ok = false;
+        } else {
+            var d = new Date(dateVal + 'T12:00:00');
+            if (isNaN(d.getTime())) {
+                setDontiaApptError($('#dontia_appt_date'), 'Please choose a valid date');
+                ok = false;
+            } else {
+                var today = new Date();
+                today.setHours(0, 0, 0, 0);
+                if (d < today) {
+                    setDontiaApptError($('#dontia_appt_date'), 'Date cannot be in the past');
+                    ok = false;
+                }
+            }
+        }
+        return ok;
+    }
+
+    $('#dontiaAppointmentForm').on('input change', '.dontia-appt-input', function () {
+        var $f = $(this);
+        $f.closest('.form-group').removeClass('has-error');
+        $f.removeClass('input-error');
+        $f.closest('.form-group').find('.dontia-appt-field-error').text('');
+    });
+
+    $('#dontiaAppointmentModal').on('show.bs.modal', function (e) {
+        resetApptModalView();
+        var rel = $(e.relatedTarget);
+        var preset = rel.data('preselect-service');
+        if (preset && allowedServices.indexOf(String(preset)) !== -1) {
+            $('#dontia_appt_service').val(String(preset));
+        }
+    });
+
+    $('#dontiaAppointmentModal').on('hidden.bs.modal', function () {
+        var $form = $('#dontiaAppointmentForm');
+        $form[0].reset();
+        clearDontiaApptErrors($form);
+        resetApptModalView();
+    });
+
+    $('#dontiaAppointmentForm').on('submit', function (ev) {
+        ev.preventDefault();
+        var $form = $(this);
+        if (!validateDontiaApptForm($form)) {
+            var $fe = $form.find('.input-error').first();
+            if ($fe.length) {
+                $fe.focus();
+            }
+            return;
+        }
+        var $btn = $form.find('button[type=submit]');
+        $btn.prop('disabled', true);
+        $.ajax({
+            url: $form.attr('action'),
+            type: 'POST',
+            data: $form.serialize(),
+            dataType: 'json'
+        }).done(function (res) {
+            if (res && res.success) {
+                $form[0].reset();
+                clearDontiaApptErrors($form);
+                showApptSuccess();
+            } else {
+                var msg = (res && res.message) ? res.message : 'Please check the form and try again.';
+                if (typeof iziToast !== 'undefined') {
+                    iziToast.error({ title: 'Error', message: msg, position: 'topRight' });
+                } else {
+                    alert(msg);
+                }
+            }
+        }).fail(function (xhr) {
+            var msg = 'Something went wrong. Please try again.';
+            try {
+                var j = xhr.responseJSON;
+                if (j && j.message) msg = j.message;
+            } catch (err) {}
+            if (typeof iziToast !== 'undefined') {
+                iziToast.error({ title: 'Error', message: msg, position: 'topRight' });
+            } else {
+                alert(msg);
+            }
+        }).always(function () {
+            $btn.prop('disabled', false);
+        });
+    });
+})(jQuery);
+</script>
+
 <div class="modal fade" id="Signup_modal" role="dialog">
     <div class="modal-dialog">
     
@@ -189,13 +338,15 @@ $dontia_clinic_label = isset($CI->website['data']->company_name) ? $CI->website[
                  
 
 
+    <script defer src="<?php echo base_url(); ?>assets/mainjs/userinfo.js"></script>
 <?php
-$this->load->helper('dontia_performance');
-$_dcc_dental_lite_js = dontia_is_marketing_lite_page();
+$_dcc_dental_lite_js = (strtolower((string) $this->router->fetch_class()) === 'dental');
 if (empty($_dcc_dental_lite_js)) {
 ?>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.3.0/js/iziToast.min.js"></script>
+    <script defer src="<?php echo base_url(); ?>assets/js/Carousel.js"></script>
+    <script defer src="<?php echo base_url(); ?>assets/js/lightslider.js"></script>
 <?php } ?>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.3.0/js/iziToast.min.js"></script>
 
 
  

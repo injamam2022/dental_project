@@ -14,7 +14,11 @@ class Home extends Frontend_Controller {
     
 	public function index()
 	{
-		$this->load->helper(array('dontia_responsive_images', 'dontia_performance', 'dontia_doctors'));
+		$this->seo_overrides = array(
+			'title' => 'Multispeciality clinic in Kolkata, WB | Dental | Skin & Hair | ENT',
+			'description' => 'Experience world-class Dental, ENT, and Aesthetic Skin & Hair care at Dontia Care Clinic, Kolkata. Book your appointment for expert health solutions.',
+		);
+		$this->load->helper('dontia_responsive_images');
         $content['Services']=$this->Home_Model->GetProduct();
         $content['banner_details']=$this->Home_Model->GetBanner();
         $content['partner_details']=$this->Home_Model->GetPartner();
@@ -25,7 +29,6 @@ class Home extends Frontend_Controller {
 		$content['technology_cards'] = $this->build_dental_technology_cards();
 		$tv = $this->dentalModel->get_active_testimonial_videos();
 		$content['testimonial_videos'] = is_array($tv) ? $tv : array();
-		$content['doctor_list'] = $this->dentalModel->get_active_doctors();
 
 		$content['home_about_image'] = array(
 			'src' => '',
@@ -41,6 +44,15 @@ class Home extends Frontend_Controller {
 				$content['home_about_image'] = dontia_home_about_responsive_attrs($hp0[0][1]);
 			}
 		}
+		$lcp_preloads = array();
+		if (!empty($content['home_about_image']['preload'])) {
+			$lcp_preloads[] = $content['home_about_image']['preload'];
+		}
+		if (!empty($lcp_preloads)) {
+			$this->seo_overrides['lcp_preload_images'] = $lcp_preloads;
+		}
+		$this->seo_overrides['preconnect_youtube'] = true;
+
 		$content['subview']="home_page";
 //        echo "<pre>";print_r($content);die;
 		$this->load->view('layout/default', $content);

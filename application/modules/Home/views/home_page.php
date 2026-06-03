@@ -25,17 +25,23 @@ if (!is_array($home_body)) {
                 $home_hero_embed_url = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($home_hero_yt_id)
                     . '?autoplay=1&mute=1&playsinline=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&rel=0&modestbranding=1'
                     . '&loop=1&playlist=' . rawurlencode($home_hero_yt_id);
-                $home_hero_embed_esc = htmlspecialchars($home_hero_embed_url, ENT_QUOTES, 'UTF-8');
                 ?>
 
                 <div class="carousel-item active">
-                    <div class="home-hero-youtube-cover" id="homeHeroYoutubeCover" data-embed="<?php echo $home_hero_embed_esc; ?>">
-                        <div class="home-hero-yt-facade home-hero-yt-facade--gradient" aria-hidden="true"></div>
+                    <div class="home-hero-youtube-cover is-playing">
+                        <iframe
+                            class="home-hero-youtube-iframe"
+                            src="<?php echo htmlspecialchars($home_hero_embed_url, ENT_QUOTES, 'UTF-8'); ?>"
+                            title="Dontia Care Clinic — welcome video"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen
+                            loading="eager"
+                        ></iframe>
                     </div>
 
                     <div class="hero-slide-overlay" aria-hidden="true"></div>
 
-                    <div class="content-box dontia-hero-content-box">
+                    <div class="content-box">
                         <div class="hero-content-card">
                             <div class="hero-banner-text">
                                 <div class="hero-banner-title"><?php echo $hero_title; ?></div>
@@ -56,7 +62,7 @@ if (!is_array($home_body)) {
     $dontia_about_company = isset($this->website['data']->company_name) ? trim(strip_tags($this->website['data']->company_name)) : 'Dontia Care Clinic';
     $dontia_about_company_esc = htmlspecialchars($dontia_about_company, ENT_QUOTES, 'UTF-8');
     ?>
-    <section class="about-section dontia-home-about">
+    <section class="about-section dontia-home-about" style="background-image: url(<?php echo base_url('assets/'); ?>images/background/1.jpg);">
         <div class="auto-container">
             <header class="dontia-about-intro">
                 <h1 class="dontia-about-intro-title">About Dontiacareclinic</h1>
@@ -80,30 +86,26 @@ if (!is_array($home_body)) {
                     <div class="image-column col-lg-6 col-md-12 col-sm-12">
                         <div class="inner-column dontia-about-visual">
                             <div class="image-box dontia-about-photos">
-                                <figure class="image dontia-about-figure">
+                                <figure class="image wow fadeInRight" data-wow-delay="200ms">
                                     <?php
-                                    $about_fn = isset($home_body[0][1]) ? basename((string) $home_body[0][1]) : '';
+                                    $about_fn = isset($home_body[0][1]) ? (string) $home_body[0][1] : '';
                                     $hai = isset($home_about_image) && is_array($home_about_image) ? $home_about_image : array();
                                     if (empty($hai['src']) && $about_fn !== '') {
-                                        $hai['src'] = rtrim(base_url('admin/webroot/uploads/home/'), '/') . '/' . rawurlencode($about_fn);
+                                        $hai['src'] = base_url('admin/webroot/uploads/home/') . $about_fn;
                                     }
-                                    $about_src_esc = !empty($hai['src'])
-                                        ? htmlspecialchars((string) $hai['src'], ENT_QUOTES, 'UTF-8')
-                                        : '';
-                                    if ($about_src_esc !== '') {
+                                    $about_src_esc = htmlspecialchars(isset($hai['src']) ? $hai['src'] : '', ENT_QUOTES, 'UTF-8');
                                     ?>
                                     <img src="<?php echo $about_src_esc; ?>"
                                         <?php if (!empty($hai['srcset'])) { ?>srcset="<?php echo htmlspecialchars($hai['srcset'], ENT_QUOTES, 'UTF-8'); ?>" sizes="<?php echo htmlspecialchars(isset($hai['sizes']) ? $hai['sizes'] : '(max-width: 991px) 100vw, 50vw', ENT_QUOTES, 'UTF-8'); ?>"<?php } ?>
                                         alt="<?php echo $dontia_about_company_esc; ?>"
                                         <?php if (!empty($hai['width']) && !empty($hai['height'])) { ?>width="<?php echo (int) $hai['width']; ?>" height="<?php echo (int) $hai['height']; ?>"<?php } ?>
-                                        loading="lazy" decoding="async">
-                                    <?php } ?>
+                                        decoding="async" fetchpriority="high">
                                 </figure>
                             </div>
                         </div>
                     </div>
                     <div class="content-column col-lg-6 col-md-12 col-sm-12">
-                        <div class="inner-column dontia-about-content">
+                        <div class="inner-column wow fadeInLeft">
                             <div class="content-box dontia-about-card">
                                 <div class="text dontia-about-body"><?php echo $home_body[0][0]; ?></div>
                                 <div class="link-box"><a href="<?php echo base_url('about-us'); ?>" class="theme-btn btn-style-one dontia-about-cta">About Us</a></div>
@@ -139,7 +141,7 @@ $dontia_show_tabs = $dontia_has_dental && $dontia_has_skin;
 $dontia_render_dental_panel = ($dontia_has_dental || $dontia_show_tabs);
 $dontia_render_skin_panel = ($dontia_has_skin || $dontia_show_tabs);
 ?>
-<section class="after-slider-wrap dontia-services-section">
+<section class="after-slider-wrap dontia-services-section" style="background-image: url(<?php echo base_url('assets/'); ?>images/background/2.jpg);">
     <div class="container">
         <header class="dontia-services-intro">
             <h2 class="dontia-services-intro-title">Our Service</h2>
@@ -193,7 +195,6 @@ $dontia_render_skin_panel = ($dontia_has_skin || $dontia_show_tabs);
         <?php } ?>
 
         <?php
-        $this->load->helper('dontia_performance');
         $dontia_render_cards = function ($list, $appt_service_preset = '') {
             if (empty($list)) {
                 echo '<div class="col-12"><p class="dontia-services-empty">No services to show yet.</p></div>';
@@ -202,9 +203,8 @@ $dontia_render_skin_panel = ($dontia_has_skin || $dontia_show_tabs);
             $preset_esc = htmlspecialchars($appt_service_preset, ENT_QUOTES, 'UTF-8');
             foreach ($list as $svc) {
                 $detail = base_url('Services/' . (int) $svc->pro_id . '/0/detail');
-                $pic = !empty($svc->pro_image) ? dontia_service_card_picture($svc->pro_image, $svc->product_name) : null;
+                $img = !empty($svc->pro_image) ? base_url('admin/webroot/uploads/product/') . $svc->pro_image : '';
                 $name = htmlspecialchars($svc->product_name, ENT_QUOTES, 'UTF-8');
-                $ring_label = htmlspecialchars('View ' . trim(strip_tags((string) $svc->product_name)), ENT_QUOTES, 'UTF-8');
                 $plain = trim(preg_replace('/\s+/', ' ', strip_tags((string) $svc->product_description)));
                 $excerpt = $plain;
                 if (strlen($excerpt) > 130) {
@@ -213,24 +213,15 @@ $dontia_render_skin_panel = ($dontia_has_skin || $dontia_show_tabs);
                 ?>
         <div class="col-lg-4 col-md-6 col-sm-12">
             <article class="dontia-service-card">
-                <a href="<?php echo $detail; ?>" class="dontia-service-card-ring" aria-label="<?php echo $ring_label; ?>">
-                    <?php if (is_array($pic) && $pic['src'] !== '') {
-                        $pic_alt = htmlspecialchars(trim(strip_tags((string) $svc->product_name)), ENT_QUOTES, 'UTF-8');
-                        ?>
-                    <picture>
-                        <?php if ($pic['webp_srcset'] !== '') { ?>
-                        <source type="image/webp" srcset="<?php echo htmlspecialchars($pic['webp_srcset'], ENT_QUOTES, 'UTF-8'); ?>" sizes="<?php echo htmlspecialchars($pic['sizes'], ENT_QUOTES, 'UTF-8'); ?>">
-                        <?php } ?>
-                        <img class="dontia-service-card-img" src="<?php echo htmlspecialchars($pic['src'], ENT_QUOTES, 'UTF-8'); ?>"
-                            <?php if ($pic['srcset'] !== '') { ?>srcset="<?php echo htmlspecialchars($pic['srcset'], ENT_QUOTES, 'UTF-8'); ?>" sizes="<?php echo htmlspecialchars($pic['sizes'], ENT_QUOTES, 'UTF-8'); ?>"<?php } ?>
-                            alt="<?php echo $pic_alt; ?>" width="100" height="100" loading="lazy" decoding="async">
-                    </picture>
+                <a href="<?php echo $detail; ?>" class="dontia-service-card-ring">
+                    <?php if ($img !== '') { ?>
+                    <span class="dontia-service-card-img" style="background-image:url('<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>')"></span>
                     <?php } else { ?>
-                    <span class="dontia-service-card-img dontia-service-card-img--placeholder" aria-hidden="true"></span>
+                    <span class="dontia-service-card-img dontia-service-card-img--placeholder"></span>
                     <?php } ?>
                 </a>
                 <h3 class="dontia-service-card-title"><a href="<?php echo $detail; ?>"><?php echo $name; ?></a></h3>
-                <p class="dontia-service-card-desc"><em><?php echo htmlspecialchars($excerpt, ENT_QUOTES, 'UTF-8'); ?> <a href="<?php echo $detail; ?>" class="dontia-service-card-more">Read more about <?php echo $name; ?></a></em></p>
+                <p class="dontia-service-card-desc"><em><?php echo htmlspecialchars($excerpt, ENT_QUOTES, 'UTF-8'); ?> <a href="<?php echo $detail; ?>" class="dontia-service-card-more">read more</a></em></p>
                 <a href="#" class="dontia-service-card-book" data-toggle="modal" data-target="#dontiaAppointmentModal"<?php echo $appt_service_preset !== '' ? ' data-preselect-service="'.$preset_esc.'"' : ''; ?>>Book Now</a>
             </article>
         </div>
@@ -265,36 +256,30 @@ $dontia_render_skin_panel = ($dontia_has_skin || $dontia_show_tabs);
 $tech_title = (isset($technology_settings) && !empty($technology_settings->section_title))
     ? $technology_settings->section_title
     : 'Latest Technology';
-$this->load->helper('dontia_doctors');
-$db_team = isset($doctor_list) && is_array($doctor_list) ? dontia_home_team_from_doctors($doctor_list) : array();
-if (count($db_team) > 0) {
-    $dontia_team_members = $db_team;
-} else {
-    $dontia_team_members = array(
-        array(
-            'name' => 'Dr. Harleen Kaur Sethi',
-            'role' => 'Principal Dentist',
-            'photo' => 'dr-harleen.png',
-            'social' => array(
-                'facebook' => '',
-                'twitter' => '',
-                'youtube' => '',
-                'linkedin' => '',
-            ),
+$dontia_team_members = array(
+    array(
+        'name' => 'Dr. Harleen Kaur Sethi',
+        'role' => 'Principal Dentist',
+        'photo' => 'dr-harleen.png',
+        'social' => array(
+            'facebook' => '',
+            'twitter' => '',
+            'youtube' => '',
+            'linkedin' => '',
         ),
-        array(
-            'name' => 'Dr. Prabhjeet Singh Sethi',
-            'role' => 'Principal Dentist',
-            'photo' => 'dr-prabhjeet.png',
-            'social' => array(
-                'facebook' => '',
-                'twitter' => '',
-                'youtube' => '',
-                'linkedin' => '',
-            ),
+    ),
+    array(
+        'name' => 'Dr. Prabhjeet Singh Sethi',
+        'role' => 'Principal Dentist',
+        'photo' => 'dr-prabhjeet.png',
+        'social' => array(
+            'facebook' => '',
+            'twitter' => '',
+            'youtube' => '',
+            'linkedin' => '',
         ),
-    );
-}
+    ),
+);
 $dontia_team_placeholder = base_url('assets/images/team/placeholder.svg');
 ?>
 <h3 class="sr-only">Dental Services</h3>
@@ -315,9 +300,7 @@ $dontia_team_placeholder = base_url('assets/images/team/placeholder.svg');
             foreach ($technology_cards as $ti) {
                 $img_esc = htmlspecialchars(isset($ti['image_url']) ? $ti['image_url'] : '', ENT_QUOTES, 'UTF-8');
                 $ti_srcset = isset($ti['image_srcset']) ? $ti['image_srcset'] : '';
-                $ti_webp = isset($ti['image_webp_srcset']) ? $ti['image_webp_srcset'] : '';
                 $ti_srcset_esc = htmlspecialchars($ti_srcset, ENT_QUOTES, 'UTF-8');
-                $ti_webp_esc = htmlspecialchars($ti_webp, ENT_QUOTES, 'UTF-8');
                 $ti_sizes_esc = htmlspecialchars(isset($ti['image_sizes']) ? $ti['image_sizes'] : '', ENT_QUOTES, 'UTF-8');
                 $lab_esc = htmlspecialchars(isset($ti['title']) ? $ti['title'] : '', ENT_QUOTES, 'UTF-8');
                 $desc_esc = htmlspecialchars(isset($ti['description']) ? $ti['description'] : '', ENT_QUOTES, 'UTF-8');
@@ -327,12 +310,7 @@ $dontia_team_placeholder = base_url('assets/images/team/placeholder.svg');
                 $ti_w = isset($ti['img_width']) ? (int) $ti['img_width'] : 0;
                 $ti_h = isset($ti['img_height']) ? (int) $ti['img_height'] : 0;
                 ?>
-                <picture>
-                    <?php if ($ti_webp !== '') { ?>
-                    <source type="image/webp" srcset="<?php echo $ti_webp_esc; ?>" sizes="<?php echo $ti_sizes_esc; ?>">
-                    <?php } ?>
-                    <img src="<?php echo $img_esc; ?>" alt="<?php echo $lab_esc; ?>"<?php if ($ti_srcset !== '') { ?> srcset="<?php echo $ti_srcset_esc; ?>" sizes="<?php echo $ti_sizes_esc; ?>"<?php } ?><?php if ($ti_w > 0 && $ti_h > 0) { ?> width="<?php echo $ti_w; ?>" height="<?php echo $ti_h; ?>"<?php } ?> loading="lazy" decoding="async">
-                </picture>
+                <img src="<?php echo $img_esc; ?>" alt="<?php echo $lab_esc; ?>"<?php if ($ti_srcset !== '') { ?> srcset="<?php echo $ti_srcset_esc; ?>" sizes="<?php echo $ti_sizes_esc; ?>"<?php } ?><?php if ($ti_w > 0 && $ti_h > 0) { ?> width="<?php echo $ti_w; ?>" height="<?php echo $ti_h; ?>"<?php } ?> loading="lazy" decoding="async">
                 <div class="dr-tech-overlay">
                     <h3><?php echo $lab_esc; ?></h3>
                     <p class="dr-tech-desc"><?php echo $desc_esc; ?></p>
@@ -357,15 +335,11 @@ $dontia_team_placeholder = base_url('assets/images/team/placeholder.svg');
                     foreach ($dontia_team_members as $member) {
                         $name_esc = htmlspecialchars($member['name'], ENT_QUOTES, 'UTF-8');
                         $role_esc = htmlspecialchars($member['role'], ENT_QUOTES, 'UTF-8');
-                        if (!empty($member['photo_url'])) {
-                            $photo_url = (string) $member['photo_url'];
-                        } else {
-                            $photo_rel = isset($member['photo']) ? $member['photo'] : '';
-                            $photo_path = $photo_rel !== '' ? FCPATH . 'assets/images/team/' . $photo_rel : '';
-                            $photo_url = ($photo_rel !== '' && is_file($photo_path))
-                                ? base_url('assets/images/team/' . $photo_rel)
-                                : $dontia_team_placeholder;
-                        }
+                        $photo_rel = isset($member['photo']) ? $member['photo'] : '';
+                        $photo_path = $photo_rel !== '' ? FCPATH . 'assets/images/team/' . $photo_rel : '';
+                        $photo_url = ($photo_rel !== '' && is_file($photo_path))
+                            ? base_url('assets/images/team/' . $photo_rel)
+                            : $dontia_team_placeholder;
                         $photo_url_esc = htmlspecialchars($photo_url, ENT_QUOTES, 'UTF-8');
                         $soc_map = array(
                             'facebook' => array('icon' => 'fa-facebook', 'label' => 'Facebook'),
@@ -550,7 +524,7 @@ unset($dontia_parse_youtube_id);
                     $watch = 'https://www.youtube.com/watch?v=' . $yid;
                     ?>
                 <a class="dontia-testimonial-video-card" href="<?php echo htmlspecialchars($watch, ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener noreferrer">
-                    <img class="dontia-testimonial-video-thumb" src="<?php echo htmlspecialchars($thumb, ENT_QUOTES, 'UTF-8'); ?>" alt="" width="320" height="180" loading="lazy" decoding="async">
+                    <span class="dontia-testimonial-video-thumb" style="background-image:url('<?php echo htmlspecialchars($thumb, ENT_QUOTES, 'UTF-8'); ?>')"></span>
                     <span class="dontia-testimonial-video-play" aria-hidden="true"><span class="fa fa-youtube-play"></span></span>
                     <?php if ($vlabel !== '') { ?>
                     <span class="dontia-testimonial-video-label"><?php echo $vlabel; ?></span>
@@ -604,6 +578,4 @@ unset($dontia_parse_youtube_id);
             </div>
         </div>
     </section> -->
-
-<script defer src="<?php echo rtrim(base_url('assets/js/'), '/') . '/'; ?>home-hero-youtube.js"></script>
-
+   

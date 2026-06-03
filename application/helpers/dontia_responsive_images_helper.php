@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @param string $sizes Value for the sizes attribute
  * @return array{src:string,srcset:string,sizes:string,width:int,height:int,has_variants:bool,preload_mid:string}
  */
-function dontia_responsive_upload_image($subdir, $filename, $sizes, array $widths = null)
+function dontia_responsive_upload_image($subdir, $filename, $sizes)
 {
 	$subdir = trim(str_replace(array('..', '\\'), array('', '/'), (string) $subdir), '/');
 	$filename = basename((string) $filename);
@@ -46,11 +46,7 @@ function dontia_responsive_upload_image($subdir, $filename, $sizes, array $width
 	$stem = isset($pi['filename']) ? $pi['filename'] : $filename;
 	$ext = isset($pi['extension']) ? $pi['extension'] : '';
 
-	if ($widths === null) {
-		$widths = ($subdir === 'product')
-			? array(100, 200, 400)
-			: array(480, 768, 1024, 1280, 1600, 1920);
-	}
+	$widths = array(480, 768, 1024, 1280, 1600, 1920);
 	$ext_variants = array_unique(array_filter(array($ext, strtolower((string) $ext), strtoupper((string) $ext))));
 	$parts = array();
 	foreach ($widths as $w) {
@@ -67,19 +63,13 @@ function dontia_responsive_upload_image($subdir, $filename, $sizes, array $width
 	}
 
 	$orig_w = $out['width'] > 0 ? $out['width'] : 2400;
-	$variant_count = count($parts);
-	$orig_bytes = filesize($path_orig);
-	$skip_huge_orig = ($subdir === 'product' && $orig_bytes > 80000)
-		|| ($subdir === 'home' && $orig_bytes > 250000);
-	if (!$skip_huge_orig) {
-		$parts[] = array(
-			'w' => $orig_w,
-			'url' => $dir_url . rawurlencode($filename),
-			'file' => $path_orig,
-		);
-	} elseif ($variant_count === 0) {
-		return $out;
-	}
+	$parts[] = array(
+		'w' => $orig_w,
+		'url' => $dir_url . rawurlencode($filename),
+		'file' => $path_orig,
+	);
+
+	$variant_count = count($parts) - 1;
 	$out['has_variants'] = $variant_count > 0;
 
 	$srcset_bits = array();
@@ -89,9 +79,8 @@ function dontia_responsive_upload_image($subdir, $filename, $sizes, array $width
 	$out['srcset'] = implode(', ', $srcset_bits);
 
 	$pick = $parts[0];
-	$pick_target = ($subdir === 'product') ? 200 : 768;
 	foreach ($parts as $p) {
-		if ((int) $p['w'] >= $pick_target) {
+		if ((int) $p['w'] >= 768) {
 			$pick = $p;
 			break;
 		}
@@ -148,12 +137,6 @@ function dontia_enrich_technology_card_image(array &$card)
 		$card['image_srcset'] = $resp['srcset'];
 		$card['image_sizes'] = $resp['sizes'];
 	}
-	$CI =& get_instance();
-	$CI->load->helper('dontia_performance');
-	$pic = dontia_upload_picture_attrs($subdir, $bn, $card['image_sizes']);
-	if ($pic['webp_srcset'] !== '') {
-		$card['image_webp_srcset'] = $pic['webp_srcset'];
-	}
 }
 
 /**
@@ -165,36 +148,24 @@ function dontia_enrich_technology_card_image(array &$card)
 function dontia_home_about_responsive_attrs($filename)
 {
 	$r = dontia_responsive_upload_image('home', $filename, '(max-width: 991px) 100vw, 50vw');
-	$CI =& get_instance();
-	$CI->load->helper('dontia_performance');
-	$smaller = dontia_upload_smaller_src_override('home', $filename);
-	if ($smaller !== '') {
-		$orig_fs = FCPATH . 'admin/webroot/uploads/home/' . basename((string) $filename);
-		if (is_file($orig_fs) && filesize($orig_fs) > 400000) {
-			$r['src'] = $smaller;
-			$r['has_variants'] = true;
+	$preload = '';
+	if ($r['has_variants'] && $r['preload_mid'] !== '') {
+		$preload = $r['preload_mid'];
+	} else {
+		$path_orig = FCPATH . 'admin/webroot/uploads/home/' . basename((string) $filename);
+		if (is_file($path_orig)) {
+			$sz = @filesize($path_orig);
+			if (is_int($sz) && $sz < 600 * 1024) {
+				$preload = $r['src'] !== '' ? $r['src'] : (rtrim(base_url('admin/webroot/uploads/home/'), '/') . '/' . rawurlencode(basename((string) $filename)));
+			}
 		}
 	}
-	$orig_fs = FCPATH . 'admin/webroot/uploads/home/' . basename((string) $filename);
-	$src = $r['src'];
-	if ($src === '' && $filename !== '' && is_file($orig_fs)) {
-		$src = rtrim(base_url('admin/webroot/uploads/home/'), '/') . '/' . rawurlencode(basename((string) $filename));
-	}
-	if ($smaller !== '') {
-		$src = $smaller;
-	} elseif ($src === '' && $r['srcset'] !== '') {
-		$first = trim(explode(',', $r['srcset'])[0]);
-		$src = trim(explode(' ', $first)[0]);
-	}
-
-	$preload = $r['preload_mid'] !== '' ? $r['preload_mid'] : $src;
 	return array(
-		'src' => $src,
+		'src' => $r['src'],
 		'srcset' => $r['srcset'],
 		'sizes' => $r['sizes'],
 		'width' => $r['width'],
 		'height' => $r['height'],
 		'preload' => $preload,
-		'skip_huge' => false,
 	);
 }

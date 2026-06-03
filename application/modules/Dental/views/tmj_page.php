@@ -365,3 +365,4 @@ $tmj_yt_poster = (is_file($tmj_yt_poster_local))
 </script>
 
 <?php $this->load->view('include/footer/footer'); ?>
+<?php $this->load->view('include/modal_master/modal_master'); ?>

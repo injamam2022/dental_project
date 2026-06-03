@@ -272,39 +272,7 @@
 
 	// Home — full-width testimonial hero (reference layout)
 	if ($('.dontia-testimonial-carousel').length) {
-		var $dccTestimonial = $('.dontia-testimonial-carousel');
-		var dontiaEnsureOwl = function (cb) {
-			if ($.fn.owlCarousel) {
-				cb();
-				return;
-			}
-			var src = window.__dontiaOwlSrc;
-			if (!src) {
-				return;
-			}
-			var pending = window.__dontiaOwlPending;
-			if (!pending) {
-				pending = [];
-				window.__dontiaOwlPending = pending;
-				var s = document.createElement('script');
-				s.src = src;
-				s.async = true;
-				s.onload = function () {
-					var q = window.__dontiaOwlPending || [];
-					window.__dontiaOwlPending = null;
-					q.forEach(function (fn) { fn(); });
-				};
-				document.body.appendChild(s);
-			}
-			pending.push(cb);
-		};
-		var dccInitTestimonialOwl = function () {
-			if ($dccTestimonial.data('owl.carousel')) {
-				return;
-			}
-			dontiaEnsureOwl(function () {
-			if (!$dccTestimonial.data('owl.carousel')) {
-			$dccTestimonial.owlCarousel({
+		$('.dontia-testimonial-carousel').owlCarousel({
 			loop: true,
 			margin: 0,
 			nav: true,
@@ -319,25 +287,7 @@
 				800: { items: 1 },
 				1024: { items: 1 }
 			}
-			});
-			}
-			});
-		};
-		var $dccTestimonialEl = $dccTestimonial.get(0);
-		if ($dccTestimonialEl && 'IntersectionObserver' in window) {
-			var dccTestimonialObs = new IntersectionObserver(function (entries, obs) {
-				entries.forEach(function (entry) {
-					if (!entry.isIntersecting) {
-						return;
-					}
-					dccInitTestimonialOwl();
-					obs.disconnect();
-				});
-			}, { rootMargin: '200px 0px' });
-			dccTestimonialObs.observe($dccTestimonialEl);
-		} else {
-			dccInitTestimonialOwl();
-		}
+		});
 	}
 
 	//Testimonial Carousel two
@@ -720,8 +670,8 @@
 		});
 	}
 	
-	// Elements Animation (skip when wow.js not loaded — home lite bundle)
-	if($('.wow').length && typeof WOW !== 'undefined'){
+	// Elements Animation
+	if($('.wow').length){
 		var wow = new WOW(
 		  {
 			boxClass:     'wow',      // animated element css class (default is wow)
