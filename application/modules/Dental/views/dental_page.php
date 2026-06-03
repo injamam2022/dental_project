@@ -1,7 +1,7 @@
 <?php
 $w = isset($this->website['data']) ? $this->website['data'] : new stdClass();
-/** /best-dental-clinic-in-kolkata only — page copy uses “Dental” instead of the sitewide clinic name. */
-$dental_landing_brand = 'Dental';
+/** /best-dental-clinic-in-kolkata only — page copy uses this brand instead of the sitewide clinic name. */
+$dental_landing_brand = 'Dontia Care Clinic-Dental';
 $dental_landing_brand_esc = htmlspecialchars($dental_landing_brand, ENT_QUOTES, 'UTF-8');
 $logo = !empty($w->company_logo) ? base_url('admin/webroot/uploads/logo/' . $w->company_logo) : base_url('assets/images/favicon.png');
 $address_1 = isset($w->address) ? trim((string) $w->address) : 'Avani Vision, 78 S.N Pandit Street, Kolkata 20';
