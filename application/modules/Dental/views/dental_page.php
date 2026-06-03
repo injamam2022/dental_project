@@ -1,7 +1,8 @@
 <?php
 $w = isset($this->website['data']) ? $this->website['data'] : new stdClass();
-$company = isset($w->company_name) && trim((string) $w->company_name) !== '' ? trim((string) $w->company_name) : 'Dontia Care Clinic';
-$company_esc = htmlspecialchars($company, ENT_QUOTES, 'UTF-8');
+/** Branding copy for /best-dental-clinic-in-kolkata only — not used in sitewide header/footer. */
+$dental_landing_brand = 'Dontia Care Clinic';
+$dental_landing_brand_esc = htmlspecialchars($dental_landing_brand, ENT_QUOTES, 'UTF-8');
 $logo = !empty($w->company_logo) ? base_url('admin/webroot/uploads/logo/' . $w->company_logo) : base_url('assets/images/favicon.png');
 $address_1 = isset($w->address) ? trim((string) $w->address) : 'Avani Vision, 78 S.N Pandit Street, Kolkata 20';
 $address_2 = isset($w->corporate_address) ? trim((string) $w->corporate_address) : 'Suite 306, P.S Aviator Chinar Park, Kolkata';
@@ -180,7 +181,7 @@ if (function_exists('GetServices')) {
         <img src="<?php echo htmlspecialchars($hero_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Dental Clinic Banner" width="1920" height="1080" decoding="async" fetchpriority="high">
         <div class="dr-hero-overlay"></div>
         <div class="dr-hero-content dr-container">
-            <h2><?php echo $company_esc; ?></h2>
+            <h2><?php echo $dental_landing_brand_esc; ?></h2>
             <p>Your One-Stop Destination for a<br>Radiant Smile &amp; Dental Needs</p>
         </div>
     </section>
@@ -188,8 +189,8 @@ if (function_exists('GetServices')) {
     <section id="about" class="dr-section dr-about">
         <div class="dr-container dr-grid">
             <div>
-                <h2>Welcome To <span><?php echo $company_esc; ?></span> in Kolkata</h2>
-                <p>Founded in 2001, <?php echo $company_esc; ?> is Kolkata's premier destination for advanced dental care. We bring comprehensive care with precision, compassion, and cutting-edge technology for our patients. We are also termed as a celebrity dental clinic as one of our clients is Koel Mallick, a renowned Bengali actress making us the top dental clinic.</p>
+                <h2>Welcome To <span><?php echo $dental_landing_brand_esc; ?></span> in Kolkata</h2>
+                <p>Founded in 2001, <?php echo $dental_landing_brand_esc; ?> is Kolkata's premier destination for advanced dental care. We bring comprehensive care with precision, compassion, and cutting-edge technology for our patients. We are also termed as a celebrity dental clinic as one of our clients is Koel Mallick, a renowned Bengali actress making us the top dental clinic.</p>
                 <p>As the only <strong>Dawson Academy-trained dentist in Eastern India</strong>, Dontia is widely recognized for smile design, dental implants, root canals, braces, and more - performed by a team of best dentists in Kolkata using state-of-the-art equipment and techniques.</p>
                 <p>With an unwavering focus on safety, precision, and patient satisfaction, Dontia is where <strong>science meets artistry</strong> - creating brighter smiles.</p>
 
@@ -218,7 +219,7 @@ if (function_exists('GetServices')) {
                     $about_img = site_url('admin/webroot/uploads/dental_media/' . $media_about_list[0]->image_name);
                 }
                 ?>
-                <img src="<?php echo htmlspecialchars($about_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo $company_esc; ?>" loading="lazy" decoding="async">
+                <img src="<?php echo htmlspecialchars($about_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo $dental_landing_brand_esc; ?>" loading="lazy" decoding="async">
             </div>
         </div>
     </section>
@@ -531,7 +532,7 @@ if (function_exists('GetServices')) {
     <section class="dr-section dr-google">
         <div class="dr-container">
             <h4>Google Reviews</h4>
-            <p class="dr-sub">See what our patients are saying about their experience at <?php echo $company_esc; ?></p>
+            <p class="dr-sub">See what our patients are saying about their experience at <?php echo $dental_landing_brand_esc; ?></p>
             <a class="dr-btn dr-btn-inline" href="https://maps.app.goo.gl/Ujpqv8hHVHVkWBeL9" target="_blank" rel="noopener noreferrer">View All Reviews on Google</a>
         </div>
     </section>
