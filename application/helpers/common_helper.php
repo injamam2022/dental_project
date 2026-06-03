@@ -211,6 +211,33 @@
 	}
    
 
+if (!function_exists('dontia_company_logo_url')) {
+	/**
+	 * Logo URL from admin Website Settings, or a static fallback.
+	 *
+	 * @param string $fallback_relative Path under site root, e.g. assets/images/branding/header-logo-96w.png
+	 */
+	function dontia_company_logo_url($fallback_relative = 'assets/images/branding/header-logo-96w.png')
+	{
+		$CI =& get_instance();
+		$filename = '';
+		if (isset($CI->website['data']->company_logo)) {
+			$filename = trim((string) $CI->website['data']->company_logo);
+		}
+		if ($filename !== '') {
+			return base_url('admin/webroot/uploads/logo/' . $filename);
+		}
+		return base_url(ltrim($fallback_relative, '/'));
+	}
+}
+
+if (!function_exists('dontia_company_logo_is_uploaded')) {
+	function dontia_company_logo_is_uploaded()
+	{
+		$CI =& get_instance();
+		return isset($CI->website['data']->company_logo)
+			&& trim((string) $CI->website['data']->company_logo) !== '';
+	}
+}
+
         
-        
-	

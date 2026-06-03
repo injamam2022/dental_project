@@ -1,9 +1,6 @@
- 
 <?php
-$this->load->helper('dontia_performance');
-$_dcc_router_class_footer = strtolower((string) $this->router->fetch_class());
-$dental_lite_scripts = ($_dcc_router_class_footer === 'dental');
-$home_lite_scripts = ($_dcc_router_class_footer === 'home');
+$this->load->helper('common');
+$dental_lite_scripts = (strtolower((string) $this->router->fetch_class()) === 'dental');
 $w = isset($this->website['data']) ? $this->website['data'] : new stdClass();
 $company = isset($w->company_name) ? trim((string) $w->company_name) : '';
 $company_esc = htmlspecialchars($company !== '' ? $company : 'Clinic', ENT_QUOTES, 'UTF-8');
@@ -16,7 +13,7 @@ $email = isset($w->support_email) ? trim((string) $w->support_email) : '';
 $addr1 = isset($w->address) ? trim((string) $w->address) : '';
 $addr2 = isset($w->corporate_address) ? trim((string) $w->corporate_address) : '';
 $copy = isset($w->copy_right) ? trim((string) $w->copy_right) : ('© ' . date('Y') . ' ' . $company_esc);
-$brand_logo_url = base_url('assets/images/branding/preloader-logo-200w.png');
+$brand_logo_url = dontia_company_logo_url('assets/images/branding/preloader-logo-200w.png');
 $dontia_footer_social = array(
     array('link' => isset($w->instagram_link) ? trim((string) $w->instagram_link) : '', 'icon' => 'fa-instagram', 'label' => 'Instagram'),
     array('link' => isset($w->youtube_link) ? trim((string) $w->youtube_link) : '', 'icon' => 'fa-youtube-play', 'label' => 'YouTube'),
@@ -107,43 +104,32 @@ $dontia_footer_social = array(
             </div>
         </div>
     </footer>
+    
 
-</div><!-- /.page-wrapper -->
+</div>
+  
+     
 
 <!--Scroll to top-->
 <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-arrow-circle-o-up"></span></div>
-<?php
-if (empty($GLOBALS['__dontia_modal_loaded'])) {
-	$GLOBALS['__dontia_modal_loaded'] = true;
-	$this->load->view('include/modal_master/modal_master');
-}
-?>
-<?php $_dcc_assets = rtrim(base_url('assets/'), '/') . '/'; ?>
-<script defer src="<?php echo $_dcc_assets; ?>js/jquery.js"></script>
-<script defer src="<?php echo $_dcc_assets; ?>js/popper.min.js"></script>
-<script defer src="<?php echo $_dcc_assets; ?>js/bootstrap.min.js"></script>
-<script defer src="<?php echo $_dcc_assets; ?>js/dontia-appointment-modal.js"></script>
-<?php if (empty($dental_lite_scripts) && empty($home_lite_scripts)) { ?>
-<script defer src="<?php echo $_dcc_assets; ?>js/owl.js"></script>
-<?php } elseif (!empty($home_lite_scripts)) { ?>
-<script>window.__dontiaOwlSrc=<?php echo json_encode($_dcc_assets . 'js/owl.js'); ?>;</script>
+<script src="<?php echo base_url('assets/'); ?>js/jquery.js"></script>
+<script src="<?php echo base_url('assets/'); ?>js/popper.min.js"></script>
+<script src="<?php echo base_url('assets/'); ?>js/bootstrap.min.js"></script>
+<?php if (empty($dental_lite_scripts)) { ?>
+<script src="<?php echo base_url('assets/'); ?>js/jquery.fancybox.js"></script>
+<script src="<?php echo base_url('assets/'); ?>js/owl.js"></script>
+<script src="<?php echo base_url('assets/'); ?>js/wow.js"></script>
+<script src="<?php echo base_url('assets/'); ?>js/appear.js"></script>
+<script src="<?php echo base_url('assets/'); ?>js/mixitup.js"></script>
+<script src="<?php echo base_url('assets/'); ?>js/slick.js"></script>
 <?php } ?>
-<?php if (empty($dental_lite_scripts) && empty($home_lite_scripts)) { ?>
-<script defer src="<?php echo $_dcc_assets; ?>js/wow.js"></script>
-<script defer src="<?php echo $_dcc_assets; ?>js/appear.js"></script>
-<script defer src="<?php echo $_dcc_assets; ?>js/jquery.fancybox.js"></script>
-<script defer src="<?php echo $_dcc_assets; ?>js/mixitup.js"></script>
-<script defer src="<?php echo $_dcc_assets; ?>js/slick.js"></script>
+<script src="<?php echo base_url('assets/'); ?>js/script.js"></script>
+<?php if (empty($dental_lite_scripts)) { ?>
+<!-- Color Setting -->
+<script src="<?php echo base_url('assets/'); ?>js/color-settings.js"></script>
 <?php } ?>
-<script defer src="<?php echo $_dcc_assets; ?>js/script.js"></script>
-<?php if (empty($dental_lite_scripts) && empty($home_lite_scripts)) { ?>
-<script defer src="<?php echo $_dcc_assets; ?>js/color-settings.js"></script>
-<?php } ?>
-<script defer>
-document.addEventListener('DOMContentLoaded', function () {
-	if (typeof jQuery === 'undefined') {
-		return;
-	}
+
+<script>
 	if (jQuery('.product-slide').length) {
 		jQuery('.product-slide').slick({
 			dots: false,
@@ -196,19 +182,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			$sec.find('#' + id).removeAttr('hidden');
 		});
 	})(jQuery);
-});
-</script>
-<script>
-window.addEventListener('load', function () {
-	(function (c, l, a, r, i, t, y) {
-		c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
-		t = l.createElement(r);
-		t.async = 1;
-		t.src = 'https://www.clarity.ms/tag/' + i;
-		y = l.getElementsByTagName(r)[0];
-		y.parentNode.insertBefore(t, y);
-	})(window, document, 'clarity', 'script', 'wrx8wpb91v');
-}, { once: true });
 </script>
 
 
@@ -230,12 +203,10 @@ if ($flash_message != '') {
         </div>
     </div>
 </div>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    if (typeof jQuery !== 'undefined' && jQuery('#flashMessageModal').length) {
-        jQuery('#flashMessageModal').modal('show');
-    }
-});
+<script type="text/javascript">
+    $(window).on('load', function () {
+        $('#flashMessageModal').modal('show');
+    });
 </script>
 <?php } ?>
 </body>

@@ -1,55 +1,57 @@
 <?php
 $this->load->model('Seo_meta_model');
+$this->load->helper('common');
 $_dcc_seo_ov = is_array($this->seo_overrides) ? $this->seo_overrides : array();
 $seo = $this->Seo_meta_model->resolve($_dcc_seo_ov);
 $h = static function ($s) {
 	return htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8');
 };
 $_dcc_br = rtrim(base_url('assets/images/branding/'), '/') . '/';
-$brand_logo_url = $_dcc_br . 'preloader-logo-200w.png';
-$header_logo_src = $_dcc_br . 'header-logo-96w.png';
-$header_logo_160 = $_dcc_br . 'header-logo-160w.png';
-$header_logo_240 = $_dcc_br . 'header-logo-240w.png';
-$header_logo_480 = $_dcc_br . 'header-logo-480w.png';
-$header_logo_srcset = $h($header_logo_src) . ' 96w, ' . $h($header_logo_160) . ' 160w, ' . $h($header_logo_240) . ' 240w, ' . $h($header_logo_480) . ' 480w';
+$_dcc_logo_from_admin = dontia_company_logo_is_uploaded();
+if ($_dcc_logo_from_admin) {
+	$header_logo_src = dontia_company_logo_url($_dcc_br . 'header-logo-96w.png');
+	$brand_logo_url = $header_logo_src;
+	$header_logo_srcset = '';
+} else {
+	$brand_logo_url = $_dcc_br . 'preloader-logo-200w.png';
+	$header_logo_src = $_dcc_br . 'header-logo-96w.png';
+	$header_logo_160 = $_dcc_br . 'header-logo-160w.png';
+	$header_logo_240 = $_dcc_br . 'header-logo-240w.png';
+	$header_logo_480 = $_dcc_br . 'header-logo-480w.png';
+	$header_logo_srcset = $h($header_logo_src) . ' 96w, ' . $h($header_logo_160) . ' 160w, ' . $h($header_logo_240) . ' 240w, ' . $h($header_logo_480) . ' 480w';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<?php
-$this->load->helper('dontia_performance');
-$_dcc_global_chrome_css = dontia_global_chrome_css();
-if ($_dcc_global_chrome_css !== '') {
-	echo '<style id="dontia-global-chrome">' . $_dcc_global_chrome_css . '</style>' . "\n";
-}
-$_dcc_marketing_lite_early = dontia_is_marketing_lite_page();
-if ($_dcc_marketing_lite_early) {
-	echo '<link rel="dns-prefetch" href="https://fonts.googleapis.com">' . "\n";
-	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
-} else {
-?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<?php } ?>
 <?php
-$_dcc_dns_prefetch_yt = false;
-if (!empty($_dcc_seo_ov['dns_prefetch_yt'])) {
-	$_dcc_dns_prefetch_yt = true;
-} elseif (!empty($_dcc_seo_ov['lcp_preload_images']) && is_array($_dcc_seo_ov['lcp_preload_images'])) {
+$_dcc_preconnect_youtube = !empty($_dcc_seo_ov['preconnect_youtube']);
+if (!$_dcc_preconnect_youtube && !empty($_dcc_seo_ov['lcp_preload_images']) && is_array($_dcc_seo_ov['lcp_preload_images'])) {
 	foreach ($_dcc_seo_ov['lcp_preload_images'] as $_lcp_u) {
-		$_lcp_scan = is_array($_lcp_u) ? (isset($_lcp_u['href']) ? (string) $_lcp_u['href'] : '') : (string) $_lcp_u;
+		$_lcp_scan = '';
+		if (is_array($_lcp_u)) {
+			$_lcp_scan = isset($_lcp_u['href']) ? (string) $_lcp_u['href'] : '';
+			if (strpos($_lcp_scan, 'i.ytimg.com') === false && !empty($_lcp_u['imagesrcset'])) {
+				$_lcp_scan = (string) $_lcp_u['imagesrcset'];
+			}
+		} else {
+			$_lcp_scan = (string) $_lcp_u;
+		}
 		if (strpos($_lcp_scan, 'i.ytimg.com') !== false) {
-			$_dcc_dns_prefetch_yt = true;
+			$_dcc_preconnect_youtube = true;
 			break;
 		}
 	}
 }
-if ($_dcc_dns_prefetch_yt) {
-	echo '<link rel="dns-prefetch" href="https://i.ytimg.com">' . "\n";
-}
+if ($_dcc_preconnect_youtube) {
 ?>
+<link rel="preconnect" href="https://i.ytimg.com">
+<link rel="preconnect" href="https://www.youtube.com">
+<?php } ?>
 <?php
 $ov_head = $_dcc_seo_ov;
 if (!empty($ov_head['lcp_preload_images']) && is_array($ov_head['lcp_preload_images'])) {
@@ -88,16 +90,20 @@ $_dcc_router_class_early = strtolower((string) $this->router->fetch_class());
 $_dcc_router_method_early = strtolower((string) $this->router->fetch_method());
 $_dcc_tmj_lite_head = ($_dcc_router_class_early === 'dental' && $_dcc_router_method_early === 'tmj_specialist');
 $_dcc_marketing_no_preloader = ($_dcc_router_class_early === 'dental' || $_dcc_router_class_early === 'home');
+$_dcc_site_origin = preg_replace('#/[^/]*$#', '', rtrim(base_url(), '/'));
+if ($_dcc_site_origin !== '') {
+	echo '<link rel="preconnect" href="' . $h($_dcc_site_origin) . '">' . "\n";
+}
 if ($_dcc_tmj_lite_head) {
 	$this->load->view('Dental/partials/tmj_page_critical_styles');
 }
 $dcc_fonts_href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@400;500;600;700&display=swap';
+if (!$_dcc_tmj_lite_head) {
 ?>
-<title><?php echo $h($seo['title']); ?></title>
-<?php if (!$_dcc_tmj_lite_head) { ?>
 <link rel="preload" href="<?php echo $h($dcc_fonts_href); ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="<?php echo $h($dcc_fonts_href); ?>"></noscript>
 <?php } ?>
+<title><?php echo $h($seo['title']); ?></title>
 <?php if ($seo['description'] !== '') { ?>
 <meta name="description" content="<?php echo $h($seo['description']); ?>">
 <?php } ?>
@@ -139,9 +145,8 @@ $dcc_fonts_href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;
 <!-- Stylesheets: avoid @import inside style.css (chains blocking requests). -->
 <?php
 $_css = rtrim(base_url('assets/css/'), '/') . '/';
-$this->load->helper('dontia_performance');
 $router_class = strtolower((string) $this->router->fetch_class());
-$dental_lite_css = dontia_is_marketing_lite_page();
+$dental_lite_css = ($router_class === 'dental');
 if (!isset($_dcc_tmj_lite_head)) {
 	$_dcc_tmj_lite_head = ($router_class === 'dental' && strtolower((string) $this->router->fetch_method()) === 'tmj_specialist');
 }
@@ -150,50 +155,26 @@ $_dcc_emit_deferred_css = static function ($href) use ($h) {
 	echo '<noscript><link href="' . $h($href) . '" rel="stylesheet"></noscript>' . "\n";
 };
 ?>
-<?php if ($dental_lite_css) {
-	$_dcc_crit_css = dontia_marketing_critical_css();
-	if ($_dcc_crit_css !== '') {
-		echo '<style id="dontia-critical-marketing">' . $_dcc_crit_css . '</style>' . "\n";
-	}
-	echo '<style id="dontia-appt-modal-stack">#dontiaAppointmentModal.modal{z-index:10060!important}body>.modal-backdrop{z-index:10050!important}body.modal-open .dontia-main-header{z-index:1030!important}.dontia-appt-modal,.dontia-appt-modal .modal-dialog,.dontia-appt-modal .modal-content,.dontia-appt-modal .dontia-appt-input,.dontia-appt-modal select,.dontia-appt-modal button,.dontia-appt-modal a,.dontia-appt-modal label{pointer-events:auto!important}.dontia-appt-modal .modal-dialog{margin:8vh auto 1rem;max-width:calc(100% - 24px);width:440px}.dontia-appt-modal__content{background:#e8dcc8;border-radius:12px;padding:28px 24px 32px;max-width:100%}.dontia-appt-input{display:block;width:100%;box-sizing:border-box;background:#fff;border:1px solid #d4c9b8;border-radius:6px;min-height:42px;padding:9px 12px}.dontia-appt-row{display:flex;flex-wrap:wrap;margin:0 -8px}.dontia-appt-col{flex:1 1 100%;max-width:100%;padding:0 8px;box-sizing:border-box}@media(min-width:576px){.dontia-appt-col{flex:1 1 50%;max-width:50%}}</style>' . "\n";
-?>
-<?php
-	$_dcc_emit_deferred_css($_css . 'bootstrap.css');
-	$_dcc_emit_deferred_css($_css . 'style.css');
-	$_dcc_emit_deferred_css($_css . 'dontia-brand.css');
-	$_dcc_emit_deferred_css($_css . 'responsive.css');
-	$_dcc_emit_deferred_css($_css . 'color-themes/blue-theme.css');
-} else { ?>
 <link href="<?php echo $_css; ?>bootstrap.css" rel="stylesheet">
-<link href="<?php echo $_css; ?>style.css" rel="stylesheet">
-<link href="<?php echo $_css; ?>responsive.css" rel="stylesheet">
-<link id="theme-color-file" href="<?php echo $_css; ?>color-themes/blue-theme.css" rel="stylesheet">
-<link href="<?php echo $_css; ?>dontia-brand.css" rel="stylesheet">
-<?php } ?>
-<?php if (!$_dcc_tmj_lite_head && !$dental_lite_css) { ?>
+<?php if (!$_dcc_tmj_lite_head) { ?>
 <link rel="preload" href="<?php echo $_css; ?>flaticon.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="<?php echo $_css; ?>flaticon.css" rel="stylesheet"></noscript>
-<?php } elseif ($dental_lite_css) {
-	$_dcc_emit_deferred_css($_css . 'flaticon.css');
-}
-if (!$_dcc_tmj_lite_head && !$dental_lite_css) { ?>
 <link rel="preload" href="<?php echo $_css; ?>slick.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="<?php echo $_css; ?>slick.css" rel="stylesheet"></noscript>
 <link rel="preload" href="<?php echo $_css; ?>color-switcher-design.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="<?php echo $_css; ?>color-switcher-design.css" rel="stylesheet"></noscript>
 <?php } ?>
-<?php
-$_dcc_fa_href = $dental_lite_css
-	? $_css . 'font-awesome-lite.css'
-	: 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
-if ($dental_lite_css) {
-	$_dcc_emit_deferred_css($_dcc_fa_href);
-} else {
-?>
 <link rel="preload" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" as="style" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"></noscript>
-<style>@font-face{font-family:FontAwesome;font-display:swap;src:url(https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0) format("woff2")}</style>
+<link href="<?php echo $_css; ?>style.css" rel="stylesheet">
+<?php if ($dental_lite_css) {
+	$_dcc_emit_deferred_css($_css . 'responsive.css');
+	$_dcc_emit_deferred_css($_css . 'color-themes/blue-theme.css');
+} else { ?>
+<link href="<?php echo $_css; ?>responsive.css" rel="stylesheet">
+<link id="theme-color-file" href="<?php echo $_css; ?>color-themes/blue-theme.css" rel="stylesheet">
 <?php } ?>
+<link href="<?php echo $_css; ?>dontia-brand.css" rel="stylesheet">
 <?php
 if ($router_class === 'dental') {
 	$_drlook_href = base_url('assets/css/dental-react-look.css');
@@ -202,23 +183,16 @@ if ($router_class === 'dental') {
 <noscript><link href="<?php echo $h($_drlook_href); ?>" rel="stylesheet"></noscript>
 <?php } ?>
 <?php
-$_defer_css = array();
-if (!$dental_lite_css) {
-	$_defer_css[] = 'https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&family=BenchNine:wght@300;400;700&display=swap';
-}
-$_defer_css = array_merge($_defer_css, array(
+$_dcc_legacy_fonts = 'https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&family=Rubik:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&family=BenchNine:wght@300;400;700&display=swap';
+$_defer_css = array(
+	$_dcc_legacy_fonts,
 	$_css . 'animate.css',
 	$_css . 'jquery.mCustomScrollbar.min.css',
 	$_css . 'owl.css',
 	$_css . 'jquery.bootstrap-touchspin.css',
 	$_css . 'jquery-ui.css',
 	$_css . 'jquery.fancybox.min.css',
-));
-if ($dental_lite_css) {
-	$_defer_css = array(
-		$_css . 'owl.css',
-	);
-}
+);
 foreach ($_defer_css as $_href) {
 	if (strpos($_href, 'http') === 0) {
 		echo '<link rel="preload" href="' . $h($_href) . '" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">' . "\n";
@@ -255,6 +229,13 @@ if ($router_class_head === 'dental' && $router_method_head === 'tmj_specialist' 
 	}
 }
 ?>
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){
+	c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+	t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+	y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "wrx8wpb91v");
+</script>
 
 </head>
 
@@ -354,7 +335,7 @@ if ($router_class_head === 'dental' && $router_method_head === 'tmj_specialist' 
                         <div class="logo dontia-logo-brand">
                             <a href="<?php echo base_url(); ?>" class="dontia-logo-link">
                                 <span class="dontia-logo-mark">
-                                    <img src="<?php echo $h($header_logo_src); ?>" srcset="<?php echo $header_logo_srcset; ?>" sizes="80px" alt="<?php echo $company_esc; ?>" width="96" height="74" decoding="async">
+                                    <img src="<?php echo $h($header_logo_src); ?>"<?php if ($header_logo_srcset !== '') { ?> srcset="<?php echo $header_logo_srcset; ?>" sizes="80px" width="96" height="74"<?php } ?> alt="<?php echo $company_esc; ?>" decoding="async" fetchpriority="high">
                                 </span>
                             </a>
                         </div>
