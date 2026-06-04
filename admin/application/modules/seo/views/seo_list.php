@@ -6,6 +6,10 @@
 <div class="page-content-wrap">
 	<div class="row">
 		<div class="col-md-12">
+			<ul class="nav nav-tabs" style="margin-bottom:15px;">
+				<li class="active"><a href="<?php echo site_url('seo'); ?>">Per-page meta</a></li>
+				<li><a href="<?php echo site_url('seo/redirects'); ?>">301 redirects</a></li>
+			</ul>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">SEO meta by page</h3>

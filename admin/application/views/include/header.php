@@ -90,7 +90,8 @@
                                 
                                 <a class="list-group-item" href="<?php echo site_url('dashboard'); ?>"> <span  class="fa fa-desktop"></span><strong>Dashboard</strong> </a>
                                 <a class="list-group-item" href="<?php echo site_url('websitemanage');?>"> <span  class="fa fa-wrench"></span><strong>Website Setting</strong> </a>
-                                <a class="list-group-item" href="<?php echo site_url('seo');?>"> <span  class="fa fa-search"></span><strong>SEO — pages</strong> </a>
+                                <a class="list-group-item" href="<?php echo site_url('seo');?>"> <span  class="fa fa-search"></span><strong>SEO — per-page meta</strong> </a>
+                                <a class="list-group-item" href="<?php echo site_url('seo/redirects');?>"> <span  class="fa fa-exchange"></span><strong>SEO — 301 redirects</strong> </a>
                                               
                             </div>                               
                         </div>                        

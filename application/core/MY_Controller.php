@@ -28,6 +28,9 @@ class MY_Controller extends CI_Controller{
 			}
 			$this->website['data']->currency_icon = '<i class="fa fa-inr"></i>';
 		/*--------------END Fetch Website data---------*/
+
+		$this->load->helper('seo_redirect');
+		seo_redirect_apply_if_match();
 		 
 	 }
 

@@ -118,8 +118,12 @@
                         <a href="<?php echo site_url('appointments'); ?>"><span class="fa fa-calendar"></span> <span class="xn-text">Appointments</span></a>
                     </li>
 
-                    <li class="not-openable">
-                        <a href="<?php echo site_url('seo'); ?>"><span class="fa fa-search"></span> <span class="xn-text">SEO — pages</span></a>
+                    <li class="xn-openable">
+                        <a href="JavaScript:void(0);"><span class="fa fa-search"></span> <span class="xn-text">SEO</span></a>
+                        <ul class="ul-open">
+                            <li><a href="<?php echo site_url('seo'); ?>"><span class="fa fa-file-text-o"></span> Per-page meta</a></li>
+                            <li><a href="<?php echo site_url('seo/redirects'); ?>"><span class="fa fa-exchange"></span> 301 redirects</a></li>
+                        </ul>
                     </li>
 					
 					
