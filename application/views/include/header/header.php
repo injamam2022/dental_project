@@ -294,19 +294,31 @@ if (!empty($seo['head_scripts'])) {
             <div class="auto-container">
                 <div class="dontia-top-bar-inner">
                     <div class="dontia-top-addresses">
-                        <?php if ($addr1 !== '') { ?>
-                        <p class="dontia-top-line"><i class="fa fa-map-marker" aria-hidden="true"></i><span class="dontia-top-label">Address:</span> <?php echo htmlspecialchars($addr1, ENT_QUOTES, 'UTF-8'); ?></p>
+                        <?php if ($addr1 !== '') {
+                            $addr1_short = dontia_header_address_display($addr1);
+                            $addr1_label = dontia_header_location_name($addr1);
+                        ?>
+                        <p class="dontia-top-line dontia-top-line--addr" title="<?php echo htmlspecialchars($addr1, ENT_QUOTES, 'UTF-8'); ?>">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i><span class="dontia-top-label"><?php echo htmlspecialchars($addr1_label, ENT_QUOTES, 'UTF-8'); ?>:</span>
+                            <span class="dontia-top-addr-text"><?php echo htmlspecialchars($addr1_short, ENT_QUOTES, 'UTF-8'); ?></span>
+                        </p>
                         <?php } ?>
-                        <?php if ($addr2 !== '') { ?>
-                        <p class="dontia-top-line"><i class="fa fa-map-marker" aria-hidden="true"></i><span class="dontia-top-label">Address:</span> <?php echo htmlspecialchars($addr2, ENT_QUOTES, 'UTF-8'); ?></p>
+                        <?php if ($addr2 !== '') {
+                            $addr2_short = dontia_header_address_display($addr2);
+                            $addr2_label = dontia_header_location_name($addr2);
+                        ?>
+                        <p class="dontia-top-line dontia-top-line--addr" title="<?php echo htmlspecialchars($addr2, ENT_QUOTES, 'UTF-8'); ?>">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i><span class="dontia-top-label"><?php echo htmlspecialchars($addr2_label, ENT_QUOTES, 'UTF-8'); ?>:</span>
+                            <span class="dontia-top-addr-text"><?php echo htmlspecialchars($addr2_short, ENT_QUOTES, 'UTF-8'); ?></span>
+                        </p>
                         <?php } ?>
                     </div>
-                    <div class="dontia-top-contact">
+                    <div class="dontia-top-contact dontia-top-contact--inline">
                         <?php foreach ($phones as $p) { ?>
                         <p class="dontia-top-line"><i class="fa fa-phone" aria-hidden="true"></i><span class="dontia-top-label">Phone No:</span> <?php echo htmlspecialchars($p, ENT_QUOTES, 'UTF-8'); ?></p>
                         <?php } ?>
                         <?php if ($email !== '') { ?>
-                        <p class="dontia-top-line"><i class="fa fa-envelope" aria-hidden="true"></i><span class="dontia-top-label">Email:</span> <a href="mailto:<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?></a></p>
+                        <p class="dontia-top-line dontia-top-line--email"><i class="fa fa-envelope" aria-hidden="true"></i><span class="dontia-top-label">Email:</span> <a href="mailto:<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?></a></p>
                         <?php } ?>
                         <?php if ($hours !== '') { ?>
                         <p class="dontia-top-line dontia-top-hours"><i class="fa fa-clock-o" aria-hidden="true"></i><span class="dontia-top-label">Hours:</span> <?php echo htmlspecialchars($hours, ENT_QUOTES, 'UTF-8'); ?></p>

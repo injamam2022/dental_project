@@ -240,4 +240,57 @@ if (!function_exists('dontia_company_logo_is_uploaded')) {
 	}
 }
 
+if (!function_exists('dontia_header_location_name')) {
+	/** Short label for header top bar (full address stays in title attribute). */
+	function dontia_header_location_name($address)
+	{
+		$a = strtolower(trim((string) $address));
+		if ($a === '') {
+			return 'Location';
+		}
+		if (strpos($a, 'chinar') !== false || strpos($a, 'rajarhat') !== false || strpos($a, 'aviator') !== false) {
+			return 'Chinar Park';
+		}
+		if (strpos($a, 'bhowanipore') !== false || strpos($a, 'elgin') !== false || strpos($a, 'pandit') !== false) {
+			return 'Bhowanipore';
+		}
+		return 'Clinic';
+	}
+}
+
+if (!function_exists('dontia_header_address_display')) {
+	/** Compact one-line address for header; full string used for tooltip. */
+	function dontia_header_address_display($address, $max = 88)
+	{
+		$address = trim(preg_replace('/\s+/u', ' ', (string) $address));
+		if ($address === '') {
+			return '';
+		}
+		$a = strtolower($address);
+		if (strpos($a, 'chinar') !== false || strpos($a, 'rajarhat') !== false || strpos($a, 'aviator') !== false) {
+			return 'Suite 306, P.S Aviator, Chinar Park, Kolkata 700136';
+		}
+		if (strpos($a, 'bhowanipore') !== false || strpos($a, 'elgin') !== false || strpos($a, 'pandit') !== false) {
+			return '78 S.N Pandit St, Elgin Rd, Bhowanipore, Kolkata 700020';
+		}
+		if (function_exists('mb_strlen') && mb_strlen($address) > $max) {
+			$cut = mb_substr($address, 0, $max);
+			$sp = mb_strrpos($cut, ' ');
+			if ($sp !== false && $sp > (int) ($max * 0.5)) {
+				$cut = mb_substr($cut, 0, $sp);
+			}
+			return rtrim($cut) . '…';
+		}
+		if (strlen($address) > $max) {
+			$cut = substr($address, 0, $max);
+			$sp = strrpos($cut, ' ');
+			if ($sp !== false && $sp > (int) ($max * 0.5)) {
+				$cut = substr($cut, 0, $sp);
+			}
+			return rtrim($cut) . '…';
+		}
+		return $address;
+	}
+}
+
         
