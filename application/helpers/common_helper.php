@@ -240,38 +240,13 @@ if (!function_exists('dontia_company_logo_is_uploaded')) {
 	}
 }
 
-if (!function_exists('dontia_header_location_name')) {
-	/** Short label for header top bar (full address stays in title attribute). */
-	function dontia_header_location_name($address)
-	{
-		$a = strtolower(trim((string) $address));
-		if ($a === '') {
-			return 'Location';
-		}
-		if (strpos($a, 'chinar') !== false || strpos($a, 'rajarhat') !== false || strpos($a, 'aviator') !== false) {
-			return 'Chinar Park';
-		}
-		if (strpos($a, 'bhowanipore') !== false || strpos($a, 'elgin') !== false || strpos($a, 'pandit') !== false) {
-			return 'Bhowanipore';
-		}
-		return 'Clinic';
-	}
-}
-
 if (!function_exists('dontia_header_address_display')) {
-	/** Compact one-line address for header; full string used for tooltip. */
+	/** Compact one-line address for header (truncates only; never replaces admin text). */
 	function dontia_header_address_display($address, $max = 88)
 	{
 		$address = trim(preg_replace('/\s+/u', ' ', (string) $address));
 		if ($address === '') {
 			return '';
-		}
-		$a = strtolower($address);
-		if (strpos($a, 'chinar') !== false || strpos($a, 'rajarhat') !== false || strpos($a, 'aviator') !== false) {
-			return 'Suite 306, P.S Aviator, Chinar Park, Kolkata 700136';
-		}
-		if (strpos($a, 'bhowanipore') !== false || strpos($a, 'elgin') !== false || strpos($a, 'pandit') !== false) {
-			return '78 S.N Pandit St, Elgin Rd, Bhowanipore, Kolkata 700020';
 		}
 		if (function_exists('mb_strlen') && mb_strlen($address) > $max) {
 			$cut = mb_substr($address, 0, $max);
@@ -290,6 +265,23 @@ if (!function_exists('dontia_header_address_display')) {
 			return rtrim($cut) . '…';
 		}
 		return $address;
+	}
+}
+
+if (!function_exists('dontia_header_address_line')) {
+	/**
+	 * Header top bar line: optional admin override, else shortened full address.
+	 *
+	 * @param string $full_address       website_setting address / corporate_address
+	 * @param string $header_override    website_setting address_header_display (if column exists)
+	 */
+	function dontia_header_address_line($full_address, $header_override = '')
+	{
+		$override = trim(preg_replace('/\s+/u', ' ', (string) $header_override));
+		if ($override !== '') {
+			return $override;
+		}
+		return dontia_header_address_display($full_address);
 	}
 }
 

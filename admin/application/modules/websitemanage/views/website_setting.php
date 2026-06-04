@@ -106,7 +106,14 @@
 											<label class="col-md-3 col-xs-12 control-label">Registered office Address</label>
 											<div class="col-md-6 col-xs-12">                                            
 												<textarea class="form-control" name="address" rows="5"><?php echo $this->website['data']->address;?></textarea>
-												<span class="help-block">Address</span>
+												<span class="help-block">Shown on Contact page, footer, and header tooltip. Use the short line below for the compact header bar.</span>
+											</div>
+									</div>
+									<div class="form-group">
+											<label class="col-md-3 col-xs-12 control-label">Header line (registered)</label>
+											<div class="col-md-6 col-xs-12">
+												<input type="text" name="address_header_display" class="form-control" maxlength="255" value="<?php echo isset($this->website['data']->address_header_display) ? htmlspecialchars($this->website['data']->address_header_display, ENT_QUOTES, 'UTF-8') : ''; ?>" placeholder="e.g. 78 S.N Pandit St, Bhowanipore, Kolkata 700020"/>
+												<span class="help-block">Optional one line for the top header bar. Leave empty to auto-shorten from the address above.</span>
 											</div>
 									</div>
                                        
@@ -122,7 +129,14 @@
 											<label class="col-md-3 col-xs-12 control-label">Corporate office Address</label>
 											<div class="col-md-6 col-xs-12">                                            
 												<textarea class="form-control" name="corporate_address" rows="5"><?php echo $this->website['data']->corporate_address;?></textarea>
-												<span class="help-block">Address</span>
+												<span class="help-block">Shown on Contact page, footer, and header tooltip.</span>
+											</div>
+									</div>
+									<div class="form-group">
+											<label class="col-md-3 col-xs-12 control-label">Header line (corporate)</label>
+											<div class="col-md-6 col-xs-12">
+												<input type="text" name="corporate_address_header_display" class="form-control" maxlength="255" value="<?php echo isset($this->website['data']->corporate_address_header_display) ? htmlspecialchars($this->website['data']->corporate_address_header_display, ENT_QUOTES, 'UTF-8') : ''; ?>" placeholder="e.g. Suite 306, P.S Aviator, Chinar Park, Kolkata 700136"/>
+												<span class="help-block">Optional one line for the top header bar. Leave empty to auto-shorten from the corporate address above.</span>
 											</div>
 									</div>
                                        

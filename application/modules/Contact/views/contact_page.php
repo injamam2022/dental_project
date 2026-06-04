@@ -15,7 +15,7 @@ if ($banner_ok) {
 	$banner_sub = 'We are here to help';
 }
 
-$contact = (! empty($contact_us) && isset($contact_us[0])) ? $contact_us[0] : null;
+$contact = (! empty($contact_us) && isset($contact_us[0])) ? $contact_us[0] : $w;
 $addr1 = $contact && isset($contact->address) ? nl2br(htmlspecialchars(trim((string) $contact->address), ENT_QUOTES, 'UTF-8')) : '';
 $addr2 = $contact && isset($contact->corporate_address) ? nl2br(htmlspecialchars(trim((string) $contact->corporate_address), ENT_QUOTES, 'UTF-8')) : '';
 $phones_raw = $contact && isset($contact->support_contact) ? (string) $contact->support_contact : '';

@@ -24,11 +24,10 @@ class Contact_Model extends MY_Model{
 
 		$this->db->select('*');
 		$query=$this->db->get('website_setting');
-		if($query->num_rows()==' '){
+		if ($query->num_rows() === 0) {
 			return false;
-		}else{
-			 return $query->result();
-		}      
+		}
+		return $query->result();
   }
     
     function insert_data($table,$data)
