@@ -4,7 +4,8 @@ class Blog extends MY_Controller {
 	
 	    function __construct() {		
 		     parent::__construct();
-			 $this->load->Model('Blog_Model');	
+			 $this->load->Model('Blog_Model');
+			 $this->Blog_Model->ensure_meta_columns();
 			 $this->table_name="tbl_blog_category";
 			 $this->table_name="tbl_posts_blog";
 			 $this->table_name="client_reviews";
@@ -108,6 +109,8 @@ class Blog extends MY_Controller {
 		  if ($posted === '') { $posted = 'Admin'; }
 		  $data=array(
 		 'post_title'=>$this->input->post('post_title'),
+		 'meta_title'=>trim((string) $this->input->post('meta_title', true)),
+		 'meta_description'=>trim((string) $this->input->post('meta_description', true)),
 		 'Permalink'=>$this->input->post('category_title'),
 		 'summernote'=>$this->input->post('summernote'),
 		 'tag'=>$this->input->post('tag'),
@@ -220,6 +223,8 @@ class Blog extends MY_Controller {
 			  if ($posted === '') { $posted = 'Admin'; }
 			  $data=array(
 			 'post_title'=>$this->input->post('post_title'),
+			 'meta_title'=>trim((string) $this->input->post('meta_title', true)),
+			 'meta_description'=>trim((string) $this->input->post('meta_description', true)),
 			 'Permalink'=>$this->input->post('category_title'),
 			 'summernote'=>$this->input->post('summernote'),
 			 'status'=>$this->input->post('status'),

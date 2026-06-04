@@ -6,6 +6,21 @@
 		
 	}
 
+	/** Adds meta_title / meta_description columns when missing (see database/blog_meta_migration.sql). */
+	public function ensure_meta_columns()
+	{
+		if ( ! $this->db->table_exists('tbl_posts_blog')) {
+			return;
+		}
+		$fields = $this->db->list_fields('tbl_posts_blog');
+		if ( ! in_array('meta_title', $fields, true)) {
+			$this->db->query("ALTER TABLE `tbl_posts_blog` ADD COLUMN `meta_title` VARCHAR(255) NOT NULL DEFAULT '' AFTER `post_title`");
+		}
+		if ( ! in_array('meta_description', $fields, true)) {
+			$this->db->query("ALTER TABLE `tbl_posts_blog` ADD COLUMN `meta_description` TEXT NULL AFTER `meta_title`");
+		}
+	}
+
 	  public function get_blog(){
 	
 		$this->db->select('*');

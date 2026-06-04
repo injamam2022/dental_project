@@ -36,13 +36,16 @@ class Blog extends Frontend_Controller {
 			$excerpt = strip_tags((string) (isset($b->summernote) ? $b->summernote : ''));
 			$excerpt = preg_replace('/\s+/u', ' ', $excerpt);
 			$excerpt = function_exists('mb_substr') ? mb_substr($excerpt, 0, 160) : substr($excerpt, 0, 160);
+			$meta_title = trim((string) (isset($b->meta_title) ? $b->meta_title : ''));
+			$meta_description = trim((string) (isset($b->meta_description) ? $b->meta_description : ''));
+			$post_title = trim((string) (isset($b->post_title) ? $b->post_title : ''));
 			$img = '';
 			if ( ! empty($b->blog_image)) {
 				$img = base_url('admin/webroot/uploads/blog/' . $b->blog_image);
 			}
 			$this->seo_overrides = array(
-				'title' => trim((string) (isset($b->post_title) ? $b->post_title : '')),
-				'description' => trim($excerpt),
+				'title' => $meta_title !== '' ? $meta_title : $post_title,
+				'description' => $meta_description !== '' ? $meta_description : trim($excerpt),
 				'og_image' => $img,
 				'og_type' => 'article',
 			);

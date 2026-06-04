@@ -131,6 +131,11 @@
                     </div>
                 </div>
 
+                <?php
+                $blog_seo_row = $data;
+                $this->load->view('blog/blog_seo_fields');
+                ?>
+
                 <div class="blog-form-card">
                     <div class="blog-form-card-head">
                         <h3><i class="fa fa-file-text-o"></i> Content</h3>
