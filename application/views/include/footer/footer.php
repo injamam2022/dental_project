@@ -189,6 +189,13 @@ $dontia_footer_social = array(
 
 
 <?php
+if (empty($GLOBALS['dontia_appt_modal_rendered'])) {
+	$GLOBALS['dontia_appt_modal_rendered'] = true;
+	$this->load->view('include/modal_master/modal_master');
+}
+?>
+
+<?php
 $flash_message = $this->session->flashdata('message');
 if ($flash_message != '') {
 ?>

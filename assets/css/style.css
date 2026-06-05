@@ -2799,14 +2799,13 @@ header-style-seven .nav-toggler:hover{
 .home-hero-video-banner.home-hero.banner-section .carousel .content-box{
 	pointer-events: none;
 }
-.home-hero-video-banner.home-hero.banner-section .carousel .content-box a{
+.home-hero-video-banner.home-hero.banner-section .carousel .content-box a,
+.home-hero-video-banner.home-hero.banner-section .carousel .hero-content-card,
+.home-hero-video-banner.home-hero.banner-section .carousel .hero-banner-cta{
 	pointer-events: auto;
 }
 .home-hero.banner-section .carousel-item .home-hero-youtube-cover .home-hero-youtube-iframe{
 	pointer-events: none;
-}
-.home-hero.banner-section .carousel-item .home-hero-youtube-cover.is-playing .home-hero-youtube-iframe{
-	pointer-events: auto;
 }
 
 /* Live site: headline centred over video, lighter vignette */

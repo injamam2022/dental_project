@@ -378,4 +378,3 @@ box-shadow:0 12px 24px rgba(183,131,51,.35);
 </div>
 
 <?php $this->load->view('include/footer/footer'); ?>
-<?php $this->load->view('include/modal_master/modal_master'); ?>
