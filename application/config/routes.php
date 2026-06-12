@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'Home/Home';
-$route['404_override'] = '';
+$route['404_override'] = 'Seo_redirect/Seo_redirect/missing';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['appointment/submit-booking'] = 'Appointment/Appointment/submit_booking';
