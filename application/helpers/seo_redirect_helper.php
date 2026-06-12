@@ -17,6 +17,43 @@ if ( ! function_exists('seo_redirect_normalize_path')) {
 	}
 }
 
+if ( ! function_exists('seo_redirect_is_home_target')) {
+	function seo_redirect_is_home_target($path)
+	{
+		$t = trim((string) $path);
+		return $t === '' || $t === '/';
+	}
+}
+
+if ( ! function_exists('seo_redirect_normalize_target')) {
+	/** Store target for DB: "/" = homepage; other paths normalized; full URLs unchanged. */
+	function seo_redirect_normalize_target($path)
+	{
+		$path = trim((string) $path);
+		if (seo_redirect_is_home_target($path)) {
+			return '/';
+		}
+		if (preg_match('#^https?://#i', $path)) {
+			return $path;
+		}
+		return seo_redirect_normalize_path($path);
+	}
+}
+
+if ( ! function_exists('seo_redirect_resolve_url')) {
+	function seo_redirect_resolve_url($target)
+	{
+		$target = trim((string) $target);
+		if (seo_redirect_is_home_target($target)) {
+			return base_url();
+		}
+		if (preg_match('#^https?://#i', $target)) {
+			return $target;
+		}
+		return base_url(ltrim($target, '/'));
+	}
+}
+
 if ( ! function_exists('seo_redirect_apply_if_match')) {
 	/**
 	 * If current request matches an active admin redirect, send HTTP redirect and exit.
@@ -50,14 +87,14 @@ if ( ! function_exists('seo_redirect_apply_if_match')) {
 
 		$target = trim((string) $row->target_url);
 		if ($target === '') {
-			return;
+			// Older saves turned "/" into empty — treat as homepage when source is set.
+			if (trim((string) $row->source_url) === '') {
+				return;
+			}
+			$target = '/';
 		}
 
-		if (preg_match('#^https?://#i', $target)) {
-			$url = $target;
-		} else {
-			$url = base_url(ltrim($target, '/'));
-		}
+		$url = seo_redirect_resolve_url($target);
 
 		$qs = isset($_SERVER['QUERY_STRING']) ? trim((string) $_SERVER['QUERY_STRING']) : '';
 		if ($qs !== '') {

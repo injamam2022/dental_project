@@ -14,8 +14,11 @@
             $fav_type = $ext === 'svg' ? 'image/svg+xml' : ($ext === 'png' ? 'image/png' : ($ext === 'gif' ? 'image/gif' : 'image/x-icon'));
         } else {
             $site_root = rtrim(preg_replace('#/admin/?$#', '', rtrim(base_url(), '/')), '/');
-            $fav_href = $site_root . '/assets/images/favicon.svg';
-            $fav_type = 'image/svg+xml';
+            $fav_href = $site_root . '/assets/images/favicon-32x32.png';
+            if (!is_file(FCPATH . '../assets/images/favicon-32x32.png')) {
+                $fav_href = $site_root . '/assets/images/favicon.png';
+            }
+            $fav_type = 'image/png';
         }
         ?>
         <link rel="icon" type="<?php echo htmlspecialchars($fav_type, ENT_QUOTES, 'UTF-8'); ?>" href="<?php echo htmlspecialchars($fav_href, ENT_QUOTES, 'UTF-8'); ?>">

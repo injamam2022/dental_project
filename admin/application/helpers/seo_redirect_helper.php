@@ -14,6 +14,28 @@ if ( ! function_exists('seo_redirect_normalize_path')) {
 	}
 }
 
+if ( ! function_exists('seo_redirect_is_home_target')) {
+	function seo_redirect_is_home_target($path)
+	{
+		$t = trim((string) $path);
+		return $t === '' || $t === '/';
+	}
+}
+
+if ( ! function_exists('seo_redirect_normalize_target')) {
+	function seo_redirect_normalize_target($path)
+	{
+		$path = trim((string) $path);
+		if (seo_redirect_is_home_target($path)) {
+			return '/';
+		}
+		if (preg_match('#^https?://#i', $path)) {
+			return $path;
+		}
+		return seo_redirect_normalize_path($path);
+	}
+}
+
 if ( ! function_exists('seo_redirect_http_code_options')) {
 	function seo_redirect_http_code_options()
 	{

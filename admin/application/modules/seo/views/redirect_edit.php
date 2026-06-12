@@ -2,8 +2,11 @@
 $is_edit = ! empty($row);
 $http_codes = seo_redirect_http_code_options();
 $source_val = $is_edit ? (string) $row->source_url : '';
-$target_val = $is_edit ? (string) $row->target_url : '';
 $code_val = $is_edit ? (int) $row->http_code : 301;
+$target_val = $is_edit ? (string) $row->target_url : '';
+if ($target_val === '' && $is_edit && $code_val !== 410) {
+	$target_val = '/';
+}
 $status_val = $is_edit ? (string) $row->status : 'active';
 $notes_val = $is_edit ? (string) $row->notes : '';
 ?>
@@ -35,8 +38,8 @@ $notes_val = $is_edit ? (string) $row->notes : '';
 						<div class="form-group">
 							<label class="col-md-3 control-label">New URL (target)</label>
 							<div class="col-md-6">
-								<input type="text" name="target_url" class="form-control" value="<?php echo htmlspecialchars($target_val, ENT_QUOTES, 'UTF-8'); ?>" placeholder="e.g. best-dental-clinic-in-kolkata or https://..."/>
-								<span class="help-block">Relative path on this site, or full URL for external redirect. Leave empty if type is <strong>410 Gone</strong>.</span>
+								<input type="text" name="target_url" class="form-control" value="<?php echo htmlspecialchars($target_val, ENT_QUOTES, 'UTF-8'); ?>" placeholder="e.g. / for home, best-dental-clinic-in-kolkata, or https://..."/>
+								<span class="help-block">Use <code>/</code> for the <strong>home page</strong>. Relative path on this site, or full URL for external redirect. Leave empty only if type is <strong>410 Gone</strong>.</span>
 							</div>
 						</div>
 						<div class="form-group">

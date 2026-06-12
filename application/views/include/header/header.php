@@ -206,9 +206,11 @@ foreach ($_defer_css as $_href) {
 	}
 }
 ?>
-<link rel="icon" type="image/svg+xml" href="<?php echo base_url('assets/images/favicon.svg'); ?>">
-<link rel="alternate icon" href="<?php echo base_url('assets/images/favicon.svg'); ?>" type="image/svg+xml">
-<link rel="apple-touch-icon" href="<?php echo base_url('assets/images/favicon.svg'); ?>">
+<?php
+$_dcc_fav = dontia_favicon_links();
+?>
+<link rel="icon" type="<?php echo $h($_dcc_fav['icon_type']); ?>" href="<?php echo $h($_dcc_fav['icon']); ?>" sizes="32x32">
+<link rel="apple-touch-icon" href="<?php echo $h($_dcc_fav['apple']); ?>" sizes="180x180">
 <!-- Responsive -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <?php

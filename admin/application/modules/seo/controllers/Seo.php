@@ -125,12 +125,13 @@ class Seo extends MY_Controller {
 			if (preg_match('#^https?://#i', $target)) {
 				// keep full URL as entered
 			} else {
-				$target = seo_redirect_normalize_path($target);
+				$target = seo_redirect_normalize_target($target);
 			}
 		} else {
 			$target = '';
 		}
-		if ($http_code !== 410 && $source === seo_redirect_normalize_path($target)) {
+		$target_cmp = ($http_code !== 410 && $target === '/') ? '' : seo_redirect_normalize_path($target);
+		if ($http_code !== 410 && $source === $target_cmp) {
 			$this->session->set_flashdata('alert', array('message' => 'Source and target cannot be the same path.', 'class' => 'danger'));
 			redirect($id > 0 ? 'seo/redirect_edit/' . $id : 'seo/redirect_add');
 			return;

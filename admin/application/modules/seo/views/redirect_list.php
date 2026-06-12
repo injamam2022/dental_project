@@ -38,7 +38,12 @@
 								<?php foreach ($rows as $r) {
 									$preview_old = rtrim($this->website['data']->site_url, '/') . '/' . htmlspecialchars($r->source_url, ENT_QUOTES, 'UTF-8');
 									$target = (string) $r->target_url;
-									if ($target !== '' && ! preg_match('#^https?://#i', $target)) {
+									if ($target === '' && (int) $r->http_code !== 410) {
+										$target = '/';
+									}
+									if ($target === '/' || seo_redirect_is_home_target($target)) {
+										$preview_new = rtrim($this->website['data']->site_url, '/') . '/';
+									} elseif ($target !== '' && ! preg_match('#^https?://#i', $target)) {
 										$preview_new = rtrim($this->website['data']->site_url, '/') . '/' . htmlspecialchars($target, ENT_QUOTES, 'UTF-8');
 									} else {
 										$preview_new = htmlspecialchars($target, ENT_QUOTES, 'UTF-8');

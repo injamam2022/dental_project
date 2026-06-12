@@ -240,6 +240,34 @@ if (!function_exists('dontia_company_logo_is_uploaded')) {
 	}
 }
 
+if (!function_exists('dontia_favicon_links')) {
+	/**
+	 * Favicon URLs for <head>: admin upload, else site monogram PNG.
+	 *
+	 * @return array{icon:string,icon_type:string,apple:string}
+	 */
+	function dontia_favicon_links()
+	{
+		$CI =& get_instance();
+		$fab = '';
+		if (isset($CI->website['data']->company_favicon)) {
+			$fab = trim((string) $CI->website['data']->company_favicon);
+		}
+		if ($fab !== '') {
+			$icon = base_url('admin/webroot/uploads/logo_fab/' . $fab);
+			$ext = strtolower(pathinfo($fab, PATHINFO_EXTENSION));
+			$type = $ext === 'svg' ? 'image/svg+xml' : ($ext === 'png' ? 'image/png' : ($ext === 'gif' ? 'image/gif' : 'image/x-icon'));
+			return array('icon' => $icon, 'icon_type' => $type, 'apple' => $icon);
+		}
+		$icon32 = base_url('assets/images/favicon-32x32.png');
+		$apple = base_url('assets/images/apple-touch-icon.png');
+		if ( ! is_file(FCPATH . 'assets/images/favicon-32x32.png')) {
+			$icon32 = base_url('assets/images/favicon.png');
+		}
+		return array('icon' => $icon32, 'icon_type' => 'image/png', 'apple' => $apple);
+	}
+}
+
 if (!function_exists('dontia_header_address_display')) {
 	/** Compact one-line address for header (truncates only; never replaces admin text). */
 	function dontia_header_address_display($address, $max = 88)
