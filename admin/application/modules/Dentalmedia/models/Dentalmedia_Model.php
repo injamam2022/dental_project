@@ -20,6 +20,10 @@ class Dentalmedia_Model extends MY_Model {
             PRIMARY KEY (`id`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
         $this->db->query($sql);
+        $fields = $this->db->list_fields('dental_media');
+        if (is_array($fields) && ! in_array('link_url', $fields, true)) {
+            $this->db->query("ALTER TABLE `dental_media` ADD COLUMN `link_url` varchar(512) DEFAULT NULL AFTER `description`");
+        }
     }
 
     public function all()

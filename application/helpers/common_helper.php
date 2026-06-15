@@ -268,6 +268,21 @@ if (!function_exists('dontia_favicon_links')) {
 	}
 }
 
+if (!function_exists('dontia_resolve_media_link')) {
+	/** Turn admin link slug or full URL into a safe href. */
+	function dontia_resolve_media_link($url)
+	{
+		$url = trim((string) $url);
+		if ($url === '') {
+			return '';
+		}
+		if (preg_match('#^https?://#i', $url)) {
+			return $url;
+		}
+		return base_url(ltrim($url, '/'));
+	}
+}
+
 if (!function_exists('dontia_header_address_display')) {
 	/** Compact one-line address for header (truncates only; never replaces admin text). */
 	function dontia_header_address_display($address, $max = 88)

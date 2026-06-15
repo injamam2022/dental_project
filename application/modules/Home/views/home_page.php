@@ -202,7 +202,6 @@ $dontia_render_skin_panel = ($dontia_has_skin || $dontia_show_tabs);
             }
             $preset_esc = htmlspecialchars($appt_service_preset, ENT_QUOTES, 'UTF-8');
             foreach ($list as $svc) {
-                $detail = base_url('Services/' . (int) $svc->pro_id . '/0/detail');
                 $img = !empty($svc->pro_image) ? base_url('admin/webroot/uploads/product/') . $svc->pro_image : '';
                 $name = htmlspecialchars($svc->product_name, ENT_QUOTES, 'UTF-8');
                 $plain = trim(preg_replace('/\s+/', ' ', strip_tags((string) $svc->product_description)));
@@ -213,15 +212,15 @@ $dontia_render_skin_panel = ($dontia_has_skin || $dontia_show_tabs);
                 ?>
         <div class="col-lg-4 col-md-6 col-sm-12">
             <article class="dontia-service-card">
-                <a href="<?php echo $detail; ?>" class="dontia-service-card-ring">
+                <div class="dontia-service-card-ring" aria-hidden="true">
                     <?php if ($img !== '') { ?>
                     <span class="dontia-service-card-img" style="background-image:url('<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>')"></span>
                     <?php } else { ?>
                     <span class="dontia-service-card-img dontia-service-card-img--placeholder"></span>
                     <?php } ?>
-                </a>
-                <h3 class="dontia-service-card-title"><a href="<?php echo $detail; ?>"><?php echo $name; ?></a></h3>
-                <p class="dontia-service-card-desc"><em><?php echo htmlspecialchars($excerpt, ENT_QUOTES, 'UTF-8'); ?> <a href="<?php echo $detail; ?>" class="dontia-service-card-more">read more</a></em></p>
+                </div>
+                <h3 class="dontia-service-card-title"><?php echo $name; ?></h3>
+                <p class="dontia-service-card-desc"><em><?php echo htmlspecialchars($excerpt, ENT_QUOTES, 'UTF-8'); ?></em></p>
                 <a href="#" class="dontia-service-card-book" data-toggle="modal" data-target="#dontiaAppointmentModal"<?php echo $appt_service_preset !== '' ? ' data-preselect-service="'.$preset_esc.'"' : ''; ?>>Book Now</a>
             </article>
         </div>

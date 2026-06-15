@@ -1139,12 +1139,16 @@ body {
 
 .page-wrapper .dontia-top-ticker__track {
 	display: flex;
+	flex-wrap: nowrap;
 	width: max-content;
+}
+
+.page-wrapper .dontia-top-ticker__track.is-animated {
 	animation: dontia-top-ticker-scroll 55s linear infinite;
 	will-change: transform;
 }
 
-.page-wrapper .dontia-top-ticker:hover .dontia-top-ticker__track {
+.page-wrapper .dontia-top-ticker:hover .dontia-top-ticker__track.is-animated {
 	animation-play-state: paused;
 }
 
@@ -1179,13 +1183,6 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.page-wrapper .dontia-top-ticker__track {
-		animation: none;
-		flex-wrap: wrap;
-		width: 100%;
-		white-space: normal;
-	}
-
 	.page-wrapper .dontia-top-ticker {
 		overflow-x: auto;
 		overflow-y: hidden;
@@ -1193,8 +1190,8 @@ body {
 		mask-image: none;
 	}
 
-	.page-wrapper .dontia-top-ticker__group[aria-hidden="true"] {
-		display: none;
+	.page-wrapper .dontia-top-ticker__track {
+		width: max-content;
 	}
 }
 
@@ -1266,7 +1263,7 @@ body {
 		font-size: 10px;
 	}
 
-	.page-wrapper .dontia-top-ticker__track {
+	.page-wrapper .dontia-top-ticker__track.is-animated {
 		animation-duration: 42s;
 	}
 

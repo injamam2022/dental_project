@@ -328,8 +328,7 @@ if (!empty($seo['head_scripts'])) {
                     <?php if (count($dontia_top_ticker_items) > 0) { ?>
                     <div class="dontia-top-ticker" aria-live="off">
                         <div class="dontia-top-ticker__track">
-                            <?php for ($ti = 0; $ti < 2; $ti++) { ?>
-                            <div class="dontia-top-ticker__group"<?php echo $ti === 1 ? ' aria-hidden="true"' : ''; ?>>
+                            <div class="dontia-top-ticker__group">
                                 <?php foreach ($dontia_top_ticker_items as $idx => $item) {
                                     if ($idx > 0) {
                                         echo '<span class="dontia-top-ticker__sep" aria-hidden="true">|</span>';
@@ -346,7 +345,6 @@ if (!empty($seo['head_scripts'])) {
                                 </span>
                                 <?php } ?>
                             </div>
-                            <?php } ?>
                         </div>
                     </div>
                     <?php } ?>

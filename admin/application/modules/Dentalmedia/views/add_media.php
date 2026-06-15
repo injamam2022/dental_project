@@ -26,6 +26,13 @@
                         <div class="form-group"><label class="col-md-3 control-label">Item Key</label><div class="col-md-6"><input type="text" name="item_key" class="form-control"></div></div>
                         <div class="form-group"><label class="col-md-3 control-label">Title</label><div class="col-md-6"><input type="text" name="title" class="form-control"></div></div>
                         <div class="form-group"><label class="col-md-3 control-label">Description</label><div class="col-md-6"><textarea name="description" class="form-control"></textarea></div></div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Heading link</label>
+                            <div class="col-md-6">
+                                <input type="text" name="link_url" class="form-control" placeholder="e.g. tmj-specialist-in-kolkata or https://…">
+                                <p class="help-block">Optional. Makes the title clickable (use a page slug or full URL).</p>
+                            </div>
+                        </div>
                         <div class="form-group"><label class="col-md-3 control-label">Image 1</label><div class="col-md-6"><input type="file" name="uploadedimages[]" class="fileinput btn-primary"></div></div>
                         <div class="form-group"><label class="col-md-3 control-label">Image 2 (before/after sections)</label><div class="col-md-6"><input type="file" name="uploadedimages2[]" class="fileinput btn-primary"></div></div>
                         <div class="form-group"><label class="col-md-3 control-label">Sort Order</label><div class="col-md-6"><input type="number" name="sort_order" class="form-control" value="0"></div></div>

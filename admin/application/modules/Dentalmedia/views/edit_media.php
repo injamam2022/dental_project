@@ -15,6 +15,13 @@
                         <div class="form-group"><label class="col-md-3 control-label">Item Key</label><div class="col-md-6"><input type="text" name="item_key" class="form-control" value="<?php echo htmlspecialchars((string) $media->item_key, ENT_QUOTES, 'UTF-8'); ?>"></div></div>
                         <div class="form-group"><label class="col-md-3 control-label">Title</label><div class="col-md-6"><input type="text" name="title" class="form-control" value="<?php echo htmlspecialchars((string) $media->title, ENT_QUOTES, 'UTF-8'); ?>"></div></div>
                         <div class="form-group"><label class="col-md-3 control-label">Description</label><div class="col-md-6"><textarea name="description" class="form-control"><?php echo htmlspecialchars((string) $media->description, ENT_QUOTES, 'UTF-8'); ?></textarea></div></div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Heading link</label>
+                            <div class="col-md-6">
+                                <input type="text" name="link_url" class="form-control" value="<?php echo htmlspecialchars((string) (isset($media->link_url) ? $media->link_url : ''), ENT_QUOTES, 'UTF-8'); ?>" placeholder="e.g. tmj-specialist-in-kolkata or https://…">
+                                <p class="help-block">Optional. Makes the title clickable (use a page slug or full URL).</p>
+                            </div>
+                        </div>
                         <div class="form-group"><label class="col-md-3 control-label">Image 1</label><div class="col-md-6"><input type="file" name="uploadedimages[]" class="fileinput btn-primary"><?php if (!empty($media->image_name)) { ?><img src="<?php echo site_url('webroot/uploads/dental_media/' . $media->image_name); ?>" width="50" height="50" alt="" style="margin-top:8px;"><?php } ?></div></div>
                         <div class="form-group"><label class="col-md-3 control-label">Image 2</label><div class="col-md-6"><input type="file" name="uploadedimages2[]" class="fileinput btn-primary"><?php if (!empty($media->image_name_2)) { ?><img src="<?php echo site_url('webroot/uploads/dental_media/' . $media->image_name_2); ?>" width="50" height="50" alt="" style="margin-top:8px;"><?php } ?></div></div>
                         <div class="form-group"><label class="col-md-3 control-label">Sort Order</label><div class="col-md-6"><input type="number" name="sort_order" class="form-control" value="<?php echo (int) $media->sort_order; ?>"></div></div>

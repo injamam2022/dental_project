@@ -22,6 +22,7 @@ $specialisations = array(
     array(
         'image' => 'Implantologist.png',
         'name' => 'Implantologist',
+        'link' => 'best-dental-implant-clinic-in-kolkata',
         'description' => 'Surgical placement of dental implants with bone grafting procedures and advanced implant dentistry expertise.'
     ),
     array(
@@ -32,11 +33,13 @@ $specialisations = array(
     array(
         'image' => 'TMJ_Specialist.png',
         'name' => 'TMJ Specialist',
+        'link' => 'tmj-specialist-in-kolkata',
         'description' => 'Expert treatment for temporomandibular joint disorders, jaw pain, and associated headaches.'
     ),
     array(
         'image' => 'Orthodontist.png',
         'name' => 'Orthodontist',
+        'link' => 'best-orthodontist-in-kolkata',
         'description' => 'Correction of misaligned, crowded, and crooked teeth using modern braces and aligner systems.'
     ),
     array(
@@ -265,7 +268,12 @@ if (function_exists('GetServices')) {
             <div class="dr-mini-grid">
                 <?php
                 $spec_source = count($media_specialisations_list) > 0 ? $media_specialisations_list : array_map(function ($sp) {
-                    return (object) array('title' => $sp['name'], 'description' => $sp['description'], 'image_name' => $sp['image']);
+                    return (object) array(
+                        'title' => $sp['name'],
+                        'description' => $sp['description'],
+                        'image_name' => $sp['image'],
+                        'link_url' => isset($sp['link']) ? $sp['link'] : '',
+                    );
                 }, $specialisations);
                 $fallback_desc = array();
                 foreach ($specialisations as $sp_f) {
@@ -287,9 +295,11 @@ if (function_exists('GetServices')) {
                             ? site_url('admin/webroot/uploads/dental_media/' . $sp->image_name)
                             : $dental_page_defaults . $sp->image_name)
                         : base_url('assets/images/favicon.png');
+                    $sp_link = isset($sp->link_url) ? dontia_resolve_media_link($sp->link_url) : '';
+                    $sp_title_esc = htmlspecialchars($sp_title, ENT_QUOTES, 'UTF-8');
                     ?>
-                    <span><img src="<?php echo htmlspecialchars($sp_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($sp_title, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async"></span>
-                    <h3><?php echo htmlspecialchars($sp_title, ENT_QUOTES, 'UTF-8'); ?></h3>
+                    <span><img src="<?php echo htmlspecialchars($sp_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo $sp_title_esc; ?>" loading="lazy" decoding="async"></span>
+                    <h3><?php if ($sp_link !== '') { ?><a href="<?php echo htmlspecialchars($sp_link, ENT_QUOTES, 'UTF-8'); ?>"><?php echo $sp_title_esc; ?></a><?php } else { echo $sp_title_esc; } ?></h3>
                     <?php if ($sp_desc !== '') { ?><p><?php echo htmlspecialchars($sp_desc, ENT_QUOTES, 'UTF-8'); ?></p><?php } ?>
                 </article>
                 <?php } ?>

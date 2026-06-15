@@ -180,6 +180,40 @@ $dontia_footer_social = array(
 	})(jQuery);
 </script>
 
+<script>
+(function () {
+	function initDontiaTopTicker() {
+		document.querySelectorAll('.dontia-top-ticker').forEach(function (ticker) {
+			if (ticker.dataset.tickerReady === '1') {
+				return;
+			}
+			var track = ticker.querySelector('.dontia-top-ticker__track');
+			var group = track && track.querySelector('.dontia-top-ticker__group');
+			if (!track || !group) {
+				return;
+			}
+			ticker.dataset.tickerReady = '1';
+			if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+				return;
+			}
+			if (group.scrollWidth <= ticker.clientWidth + 4) {
+				return;
+			}
+			var clone = group.cloneNode(true);
+			clone.setAttribute('aria-hidden', 'true');
+			track.appendChild(clone);
+			track.classList.add('is-animated');
+		});
+	}
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initDontiaTopTicker);
+	} else {
+		initDontiaTopTicker();
+	}
+	window.addEventListener('load', initDontiaTopTicker);
+})();
+</script>
+
 
 
 
