@@ -92,10 +92,7 @@
                     </div>
                 </div>
 
-                <?php
-                $blog_seo_row = null;
-                $this->load->view('blog/blog_seo_fields');
-                ?>
+                <?php $this->load->view('blog/blog_seo_fields', array('blog_seo_row' => null)); ?>
 
                 <div class="blog-form-card">
                     <div class="blog-form-card-head">
