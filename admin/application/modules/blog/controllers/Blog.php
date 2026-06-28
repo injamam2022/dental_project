@@ -105,13 +105,14 @@ class Blog extends MY_Controller {
 	
 		 if($_POST)
 		  {
+		  $this->Blog_Model->ensure_meta_columns();
 		  $posted = trim((string) $this->input->post('posted'));
 		  if ($posted === '') { $posted = 'Admin'; }
 		  $data=array(
 		 'post_title'=>$this->input->post('post_title'),
-		 'meta_title'=>trim((string) $this->input->post('meta_title', true)),
-		 'meta_description'=>trim((string) $this->input->post('meta_description', true)),
-		 'Permalink'=>$this->input->post('category_title'),
+		 'meta_title'=>trim((string) ($this->input->post('meta_title') !== null ? $this->input->post('meta_title') : '')),
+		 'meta_description'=>trim((string) ($this->input->post('meta_description') !== null ? $this->input->post('meta_description') : '')),
+		 'Permalink'=>$this->_normalize_blog_permalink($this->input->post('category_title')),
 		 'summernote'=>$this->input->post('summernote'),
 		 'tag'=>$this->input->post('tag'),
 		 'status'=>$this->input->post('status'),
@@ -207,7 +208,22 @@ class Blog extends MY_Controller {
 		
 
 		function update_post() {
-			  $id=$this->uri->segment(3); 
+			  $id = (int) $this->input->post('post_id');
+			  if ($id <= 0) {
+				  $id = (int) $this->uri->segment(3);
+			  }
+			  if ($id <= 0) {
+				  $this->session->set_flashdata('alert', array('message' => 'Invalid blog post.', 'class' => 'error'));
+				  redirect('blog');
+			  }
+
+			  $existing_rows = $this->Blog_Model->get_edit_post($id);
+			  if (empty($existing_rows)) {
+				  $this->session->set_flashdata('alert', array('message' => 'Blog post not found.', 'class' => 'error'));
+				  redirect('blog');
+			  }
+			  $existing = $existing_rows[0];
+
 			if($_FILES['uploadedimages']['error'][0]>0){
 		
 			 $image_name=$this->input->post('prev_image');
@@ -219,13 +235,22 @@ class Blog extends MY_Controller {
 
 			 if($_POST)
 			  {
+			  $this->Blog_Model->ensure_meta_columns();
 			  $posted = trim((string) $this->input->post('posted'));
 			  if ($posted === '') { $posted = 'Admin'; }
+
+			  $permalink = $this->_normalize_blog_permalink($this->input->post('category_title'));
+			  if ($permalink === '' && isset($existing->Permalink)) {
+				  $permalink = (string) $existing->Permalink;
+			  }
+
+			  $meta_title = $this->input->post('meta_title');
+			  $meta_description = $this->input->post('meta_description');
 			  $data=array(
 			 'post_title'=>$this->input->post('post_title'),
-			 'meta_title'=>trim((string) $this->input->post('meta_title', true)),
-			 'meta_description'=>trim((string) $this->input->post('meta_description', true)),
-			 'Permalink'=>$this->input->post('category_title'),
+			 'meta_title'=>trim((string) ($meta_title !== null ? $meta_title : '')),
+			 'meta_description'=>trim((string) ($meta_description !== null ? $meta_description : '')),
+			 'Permalink'=>$permalink,
 			 'summernote'=>$this->input->post('summernote'),
 			 'status'=>$this->input->post('status'),
 			 'tag'=>$this->input->post('tag'),
@@ -235,17 +260,26 @@ class Blog extends MY_Controller {
 			 'posted'=>$posted,
 			 );
 			 
-			 
-			 
-			   $this->Blog_Model->update_post($data,$id); 
-			   $this->session->set_flashdata('alert', array('message' => 'Posts Blog Update Successfully','class' => 'success'));
-			 redirect('blog');
+			   $updated = $this->Blog_Model->update_post($data, $id);
+			   if ($updated) {
+				   $this->session->set_flashdata('alert', array('message' => 'Posts Blog Update Successfully','class' => 'success'));
+			   } else {
+				   $this->session->set_flashdata('alert', array('message' => 'Could not save blog post. If SEO fields fail, run database/blog_meta_migration.sql on the server.','class' => 'error'));
+			   }
+			 redirect('blog/edit_post/' . $id);
 			 }
 	
 			else{ 
-		     redirect('blog/edit_post');
+		     redirect('blog/edit_post/' . $id);
 		    }
-	 }		  
+	 }
+
+		private function _normalize_blog_permalink($slug)
+		{
+			$slug = strtolower(trim((string) $slug));
+			$slug = preg_replace('/[^a-z0-9\s-]/', '', $slug);
+			return trim(preg_replace('/[\s-]+/', '-', $slug), '-');
+		}		  
 	function Comment_list()
     {
 		        $this->db->select("*");

@@ -202,9 +202,9 @@
 	
 	function update_post($data,$id)
 	{
-		
-		$this->db->where('id',$id);
-		$this->db->update('tbl_posts_blog',$data);
+		$this->db->where('id', (int) $id);
+		$this->db->update('tbl_posts_blog', $data);
+		return $this->db->affected_rows() >= 0 && $this->db->error()['code'] === 0;
 	}
 	
 	function update_comment($data,$id)

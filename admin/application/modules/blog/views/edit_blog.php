@@ -54,6 +54,10 @@
     <div class="row">
         <div class="col-md-12">
             <?php foreach ($get_edit_post as $data) {
+                $front_base = rtrim((string) $this->config->item('ui_url'), '/');
+                if ($front_base === '') {
+                    $front_base = rtrim(preg_replace('#/admin/?$#', '', base_url()), '/');
+                }
                 $img_raw = isset($data->blog_image) ? trim((string) $data->blog_image) : '';
                 $first_img = '';
                 if ($img_raw !== '') {
@@ -68,6 +72,7 @@
             <form id="edit_blog_form" class="form-horizontal" method="post"
                 action="<?php echo site_url('blog/update_post'); ?>/<?php echo $data->id; ?>"
                 enctype="multipart/form-data">
+                <input type="hidden" name="post_id" value="<?php echo (int) $data->id; ?>">
 
                 <?php $log_s = $this->session->flashdata('msg'); ?>
                 <?php if (!empty($log_s)) { ?>
@@ -88,7 +93,7 @@
                                 $perma_slug = trim(preg_replace('/[\s-]+/', '-', $perma_slug), '-');
                             }
                             if ($perma_slug !== '') {
-                                $front_url = base_url('blog/' . $perma_slug);
+                                $front_url = $front_base . '/blog/' . $perma_slug;
                             ?>
                             <a class="btn btn-default btn-sm" target="_blank" rel="noopener" href="<?php echo $front_url; ?>">
                                 <i class="fa fa-external-link"></i> View on site
@@ -108,9 +113,8 @@
                                     <label>Post Title <span class="required">*</span></label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                        <input type="text" name="post_title" placeholder="Enter post title"
+                                        <input type="text" name="post_title" id="blog_edit_post_title" placeholder="Enter post title"
                                             value="<?php echo htmlspecialchars((string) $data->post_title, ENT_QUOTES, 'UTF-8'); ?>"
-                                            onblur="slug_url(this.value,'category_title')"
                                             class="form-control" required />
                                     </div>
                                 </div>
@@ -119,12 +123,16 @@
                                 <div class="blog-field">
                                     <label>Permalink (URL slug) <span class="required">*</span></label>
                                     <div class="input-group">
-                                        <span class="blog-permalink-prefix"><?php echo base_url(); ?>blog/</span>
+                                        <span class="blog-permalink-prefix"><?php echo htmlspecialchars($front_base, ENT_QUOTES, 'UTF-8'); ?>/blog/</span>
                                         <input type="text" name="category_title" id="category_title"
                                             value="<?php echo htmlspecialchars((string) $data->Permalink, ENT_QUOTES, 'UTF-8'); ?>"
                                             class="form-control" required />
                                     </div>
-                                    <small class="hint">Lowercase letters, numbers and hyphens only.</small>
+                                    <small class="hint">Lowercase letters, numbers and hyphens only. Changing the post title does not change this slug — edit it here only when you want a new URL.</small>
+                                    <button type="button" class="btn btn-default btn-xs" style="margin-top:6px;"
+                                        onclick="slug_url(document.getElementById('blog_edit_post_title').value,'category_title')">
+                                        <i class="fa fa-link"></i> Generate slug from title
+                                    </button>
                                 </div>
                             </div>
                         </div>
