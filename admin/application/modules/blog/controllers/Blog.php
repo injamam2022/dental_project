@@ -197,8 +197,9 @@ class Blog extends MY_Controller {
 	    }
 		
 	
-		function edit_post($id) 
+	 function edit_post($id) 
 		{
+				$this->Blog_Model->ensure_meta_columns();
 				$content['get_related_post']=$this->Blog_Model->get_related_post();
 				$content['get_category']=$this->Blog_Model->get_category();
 				$content['get_edit_post']=$this->Blog_Model->get_edit_post($id);

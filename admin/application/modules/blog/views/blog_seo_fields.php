@@ -1,8 +1,21 @@
 <?php
-$blog_seo_row = isset($blog_seo_row) ? $blog_seo_row : null;
-$blog_meta_title = ($blog_seo_row && isset($blog_seo_row->meta_title)) ? (string) $blog_seo_row->meta_title : '';
-$blog_meta_description = ($blog_seo_row && isset($blog_seo_row->meta_description)) ? (string) $blog_seo_row->meta_description : '';
-$blog_post_title = ($blog_seo_row && isset($blog_seo_row->post_title)) ? (string) $blog_seo_row->post_title : '';
+if ( ! isset($blog_seo_row)) {
+	$blog_seo_row = null;
+}
+$blog_meta_title = '';
+$blog_meta_description = '';
+$blog_post_title = '';
+if (is_object($blog_seo_row)) {
+	if (property_exists($blog_seo_row, 'meta_title')) {
+		$blog_meta_title = trim((string) $blog_seo_row->meta_title);
+	}
+	if (property_exists($blog_seo_row, 'meta_description')) {
+		$blog_meta_description = trim((string) $blog_seo_row->meta_description);
+	}
+	if (property_exists($blog_seo_row, 'post_title')) {
+		$blog_post_title = trim((string) $blog_seo_row->post_title);
+	}
+}
 ?>
 <div class="blog-form-card">
     <div class="blog-form-card-head">

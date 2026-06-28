@@ -92,7 +92,10 @@
                     </div>
                 </div>
 
-                <?php $this->load->view('blog/blog_seo_fields', array('blog_seo_row' => null)); ?>
+                <?php
+                $blog_seo_row = null;
+                include __DIR__ . '/blog_seo_fields.php';
+                ?>
 
                 <div class="blog-form-card">
                     <div class="blog-form-card-head">

@@ -173,9 +173,10 @@
 	
 	 public function get_edit_post($id){
 	
-		$this->db->select('*');
-		$this->db->where("id",$id);
-		$query=$this->db->get('tbl_posts_blog');
+		$this->ensure_meta_columns();
+		$this->db->select('id, post_title, meta_title, meta_description, Permalink, summernote, status, category, relatedposts, blog_image, tag, posted, dat');
+		$this->db->where('id', (int) $id);
+		$query = $this->db->get('tbl_posts_blog');
 		   if($query->num_rows() ==''){
 				return '';
 				}else{
