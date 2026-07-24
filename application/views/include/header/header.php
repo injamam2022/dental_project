@@ -415,6 +415,7 @@ if (!empty($seo['head_scripts'])) {
                                                 ?>
                                                     <li><a href="<?php echo base_url('best-orthodontist-in-kolkata'); ?>">Braces</a></li>
                                                     <li><a href="<?php echo base_url('best-dental-implant-clinic-in-kolkata'); ?>">Dental Implant</a></li>
+                                                    <li><a href="<?php echo base_url('best-root-canal-treatment-in-kolkata'); ?>">Root Canal Treatment</a></li>
                                                     <li><a href="<?php echo base_url('tmj-specialist-in-kolkata'); ?>">TMJ Specialist</a></li>
                                                 <?php
                                                         }

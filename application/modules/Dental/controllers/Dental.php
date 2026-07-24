@@ -301,6 +301,41 @@ class Dental extends Frontend_Controller {
         $this->load->view('Dental/dental_implant_page', $content);
     }
 
+    public function root_canal()
+    {
+        $rct_hero = 'assets/images/root-canal-treatment/' . rawurlencode('section-1-Root-canal-treatment-in-kolkat (1).jpeg');
+        $this->seo_overrides = array(
+            'title' => 'Root Canal Treatment in Kolkata – Painless & Advanced Care',
+            'description' => 'Get painless and affordable root canal treatment at Dontia Care Clinic-Dental. Expert endodontists, modern technology, and same-day relief from tooth pain.',
+            'canonical' => base_url('best-root-canal-treatment-in-kolkata'),
+            'lcp_preload_images' => array(base_url($rct_hero)),
+        );
+
+        $content = array();
+        $content['doctor_list'] = $this->dentalModel->get_active_doctors();
+        $content['technology_cards'] = $this->enrich_technology_cards(array(
+            array(
+                'title' => 'Rotary Endodontic Technology',
+                'description' => 'Modern rotary instruments for precise cleaning of root canals — faster, more comfortable, and highly effective.',
+                'image_url' => base_url('admin/webroot/uploads/dental_page/technology/Dental-Laser.jpg'),
+            ),
+            array(
+                'title' => 'Digital Diagnostics',
+                'description' => 'Digital X-rays help us map infection accurately and plan a personalised root canal treatment.',
+                'image_url' => base_url('admin/webroot/uploads/dental_page/technology/hf_20260408_141453_072419cd-d779-4092-9401-4e7427a126ad.png'),
+            ),
+            array(
+                'title' => 'Comfort-Focused Anaesthesia',
+                'description' => 'Advanced anaesthesia techniques keep RCT as painless and comfortable as possible throughout the visit.',
+                'image_url' => base_url('admin/webroot/uploads/dental_page/technology/Baldus.jpg'),
+            ),
+        ));
+        $content['media_certificates'] = $this->dentalModel->get_media_by_section('certificates');
+        $content['blog_carousel'] = $this->dentalModel->get_blog_posts_for_dental(6);
+
+        $this->load->view('Dental/root_canal_page', $content);
+    }
+
     public function tmj_specialist()
     {
         $this->seo_overrides = array(
