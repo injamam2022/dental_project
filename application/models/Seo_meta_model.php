@@ -39,6 +39,9 @@ class Seo_meta_model extends CI_Model {
 			if ($m === 'root_canal') {
 				return 'dental_root_canal';
 			}
+			if ($m === 'cosmetic_dentist') {
+				return 'dental_cosmetic';
+			}
 			if ($m === 'tmj_specialist') {
 				return 'dental_tmj';
 			}

@@ -336,6 +336,41 @@ class Dental extends Frontend_Controller {
         $this->load->view('Dental/root_canal_page', $content);
     }
 
+    public function cosmetic_dentist()
+    {
+        $hero = base_url('admin/webroot/uploads/banner/Koel_Mallick_with_dentist_in_kolkata_JPG.jpeg');
+        $this->seo_overrides = array(
+            'title' => 'Best Cosmetic Dentist in Kolkata at Dontia Care Clinic – Transform Your Smile',
+            'description' => 'Transform your smile with expert cosmetic dentistry in Kolkata — teeth whitening, veneers, bonding, smile makeovers, and more at Dontia Care Clinic-Dental.',
+            'canonical' => base_url('best-cosmetic-dentist-in-kolkata'),
+            'lcp_preload_images' => array($hero),
+        );
+
+        $content = array();
+        $content['doctor_list'] = $this->dentalModel->get_active_doctors();
+        $content['technology_cards'] = $this->enrich_technology_cards(array(
+            array(
+                'title' => 'Digital Smile Design',
+                'description' => 'Visualise your new smile before treatment begins with digital planning and smile design technology.',
+                'image_url' => base_url('admin/webroot/uploads/dental_page/technology/hf_20260408_141453_072419cd-d779-4092-9401-4e7427a126ad.png'),
+            ),
+            array(
+                'title' => '3D Scanning & Precision Fit',
+                'description' => 'Accurate digital footprints help us craft veneers, crowns, and restorations that look natural and fit seamlessly.',
+                'image_url' => base_url('admin/webroot/uploads/dental_page/technology/Cerec.png'),
+            ),
+            array(
+                'title' => 'Aesthetic Laser Care',
+                'description' => 'Modern laser options for comfortable contouring and refined cosmetic outcomes when clinically appropriate.',
+                'image_url' => base_url('admin/webroot/uploads/dental_page/technology/Dental-Laser.jpg'),
+            ),
+        ));
+        $content['media_certificates'] = $this->dentalModel->get_media_by_section('certificates');
+        $content['blog_carousel'] = $this->dentalModel->get_blog_posts_for_dental(6);
+
+        $this->load->view('Dental/cosmetic_dentist_page', $content);
+    }
+
     public function tmj_specialist()
     {
         $this->seo_overrides = array(
