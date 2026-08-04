@@ -30,12 +30,12 @@ $patient_images = array(
     array(
         'url' => $rct_img('root-canal-treatment-patient-in-kolkata.webp'),
         'alt' => 'Root canal treatment patient at Dontia Care Clinic, Kolkata',
-        'caption' => 'Comfortable, painless root canal care that saves your natural tooth.',
+        'caption' => 'Comfort-focused root canal care aimed at saving your natural tooth.',
     ),
     array(
         'url' => $rct_img('root-canal-patient-treatment-in-kolkata (1).jpeg'),
         'alt' => 'Root canal patient treatment in Kolkata',
-        'caption' => 'Same-day relief from tooth pain with expert endodontic care.',
+        'caption' => 'Prompt relief from tooth pain with expert endodontic care.',
     ),
     array(
         'url' => $rct_img('endontist-in-kolkata-dr-prabhjeet-singh-sethi-performing-root-canal-treatment.JPG'),
@@ -46,7 +46,7 @@ $patient_images = array(
 
 $rct_videos = array(
     array('title' => 'Patient Feedback', 'video_id' => 'lM7QBzXFFAc'),
-    array('title' => 'Best Clinic in Kolkata', 'video_id' => 'RnUzeg5CcyU'),
+    array('title' => 'Patient Experience at Dontia', 'video_id' => 'RnUzeg5CcyU'),
     array('title' => 'Root Canal Treatment', 'video_id' => 'tTHsI5qP1wU'),
 );
 
@@ -65,16 +65,16 @@ $rct_why_points = array(
     'Experienced endodontic specialist — Dr. Prabhjeet Singh Sethi',
     '25+ years of experience and thousands of root canal procedures',
     'Cutting-edge rotary root canal technology',
-    'Painless and comfortable processes',
-    'High treatment success rate',
+    'Comfort-focused, minimal-pain processes',
+    'Strong treatment outcomes with careful follow-up',
     'Precise sterilisation and safety protocols',
     'Transparent, affordable treatment packages',
 );
 
 $rct_painless_points = array(
-    'Minimal pain',
+    'Minimal discomfort',
     'Quicker than older methods',
-    'Highly precise and sterile',
+    'Precise and sterile',
     'Comfortable for patients',
     'Often completed in 1–2 visits',
 );
@@ -193,7 +193,7 @@ $rct_aftercare = array(
     <section class="rct-hero">
         <div class="rct-hero-inner">
             <h1>Root Canal Treatment in Kolkata – Painless &amp; Advanced Care</h1>
-            <p class="rct-hero-sub">Expert endodontists, modern technology, and same-day relief from tooth pain at Dontia Care Clinic-Dental.</p>
+            <p class="rct-hero-sub">Expert endodontists, modern technology, and prompt relief from tooth pain at Dontia Care Clinic-Dental.</p>
             <div class="rct-hero-cta">
                 <a class="ortho-btn ortho-btn-gold" href="#" data-toggle="modal" data-target="#dontiaAppointmentModal">Book consultation</a>
             </div>
@@ -204,8 +204,8 @@ $rct_aftercare = array(
         <div class="container">
             <div class="ortho-grid-2">
                 <div>
-                    <p class="ortho-sub">Severe tooth pain doesn't have to become tooth loss. Get painless root canal treatment in Kolkata with advanced technology that saves your natural tooth and restores your smile. At Dontia Care Clinic-Dental, we use modern technology, tools, and anaesthesia techniques to offer painless root canal treatment (RCT) in Kolkata — helping you get rid of intolerable tooth pain quickly by removing the infection while protecting your natural tooth.</p>
-                    <p class="ortho-sub" style="margin-top:16px;">An infected tooth can disrupt your daily activities. Our dedicated team uses advanced root canal methods to overcome infection while preserving your original tooth. We prioritise long-term oral solutions — not temporary extraction — through personalised, advanced RCT treatment.</p>
+                    <p class="ortho-sub">Severe tooth pain doesn't have to become tooth loss. Get comfortable root canal treatment in Kolkata with advanced technology designed to save your natural tooth and restore your smile. At Dontia Care Clinic-Dental, we use modern tools and anaesthesia techniques to offer minimal-pain root canal treatment (RCT) — helping relieve intense tooth pain by removing the infection while protecting your natural tooth.</p>
+                    <p class="ortho-sub" style="margin-top:16px;">An infected tooth can disrupt your daily activities. Our dedicated team uses advanced root canal methods to treat infection while preserving your original tooth. We prioritise long-term oral solutions — not extraction when a tooth can be saved — through personalised, advanced RCT care.</p>
                 </div>
                 <div class="rct-media">
                     <img src="<?php echo htmlspecialchars($hero_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Root canal treatment in Kolkata at Dontia Care Clinic-Dental" width="640" height="480" decoding="async" fetchpriority="high">
@@ -222,8 +222,8 @@ $rct_aftercare = array(
                 </div>
                 <div>
                     <h2>What is Root Canal Treatment (RCT)?</h2>
-                    <p class="ortho-sub">Root canal treatment is an advanced oral healthcare procedure that removes spoiled pulp from inside the tooth. The tooth is then sealed — often with a dental crown — to prevent future infection and restore strength.</p>
-                    <p class="ortho-sub" style="margin-top:14px;">The pulp is a sensitive area made of nerves, connective tissues, and blood vessels that support tooth health. Infection develops when bacteria enter through deep cavities or cracks, causing unbearable pain.</p>
+                    <p class="ortho-sub">Root canal treatment is an advanced oral healthcare procedure that removes infected or damaged pulp from inside the tooth. The tooth is then sealed — often with a dental crown — to help prevent future infection and restore strength.</p>
+                    <p class="ortho-sub" style="margin-top:14px;">The pulp is a sensitive area made of nerves, connective tissues, and blood vessels that support tooth health. Infection develops when bacteria enter through deep cavities or cracks, often causing severe pain.</p>
                     <p class="ortho-sub" style="margin-top:14px;">RCT removes the infected pulp, thoroughly cleans the canals, and seals the tooth. A crown often restores firmness so the tooth can function normally — helping you keep your original tooth instead of extracting it.</p>
                 </div>
             </div>
@@ -248,7 +248,7 @@ $rct_aftercare = array(
     <section class="ortho-sec rct-sec-alt">
         <div class="container">
             <div class="ortho-section-head">
-                <h2>Patient Feedback Videos</h2>
+                <h2>Testimonial Videos</h2>
                 <p>Hear from patients who chose Dontia Care Clinic-Dental for root canal care in Kolkata.</p>
             </div>
             <div class="rct-video-grid" id="rctVideoGrid">
@@ -299,7 +299,7 @@ $rct_aftercare = array(
                 </div>
                 <aside class="ortho-doctor-note">
                     <h3>Trusted endodontic care</h3>
-                    <p>Patients seeking a trusted dental pulp specialist rely on our team for accurate diagnosis, compassionate care, and cutting-edge treatment systems.</p>
+                    <p>Patients seeking a trusted endodontic specialist rely on our team for careful diagnosis, compassionate care, and modern treatment systems.</p>
                     <ul class="ortho-benefit-list">
                         <?php foreach ($rct_why_points as $point) { ?>
                         <li><?php echo htmlspecialchars($point, ENT_QUOTES, 'UTF-8'); ?></li>
@@ -318,13 +318,13 @@ $rct_aftercare = array(
             <div class="ortho-grid-2">
                 <div>
                     <h2>Painless Root Canal Treatment in Kolkata</h2>
-                    <p class="ortho-sub">Not all dental clinics in Kolkata offer minimal-pain treatment — which is why many patients worry. Modern technology has changed that. We use rotary endodontic technology and advanced anaesthesia systems so your RCT stays:</p>
+                    <p class="ortho-sub">Many patients worry that root canal treatment will hurt. Modern technology has changed that experience. We use rotary endodontic technology and advanced anaesthesia so your RCT can stay:</p>
                     <div class="rct-chips">
                         <?php foreach ($rct_painless_points as $chip) { ?>
                         <span class="rct-chip"><?php echo htmlspecialchars($chip, ENT_QUOTES, 'UTF-8'); ?></span>
                         <?php } ?>
                     </div>
-                    <p class="ortho-sub" style="margin-top:18px;">Most cases close in 1–2 visits. Some patients with severe infection may need additional visits. The result: less pain, more reliability, and a smoother recovery.</p>
+                    <p class="ortho-sub" style="margin-top:18px;">Most cases are completed in 1–2 visits. Some patients with severe infection may need additional visits. The goal: less discomfort, reliable results, and a smoother recovery.</p>
                 </div>
                 <div class="rct-media">
                     <img src="<?php echo htmlspecialchars($painless_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Painless root canal treatment with modern technology in Kolkata" loading="lazy" decoding="async" width="640" height="480">
@@ -368,7 +368,7 @@ $rct_aftercare = array(
                 </li>
                 <li>
                     <strong>Local Anaesthesia</strong>
-                    <span>The area is numbed so you feel zero pain during the procedure and stay comfortable throughout.</span>
+                    <span>The area is numbed so you stay comfortable throughout the procedure with minimal discomfort.</span>
                 </li>
                 <li>
                     <strong>Cleaning the Root Canal</strong>
@@ -429,11 +429,11 @@ $rct_aftercare = array(
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td>A natural way to save the tooth</td><td>Removal of a tooth</td></tr>
+                    <tr><td>A natural way to save the tooth</td><td>Removal of a tooth, often followed by a dental implant or bridge</td></tr>
                     <tr><td>Helps regain normal functionality</td><td>May lead to additional costs for replacement</td></tr>
-                    <tr><td>Helps restore an almost natural appearance</td><td>May deteriorate the smile's appearance</td></tr>
-                    <tr><td>Long-term outcome</td><td>Short-term relief</td></tr>
-                    <tr><td>Less invasive if treated early</td><td>More invasive if left untouched</td></tr>
+                    <tr><td>Helps restore an almost natural appearance</td><td>May affect the smile's appearance if not replaced</td></tr>
+                    <tr><td>Strong long-term outcome when treated early</td><td>Short-term relief only, unless restored</td></tr>
+                    <tr><td>Less invasive when treated in time</td><td>More invasive if infection is left untreated</td></tr>
                 </tbody>
             </table>
             <p class="rct-callout">If feasible, saving the original tooth is the better option to consider.</p>
@@ -468,7 +468,7 @@ $rct_aftercare = array(
             <div class="ortho-cta-wrap">
                 <div class="ortho-cta-card">
                     <h2>Book Your Consultation Today</h2>
-                    <p>Don't ignore tooth pain before it leads to complications. Choose Dontia Care Clinic-Dental for advanced, painless, and reliable RCT. Schedule your appointment with our experts and see why patients trust us among the top endodontists in Kolkata.</p>
+                    <p>Don't ignore tooth pain before it leads to complications. Choose Dontia Care Clinic-Dental for advanced, comfort-focused, and reliable RCT. Schedule your appointment with our experts and experience careful endodontic care in Kolkata.</p>
                     <a class="ortho-btn" href="#" data-toggle="modal" data-target="#dontiaAppointmentModal">Book consultation</a>
                     <p style="margin-top:14px;margin-bottom:0;"><a href="<?php echo base_url('contact-us'); ?>" class="ortho-note">Contact page</a> — directions and clinic details.</p>
                 </div>
@@ -487,19 +487,19 @@ $rct_aftercare = array(
             </details>
             <details>
                 <summary>Is Laser Root Canal Treatment worth the cost?</summary>
-                <p>Yes. Laser RCT improves disinfection, reduces pain, and promotes faster healing.</p>
+                <p>Laser RCT can improve disinfection, reduce discomfort, and support faster healing in suitable cases. Your dentist will advise if it is right for you.</p>
             </details>
             <details>
                 <summary>How many visits are required for RCT?</summary>
-                <p>Standard RCT may require 1–2 visits. Laser and single-sitting RCT can often be completed in one appointment.</p>
+                <p>Standard RCT may require 1–2 visits. Laser and single-sitting RCT can often be completed in one appointment, depending on the case.</p>
             </details>
             <details>
                 <summary>Is RCT painful?</summary>
-                <p>Modern RCT is typically painless due to local anaesthesia and advanced tools.</p>
+                <p>Modern RCT is typically comfortable thanks to local anaesthesia and advanced tools. Most patients report little to no pain during the procedure.</p>
             </details>
             <details>
                 <summary>Do I need a crown after RCT?</summary>
-                <p>Yes. RCT-treated teeth become fragile and require a crown for protection and to restore chewing ability.</p>
+                <p>Often yes. RCT-treated teeth can become more fragile, and a crown is commonly recommended to protect the tooth and restore chewing ability.</p>
             </details>
         </div>
     </section>
@@ -529,7 +529,7 @@ $rct_aftercare = array(
         <div class="container">
             <div class="ortho-section-head">
                 <h4>Google Reviews</h4>
-                <p>See what our patients say about Dontia Dental Clinic.</p>
+                <p>See what our patients say about Dontia Care Clinic.</p>
             </div>
             <div style="text-align:center;">
                 <a class="ortho-btn ortho-btn-gold" href="https://maps.app.goo.gl/Ujpqv8hHVHVkWBeL9" target="_blank" rel="noopener noreferrer">View reviews on Google</a>

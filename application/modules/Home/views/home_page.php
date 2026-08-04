@@ -214,7 +214,7 @@ $dontia_render_skin_panel = ($dontia_has_skin || $dontia_show_tabs);
             <article class="dontia-service-card">
                 <div class="dontia-service-card-ring" aria-hidden="true">
                     <?php if ($img !== '') { ?>
-                    <span class="dontia-service-card-img" style="background-image:url('<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>')"></span>
+                    <img class="dontia-service-card-img" src="<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>" alt="" width="84" height="84" loading="lazy" decoding="async">
                     <?php } else { ?>
                     <span class="dontia-service-card-img dontia-service-card-img--placeholder"></span>
                     <?php } ?>

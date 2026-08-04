@@ -24,7 +24,7 @@ $cos_videos = array(
 );
 
 $cos_why = array(
-    'Experienced cosmetic dentist — Dr. Tanwee Saha, among the best cosmetic dentists in Kolkata',
+    'Experienced cosmetic dentist — Dr. Tanwee Saha, recognised for cosmetic dentistry in Kolkata',
     'Modern technologies including Digital Smile Design & 3D scanning',
     'Treatment tailored to your specific smile goals',
     'Natural-looking smiles with durable results',
@@ -156,9 +156,9 @@ $cos_process = array(
         <div class="container">
             <div class="ortho-grid-2">
                 <div>
-                    <p class="ortho-sub">Have you ever wondered why celebrities have such wonderful, beautiful smiles? You might have wondered if it's their natural smile, but they also have the same natural teeth as we do — unlike the common person, they have undergone cosmetic enhancements, like Cristiano Ronaldo.</p>
-                    <p class="ortho-sub" style="margin-top:16px;">At our dental clinic in Bhowanipore, Bengali film actress Koel Mallick has also undergone cosmetic dental treatment to enhance her smile. Worry not — we have the same treatment plan approach for you.</p>
-                    <p class="ortho-sub" style="margin-top:16px;">Our cosmetic dentists at Dontia Care Clinic-Dental help you retain confidence in your smile by improving tooth form through advanced cosmetic treatments. Our doctors customise care for refined or comprehensive enhancements, delivering sustained, relevant outcomes.</p>
+                    <p class="ortho-sub">Have you ever wondered why celebrities have such wonderful, beautiful smiles? Many public figures — including athletes like Cristiano Ronaldo — are known for investing in cosmetic enhancements to refine their smile, not because their teeth are fundamentally different from anyone else's.</p>
+                    <p class="ortho-sub" style="margin-top:16px;">At our dental clinic in Bhowanipore, Bengali film actress Koel Mallick has also chosen cosmetic dental care to enhance her smile. Rest assured — we create a personalised treatment plan tailored to your goals.</p>
+                    <p class="ortho-sub" style="margin-top:16px;">Our cosmetic dentists at Dontia Care Clinic-Dental help you retain confidence in your smile by improving tooth form through advanced cosmetic treatments. Our doctors customise care for refined or comprehensive enhancements, delivering natural-looking, lasting results.</p>
                 </div>
                 <div class="cos-media">
                     <img src="<?php echo htmlspecialchars($hero_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Koel Mallick with dentist at Dontia Care Clinic in Kolkata" width="640" height="480" decoding="async" fetchpriority="high">
@@ -221,11 +221,11 @@ $cos_process = array(
             <div class="cos-svc-grid">
                 <article class="cos-svc-card">
                     <h3>Teeth Whitening</h3>
-                    <p>Deep stains from tea, coffee, smoking, tobacco, and ageing can hold back your smile. Our whitening services often restore brightness in a single appointment so you can smile with confidence again.</p>
+                    <p>Deep stains from tea, coffee, smoking, tobacco, and ageing can hold back your smile. Our whitening services can often restore brightness in a single appointment, helping you smile with confidence again.</p>
                 </article>
                 <article class="cos-svc-card">
                     <h3>Laminates or Dental Veneers vs Lumineers</h3>
-                    <p>Veneers help teeth appear brighter and well-aligned. Lumineers create a similar effect, are simpler to apply, and do not require enamel shaving. At Dontia Care Clinic-Dental, we capture digital footprints for a natural, unified fit.</p>
+                    <p>Veneers help teeth appear brighter and well-aligned. Lumineers create a similar effect, are often simpler to apply, and in many cases do not require enamel shaving. At Dontia Care Clinic-Dental, we use precise digital scans for a natural, unified fit.</p>
                 </article>
                 <article class="cos-svc-card">
                     <h3>Dental Bonding &amp; Clear Aligners</h3>
@@ -233,15 +233,15 @@ $cos_process = array(
                 </article>
                 <article class="cos-svc-card">
                     <h3>Smile Designing or Smile Makeover</h3>
-                    <p>Transform the appearance of your teeth with a complete smile makeover. This may include veneers, bonding, and related cosmetic procedures — planned for different skin and facial textures.</p>
+                    <p>Transform the appearance of your teeth with a complete smile makeover. This may include veneers, bonding, and related cosmetic procedures — planned around your facial features and aesthetic goals.</p>
                 </article>
                 <article class="cos-svc-card">
                     <h3>Dental Crown</h3>
-                    <p>Advanced crowns restore the size, shape, and function of weakened teeth. We match crown colour to your natural teeth for a durable, seamless result — including after root canal treatment.</p>
+                    <p>Advanced crowns help restore the size, shape, and function of weakened teeth. We match crown colour to your natural teeth for a durable, seamless result — including after root canal treatment.</p>
                 </article>
                 <article class="cos-svc-card">
                     <h3>Gum or Tooth Contouring</h3>
-                    <p>Gum contouring helps correct uneven or gummy smiles. This less intrusive procedure can create a more balanced, harmonious smile with noticeable improvement in overall appearance.</p>
+                    <p>Gum contouring can help correct uneven or gummy smiles. This less invasive procedure aims for a more balanced, harmonious smile with a noticeable improvement in overall appearance.</p>
                 </article>
             </div>
         </div>
@@ -256,9 +256,9 @@ $cos_process = array(
             <div class="ortho-doctor-layout">
                 <div>
                     <article class="ortho-doctor-card">
-                        <img class="ortho-doctor-photo" src="<?php echo htmlspecialchars($doctor_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Dr. Tanwee Saha — best cosmetic dentist in Kolkata" width="480" height="300" loading="lazy" decoding="async">
+                        <img class="ortho-doctor-photo" src="<?php echo htmlspecialchars($doctor_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Dr. Tanwee Saha — cosmetic dentist in Kolkata" width="480" height="300" loading="lazy" decoding="async">
                         <h3>Dr. Tanwee Saha</h3>
-                        <p>Best Cosmetic Dentist in Kolkata</p>
+                        <p>Cosmetic Dentist in Kolkata</p>
                     </article>
                 </div>
                 <aside class="ortho-doctor-note">
@@ -282,7 +282,7 @@ $cos_process = array(
             <div class="ortho-grid-2">
                 <div>
                     <h2>Cosmetic Dentistry Leads to an Improved Life</h2>
-                    <p class="ortho-sub">Dental cosmetic treatment is for people who want a complete solution for a full-fledged smile. Covering cracks with bonding or veneers not only gives you confidence to smile — it also helps protect teeth from bacterial attacks.</p>
+                    <p class="ortho-sub">Dental cosmetic treatment is for people who want a complete solution for a fuller, more confident smile. Covering cracks with bonding or veneers can boost your confidence to smile — and may also help protect vulnerable tooth surfaces.</p>
                     <p class="ortho-sub" style="margin-top:14px;">Our cosmetic services give many patients the confidence to attend interviews, marriages, birthday parties, dates, vacations, and everyday outings with a smile they love.</p>
                 </div>
                 <div class="cos-media">
@@ -407,7 +407,7 @@ $cos_process = array(
         <div class="container">
             <div class="ortho-section-head">
                 <h4>Google Reviews</h4>
-                <p>See what our patients say about Dontia Dental Clinic.</p>
+                <p>See what our patients say about Dontia Care Clinic.</p>
             </div>
             <div style="text-align:center;">
                 <a class="ortho-btn ortho-btn-gold" href="https://maps.app.goo.gl/Ujpqv8hHVHVkWBeL9" target="_blank" rel="noopener noreferrer">View reviews on Google</a>

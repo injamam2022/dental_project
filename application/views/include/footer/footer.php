@@ -30,13 +30,25 @@ $dontia_footer_social = array(
                                 We offer a wide range of dental and skin care services. For appointments or questions, reach us by phone or email—we are happy to help.
                             </p>
                             <ul class="dontia-footer-contact-inline">
-                                <?php foreach ($phones as $p) { ?>
-                                <li><a href="tel:<?php echo preg_replace('/\s+/', '', $p); ?>"><i class="fa fa-phone" aria-hidden="true"></i><?php echo htmlspecialchars($p, ENT_QUOTES, 'UTF-8'); ?></a></li>
-                                <?php } ?>
-                                <?php if ($email !== '') { ?>
-                                <li><a href="mailto:<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>"><i class="fa fa-envelope" aria-hidden="true"></i><?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?></a></li>
-                                <?php } ?>
-                            </ul>
+    <?php foreach ($phones as $index => $p) { 
+        $m = ($index === 0) ? "Chinar Park" : "Elgin Road"; 
+    ?>
+        <li>
+            <span class="dontia-footer-location-label"><?php echo $m; ?></span> 
+            <a href="tel:<?php echo preg_replace('/\s+/', '', $p); ?>">
+                <i class="fa fa-phone" aria-hidden="true"></i><?php echo htmlspecialchars($p, ENT_QUOTES, 'UTF-8'); ?>
+            </a>
+        </li>
+    <?php } ?>
+
+    <?php if (!empty($email)) { ?>
+        <li>
+            <a href="mailto:<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>">
+                <i class="fa fa-envelope" aria-hidden="true"></i><?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>
+            </a>
+        </li>
+    <?php } ?>
+</ul>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-12 dontia-footer-locations-col">
@@ -44,13 +56,13 @@ $dontia_footer_social = array(
                         <div class="dontia-footer-locations">
                             <?php if ($addr1 !== '') { ?>
                             <div class="dontia-footer-location">
-                                <span class="dontia-footer-location-label">Registered office</span>
+                                <span class="dontia-footer-location-label">Elgin Road</span>
                                 <p><?php echo htmlspecialchars($addr1, ENT_QUOTES, 'UTF-8'); ?></p>
                             </div>
                             <?php } ?>
                             <?php if ($addr2 !== '') { ?>
                             <div class="dontia-footer-location">
-                                <span class="dontia-footer-location-label">Corporate office</span>
+                                <span class="dontia-footer-location-label">Chinar Park</span>
                                 <p><?php echo htmlspecialchars($addr2, ENT_QUOTES, 'UTF-8'); ?></p>
                             </div>
                             <?php } ?>
