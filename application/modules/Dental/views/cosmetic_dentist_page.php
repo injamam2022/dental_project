@@ -24,29 +24,29 @@ $cos_videos = array(
 );
 
 $cos_why = array(
-    'Experienced cosmetic dentist — Dr. Tanwee Saha, recognised for cosmetic dentistry in Kolkata',
-    'Modern technologies including Digital Smile Design & 3D scanning',
-    'Treatment tailored to your specific smile goals',
-    'Natural-looking smiles with durable results',
-    'Patient-centric care in a welcoming clinic environment',
-    'Transparent packages with no hidden costs',
-    'Fast, convenient, and honest consultation',
+    'Experienced dentists specialise in cosmetic dental treatments — Dr Tanwee Saha - Best Cosmetic Dentist in Kolkata',
+    'We only use modern technologies for dental services, such as digital smile design & 3D scanning',
+    'Treatment services tailored to the specific needs of the patient',
+    'We excel in delivering natural-looking smiles and durable results in cosmetic dentistry',
+    'We believe in offering patient-centric care in a noticeably good environment',
+    'We maintain transparency by disclosing the package with no hidden costs',
+    'The consultation process is fast, convenient, and honest, and treatment is world-class',
 );
 
 $cos_who = array(
-    'Stained teeth that do not improve even after brushing twice a day',
-    'Gaps, uneven, or misaligned teeth affecting smile balance',
-    'Damaged or chipped teeth from injury or grinding',
-    'Skewed teeth that reduce confidence to smile',
-    'A noticeably gummy smile',
+    'Have stained teeth that don\'t improve even after brushing twice a day',
+    'Have gaps in between their teeth, uneven or misaligned teeth, affecting their smile balance',
+    'Have damaged or chipped teeth as a result of an injury or teeth grinding',
+    'Have skewed teeth, impacting their confidence to smile wholeheartedly',
+    'Have a noticeably higher gummy smile',
 );
 
 $cos_process = array(
-    array('title' => 'Smile analysis', 'text' => 'We identify your oral needs and specific aesthetic goals.'),
-    array('title' => 'Digital imaging', 'text' => 'Advanced imaging helps predict and visualise your final smile.'),
-    array('title' => 'Personalised plan', 'text' => 'We prepare a treatment plan tailored to your goals and smile.'),
-    array('title' => 'Precise treatment', 'text' => 'Our dentists perform procedures carefully, as planned.'),
-    array('title' => 'Review & aftercare', 'text' => 'We refine results and share a care plan for lasting outcomes.'),
+    array('title' => 'Smile analysis', 'text' => 'The first thing we do is a smile analysis to identify your oral needs and specific aesthetic goals.'),
+    array('title' => 'Advanced digital imaging', 'text' => 'Then we do advanced digital imaging to predict and visualise your final output.'),
+    array('title' => 'Personalised treatment plan', 'text' => 'We next prepare a treatment plan tailored to your specific needs.'),
+    array('title' => 'Precise procedures', 'text' => 'Our best dentist in Kolkata then performs the procedures as planned and with precision.'),
+    array('title' => 'Review & care plan', 'text' => 'Finally, we make adjustments after reviewing the results and provide you with a care plan for lasting results.'),
 );
 ?>
 <style>
@@ -156,9 +156,9 @@ $cos_process = array(
         <div class="container">
             <div class="ortho-grid-2">
                 <div>
-                    <p class="ortho-sub">Have you ever wondered why celebrities have such wonderful, beautiful smiles? Many public figures — including athletes like Cristiano Ronaldo — are known for investing in cosmetic enhancements to refine their smile, not because their teeth are fundamentally different from anyone else's.</p>
-                    <p class="ortho-sub" style="margin-top:16px;">At our dental clinic in Bhowanipore, Bengali film actress Koel Mallick has also chosen cosmetic dental care to enhance her smile. Rest assured — we create a personalised treatment plan tailored to your goals.</p>
-                    <p class="ortho-sub" style="margin-top:16px;">Our cosmetic dentists at Dontia Care Clinic-Dental help you retain confidence in your smile by improving tooth form through advanced cosmetic treatments. Our doctors customise care for refined or comprehensive enhancements, delivering natural-looking, lasting results.</p>
+                    <p class="ortho-sub">Have you ever wondered why celebrities have such wonderful, beautiful smiles? You might have wondered if it's their natural smile, but they also have the same natural teeth as we do; unlike the common person, they have undergone cosmetic enhancements, like Cristiano Ronaldo.</p>
+                    <p class="ortho-sub" style="margin-top:16px;">At our dental clinic in Bhowanipore, Bengali film actress Koel Mallick has also undergone cosmetic dental treatment to enhance her smile, and worry not; we have the same treatment plan for you.</p>
+                    <p class="ortho-sub" style="margin-top:16px;">Our Cosmetic dentist at Dontia Care Clinic-Dental helps retain your confidence in your smile by improving your tooth form through groundbreaking cosmetic dental treatments. Our dental doctors specialise in customising treatment to suit the needs of diverse patients, such as refined or comprehensive enhancements, to deliver sustained, relevant outcomes.</p>
                 </div>
                 <div class="cos-media">
                     <img src="<?php echo htmlspecialchars($hero_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Koel Mallick with dentist at Dontia Care Clinic in Kolkata" width="640" height="480" decoding="async" fetchpriority="high">
@@ -175,8 +175,8 @@ $cos_process = array(
                 </div>
                 <div>
                     <h2>Modern Cosmetic Dentistry and a Confident Smile</h2>
-                    <p class="ortho-sub">Your teeth get noticed when you smile. A properly aligned and bright set of teeth gives you the confidence to smile wholeheartedly. We offer cosmetic dental services to cater to such needs. Our experts specialise in treating discolouration, filling gaps, and correcting irregular teeth to restore your natural appearance.</p>
-                    <p class="ortho-sub" style="margin-top:14px;">What positions us uniquely is a balanced use of leading-edge dental technology — like Digital Smile Design and 3D scanning — with tailored treatment that helps you regain your usual smile.</p>
+                    <p class="ortho-sub">Your teeth get noticed when you smile. A properly aligned and bright set of teeth gives confidence to smile wholeheartedly. We offer cosmetic dental services to cater to such needs. Our experts specialise in treating discolouration, filling gaps, and treating irregular teeth to restore your natural appearance.</p>
+                    <p class="ortho-sub" style="margin-top:14px;">What positions us uniquely in the market is a balanced use of leading-edge dental technology like Digital Smile &amp; 3D scanning and tailored treatment to enable you to regain your usual smile.</p>
                 </div>
             </div>
         </div>
@@ -221,27 +221,27 @@ $cos_process = array(
             <div class="cos-svc-grid">
                 <article class="cos-svc-card">
                     <h3>Teeth Whitening</h3>
-                    <p>Deep stains from tea, coffee, smoking, tobacco, and ageing can hold back your smile. Our whitening services can often restore brightness in a single appointment, helping you smile with confidence again.</p>
+                    <p>Deep stains prevent you from smiling. We respond with services that can remove stains from tea, coffee, smoking, drinking, tobacco consumption, and the ageing factor. What is noticeably good about us is that one appointment is enough for you to regain your confident smile.</p>
                 </article>
                 <article class="cos-svc-card">
                     <h3>Laminates or Dental Veneers vs Lumineers</h3>
-                    <p>Veneers help teeth appear brighter and well-aligned. Lumineers create a similar effect, are often simpler to apply, and in many cases do not require enamel shaving. At Dontia Care Clinic-Dental, we use precise digital scans for a natural, unified fit.</p>
+                    <p>Teeth can appear brighter and well-aligned if veneers are applied to them. Lumineers also produce such effects, but last less and are simpler to apply than veneers or laminates. Lumineers has its advantages over veneers; enamel is not shaved while applying them. At Dontia Care Clinic-Dental in Kolkata, we ensure a perfect, unified fit for a natural appearance by capturing digital footprints.</p>
                 </article>
                 <article class="cos-svc-card">
                     <h3>Dental Bonding &amp; Clear Aligners</h3>
-                    <p>We offer quick remedies for uneven, chipped, or cracked teeth using tooth-coloured composite bonding. For straightening, we provide metal braces, orthodontic care, and clear aligners or Invisalign treatment in Kolkata for a seamless daily life.</p>
+                    <p>Our experienced doctors are known for offering a quick remedy for uneven, chipped, or cracked teeth using advanced dental bonding. The bonding process includes the use of a tooth-coloured composite resin. We also use metal braces or orthodontic treatment for teeth straightening. We also provide clear aligners or Invisalign treatment services in Kolkata, ensuring a seamless, normal day-to-day life for a person.</p>
                 </article>
                 <article class="cos-svc-card">
                     <h3>Smile Designing or Smile Makeover</h3>
-                    <p>Transform the appearance of your teeth with a complete smile makeover. This may include veneers, bonding, and related cosmetic procedures — planned around your facial features and aesthetic goals.</p>
+                    <p>We provide smile makeover design services for people seeking to transform the appearance of their teeth. This service includes cosmetic procedures, such as veneers and bonding, to give your smile a complete overhaul. Our treatment is for patients with different skin and facial textures.</p>
                 </article>
                 <article class="cos-svc-card">
                     <h3>Dental Crown</h3>
-                    <p>Advanced crowns help restore the size, shape, and function of weakened teeth. We match crown colour to your natural teeth for a durable, seamless result — including after root canal treatment.</p>
+                    <p>Those with weakened teeth shouldn’t worry anymore, as we offer advanced dental crown services that help restore the size, shape, and functionality of such teeth. It is a common assumption that crowns cannot match the natural colour. Fortunately, we ensure that the crown matches the natural colour of the teeth, guaranteeing a perfect and durable result. A crown is also applied when you have had root canal treatment.</p>
                 </article>
                 <article class="cos-svc-card">
                     <h3>Gum or Tooth Contouring</h3>
-                    <p>Gum contouring can help correct uneven or gummy smiles. This less invasive procedure aims for a more balanced, harmonious smile with a noticeable improvement in overall appearance.</p>
+                    <p>Dentists utilise gum contouring to help people get rid of uneven or gummy smiles. Many patients prefer this service to see unbelievable results in the overall appearance of their teeth. This is a significantly less intrusive procedure to provide patients with a balanced and harmonious smile.</p>
                 </article>
             </div>
         </div>
@@ -256,14 +256,14 @@ $cos_process = array(
             <div class="ortho-doctor-layout">
                 <div>
                     <article class="ortho-doctor-card">
-                        <img class="ortho-doctor-photo" src="<?php echo htmlspecialchars($doctor_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Dr. Tanwee Saha — cosmetic dentist in Kolkata" width="480" height="300" loading="lazy" decoding="async">
+                        <img class="ortho-doctor-photo" src="<?php echo htmlspecialchars($doctor_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Dr. Tanwee Saha — best cosmetic dentist in Kolkata" width="480" height="300" loading="lazy" decoding="async">
                         <h3>Dr. Tanwee Saha</h3>
-                        <p>Cosmetic Dentist in Kolkata</p>
+                        <p>Best Cosmetic Dentist in Kolkata</p>
                     </article>
                 </div>
                 <aside class="ortho-doctor-note">
-                    <h3>Trusted cosmetic care</h3>
-                    <p>Our experienced dentists specialise in cosmetic dental treatments, and our consultation process is fast, convenient, and honest.</p>
+                    <h3>Why Choose Dontia Care Clinic-Dental?</h3>
+                    <p>Because our experienced dentists specialise in cosmetic dental treatments. Moreover, the consultation process is fast, convenient, and honest, and treatment is world-class.</p>
                     <ul class="ortho-benefit-list">
                         <?php foreach ($cos_why as $point) { ?>
                         <li><?php echo htmlspecialchars($point, ENT_QUOTES, 'UTF-8'); ?></li>
@@ -282,8 +282,8 @@ $cos_process = array(
             <div class="ortho-grid-2">
                 <div>
                     <h2>Cosmetic Dentistry Leads to an Improved Life</h2>
-                    <p class="ortho-sub">Dental cosmetic treatment is for people who want a complete solution for a fuller, more confident smile. Covering cracks with bonding or veneers can boost your confidence to smile — and may also help protect vulnerable tooth surfaces.</p>
-                    <p class="ortho-sub" style="margin-top:14px;">Our cosmetic services give many patients the confidence to attend interviews, marriages, birthday parties, dates, vacations, and everyday outings with a smile they love.</p>
+                    <p class="ortho-sub">Dental cosmetic treatment is for people who want a complete solution for a full-fledged smile. Covering cracks with bonding or veneers not only gives you the confidence to smile but also protects your teeth from bacterial attacks.</p>
+                    <p class="ortho-sub" style="margin-top:14px;">Our dental cosmetic services provide many with the best smile, giving them confidence to attend different events, such as interviews or life events like marriage functions, birthday parties, dates &amp; vacations, or outings.</p>
                 </div>
                 <div class="cos-media">
                     <img src="<?php echo htmlspecialchars($clinic_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Dontia Care Clinic cosmetic dentistry clinic in Kolkata" loading="lazy" decoding="async" width="640" height="480">
@@ -295,7 +295,7 @@ $cos_process = array(
     <section class="ortho-sec">
         <div class="container">
             <h2>Step-by-Step Treatment Process</h2>
-            <p class="ortho-sub">We keep the journey simple and easy to manage — from analysis to lasting aftercare.</p>
+            <p class="ortho-sub">It is fairly simple and easy to manage the treatment procedure for you. We offer treatment in a step-by-step procedure.</p>
             <ol class="cos-proc-steps">
                 <?php foreach ($cos_process as $step) { ?>
                 <li>
@@ -329,8 +329,8 @@ $cos_process = array(
     <section class="ortho-sec">
         <div class="container">
             <h2>Cost of a Cosmetic Dental Treatment in Kolkata</h2>
-            <p class="ortho-sub">The price package for cosmetic dental treatment in Kolkata varies with the complexity of the concern and the number of sessions needed. At our clinic we maintain transparency by disclosing the package at consultation — with no hidden charges.</p>
-            <p class="ortho-sub" style="margin-top:14px;">Our doctors assess your condition first, then discuss a package tailored to your oral health needs. We aim to keep care affordable and accessible for patients across Kolkata.</p>
+            <p class="ortho-sub">The price package for cosmetic dental treatment can vary in Kolkata depending on the complexity of the problem and, therefore, the number of sessions necessary to fix it. Good news: at our best dental clinic in Kolkata, we maintain transparency by disclosing the package at the time of consultation with no hidden charges.</p>
+            <p class="ortho-sub" style="margin-top:14px;">Our expert doctors assess the condition first before discussing the package tailored to your oral health needs. The good thing about us is that we try to keep the package affordable, making services accessible for many patients in Kolkata.</p>
             <?php if (count($tech_cards) > 0) { ?>
             <div class="ortho-grid-2" style="margin-top:28px;align-items:stretch;">
                 <?php foreach ($tech_cards as $tc) { ?>
@@ -354,7 +354,7 @@ $cos_process = array(
             <div class="ortho-cta-wrap">
                 <div class="ortho-cta-card">
                     <h2>Book Your Cosmetic Dental Consultation Today</h2>
-                    <p>Want to be among those who have already had a positive journey with us? You are just a consultation away from your confident smile at Dontia Care Clinic. Contact us today to book at our cosmetic dental clinic in Kolkata — your everlasting, confident smile is just an appointment away.</p>
+                    <p>Want to be among those who have already had a positive journey with us? You are just a consultation away from your confident smile at Dontia Care Clinic. Our experts will make this journey easy for your final smile. Contact us today by following the easy steps to book your consultation at our cosmetic dental clinic in Kolkata and learn how we can reassure you with a final smile through treatment tailored to your dental needs. Your everlasting and confident smile is just an appointment away.</p>
                     <a class="ortho-btn" href="#" data-toggle="modal" data-target="#dontiaAppointmentModal">Book consultation</a>
                     <p style="margin-top:14px;margin-bottom:0;"><a href="<?php echo base_url('contact-us'); ?>" class="ortho-note">Contact page</a> — directions and clinic details.</p>
                 </div>
@@ -373,11 +373,11 @@ $cos_process = array(
             </details>
             <details>
                 <summary>How to select a suitable cosmetic dentist in Kolkata?</summary>
-                <p>When visiting a cosmetic dentistry clinic in Kolkata, look for experience, before-and-after photos, a customised treatment plan, and effective communication.</p>
+                <p>When you're visiting the best value Cosmetic Dentistry clinic in Kolkata, look for experience, before-and-after photos, a customized treatment plan, and effective communication.</p>
             </details>
             <details>
                 <summary>How many days does it take for a smile makeover?</summary>
-                <p>This could take as little as 1 day for whitening, or 2–3 weeks for veneers or a full makeover.</p>
+                <p>This could take as long as 1 day for whitening, or 2 – 3 weeks for veneers or a full makeover.</p>
             </details>
         </div>
     </section>

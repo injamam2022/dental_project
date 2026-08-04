@@ -31,7 +31,7 @@ $dontia_footer_social = array(
                             </p>
                             <ul class="dontia-footer-contact-inline">
     <?php foreach ($phones as $index => $p) { 
-        $m = ($index === 0) ? "Chinar Park" : "Elgin Road"; 
+        $m = ($index === 0) ? "Elgin Road" : "Chinar Park"; 
     ?>
         <li>
             <span class="dontia-footer-location-label"><?php echo $m; ?></span> 
