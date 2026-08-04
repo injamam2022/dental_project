@@ -65,7 +65,7 @@ if (!is_array($home_body)) {
     <section class="about-section dontia-home-about" style="background-image: url(<?php echo base_url('assets/'); ?>images/background/1.jpg);">
         <div class="auto-container">
             <header class="dontia-about-intro">
-                <h1 class="dontia-about-intro-title">About Dontiacareclinic</h1>
+                <h1 class="dontia-about-intro-title">About Dontia Care Clinic</h1>
                 <div class="dontia-about-intro-divider" aria-hidden="true">
                     <span class="dontia-about-intro-line"></span>
                     <span class="dontia-about-intro-icon">
