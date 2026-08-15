@@ -413,7 +413,7 @@ class Dental extends Frontend_Controller {
         $this->seo_overrides = array(
             'title' => 'Pediatric Dentist in Kolkata | Gentle Kids Dental Care at Dontia Care Clinic',
             'description' => 'Gentle, expert pediatric dentistry in South Kolkata at Dontia Care Clinic-Dental. Dr. Suparna Roy provides kid-friendly check-ups, cavity care, sealants, fluoride, and emergency kids dental treatment.',
-            'canonical' => base_url('pediatric-dentist-in-kolkata'),
+            'canonical' => base_url('best-pediatric-dentist-in-kolkata'),
             'og_image' => base_url($hero),
             'lcp_preload_images' => array(base_url($hero)),
         );

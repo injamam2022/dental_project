@@ -309,32 +309,7 @@ $tmj_yt_poster = (is_file($tmj_yt_poster_local))
         </div>
     </section>
 
-    <section class="ortho-sec">
-        <div class="container">
-            <h4>Blogs</h4>
-            <div class="ortho-grid-2" style="margin-top:14px;">
-                <?php if (count($blogs) > 0) {
-                    foreach (array_slice($blogs, 0, 4) as $b) {
-                        $b_title = isset($b->post_title) ? (string) $b->post_title : 'Blog';
-                        $b_img = !empty($b->blog_image) ? base_url('admin/webroot/uploads/blog/' . $b->blog_image) : base_url('assets/images/favicon.png');
-                        $b_permalink = isset($b->Permalink) ? strtolower(trim((string) $b->Permalink)) : '';
-                        $b_permalink = preg_replace('/[^a-z0-9\s-]/', '', $b_permalink);
-                        $b_permalink = trim(preg_replace('/[\s-]+/', '-', $b_permalink), '-');
-                        $b_link = $b_permalink !== '' ? base_url('blog/' . $b_permalink) : '#';
-                ?>
-                <article class="ortho-card">
-                    <img src="<?php echo htmlspecialchars($b_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($b_title, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
-                    <h4><?php echo htmlspecialchars($b_title, ENT_QUOTES, 'UTF-8'); ?></h4>
-                    <a href="<?php echo htmlspecialchars($b_link, ENT_QUOTES, 'UTF-8'); ?>">Read blog</a>
-                </article>
-                <?php
-                    }
-                } else { ?>
-                <article class="ortho-card"><p class="ortho-sub" style="margin:0;">Blog posts will appear here when published from admin.</p></article>
-                <?php } ?>
-            </div>
-        </div>
-    </section>
+    <?php $this->load->view('Dental/partials/service_blog_cards'); ?>
 </div>
 
 <script>
