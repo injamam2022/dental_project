@@ -406,4 +406,22 @@ class Dental extends Frontend_Controller {
 
         $this->load->view('Dental/tmj_page', $content);
     }
+
+    public function pediatric_dentist()
+    {
+        $hero = 'assets/images/pediatic-dentist/' . rawurlencode('When You Should Take Your Kid to a Pediatric Dentist-pedodontist-treating-patient-kolkat.jpeg');
+        $this->seo_overrides = array(
+            'title' => 'Pediatric Dentist in Kolkata | Gentle Kids Dental Care at Dontia Care Clinic',
+            'description' => 'Gentle, expert pediatric dentistry in South Kolkata at Dontia Care Clinic-Dental. Dr. Suparna Roy provides kid-friendly check-ups, cavity care, sealants, fluoride, and emergency kids dental treatment.',
+            'canonical' => base_url('pediatric-dentist-in-kolkata'),
+            'og_image' => base_url($hero),
+            'lcp_preload_images' => array(base_url($hero)),
+        );
+
+        $content = array();
+        $content['doctor_list'] = $this->dentalModel->get_active_doctors();
+        $content['blog_carousel'] = $this->dentalModel->get_blog_posts_for_dental(6);
+
+        $this->load->view('Dental/pediatric_dentist_page', $content);
+    }
 }

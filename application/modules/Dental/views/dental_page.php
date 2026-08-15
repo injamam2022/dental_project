@@ -45,6 +45,7 @@ $specialisations = array(
     array(
         'image' => 'Pedodontist.png',
         'name' => 'Pedodontist',
+        'link' => 'pediatric-dentist-in-kolkata',
         'description' => 'Specialized pediatric dental care focused on preventive treatment and child-friendly oral health.'
     ),
 );

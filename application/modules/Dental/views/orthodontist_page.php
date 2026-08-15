@@ -301,6 +301,7 @@ box-shadow:0 12px 24px rgba(183,131,51,.35);
                     <a class="ortho-btn" href="#" data-toggle="modal" data-target="#dontiaAppointmentModal">Book Consultation</a>
                 </div>
             </div>
+            <?php $this->load->view('Dental/partials/clinic_location_cards'); ?>
         </div>
     </section>
 

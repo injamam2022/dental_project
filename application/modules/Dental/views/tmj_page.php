@@ -284,6 +284,7 @@ $tmj_yt_poster = (is_file($tmj_yt_poster_local))
                     <p style="margin-top:14px;margin-bottom:0;"><a href="<?php echo base_url('contact-us'); ?>" class="ortho-note">Contact us</a> for directions and hours.</p>
                 </div>
             </div>
+            <?php $this->load->view('Dental/partials/clinic_location_cards'); ?>
         </div>
     </section>
 

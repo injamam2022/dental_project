@@ -418,6 +418,7 @@ if (!empty($seo['head_scripts'])) {
                                                     <li><a href="<?php echo base_url('best-root-canal-treatment-in-kolkata'); ?>">Root Canal Treatment</a></li>
                                                     <li><a href="<?php echo base_url('best-cosmetic-dentist-in-kolkata'); ?>">Cosmetic Dentistry</a></li>
                                                     <li><a href="<?php echo base_url('tmj-specialist-in-kolkata'); ?>">TMJ Specialist</a></li>
+                                                    <li><a href="<?php echo base_url('pediatric-dentist-in-kolkata'); ?>">Pediatric Dentistry</a></li>
                                                 <?php
                                                         }
                                                         foreach ($service['subcategory'] as $subcategory) {

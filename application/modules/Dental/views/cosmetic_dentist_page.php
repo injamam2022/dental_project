@@ -359,6 +359,7 @@ $cos_process = array(
                     <p style="margin-top:14px;margin-bottom:0;"><a href="<?php echo base_url('contact-us'); ?>" class="ortho-note">Contact page</a> — directions and clinic details.</p>
                 </div>
             </div>
+            <?php $this->load->view('Dental/partials/clinic_location_cards'); ?>
         </div>
     </section>
 

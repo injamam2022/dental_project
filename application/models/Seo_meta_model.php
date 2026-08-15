@@ -45,6 +45,9 @@ class Seo_meta_model extends CI_Model {
 			if ($m === 'tmj_specialist') {
 				return 'dental_tmj';
 			}
+			if ($m === 'pediatric_dentist') {
+				return 'dental_pediatric';
+			}
 			return 'dental';
 		}
 

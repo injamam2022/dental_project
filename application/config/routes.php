@@ -70,4 +70,5 @@ $route['best-dental-implant-clinic-in-kolkata'] = 'Dental/Dental/dental_implant'
 $route['best-root-canal-treatment-in-kolkata'] = 'Dental/Dental/root_canal';
 $route['best-cosmetic-dentist-in-kolkata'] = 'Dental/Dental/cosmetic_dentist';
 $route['tmj-specialist-in-kolkata'] = 'Dental/Dental/tmj_specialist';
+$route['pediatric-dentist-in-kolkata'] = 'Dental/Dental/pediatric_dentist';
 $route['blog/(:any)'] = 'Blog/Blog/blogdetails/$1';
