@@ -32,7 +32,7 @@ if (! empty($ext['patient_title'])) {
 }
 
 $default_highlights = array(
-	'<p class="dontia-about-highlight__p">In addition to world-class dentistry, our <strong><a href="' . base_url('best-skin-care-clinic-in-kolkata') . '">Skin Care Division</a></strong> offers a full range of personalized aesthetic treatments, including acne management, anti-aging therapies, laser hair reduction, PRP, fillers, and exclusive Korean glass skin facials — all designed to enhance your natural beauty safely and effectively.</p>',
+	'<p class="dontia-about-highlight__p">In addition to world-class dentistry, our <strong><a href="' . base_url('best-skin-doctor-clinic-in-kolkata') . '">Skin Care Division</a></strong> offers a full range of personalized aesthetic treatments, including acne management, anti-aging therapies, laser hair reduction, PRP, fillers, and exclusive Korean glass skin facials — all designed to enhance your natural beauty safely and effectively.</p>',
 	'<p class="dontia-about-highlight__p">Our <strong>ENT specialists</strong> provide expert diagnosis and treatment for a wide spectrum of ear, nose, and throat conditions, ensuring optimal care for both acute and chronic ENT issues in adults and children.</p>',
 	'<p class="dontia-about-highlight__p">With an unwavering focus on safety, precision, and patient satisfaction, <strong>Dontia</strong> is where science meets artistry — creating brighter smiles, healthier skin, and better overall well-being every day.</p>',
 );

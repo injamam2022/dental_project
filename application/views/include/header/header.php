@@ -388,7 +388,7 @@ if (!empty($seo['head_scripts'])) {
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navigation dontia-primary-nav">
                                     <li><a href="<?php echo base_url('best-dental-clinic-in-kolkata'); ?>">Dental</a></li>
-                                    <li><a href="<?php echo base_url('best-skin-care-clinic-in-kolkata'); ?>">Skin Care</a></li>
+                                    <li><a href="<?php echo base_url('best-skin-doctor-clinic-in-kolkata'); ?>">Skin Care</a></li>
                                     <li><a href="<?php echo base_url('about-us'); ?>">About</a></li>
                                     <li class="dropdown"><a href="#">Services</a>
                                         <ul>
@@ -408,7 +408,7 @@ if (!empty($seo['head_scripts'])) {
                                                         $achor = '#';
                                                     }
                                                     if ($is_skin_service) {
-                                                        $achor = base_url('best-skin-care-clinic-in-kolkata');
+                                                        $achor = base_url('best-skin-doctor-clinic-in-kolkata');
                                                         if (count($service['subcategory']) === 0) {
                                                             $dropdownClass = '';
                                                         }

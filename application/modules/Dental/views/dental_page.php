@@ -148,7 +148,7 @@ $dontia_dr_resp_attrs = ' srcset="' . $dontia_dr_prabhjeet_srcset . '" sizes="' 
 $blog_carousel_rows = isset($blog_carousel) && is_array($blog_carousel) ? $blog_carousel : array();
 $service_nav_links = array(
     'Dental' => base_url('Services'),
-    'Skin Care' => base_url('best-skin-care-clinic-in-kolkata'),
+    'Skin Care' => base_url('best-skin-doctor-clinic-in-kolkata'),
     'ENT' => base_url('Services'),
 );
 if (function_exists('GetServices')) {
@@ -164,7 +164,7 @@ if (function_exists('GetServices')) {
             if (strpos($svc_name_l, 'dental') !== false) {
                 $service_nav_links['Dental'] = base_url('Services/' . $svc_id . '/0');
             } elseif (strpos($svc_name_l, 'skin') !== false) {
-                $service_nav_links['Skin Care'] = base_url('best-skin-care-clinic-in-kolkata');
+                $service_nav_links['Skin Care'] = base_url('best-skin-doctor-clinic-in-kolkata');
             } elseif (strpos($svc_name_l, 'ent') !== false) {
                 $service_nav_links['ENT'] = base_url('Services/' . $svc_id . '/0');
             }

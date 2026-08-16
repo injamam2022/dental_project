@@ -14,9 +14,10 @@ $laser_img = $skin_img('section3-skin-doctor-treating-skin-with-laser-therapy-pa
 $clinic_img = $skin_img('skin-treatment-in-the-clinic.jpg');
 $why_img = $skin_img('Why Choose Dontia Care Clinic for Skin Treatment in Kolkatadontia-care-clinic-skin-and-hair-treatment-room (1).JPG');
 
-$skin_youtube_id = 'B3xn7yI24EA';
-$skin_yt_poster = 'https://i.ytimg.com/vi/' . rawurlencode($skin_youtube_id) . '/hqdefault.jpg';
-$skin_embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($skin_youtube_id) . '?rel=0&autoplay=1&playsinline=1';
+$skin_videos = array(
+    array('title' => 'Skin Care at Dontia Care Clinic', 'video_id' => 'B3xn7yI24EA'),
+    array('title' => 'Skin treatment at Dontia Care Clinic', 'video_id' => 'Ba6myaPl4W0'),
+);
 
 $skin_pillars = array(
     'Recommending treatment specific to individual skin types by our dermatologists.',
@@ -199,17 +200,20 @@ $skin_faqs = array(
 .skin-page .skin-check li{margin:0;background:#fff;border:1px solid #ece6df;border-radius:12px;padding:14px 16px 14px 44px;position:relative;line-height:1.55;box-shadow:0 6px 14px rgba(0,0,0,.05)}
 .skin-page .skin-check li::before{content:"✓";position:absolute;left:14px;top:13px;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#c59a4d,#b78333);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
 .skin-page .skin-video-wrap{max-width:920px;margin:0 auto}
+.skin-page .skin-video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:920px;margin:0 auto}
 .skin-page .skin-video-aspect{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#1a1614;box-shadow:0 16px 36px rgba(0,0,0,.18)}
 .skin-page .skin-yt-facade{position:absolute;inset:0;width:100%;height:100%;border:0;padding:0;cursor:pointer;background:#1a1614}
 .skin-page .skin-yt-facade img{width:100%;height:100%;object-fit:cover;display:block}
 .skin-page .skin-yt-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(183,131,51,.94);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 8px 20px rgba(0,0,0,.28)}
 .skin-page .skin-video-aspect iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.skin-page .skin-video-card h3{margin:12px 0 0;font-size:16px;line-height:1.35;color:#3d342d;text-align:center}
 
 @media (max-width:1024px){.skin-page .skin-svc-grid,.skin-page .skin-check{grid-template-columns:1fr}}
 @media (max-width:768px){
 .skin-page .skin-sec-alt{background:linear-gradient(180deg,#f3ece6 0%,#e8e0d8 100%)}
 .skin-page .ortho-sub{color:#3a3836!important;line-height:1.75}
 .skin-page .ortho-doctor-photo{height:min(70vw,360px)}
+.skin-page .skin-video-grid{grid-template-columns:1fr}
 }
 </style>
 
@@ -290,13 +294,21 @@ $skin_faqs = array(
                 <h2>Skin Care at Dontia Care Clinic</h2>
                 <p>See how our dermatologists approach personalised skin treatment in Kolkata.</p>
             </div>
-            <div class="skin-video-wrap">
-                <div class="skin-video-aspect" id="skinVideoAspect">
-                    <button type="button" class="skin-yt-facade" id="skinYoutubeFacade" data-embed="<?php echo htmlspecialchars($skin_embed, ENT_QUOTES, 'UTF-8'); ?>" aria-label="Play skin treatment video from Dontia Care Clinic">
-                        <img src="<?php echo htmlspecialchars($skin_yt_poster, ENT_QUOTES, 'UTF-8'); ?>" alt="Skin treatment video at Dontia Care Clinic in Kolkata" width="480" height="270" loading="lazy" decoding="async">
-                        <span class="skin-yt-play" aria-hidden="true">&#9654;</span>
-                    </button>
-                </div>
+            <div class="skin-video-grid">
+                <?php foreach ($skin_videos as $i => $vid) {
+                    $poster = 'https://i.ytimg.com/vi/' . rawurlencode($vid['video_id']) . '/hqdefault.jpg';
+                    $embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($vid['video_id']) . '?rel=0&autoplay=1&playsinline=1';
+                ?>
+                <article class="skin-video-card">
+                    <div class="skin-video-aspect">
+                        <button type="button" class="skin-yt-facade" data-embed="<?php echo htmlspecialchars($embed, ENT_QUOTES, 'UTF-8'); ?>" aria-label="Play <?php echo htmlspecialchars($vid['title'], ENT_QUOTES, 'UTF-8'); ?>">
+                            <img src="<?php echo htmlspecialchars($poster, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($vid['title'], ENT_QUOTES, 'UTF-8'); ?>" width="480" height="270" loading="lazy" decoding="async">
+                            <span class="skin-yt-play" aria-hidden="true">&#9654;</span>
+                        </button>
+                    </div>
+                    <h3><?php echo htmlspecialchars($vid['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                </article>
+                <?php } ?>
             </div>
         </div>
     </section>
@@ -485,19 +497,19 @@ $skin_faqs = array(
 
 <script>
 (function () {
-    var btn = document.getElementById('skinYoutubeFacade');
-    var aspect = document.getElementById('skinVideoAspect');
-    if (!btn || !aspect) { return; }
-    btn.addEventListener('click', function () {
-        var embed = btn.getAttribute('data-embed');
-        if (!embed) { return; }
-        var iframe = document.createElement('iframe');
-        iframe.src = embed;
-        iframe.setAttribute('title', 'Skin treatment at Dontia Care Clinic, Kolkata');
-        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-        iframe.setAttribute('allowfullscreen', '');
-        iframe.setAttribute('loading', 'eager');
-        aspect.replaceChild(iframe, btn);
+    document.querySelectorAll('.skin-yt-facade').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var embed = btn.getAttribute('data-embed');
+            var aspect = btn.parentNode;
+            if (!embed || !aspect) { return; }
+            var iframe = document.createElement('iframe');
+            iframe.src = embed;
+            iframe.setAttribute('title', 'Skin treatment at Dontia Care Clinic, Kolkata');
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+            iframe.setAttribute('allowfullscreen', '');
+            iframe.setAttribute('loading', 'eager');
+            aspect.replaceChild(iframe, btn);
+        });
     });
 })();
 </script>
