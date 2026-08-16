@@ -340,7 +340,7 @@ $dontia_clinic_label = isset($CI->website['data']->company_name) ? $CI->website[
 
     <script defer src="<?php echo base_url(); ?>assets/mainjs/userinfo.js"></script>
 <?php
-$_dcc_dental_lite_js = (strtolower((string) $this->router->fetch_class()) === 'dental');
+$_dcc_dental_lite_js = in_array(strtolower((string) $this->router->fetch_class()), array('dental', 'skin'), true);
 if (empty($_dcc_dental_lite_js)) {
 ?>
     <script defer src="<?php echo base_url(); ?>assets/js/Carousel.js"></script>

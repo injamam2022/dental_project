@@ -4,8 +4,13 @@
     $banner_img = ($banner && !empty($banner->image_name))
         ? site_url('admin/webroot/uploads/banner/'.$banner->image_name)
         : $banner_fallback;
-    $banner_title = ($banner && !empty($banner->image_seo_title)) ? $banner->image_seo_title : 'Blog Details';
-    $banner_subtitle = ($banner && !empty($banner->image_url_link)) ? $banner->image_url_link : 'Latest insights, updates, and care tips from our specialists';
+    $dontia_banner_plain = static function ($raw, $fallback) {
+        $s = html_entity_decode((string) $raw, ENT_QUOTES, 'UTF-8');
+        $s = trim(preg_replace('/\s+/', ' ', strip_tags($s)));
+        return $s !== '' ? $s : $fallback;
+    };
+    $banner_title = $dontia_banner_plain(($banner && isset($banner->image_seo_title)) ? $banner->image_seo_title : '', 'Blog Details');
+    $banner_subtitle = $dontia_banner_plain(($banner && isset($banner->image_url_link)) ? $banner->image_url_link : '', 'Latest insights, updates, and care tips from our specialists');
 ?>
 <style>
 .dontia-blog-detail-banner {

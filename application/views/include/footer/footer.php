@@ -1,6 +1,6 @@
 <?php
 $this->load->helper('common');
-$dental_lite_scripts = (strtolower((string) $this->router->fetch_class()) === 'dental');
+$dental_lite_scripts = in_array(strtolower((string) $this->router->fetch_class()), array('dental', 'skin'), true);
 $w = isset($this->website['data']) ? $this->website['data'] : new stdClass();
 $company = isset($w->company_name) ? trim((string) $w->company_name) : '';
 $company_esc = htmlspecialchars($company !== '' ? $company : 'Clinic', ENT_QUOTES, 'UTF-8');
@@ -75,6 +75,7 @@ $dontia_footer_social = array(
                         <h2 class="dontia-footer-heading">Useful links</h2>
                         <ul class="dontia-footer-links">
                             <li><a href="<?php echo base_url('best-dental-clinic-in-kolkata'); ?>">Dental</a></li>
+                            <li><a href="<?php echo base_url('best-skin-care-clinic-in-kolkata'); ?>">Skin Care</a></li>
                             <li><a href="<?php echo base_url('about-us'); ?>">About</a></li>
                             <li><a href="<?php echo base_url('blogs'); ?>">Blog</a></li>
                             <li><a href="<?php echo base_url('Gallery'); ?>">Gallery</a></li>

@@ -15,7 +15,7 @@ function dontia_is_marketing_lite_page()
 		return false;
 	}
 	$class = strtolower((string) $CI->router->fetch_class());
-	return in_array($class, array('home', 'dental'), true);
+	return in_array($class, array('home', 'dental', 'skin'), true);
 }
 
 /**

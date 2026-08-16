@@ -92,7 +92,7 @@ if (!empty($ov_head['lcp_preload_images']) && is_array($ov_head['lcp_preload_ima
 $_dcc_router_class_early = strtolower((string) $this->router->fetch_class());
 $_dcc_router_method_early = strtolower((string) $this->router->fetch_method());
 $_dcc_tmj_lite_head = ($_dcc_router_class_early === 'dental' && $_dcc_router_method_early === 'tmj_specialist');
-$_dcc_marketing_no_preloader = ($_dcc_router_class_early === 'dental' || $_dcc_router_class_early === 'home');
+$_dcc_marketing_no_preloader = ($_dcc_router_class_early === 'dental' || $_dcc_router_class_early === 'skin' || $_dcc_router_class_early === 'home');
 $_dcc_site_origin = preg_replace('#/[^/]*$#', '', rtrim(base_url(), '/'));
 if ($_dcc_site_origin !== '') {
 	echo '<link rel="preconnect" href="' . $h($_dcc_site_origin) . '">' . "\n";
@@ -149,7 +149,7 @@ if (!$_dcc_tmj_lite_head) {
 <?php
 $_css = rtrim(base_url('assets/css/'), '/') . '/';
 $router_class = strtolower((string) $this->router->fetch_class());
-$dental_lite_css = ($router_class === 'dental');
+$dental_lite_css = ($router_class === 'dental' || $router_class === 'skin');
 if (!isset($_dcc_tmj_lite_head)) {
 	$_dcc_tmj_lite_head = ($router_class === 'dental' && strtolower((string) $this->router->fetch_method()) === 'tmj_specialist');
 }
@@ -179,7 +179,7 @@ $_dcc_emit_deferred_css = static function ($href) use ($h) {
 <?php } ?>
 <link href="<?php echo $_css; ?>dontia-brand.css" rel="stylesheet">
 <?php
-if ($router_class === 'dental') {
+if ($router_class === 'dental' || $router_class === 'skin') {
 	$_drlook_href = base_url('assets/css/dental-react-look.css');
 ?>
 <link rel="preload" href="<?php echo $h($_drlook_href); ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -245,6 +245,7 @@ if (!empty($seo['head_scripts'])) {
 	<?php
 	if (!isset($_dcc_marketing_no_preloader)) {
 		$_dcc_marketing_no_preloader = (strtolower((string) $this->router->fetch_class()) === 'dental'
+			|| strtolower((string) $this->router->fetch_class()) === 'skin'
 			|| strtolower((string) $this->router->fetch_class()) === 'home');
 	}
 	?>
@@ -387,6 +388,7 @@ if (!empty($seo['head_scripts'])) {
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navigation dontia-primary-nav">
                                     <li><a href="<?php echo base_url('best-dental-clinic-in-kolkata'); ?>">Dental</a></li>
+                                    <li><a href="<?php echo base_url('best-skin-care-clinic-in-kolkata'); ?>">Skin Care</a></li>
                                     <li><a href="<?php echo base_url('about-us'); ?>">About</a></li>
                                     <li class="dropdown"><a href="#">Services</a>
                                         <ul>
@@ -397,12 +399,19 @@ if (!empty($seo['head_scripts'])) {
                                                     $cat_name = isset($service['cat_name']) ? trim((string) $service['cat_name']) : '';
                                                     $cat_name_l = strtolower($cat_name);
                                                     $is_dental_service = (strpos($cat_name_l, 'dental') !== false);
+                                                    $is_skin_service = (strpos($cat_name_l, 'skin') !== false || strpos($cat_name_l, 'derma') !== false);
                                                     if (count($service['subcategory']) > 0 || $is_dental_service) {
                                                         $dropdownClass = 'dropdown';
                                                         $achor = '#';
                                                     } else {
                                                         $dropdownClass = '';
                                                         $achor = '#';
+                                                    }
+                                                    if ($is_skin_service) {
+                                                        $achor = base_url('best-skin-care-clinic-in-kolkata');
+                                                        if (count($service['subcategory']) === 0) {
+                                                            $dropdownClass = '';
+                                                        }
                                                     }
                                             ?>
                                             <li class="<?php echo $dropdownClass; ?>"><a href="<?php echo $achor; ?>"><?php echo $service['cat_name']; ?></a>

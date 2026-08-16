@@ -22,9 +22,6 @@ $dontia_dr_sizes_esc = htmlspecialchars('(max-width: 900px) min(92vw, 360px), mi
 $dontia_dr_resp_attrs = ' srcset="' . $dontia_dr_prabhjeet_srcset . '" sizes="' . $dontia_dr_sizes_esc . '"';
 ?>
 <style>
-.ortho-page .ortho-hero{position:relative;min-height:560px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#111 url('<?php echo base_url('assets/images/orthodontist/braces-before-after-2.png'); ?>') center center/contain no-repeat}
-.ortho-page .ortho-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.4) 0%,rgba(0,0,0,.55) 100%)}
-.ortho-page .ortho-hero h1{position:relative;z-index:2;color:#fff !important;text-align:center;font-size:42px;line-height:1.25;margin:0 15px;max-width:980px;padding:14px 20px;background:rgba(0,0,0,.35);border-radius:8px;text-shadow:0 2px 10px rgba(0,0,0,.65)}
 .ortho-page .ortho-sec{padding:60px 0}
 .ortho-page .ortho-sec h2,.ortho-page .ortho-sec h3,.ortho-page .ortho-sec h4{margin:0 0 16px}
 .ortho-page .ortho-sub{font-size:19px;line-height:1.8}
@@ -132,12 +129,14 @@ box-shadow:0 8px 20px rgba(183,131,51,.28);
 .ortho-page .ortho-btn-gold:focus{
 box-shadow:0 12px 24px rgba(183,131,51,.35);
 }
-@media (max-width:900px){.ortho-page .ortho-grid-2,.ortho-page .ortho-ba-grid,.ortho-page .ortho-doctor-layout,.ortho-page .ortho-cert-grid{grid-template-columns:1fr}.ortho-page .ortho-hero{min-height:420px;background-position:center top}.ortho-page .ortho-hero h1{font-size:30px;padding:10px 14px}.ortho-page .ortho-ba-card--full img{height:320px}.ortho-page .ortho-ba-pair img{height:200px}.ortho-page .ortho-doctor-grid{grid-template-columns:minmax(0,1fr)}.ortho-page .ortho-doctor-photo{height:220px;object-position:center 12%}.ortho-page .ortho-doctor-note h3{font-size:28px}.ortho-page .ortho-cta-card{padding:20px 18px}.ortho-page .ortho-why-card{padding:20px 16px}}
+@media (max-width:900px){.ortho-page .ortho-grid-2,.ortho-page .ortho-ba-grid,.ortho-page .ortho-doctor-layout,.ortho-page .ortho-cert-grid{grid-template-columns:1fr}.ortho-page .ortho-ba-card--full img{height:320px}.ortho-page .ortho-ba-pair img{height:200px}.ortho-page .ortho-doctor-grid{grid-template-columns:minmax(0,1fr)}.ortho-page .ortho-doctor-photo{height:220px;object-position:center 12%}.ortho-page .ortho-doctor-note h3{font-size:28px}.ortho-page .ortho-cta-card{padding:20px 18px}.ortho-page .ortho-why-card{padding:20px 16px}}
 </style>
 
 <div class="ortho-page">
-    <section class="ortho-hero">
-        <h1>Transform your Smile with the Best Orthodontist in Kolkata</h1>
+    <section class="dcc-hero dcc-hero--contain" style="background-image:url('<?php echo base_url('assets/images/orthodontist/braces-before-after-2.png'); ?>')">
+        <div class="dcc-hero-inner">
+            <h1>Transform your Smile with the Best Orthodontist in Kolkata</h1>
+        </div>
     </section>
 
     <section class="ortho-sec">

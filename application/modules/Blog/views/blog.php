@@ -1,17 +1,46 @@
 <?php
-    $banner = $banner_details[0];
+    $banner = (isset($banner_details[0])) ? $banner_details[0] : null;
+    $dontia_banner_plain = static function ($raw, $fallback) {
+        $s = html_entity_decode((string) $raw, ENT_QUOTES, 'UTF-8');
+        $s = trim(preg_replace('/\s+/', ' ', strip_tags($s)));
+        return $s !== '' ? $s : $fallback;
+    };
+    $banner_img = base_url('assets/images/skin-care/' . rawurlencode('Why Choose Dontia Care Clinic for Skin Treatment in Kolkatadontia-care-clinic-skin-and-hair-treatment-room (1).JPG'));
+    $banner_title = $dontia_banner_plain(($banner && isset($banner->image_seo_title)) ? $banner->image_seo_title : '', 'Our Blog');
+    $banner_subtitle = $dontia_banner_plain(($banner && isset($banner->image_url_link)) ? $banner->image_url_link : '', 'Learn more about dental health and treatments');
 ?>
-
- 
-    <section class="page-title" style="background-image:url(<?php echo site_url('admin/webroot/uploads/banner/'.$banner->image_name);?>);">
+<style>
+.page-wrapper .page-title.dontia-blog-hero .title-box {
+    background: none !important;
+    background-color: transparent !important;
+    padding: 0 !important;
+    float: none;
+    max-width: min(520px, 90%);
+}
+.page-wrapper .page-title.dontia-blog-hero .title-box h2,
+.page-wrapper .page-title.dontia-blog-hero .title-box .title {
+    color: #fff !important;
+    text-shadow: 0 2px 14px rgba(0,0,0,.65) !important;
+}
+.page-wrapper .page-title.dontia-blog-hero .title-box h2 {
+    margin: 0 0 8px;
+    font-size: clamp(26px, 3.2vw, 36px);
+    line-height: 1.2;
+}
+.page-wrapper .page-title.dontia-blog-hero .title-box .title {
+    font-size: 16px;
+    line-height: 1.45;
+}
+</style>
+    <section class="page-title dontia-blog-hero" style="background-image:url('<?php echo htmlspecialchars($banner_img, ENT_QUOTES, 'UTF-8'); ?>');">
         <div class="auto-container">
             <div class="inner-container clearfix">
                 <div class="title-box">
-                    <h2><?php echo $banner->image_seo_title; ?></h2>
-                    <span class="title"><?php echo $banner->image_url_link; ?></span>
+                    <h2><?php echo htmlspecialchars($banner_title, ENT_QUOTES, 'UTF-8'); ?></h2>
+                    <span class="title"><?php echo htmlspecialchars($banner_subtitle, ENT_QUOTES, 'UTF-8'); ?></span>
                 </div>
                 <ul class="bread-crumb clearfix">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="<?php echo base_url(); ?>">Home</a></li>
                     <li>Blogs</li>
                 </ul>
             </div>

@@ -52,13 +52,6 @@ $cos_process = array(
 <style>
 .cos-page{overflow-x:hidden}
 .cos-page .container{max-width:min(1280px,94vw);width:100%;padding-left:max(22px,calc(env(safe-area-inset-left,0px) + 16px));padding-right:max(22px,calc(env(safe-area-inset-right,0px) + 16px));box-sizing:border-box}
-.cos-page .cos-hero{position:relative;min-height:560px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:#1a1614 url('<?php echo htmlspecialchars($hero_img, ENT_QUOTES, 'UTF-8'); ?>') center 28%/cover no-repeat}
-.cos-page .cos-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(18,12,8,.78) 0%,rgba(18,12,8,.42) 52%,rgba(18,12,8,.68) 100%)}
-.cos-page .cos-hero-inner{position:relative;z-index:2;text-align:center;max-width:940px;margin:0 16px;padding:28px 28px 30px;background:rgba(12,8,6,.45);border:1px solid rgba(255,255,255,.12);border-radius:14px;backdrop-filter:blur(2px)}
-.cos-page .cos-hero h1{color:#fff!important;margin:0 0 14px;font-size:clamp(26px,4vw,40px);line-height:1.18;text-shadow:0 2px 14px rgba(0,0,0,.55)}
-.cos-page .cos-hero-sub{margin:0 auto;color:#fff!important;font-size:clamp(16px,2.1vw,19px);line-height:1.55;text-shadow:0 1px 8px rgba(0,0,0,.5);max-width:40ch}
-.cos-page .cos-hero-cta{margin-top:22px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-@media (max-width:900px){.cos-page .cos-hero{min-height:440px;background-position:center 20%}.cos-page .cos-hero-inner{padding:22px 18px}}
 
 .ortho-page .ortho-sec{padding:60px 0}
 .ortho-page .ortho-sec h2,.ortho-page .ortho-sec h3,.ortho-page .ortho-sec h4{margin:0 0 16px}
@@ -142,11 +135,11 @@ $cos_process = array(
 </style>
 
 <div class="ortho-page implant-page cos-page">
-    <section class="cos-hero">
-        <div class="cos-hero-inner">
+    <section class="dcc-hero" style="background-image:url('<?php echo htmlspecialchars($hero_img, ENT_QUOTES, 'UTF-8'); ?>')">
+        <div class="dcc-hero-inner">
             <h1>Best Cosmetic Dentist in Kolkata at Dontia Care Clinic – Transform Your Smile</h1>
-            <p class="cos-hero-sub">Celebrity-trusted cosmetic dentistry in Bhowanipore — personalised smile enhancements that look natural and last.</p>
-            <div class="cos-hero-cta">
+            <p class="dcc-hero-sub">Celebrity-trusted cosmetic dentistry in Bhowanipore — personalised smile enhancements that look natural and last.</p>
+            <div class="dcc-hero-cta">
                 <a class="ortho-btn ortho-btn-gold" href="#" data-toggle="modal" data-target="#dontiaAppointmentModal">Book consultation</a>
             </div>
         </div>

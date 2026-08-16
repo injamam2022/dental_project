@@ -89,13 +89,6 @@ $rct_aftercare = array(
 <style>
 .rct-page{overflow-x:hidden}
 .rct-page .container{max-width:min(1280px,94vw);width:100%;padding-left:max(22px,calc(env(safe-area-inset-left,0px) + 16px));padding-right:max(22px,calc(env(safe-area-inset-right,0px) + 16px));box-sizing:border-box}
-.rct-page .rct-hero{position:relative;min-height:540px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:#1a1614 url('<?php echo htmlspecialchars($hero_img, ENT_QUOTES, 'UTF-8'); ?>') center center/cover no-repeat}
-.rct-page .rct-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(20,14,10,.72) 0%,rgba(20,14,10,.45) 48%,rgba(20,14,10,.62) 100%)}
-.rct-page .rct-hero-inner{position:relative;z-index:2;text-align:center;max-width:920px;margin:0 16px;padding:28px 28px 30px;background:rgba(12,8,6,.42);border:1px solid rgba(255,255,255,.12);border-radius:14px;backdrop-filter:blur(2px)}
-.rct-page .rct-hero h1{color:#fff!important;margin:0 0 14px;font-size:clamp(28px,4.2vw,42px);line-height:1.18;text-shadow:0 2px 14px rgba(0,0,0,.55)}
-.rct-page .rct-hero-sub{margin:0;color:#fff!important;font-size:clamp(16px,2.1vw,19px);line-height:1.55;text-shadow:0 1px 8px rgba(0,0,0,.5);max-width:38ch;margin-inline:auto}
-.rct-page .rct-hero-cta{margin-top:22px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-@media (max-width:900px){.rct-page .rct-hero{min-height:420px}.rct-page .rct-hero-inner{padding:22px 18px}}
 
 .ortho-page .ortho-sec{padding:60px 0}
 .ortho-page .ortho-sec h2,.ortho-page .ortho-sec h3,.ortho-page .ortho-sec h4{margin:0 0 16px}
@@ -190,11 +183,11 @@ $rct_aftercare = array(
 </style>
 
 <div class="ortho-page implant-page rct-page">
-    <section class="rct-hero">
-        <div class="rct-hero-inner">
+    <section class="dcc-hero" style="background-image:url('<?php echo htmlspecialchars($hero_img, ENT_QUOTES, 'UTF-8'); ?>')">
+        <div class="dcc-hero-inner">
             <h1>Root Canal Treatment in Kolkata – Painless &amp; Advanced Care</h1>
-            <p class="rct-hero-sub">Expert endodontists, modern technology, and same-day relief from tooth pain at Dontia Care Clinic-Dental.</p>
-            <div class="rct-hero-cta">
+            <p class="dcc-hero-sub">Expert endodontists, modern technology, and same-day relief from tooth pain at Dontia Care Clinic-Dental.</p>
+            <div class="dcc-hero-cta">
                 <a class="ortho-btn ortho-btn-gold" href="#" data-toggle="modal" data-target="#dontiaAppointmentModal">Book consultation</a>
             </div>
         </div>

@@ -45,12 +45,6 @@ $patient_story_captions = array(
 .implant-page .implant-stories-slider-outer .implant-patient-stories-wrap.dr-gallery-slider-wrap{margin-top:14px;padding-left:max(48px,calc(env(safe-area-inset-left,0px) + 42px));padding-right:max(48px,calc(env(safe-area-inset-right,0px) + 42px))}
 @media (max-width:768px){.implant-page .implant-stories-slider-outer{padding-left:max(14px,calc(env(safe-area-inset-left,0px) + 10px));padding-right:max(14px,calc(env(safe-area-inset-right,0px) + 10px))}.implant-page .implant-stories-slider-outer .implant-patient-stories-wrap.dr-gallery-slider-wrap{padding-left:max(20px,calc(env(safe-area-inset-left,0px) + 12px));padding-right:max(20px,calc(env(safe-area-inset-right,0px) + 12px));margin-top:10px}}
 
-.implant-page .implant-hero{position:relative;min-height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:#1a1614 url('<?php echo base_url('assets/images/dental-implant/hero-banner.jpg'); ?>') center center/cover no-repeat}
-.implant-page .implant-hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,.62) 100%)}
-.implant-page .implant-hero-inner{position:relative;z-index:2;text-align:center;max-width:980px;margin:0 15px;padding:20px 24px;background:rgba(0,0,0,.4);border-radius:10px}
-.implant-page .implant-hero h1{color:#fff !important;margin:0 0 12px;font-size:38px;line-height:1.2;text-shadow:0 2px 12px rgba(0,0,0,.65)}
-.implant-page .implant-hero-sub{margin:0;color:#fff!important;font-size:18px;line-height:1.5;text-shadow:0 1px 8px rgba(0,0,0,.55)}
-@media (max-width:900px){.implant-page .implant-hero{min-height:400px}.implant-page .implant-hero h1{font-size:28px}}
 .implant-page .implant-proc-steps{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:16px}
 .implant-page .implant-proc-steps li{margin:0;background:#fff;border:1px solid #ece6df;border-radius:12px;padding:18px 20px;box-shadow:0 8px 20px rgba(0,0,0,.07)}
 .implant-page .implant-proc-steps strong{display:block;color:#5b2f1d;margin-bottom:8px;font-size:17px}
@@ -123,10 +117,10 @@ $patient_story_captions = array(
 </style>
 
 <div class="ortho-page implant-page">
-    <section class="implant-hero">
-        <div class="implant-hero-inner">
+    <section class="dcc-hero" style="background-image:url('<?php echo base_url('assets/images/dental-implant/hero-banner.jpg'); ?>')">
+        <div class="dcc-hero-inner">
             <h1>Best Dental Implant Clinic in Kolkata</h1>
-            <p class="implant-hero-sub">Expert dentists for a perfect smile — restore your lost smile</p>
+            <p class="dcc-hero-sub">Expert dentists for a perfect smile — restore your lost smile</p>
         </div>
     </section>
 
