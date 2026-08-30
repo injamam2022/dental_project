@@ -6,8 +6,13 @@
         return $s !== '' ? $s : $fallback;
     };
     $banner_img = base_url('assets/images/skin-care/' . rawurlencode('Why Choose Dontia Care Clinic for Skin Treatment in Kolkatadontia-care-clinic-skin-and-hair-treatment-room (1).JPG'));
-    $banner_title = $dontia_banner_plain(($banner && isset($banner->image_seo_title)) ? $banner->image_seo_title : '', 'Our Blog');
-    $banner_subtitle = $dontia_banner_plain(($banner && isset($banner->image_url_link)) ? $banner->image_url_link : '', 'Learn more about dental health and treatments');
+    $blog_section = isset($blog_section) ? $blog_section : null;
+    $section_name = ($blog_section && !empty($blog_section->name)) ? trim((string) $blog_section->name) : '';
+    $banner_title = $section_name !== '' ? $section_name : $dontia_banner_plain(($banner && isset($banner->image_seo_title)) ? $banner->image_seo_title : '', 'Our Blog');
+    $banner_subtitle = $section_name !== ''
+        ? 'Articles from Dontia Care Clinic'
+        : $dontia_banner_plain(($banner && isset($banner->image_url_link)) ? $banner->image_url_link : '', 'Learn more about dental health and treatments');
+    $crumb_label = $section_name !== '' ? $section_name : 'Blogs';
 ?>
 <style>
 .page-wrapper .page-title.dontia-blog-hero .title-box {
@@ -41,7 +46,7 @@
                 </div>
                 <ul class="bread-crumb clearfix">
                     <li><a href="<?php echo base_url(); ?>">Home</a></li>
-                    <li>Blogs</li>
+                    <li><?php echo htmlspecialchars($crumb_label, ENT_QUOTES, 'UTF-8'); ?></li>
                 </ul>
             </div>
         </div>
@@ -54,6 +59,11 @@
                          <?php 
                 
                   $blog_rows = is_array($blog_details) ? $blog_details : array();
+                  if (count($blog_rows) === 0) {
+                         ?>
+                        <p>No posts in this section yet. New articles will appear here once they are published from admin.</p>
+                         <?php
+                  }
                   for($i=0;$i<count($blog_rows);$i++)
                   {
                          $permalink = strtolower(trim((string) $blog_rows[$i]->Permalink));

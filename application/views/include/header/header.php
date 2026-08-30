@@ -449,7 +449,27 @@ if (!empty($seo['head_scripts'])) {
                                         </ul>
                                     </li>
                                     <li><a href="<?php echo base_url('why-choose-us'); ?>">Why Choose Us</a></li>
+                                    <?php
+                                    $blog_nav_cats = function_exists('dontia_blog_nav_categories') ? dontia_blog_nav_categories() : array();
+                                    if (is_array($blog_nav_cats) && count($blog_nav_cats) > 0) {
+                                    ?>
+                                    <li class="dropdown"><a href="#">Blogs</a>
+                                        <ul>
+                                            <?php foreach ($blog_nav_cats as $blog_nav_cat) {
+                                                $blog_nav_name = isset($blog_nav_cat->name) ? (string) $blog_nav_cat->name : 'Blog';
+                                                $blog_nav_slug = isset($blog_nav_cat->slug) ? (string) $blog_nav_cat->slug : '';
+                                                if ($blog_nav_slug === '') {
+                                                    continue;
+                                                }
+                                                $blog_nav_href = function_exists('dontia_blog_section_url') ? dontia_blog_section_url($blog_nav_slug) : base_url('blog/' . $blog_nav_slug);
+                                            ?>
+                                            <li><a href="<?php echo htmlspecialchars($blog_nav_href, ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($blog_nav_name, ENT_QUOTES, 'UTF-8'); ?></a></li>
+                                            <?php } ?>
+                                        </ul>
+                                    </li>
+                                    <?php } else { ?>
                                     <li><a href="<?php echo base_url('blogs'); ?>">Blogs</a></li>
+                                    <?php } ?>
                                     <li><a href="<?php echo base_url('contact-us'); ?>">Contact</a></li>
                                 </ul>
                             </div>

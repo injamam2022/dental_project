@@ -13,6 +13,7 @@ class Blog extends MY_Controller {
 		
 	   function index() {
 				$content['get_post']=$this->Blog_Model->get_post();
+				$content['get_category']=$this->Blog_Model->get_category();
                 $content['subview']="blog/posts";
 				$this->load->view('layout', $content);	
 				
@@ -42,7 +43,7 @@ class Blog extends MY_Controller {
 		   
 			  $data=array(
 			 'name'=>$this->input->post('category_name'), 
-			 'slug'=>$this->input->post('category_title'),
+			 'slug'=>$this->_normalize_category_slug($this->input->post('category_title'), $this->input->post('category_name')),
 			 'status'=>$this->input->post('status')
 			 );
 			 $res=$this->db->insert('tbl_blog_category',$data);
@@ -62,7 +63,7 @@ class Blog extends MY_Controller {
 		   
 			  $data=array(
 			 'name'=>$this->input->post('category_name'), 
-			 'slug'=>$this->input->post('category_title'),
+			 'slug'=>$this->_normalize_category_slug($this->input->post('category_title'), $this->input->post('category_name')),
 			 'status'=>$this->input->post('status')
 			 );
 			
@@ -280,6 +281,15 @@ class Blog extends MY_Controller {
 			$slug = strtolower(trim((string) $slug));
 			$slug = preg_replace('/[^a-z0-9\s-]/', '', $slug);
 			return trim(preg_replace('/[\s-]+/', '-', $slug), '-');
+		}
+
+		private function _normalize_category_slug($slug, $fallback_name = '')
+		{
+			$slug = $this->_normalize_blog_permalink($slug);
+			if ($slug === '') {
+				$slug = $this->_normalize_blog_permalink($fallback_name);
+			}
+			return $slug;
 		}		  
 	function Comment_list()
     {

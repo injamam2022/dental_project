@@ -2721,6 +2721,37 @@ body .main-footer.dontia-footer .dontia-footer-contact-inline a:hover,
 	color: var(--dcc-header-bar) !important;
 }
 
+body .main-footer.dontia-footer .dontia-footer-hours,
+.page-wrapper .main-footer.dontia-footer .dontia-footer-hours {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	margin: 14px 0 0;
+	font-size: 14px;
+	line-height: 1.55;
+	color: var(--dcc-body);
+}
+
+body .main-footer.dontia-footer .dontia-footer-hours .fa,
+.page-wrapper .main-footer.dontia-footer .dontia-footer-hours .fa {
+	color: var(--dcc-warm-deep);
+	font-size: 15px;
+	margin-top: 2px;
+	flex-shrink: 0;
+}
+
+body .main-footer.dontia-footer .dontia-footer-hours-label,
+.page-wrapper .main-footer.dontia-footer .dontia-footer-hours-label {
+	display: block;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--dcc-header-bar);
+	margin-bottom: 4px;
+}
+
 body .main-footer.dontia-footer .dontia-footer-heading,
 .page-wrapper .main-footer.dontia-footer .dontia-footer-heading {
 	font-family: 'Montserrat', sans-serif !important;

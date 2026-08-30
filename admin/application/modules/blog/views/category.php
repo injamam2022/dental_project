@@ -25,6 +25,9 @@
                                                                      
                                     
                                 </div>
+                                <div class="panel-body" style="padding-bottom:0;">
+                                    <p class="text-muted" style="margin:0 0 12px;font-size:13px;">Enabled categories appear under <strong>Blogs</strong> on the website. The slug is the listing URL after <code>/blog/</code>, for example <code>skin-care</code> becomes <code>/blog/skin-care</code> and <code>dental</code> becomes <code>/blog/dental</code>.</p>
+                                </div>
 		<!--FOR CATEGORY POPUP START HERE-->
 								
 					   <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
@@ -42,16 +45,19 @@
                                         <div class="col-md-6 col-xs-12">                                            
                                             <div class="input-group">
                                                 <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                                <input type="text" name="category_name" class="form-control" onblur="slug_url(this.value,'category_title')"/ required>
+                                                <input type="text" name="category_name" class="form-control" onblur="slug_url(this.value,'category_title')" required>
                                             </div>                                            
-                                            <span class="help-block">This is required text field</span>
+                                            <span class="help-block">Shown in the website Blogs menu.</span>
                                         </div>
                                     </div>
-                                    <div class="form-group">                                        
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">URL slug</label>
                                         <div class="col-md-6 col-xs-12">
                                             <div class="input-group">
-                                                <input type="hidden" name="category_title" readonly id="category_title" class="form-control"/>
-                                            </div>            
+                                                <span class="input-group-addon">/</span>
+                                                <input type="text" name="category_title" id="category_title" class="form-control" placeholder="skin-care" required>
+                                            </div>
+                                            <span class="help-block">Use <code>skin-care</code>, <code>dental</code>, or another short slug. This becomes <code>/blog/your-slug</code>.</span>
                                         </div>
                                     </div>  
 									<div class="form-group">                                        
@@ -145,16 +151,19 @@
                                         <div class="col-md-6 col-xs-12">                                            
                                             <div class="input-group">
                                                 <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                                <input type="text"  value="<?php echo $blog_lists->name;?>" name="category_name" class="form-control" onblur="slug_url(this.value,'category_titles')"/ required>
+                                                <input type="text"  value="<?php echo htmlspecialchars((string) $blog_lists->name, ENT_QUOTES, 'UTF-8'); ?>" name="category_name" class="form-control" required>
                                             </div>                                            
-                                            <span class="help-block">This is required text field</span>
+                                            <span class="help-block">Shown in the website Blogs menu.</span>
                                         </div>
                                     </div>
-                                    <div class="form-group">                                        
+                                    <div class="form-group">
+                                        <label class="col-md-3 col-xs-12 control-label">URL slug</label>
                                         <div class="col-md-6 col-xs-12">
                                             <div class="input-group">
-                                                <input type="hidden" value="<?php echo $blog_lists->slug;?>" name="category_title" readonly id="category_titles"  class="form-control"/>
-                                            </div>            
+                                                <span class="input-group-addon">/</span>
+                                                <input type="text" value="<?php echo htmlspecialchars((string) $blog_lists->slug, ENT_QUOTES, 'UTF-8'); ?>" name="category_title" id="category_title_<?php echo (int) $blog_lists->id; ?>" class="form-control" required>
+                                            </div>
+                                            <span class="help-block">Changing this changes the public listing URL (e.g. /blog/dental).</span>
                                         </div>
                                     </div>  
 									<div class="form-group">                                        

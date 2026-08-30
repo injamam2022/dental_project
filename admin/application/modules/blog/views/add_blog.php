@@ -89,6 +89,39 @@
                                 </div>
                             </div>
                         </div>
+                        <?php
+                        $blog_cats = (isset($get_category) && is_array($get_category)) ? $get_category : array();
+                        $default_cat_id = '';
+                        foreach ($blog_cats as $bc) {
+                            if (isset($bc->slug) && in_array(strtolower(trim((string) $bc->slug)), array('dental', 'dental-blog'), true)) {
+                                $default_cat_id = (string) $bc->id;
+                                break;
+                            }
+                        }
+                        ?>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="blog-field">
+                                    <label>Blog category <span class="required">*</span></label>
+                                    <select class="form-control" name="category" required>
+                                        <option value="">Select category</option>
+                                        <?php foreach ($blog_cats as $bc) {
+                                            $opt_id = isset($bc->id) ? (string) $bc->id : '';
+                                            $opt_name = isset($bc->name) ? (string) $bc->name : '';
+                                            $opt_slug = isset($bc->slug) ? (string) $bc->slug : '';
+                                        ?>
+                                        <option value="<?php echo htmlspecialchars($opt_id, ENT_QUOTES, 'UTF-8'); ?>"<?php echo ($opt_id === $default_cat_id) ? ' selected' : ''; ?>>
+                                            <?php echo htmlspecialchars($opt_name, ENT_QUOTES, 'UTF-8'); ?><?php echo $opt_slug !== '' ? ' (/' . htmlspecialchars($opt_slug, ENT_QUOTES, 'UTF-8') . ')' : ''; ?>
+                                        </option>
+                                        <?php } ?>
+                                    </select>
+                                    <small class="hint">This is where the post appears on the website (Blogs menu). Add more sections in Blog → Categories using slugs such as <code>skin-care</code> or <code>dental</code> (URLs become /blog/skin-care and /blog/dental).</small>
+                                    <?php if (count($blog_cats) === 0) { ?>
+                                    <small class="hint"><a href="<?php echo site_url('blog/categories'); ?>">Add a category</a> before publishing.</small>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -175,7 +208,7 @@
                             <div class="col-md-4">
                                 <div class="blog-field">
                                     <label>Visibility</label>
-                                    <p><span class="blog-status-pill"><i class="fa fa-check-circle"></i> Will appear in /blog list</span></p>
+                                    <p><span class="blog-status-pill"><i class="fa fa-check-circle"></i> Will appear in the selected category listing</span></p>
                                 </div>
                             </div>
                         </div>

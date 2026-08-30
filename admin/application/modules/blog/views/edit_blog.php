@@ -136,6 +136,33 @@
                                 </div>
                             </div>
                         </div>
+                        <?php
+                        $blog_cats = (isset($get_category) && is_array($get_category)) ? $get_category : array();
+                        $current_cat = isset($data->category) ? trim((string) $data->category) : '';
+                        ?>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="blog-field">
+                                    <label>Blog category <span class="required">*</span></label>
+                                    <select class="form-control" name="category" required>
+                                        <option value="">Select category</option>
+                                        <?php foreach ($blog_cats as $bc) {
+                                            $opt_id = isset($bc->id) ? (string) $bc->id : '';
+                                            $opt_name = isset($bc->name) ? (string) $bc->name : '';
+                                            $opt_slug = isset($bc->slug) ? (string) $bc->slug : '';
+                                            $selected = ($opt_id !== '' && $opt_id === $current_cat)
+                                                || ($opt_slug !== '' && strcasecmp($opt_slug, $current_cat) === 0)
+                                                || ($opt_name !== '' && strcasecmp($opt_name, $current_cat) === 0);
+                                        ?>
+                                        <option value="<?php echo htmlspecialchars($opt_id, ENT_QUOTES, 'UTF-8'); ?>"<?php echo $selected ? ' selected' : ''; ?>>
+                                            <?php echo htmlspecialchars($opt_name, ENT_QUOTES, 'UTF-8'); ?><?php echo $opt_slug !== '' ? ' (/' . htmlspecialchars($opt_slug, ENT_QUOTES, 'UTF-8') . ')' : ''; ?>
+                                        </option>
+                                        <?php } ?>
+                                    </select>
+                                    <small class="hint">This is where the post appears on the website (Blogs menu). Categories are managed in Blog → Categories.</small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

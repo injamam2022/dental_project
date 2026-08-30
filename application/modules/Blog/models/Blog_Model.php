@@ -57,16 +57,32 @@ class Blog_Model extends MY_Model{
 		}
 	}
 
-  function GetBlog(){
-	
+	function GetBlog($section_slug = '')
+	{
+		$this->load->helper('common');
 		$this->db->select('*');
 		$this->apply_published_filter();
-		$query=$this->db->get('tbl_posts_blog');
-		if($query->num_rows()==' '){
-			return false;
-		}else{
-			 return $query->result();
+		$this->db->order_by('id', 'desc');
+		$query = $this->db->get('tbl_posts_blog');
+		if (!$query || $query->num_rows() === 0) {
+			return array();
 		}
+		$rows = $query->result();
+		$section_slug = strtolower(trim((string) $section_slug));
+		if ($section_slug === '') {
+			return $rows;
+		}
+		$section = function_exists('dontia_blog_section_by_slug') ? dontia_blog_section_by_slug($section_slug) : null;
+		if (!$section) {
+			return array();
+		}
+		$filtered = array();
+		foreach ($rows as $row) {
+			if (function_exists('dontia_blog_post_matches_section') && dontia_blog_post_matches_section($row, $section)) {
+				$filtered[] = $row;
+			}
+		}
+		return $filtered;
 	}
     
     

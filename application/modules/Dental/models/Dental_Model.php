@@ -79,16 +79,18 @@ class Dental_Model extends MY_Model {
     }
 
     /**
-     * Published blog posts for the dental landing carousel (tbl_posts_blog + admin uploads).
+     * Published blog posts for landing carousels (tbl_posts_blog + admin uploads).
      *
-     * @param int $limit
+     * @param int    $limit
+     * @param string $section_slug Admin category slug, e.g. dental or skin-care
      * @return array<int, object> rows with dental_* display fields
      */
-    public function get_blog_posts_for_dental($limit = 12)
+    public function get_blog_posts_for_dental($limit = 12, $section_slug = 'dental')
     {
         if (!$this->db->table_exists('tbl_posts_blog')) {
             return array();
         }
+        $this->load->helper('common');
         $this->db->reset_query();
         $this->db->select('p.*');
         $fields = $this->db->list_fields('tbl_posts_blog');
@@ -111,13 +113,21 @@ class Dental_Model extends MY_Model {
         $this->db->or_where('p.status', '1');
         $this->db->group_end();
         $this->db->order_by('p.id', 'desc');
-        $this->db->limit((int) $limit);
+        $fetch_limit = max((int) $limit * 8, 40);
+        $this->db->limit($fetch_limit);
         $q = $this->db->get();
         if ($q->num_rows() === 0) {
             return array();
         }
+        $section_slug = strtolower(trim((string) $section_slug));
+        $section = ($section_slug !== '' && function_exists('dontia_blog_section_by_slug'))
+            ? dontia_blog_section_by_slug($section_slug)
+            : null;
         $out = array();
         foreach ($q->result() as $row) {
+            if ($section && function_exists('dontia_blog_post_matches_section') && !dontia_blog_post_matches_section($row, $section)) {
+                continue;
+            }
             $plain = trim(preg_replace('/\s+/', ' ', strip_tags((string) $row->summernote)));
             $excerpt = $plain;
             if (strlen($excerpt) > 170) {
@@ -137,6 +147,9 @@ class Dental_Model extends MY_Model {
                 }
             }
             $out[] = $row;
+            if (count($out) >= (int) $limit) {
+                break;
+            }
         }
         return $out;
     }

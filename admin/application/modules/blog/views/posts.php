@@ -35,7 +35,7 @@
                                                 </th>
 												<th>Image</th>
 												 <th>Name</th>
-                                                <!--<th>Category</th>-->
+                                                <th>Category</th>
 												<th>Date</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
@@ -68,11 +68,19 @@
                                                     <?php } ?>
                                                 </td>
                                                 <td><?php echo $post_lists->post_title;?></td>
-												 <!--<td><?php  $post_lists->category; $catid=$post_lists->category; 
-												 $id=$this->Blog_Model->get_catid($catid);
-												 echo $id[0]->name;   
-												 ?>
-												 </td>-->
+												 <td><?php
+												 $catid = isset($post_lists->category) ? trim((string) $post_lists->category) : '';
+												 $cat_label = '—';
+												 if ($catid !== '' && isset($get_category) && is_array($get_category)) {
+												     foreach ($get_category as $gc) {
+												         if ((string) $gc->id === $catid || (isset($gc->slug) && strcasecmp((string) $gc->slug, $catid) === 0) || (isset($gc->name) && strcasecmp((string) $gc->name, $catid) === 0)) {
+												             $cat_label = $gc->name;
+												             break;
+												         }
+												     }
+												 }
+												 echo htmlspecialchars($cat_label, ENT_QUOTES, 'UTF-8');
+												 ?></td>
 													<?php $t=$post_lists->dat;?>			
 												 <td><?php echo $date=date("Y-m-d",strtotime($t)); ?></td>
 												 <td><?php echo $post_lists->status;?></td>

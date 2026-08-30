@@ -3,6 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $blogs = isset($blog_carousel) && is_array($blog_carousel) ? $blog_carousel : (isset($blogs) && is_array($blogs) ? $blogs : array());
 $blogs = array_slice($blogs, 0, 3);
 $favicon = base_url('assets/images/favicon.png');
+$blog_list_url = isset($blog_list_url) && trim((string) $blog_list_url) !== ''
+    ? $blog_list_url
+    : (function_exists('dontia_blog_section_url') ? dontia_blog_section_url('dental') : base_url('blog/dental'));
+$blog_list_heading = isset($blog_list_heading) && trim((string) $blog_list_heading) !== '' ? $blog_list_heading : 'From our blog';
+$blog_list_intro = isset($blog_list_intro) && trim((string) $blog_list_intro) !== ''
+    ? $blog_list_intro
+    : 'Practical dental advice and clinic updates from Dontia Care Clinic.';
 ?>
 <style>
 .dontia-blog-sec{padding-top:8px}
@@ -30,8 +37,8 @@ $favicon = base_url('assets/images/favicon.png');
 <section class="ortho-sec dontia-blog-sec">
     <div class="container">
         <div class="dontia-blog-head">
-            <h3>From our blog</h3>
-            <p>Practical dental advice and clinic updates from Dontia Care Clinic.</p>
+            <h3><?php echo htmlspecialchars($blog_list_heading, ENT_QUOTES, 'UTF-8'); ?></h3>
+            <p><?php echo htmlspecialchars($blog_list_intro, ENT_QUOTES, 'UTF-8'); ?></p>
         </div>
         <?php if (count($blogs) > 0) { ?>
         <div class="dontia-blog-grid">
@@ -57,7 +64,7 @@ $favicon = base_url('assets/images/favicon.png');
             <?php } ?>
         </div>
         <div class="dontia-blog-all">
-            <a class="ortho-btn" href="<?php echo base_url('blogs'); ?>">View all blogs</a>
+            <a class="ortho-btn" href="<?php echo htmlspecialchars($blog_list_url, ENT_QUOTES, 'UTF-8'); ?>">View all blogs</a>
         </div>
         <?php } else { ?>
         <p class="dontia-blog-empty">Blog posts will appear here when published from admin.</p>

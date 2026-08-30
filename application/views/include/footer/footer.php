@@ -12,6 +12,10 @@ if (count($phones) === 0 && trim($phone_raw) !== '') {
 $email = isset($w->support_email) ? trim((string) $w->support_email) : '';
 $addr1 = isset($w->address) ? trim((string) $w->address) : '';
 $addr2 = isset($w->corporate_address) ? trim((string) $w->corporate_address) : '';
+$hours = isset($w->insurance_pss) ? trim((string) $w->insurance_pss) : '';
+if ($hours === '') {
+    $hours = 'Monday - Saturday';
+}
 $copy = isset($w->copy_right) ? trim((string) $w->copy_right) : ('© ' . date('Y') . ' ' . $company_esc);
 $dontia_footer_social = array(
     array('link' => isset($w->instagram_link) ? trim((string) $w->instagram_link) : '', 'icon' => 'fa-instagram', 'label' => 'Instagram'),
@@ -49,6 +53,15 @@ $dontia_footer_social = array(
         </li>
     <?php } ?>
 </ul>
+                            <?php if ($hours !== '') { ?>
+                            <p class="dontia-footer-hours">
+                                <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                <span class="dontia-footer-hours-body">
+                                    <span class="dontia-footer-hours-label">Hours</span>
+                                    <?php echo nl2br(htmlspecialchars($hours, ENT_QUOTES, 'UTF-8')); ?>
+                                </span>
+                            </p>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-12 dontia-footer-locations-col">
@@ -77,7 +90,24 @@ $dontia_footer_social = array(
                             <li><a href="<?php echo base_url('best-dental-clinic-in-kolkata'); ?>">Dental</a></li>
                             <li><a href="<?php echo base_url('best-skin-doctor-clinic-in-kolkata'); ?>">Skin Care</a></li>
                             <li><a href="<?php echo base_url('about-us'); ?>">About</a></li>
+                            <?php
+                            $footer_blog_cats = function_exists('dontia_blog_nav_categories') ? dontia_blog_nav_categories() : array();
+                            if (is_array($footer_blog_cats) && count($footer_blog_cats) > 0) {
+                                foreach ($footer_blog_cats as $footer_blog_cat) {
+                                    $fb_name = isset($footer_blog_cat->name) ? (string) $footer_blog_cat->name : 'Blog';
+                                    $fb_slug = isset($footer_blog_cat->slug) ? (string) $footer_blog_cat->slug : '';
+                                    if ($fb_slug === '') {
+                                        continue;
+                                    }
+                                    $fb_href = function_exists('dontia_blog_section_url') ? dontia_blog_section_url($fb_slug) : base_url('blog/' . $fb_slug);
+                            ?>
+                            <li><a href="<?php echo htmlspecialchars($fb_href, ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($fb_name, ENT_QUOTES, 'UTF-8'); ?></a></li>
+                            <?php
+                                }
+                            } else {
+                            ?>
                             <li><a href="<?php echo base_url('blogs'); ?>">Blog</a></li>
+                            <?php } ?>
                             <li><a href="<?php echo base_url('Gallery'); ?>">Gallery</a></li>
                             <li><a href="<?php echo base_url('contact-us'); ?>">Contact us</a></li>
                         </ul>

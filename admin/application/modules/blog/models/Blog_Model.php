@@ -3,7 +3,35 @@
 	function __construct() {
 
 		parent::__construct();
+		$this->ensure_default_categories();
 		
+	}
+
+	/** Seed Skin Care Blog / Dental Blog if they are missing so the public menu has categories to use. */
+	public function ensure_default_categories()
+	{
+		if ( ! $this->db->table_exists('tbl_blog_category')) {
+			return;
+		}
+		$defaults = array(
+			array('name' => 'Skin Care Blog', 'slug' => 'skin-care'),
+			array('name' => 'Dental Blog', 'slug' => 'dental'),
+		);
+		foreach (array('skin-care-blog' => 'skin-care', 'dental-blog' => 'dental') as $old_slug => $new_slug) {
+			$this->db->where('slug', $old_slug);
+			$this->db->update('tbl_blog_category', array('slug' => $new_slug));
+		}
+		foreach ($defaults as $def) {
+			$q = $this->db->get_where('tbl_blog_category', array('slug' => $def['slug']), 1);
+			if ($q && $q->num_rows() > 0) {
+				continue;
+			}
+			$this->db->insert('tbl_blog_category', array(
+				'name' => $def['name'],
+				'slug' => $def['slug'],
+				'status' => 'Yes',
+			));
+		}
 	}
 
 	/** Adds meta_title / meta_description columns when missing (see database/blog_meta_migration.sql). */

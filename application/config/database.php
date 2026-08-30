@@ -79,11 +79,11 @@ $is_local = ($server_name === 'localhost' || strpos($server_name, '127.') === 0 
 if ($is_local) {
 	$username = getenv('DB_USER') ?: 'root';
 	$password = getenv('DB_PASS') ?: '';
-	$database_name = getenv('DB_NAME') ?: 'dental_project';
+	$database_name = getenv('DB_NAME') ?: 'ugqnknyt_dental_project';
 } else {
 	$username = getenv('DB_USER') ?: 'u677776351_dental_project';
 	$password = getenv('DB_PASS') ?: 'Dental_project@2026';
-	$database_name = getenv('DB_NAME') ?: 'u677776351_dental_project';
+	$database_name = getenv('DB_NAME') ?: 'ugqnknyt_dental_project';
 }
 $active_group = 'default';
 $query_builder = TRUE;
