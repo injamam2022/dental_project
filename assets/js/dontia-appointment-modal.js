@@ -25,7 +25,7 @@
 		}
 
 		window.__dontiaApptModalBound = true;
-		var allowedServices = ['Skin Treatment', 'Dental', 'ENT'];
+		var allowedServices = ['Skin Treatment', 'Hair Treatment', 'Dental', 'ENT'];
 
 		function resetApptModalView() {
 			$('#dontiaAppointmentFormWrap').show();

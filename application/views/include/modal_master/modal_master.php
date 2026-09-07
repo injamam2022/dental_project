@@ -40,6 +40,7 @@ $dontia_clinic_label = isset($CI->website['data']->company_name) ? $CI->website[
                         <select class="form-control dontia-appt-input dontia-appt-select" id="dontia_appt_service" name="service_name">
                             <option value="">- Select Services -</option>
                             <option value="Skin Treatment">Skin Treatment</option>
+                            <option value="Hair Treatment">Hair Treatment</option>
                             <option value="Dental">Dental</option>
                             <option value="ENT">ENT</option>
                         </select>
@@ -65,7 +66,7 @@ $dontia_clinic_label = isset($CI->website['data']->company_name) ? $CI->website[
 </div>
 <script>
 (function ($) {
-    var allowedServices = ['Skin Treatment', 'Dental', 'ENT'];
+    var allowedServices = ['Skin Treatment', 'Hair Treatment', 'Dental', 'ENT'];
 
     function resetApptModalView() {
         $('#dontiaAppointmentFormWrap').show();

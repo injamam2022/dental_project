@@ -389,6 +389,7 @@ if (!empty($seo['head_scripts'])) {
                                 <ul class="navigation dontia-primary-nav">
                                     <li><a href="<?php echo base_url('best-dental-clinic-in-kolkata'); ?>">Dental</a></li>
                                     <li><a href="<?php echo base_url('best-skin-doctor-clinic-in-kolkata'); ?>">Skin Care</a></li>
+                                    <li><a href="<?php echo base_url('best-hair-doctor-dermatologist-clinic-kolkata'); ?>">Hair</a></li>
                                     <li><a href="<?php echo base_url('about-us'); ?>">About</a></li>
                                     <li class="dropdown"><a href="#">Services</a>
                                         <ul>
@@ -400,6 +401,7 @@ if (!empty($seo['head_scripts'])) {
                                                     $cat_name_l = strtolower($cat_name);
                                                     $is_dental_service = (strpos($cat_name_l, 'dental') !== false);
                                                     $is_skin_service = (strpos($cat_name_l, 'skin') !== false || strpos($cat_name_l, 'derma') !== false);
+                                                    $is_hair_service = (strpos($cat_name_l, 'hair') !== false && !$is_skin_service);
                                                     if (count($service['subcategory']) > 0 || $is_dental_service) {
                                                         $dropdownClass = 'dropdown';
                                                         $achor = '#';
@@ -409,6 +411,11 @@ if (!empty($seo['head_scripts'])) {
                                                     }
                                                     if ($is_skin_service) {
                                                         $achor = base_url('best-skin-doctor-clinic-in-kolkata');
+                                                        if (count($service['subcategory']) === 0) {
+                                                            $dropdownClass = '';
+                                                        }
+                                                    } elseif ($is_hair_service) {
+                                                        $achor = base_url('best-hair-doctor-dermatologist-clinic-kolkata');
                                                         if (count($service['subcategory']) === 0) {
                                                             $dropdownClass = '';
                                                         }
@@ -481,4 +488,27 @@ if (!empty($seo['head_scripts'])) {
             </div>
         </div>
     </header>
-    
+    <script>
+    (function () {
+        var header = document.querySelector('.dontia-main-header');
+        var wrap = document.querySelector('.page-wrapper');
+        if (!header || !wrap) { return; }
+        function syncHeaderOffset() {
+            var raw = header.getBoundingClientRect().height;
+            if (!raw || raw < 40) { return; }
+            /* Floor and overlap 2px so page bg never peeks under the fixed nav */
+            var h = Math.max(40, Math.floor(raw) - 2);
+            document.documentElement.style.setProperty('--dcc-header-offset', h + 'px');
+            wrap.style.paddingTop = h + 'px';
+        }
+        syncHeaderOffset();
+        if (window.requestAnimationFrame) {
+            requestAnimationFrame(syncHeaderOffset);
+        }
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(syncHeaderOffset).catch(function () {});
+        }
+        window.addEventListener('resize', syncHeaderOffset);
+        window.addEventListener('load', syncHeaderOffset);
+    })();
+    </script>

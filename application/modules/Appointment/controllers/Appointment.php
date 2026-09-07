@@ -22,7 +22,7 @@ class Appointment extends Frontend_Controller {
 		$phone = trim((string) $this->input->post('phone'));
 		$service_name = trim((string) $this->input->post('service_name'));
 		$appointment_date = trim((string) $this->input->post('appointment_date'));
-		$allowed_services = array('Skin Treatment', 'Dental', 'ENT');
+		$allowed_services = array('Skin Treatment', 'Hair Treatment', 'Dental', 'ENT');
 		if (strlen($name) < 2) {
 			$this->output->set_output(json_encode(array('success' => false, 'message' => 'Please enter your name.')));
 			return;

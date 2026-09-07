@@ -149,7 +149,7 @@ body {
 .page-wrapper .dontia-main-header .header-lower {
 	background-color: var(--dcc-header-bar) !important;
 	border-bottom: none !important;
-	box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25) !important;
+	box-shadow: none !important;
 	margin: 0 !important;
 	padding: 0 !important;
 	position: relative !important;
@@ -164,32 +164,50 @@ body {
 	width: 100% !important;
 	z-index: 10000 !important;
 	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+	margin: 0 !important;
+	border: 0 !important;
+	/* Avoid a 1px white strip under the dark nav (critical-marketing sets header bg #fff) */
+	background: transparent !important;
+	box-shadow: none !important;
 }
 
 /* Reserve page space for fixed header; clip rare full-bleed heroes (e.g. 100vw math) from causing horizontal scroll */
 .page-wrapper {
-	padding-top: 136px;
+	padding-top: var(--dcc-header-offset, 136px);
 	overflow-x: hidden;
 	max-width: 100%;
 }
 
 @media (max-width: 991px) {
 	.page-wrapper {
-		padding-top: 128px;
+		padding-top: var(--dcc-header-offset, 128px);
 	}
 }
 
 @media (max-width: 767px) {
 	.page-wrapper {
-		padding-top: 82px;
+		padding-top: var(--dcc-header-offset, 82px);
 	}
 }
 
-.page-wrapper .dontia-main-header .header-lower:before,
-.page-wrapper .dontia-main-header .header-lower:after {
+.page-wrapper .dontia-main-header .header-lower:before {
 	display: none !important;
 	content: none !important;
 	border: none !important;
+}
+.page-wrapper .dontia-main-header .header-lower:after {
+	display: block !important;
+	content: "" !important;
+	position: absolute !important;
+	left: 0 !important;
+	right: 0 !important;
+	bottom: -4px !important;
+	height: 4px !important;
+	background: var(--dcc-header-bar) !important;
+	border: 0 !important;
+	pointer-events: none !important;
+	z-index: 2 !important;
 }
 
 /* Header row: no clearfix pseudo-elements (they become extra grid items and break vertical alignment) */

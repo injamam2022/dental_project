@@ -79,4 +79,7 @@ $route['best-pediatric-dentist-in-kolkata'] = 'Dental/Dental/pediatric_dentist';
 $route['pediatric-dentist-in-kolkata'] = 'Dental/Dental/pediatric_dentist';
 $route['best-skin-care-clinic-in-kolkata'] = 'Skin/Skin/index';
 $route['best-skin-doctor-clinic-in-kolkata'] = 'Skin/Skin/index';
+$route['best-hair-doctor-dermatologist-clinic-kolkata'] = 'Hair/Hair/index';
+$route['best-hair-doctor-in-kolkata'] = 'Hair/Hair/index';
+$route['best-hair-clinic-in-kolkata'] = 'Hair/Hair/index';
 $route['blog/(:any)'] = 'Blog/Blog/blogdetails/$1';

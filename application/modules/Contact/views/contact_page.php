@@ -55,6 +55,7 @@ $topics = array(
 	'General enquiry' => 'General enquiry',
 	'Dental' => 'Dental',
 	'Skin treatment' => 'Skin treatment',
+	'Hair treatment' => 'Hair treatment',
 	'ENT' => 'ENT',
 	'Appointment' => 'Appointment',
 	'Billing / insurance' => 'Billing / insurance',

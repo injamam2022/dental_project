@@ -89,6 +89,7 @@ $dontia_footer_social = array(
                         <ul class="dontia-footer-links">
                             <li><a href="<?php echo base_url('best-dental-clinic-in-kolkata'); ?>">Dental</a></li>
                             <li><a href="<?php echo base_url('best-skin-doctor-clinic-in-kolkata'); ?>">Skin Care</a></li>
+                            <li><a href="<?php echo base_url('best-hair-doctor-dermatologist-clinic-kolkata'); ?>">Hair</a></li>
                             <li><a href="<?php echo base_url('about-us'); ?>">About</a></li>
                             <?php
                             $footer_blog_cats = function_exists('dontia_blog_nav_categories') ? dontia_blog_nav_categories() : array();

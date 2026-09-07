@@ -13,6 +13,7 @@
         $CI->db->group_start();
         $CI->db->like('cat_name', 'Dental');
         $CI->db->or_like('cat_name', 'Skin');
+        $CI->db->or_like('cat_name', 'Hair');
         $CI->db->group_end();
         $CI->db->order_by('cat_name', 'ASC');
         $query = $CI->db->get();

@@ -37,6 +37,8 @@ class Services extends Frontend_Controller {
                 $cn = strtolower((string) $row->cat_name);
                 if (strpos($cn, 'skin') !== false) {
                     $content['appointment_service_preset'] = 'Skin Treatment';
+                } elseif (strpos($cn, 'hair') !== false) {
+                    $content['appointment_service_preset'] = 'Hair Treatment';
                 } elseif (strpos($cn, 'ent') !== false) {
                     $content['appointment_service_preset'] = 'ENT';
                 } elseif (strpos($cn, 'dental') !== false) {
