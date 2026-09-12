@@ -388,7 +388,13 @@ if (!empty($seo['head_scripts'])) {
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navigation dontia-primary-nav">
                                     <li><a href="<?php echo base_url('best-dental-clinic-in-kolkata'); ?>">Dental</a></li>
-                                    <li><a href="<?php echo base_url('best-skin-doctor-clinic-in-kolkata'); ?>">Skin Care</a></li>
+                                    <li class="dropdown">
+                                        <a href="<?php echo base_url('best-skin-doctor-clinic-in-kolkata'); ?>">Skin Care</a>
+                                        <ul>
+                                            <li><a href="<?php echo base_url('best-skin-doctor-clinic-in-kolkata'); ?>">Skin Clinic</a></li>
+                                            <li><a href="<?php echo base_url('hydrafacial-treatment-in-kolkata'); ?>">HydraFacial</a></li>
+                                        </ul>
+                                    </li>
                                     <li><a href="<?php echo base_url('best-hair-doctor-dermatologist-clinic-kolkata'); ?>">Hair</a></li>
                                     <li><a href="<?php echo base_url('about-us'); ?>">About</a></li>
                                     <li class="dropdown"><a href="#">Services</a>

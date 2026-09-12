@@ -31,4 +31,26 @@ class Skin extends Frontend_Controller {
 
         $this->load->view('Skin/skin_page', $content);
     }
+
+    public function hydrafacial()
+    {
+        $hero = 'assets/images/hydra-facial/' . rawurlencode('section-2-hair-skin-treatment-chair-dontia-care-clinic-skin-and-hair-kolkata-200kb.jpg');
+        $share = 'assets/images/hydra-facial/' . rawurlencode('hydrafacial-treatment-in-kolkata-at-dontia-care-clinic-skin-and-hair.jpeg');
+        $this->seo_overrides = array(
+            'title' => 'HydraFacial Treatment in Kolkata | Dontia Care Clinic – Skin and Hair',
+            'description' => 'Advanced HydraFacial, Medi Facial and Derma Facial treatment in Kolkata at Dontia Care Clinic. Deep cleansing, hydration and glow at Elgin Road, Bhowanipore.',
+            'canonical' => base_url('hydrafacial-treatment-in-kolkata'),
+            'og_image' => base_url($share),
+            'lcp_preload_images' => array(base_url($hero)),
+            'preconnect_youtube' => true,
+        );
+
+        $content = array();
+        $content['blog_carousel'] = $this->dentalModel->get_blog_posts_for_dental(6, 'skin-care');
+        $content['blog_list_url'] = function_exists('dontia_blog_section_url') ? dontia_blog_section_url('skin-care') : base_url('blog/skin-care');
+        $content['blog_list_heading'] = 'From our skin care blog';
+        $content['blog_list_intro'] = 'Skin and facial advice from Dontia Care Clinic.';
+
+        $this->load->view('Skin/hydrafacial_page', $content);
+    }
 }

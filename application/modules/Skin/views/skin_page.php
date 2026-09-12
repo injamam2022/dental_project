@@ -33,12 +33,13 @@ $skin_analysis = array(
     'Basic cutis conditions',
 );
 
+$hydra_url = base_url('hydrafacial-treatment-in-kolkata');
 $skin_facials = array(
-    'Facial Rejuvenation Medifacial',
-    'Hydra facial treatment for profound hydration and glow',
-    'Oxygen (O2) infusion facial for instant glow',
-    'Moringa facial revitalisation',
-    'Cleopatra premium advanced ritual-rejuvenation treatment',
+    array('text' => 'Facial Rejuvenation Medifacial'),
+    array('text' => 'HydraFacial treatment for profound hydration and glow', 'url' => $hydra_url),
+    array('text' => 'Oxygen (O2) infusion facial for instant glow'),
+    array('text' => 'Moringa facial revitalisation'),
+    array('text' => 'Cleopatra premium advanced ritual-rejuvenation treatment'),
 );
 
 $skin_peels = array(
@@ -207,6 +208,8 @@ $skin_faqs = array(
 .skin-page .skin-yt-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(183,131,51,.94);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 8px 20px rgba(0,0,0,.28)}
 .skin-page .skin-video-aspect iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .skin-page .skin-video-card h3{margin:12px 0 0;font-size:16px;line-height:1.35;color:#3d342d;text-align:center}
+.skin-page .skin-inline-link{color:#5b2f1d;font-weight:700;text-decoration:underline}
+.skin-page .skin-inline-link:hover,.skin-page .skin-inline-link:focus{color:#b78333}
 
 @media (max-width:1024px){.skin-page .skin-svc-grid,.skin-page .skin-check{grid-template-columns:1fr}}
 @media (max-width:768px){
@@ -275,8 +278,11 @@ $skin_faqs = array(
                     <h2>Best Facial Treatments in Kolkata</h2>
                     <p class="ortho-sub">It is easier now to regain balance, glow, and hydration with medically proven facials:</p>
                     <ul class="ortho-service-bullets">
-                        <?php foreach ($skin_facials as $item) { ?>
-                        <li><?php echo htmlspecialchars($item, ENT_QUOTES, 'UTF-8'); ?></li>
+                        <?php foreach ($skin_facials as $item) {
+                            $item_text = is_array($item) ? (string) $item['text'] : (string) $item;
+                            $item_url = (is_array($item) && !empty($item['url'])) ? (string) $item['url'] : '';
+                        ?>
+                        <li><?php if ($item_url !== '') { ?><a class="skin-inline-link" href="<?php echo htmlspecialchars($item_url, ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($item_text, ENT_QUOTES, 'UTF-8'); ?></a><?php } else { echo htmlspecialchars($item_text, ENT_QUOTES, 'UTF-8'); } ?></li>
                         <?php } ?>
                     </ul>
                     <p class="ortho-sub" style="margin-top:16px;">Tired of blemished facial spots, acne, tanning, and uneven tone? Chemical peeling provides a dermatological solution to all these. We offer personalised facial treatment only after assessing the conditions.</p>
