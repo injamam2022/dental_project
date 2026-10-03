@@ -235,7 +235,7 @@ box-shadow:0 12px 24px rgba(183,131,51,.35);
             <h2>Types of Orthodontic Services We Offer at our Dental Clinic</h2>
             <p>We have an expert team of top orthodontists in Kolkata who are skilled enough to use the updated best braces for teeth. So, it is easy to restore your smile.</p>
             <ul class="ortho-service-bullets">
-                <li><strong>Invisalign Aligners:</strong> Clear, removable aligner systems for gradual teeth straightening without metal wires.</li>
+                <li><strong>Invisalign Aligners:</strong> Clear, removable aligner systems for gradual teeth straightening without metal wires. <a href="<?php echo base_url('best-clear-aligners-clinic-in-kolkata'); ?>">See clear aligner treatment</a>.</li>
                 <li><strong>Ceramic Braces:</strong> A less noticeable braces option that provides effective correction of dental misalignment.</li>
                 <li><strong>Retainers:</strong> Custom-made retainers after braces or aligners treatment to maintain alignment for years.</li>
             </ul>

@@ -325,7 +325,7 @@ $dontia_team_placeholder = base_url('assets/images/team/placeholder.svg');
     <div class="auto-container">
         <div class="row dontia-team-layout align-items-center">
             <div class="col-lg-4 col-md-12 dontia-team-heading-col">
-                <h2 id="dontia-team-heading" class="dontia-team-title">Meet Our Team Members</h2>
+                <h2 id="dontia-team-heading" class="dontia-team-title">Meet Our Founders</h2>
                 <p class="dontia-team-sub">Board-led care across <strong>dental</strong>, <strong>skin</strong>, and <strong>ENT</strong>—clear treatment plans and a calm, patient-first experience.</p>
             </div>
             <div class="col-lg-8 col-md-12">

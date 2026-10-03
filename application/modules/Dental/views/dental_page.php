@@ -55,14 +55,14 @@ $stats = array(
     array('icon' => 'Dental_Doctors.png', 'value' => '10+', 'label' => 'Dental Doctors'),
     array('icon' => 'Dental_Implants_Placed.png', 'value' => '20,000+', 'label' => 'Dental Implants Placed'),
 );
-$doctors = array(
-    array('name' => 'Dr. Prabhjeet Sethi', 'role' => 'Implantologist & TMJ Specialist', 'image' => 'dr-prabhjeet-sethi.png'),
-    array('name' => 'Dr. Harleen Sandhu', 'role' => 'Cosmetic Dentist', 'image' => 'dr-harleen-sandhu.png'),
-    array('name' => 'Dr. Aishi Sinha', 'role' => 'Endodontist', 'image' => 'Aishi_Sinha.png'),
-    array('name' => 'Dr. Saibal Sen', 'role' => 'Dental Surgeon', 'image' => 'dr-saibal-sen-purnam-medicare-polyclinic--lala-lajpat-rai-sarani-kolkata-dentists-yjki7.jpg'),
-    array('name' => 'Dr. Prasoon Killa', 'role' => 'Orthodontist', 'image' => 'Prasoon_Killa.png'),
-    array('name' => 'Dr. Navneet', 'role' => 'Periodontist', 'image' => 'Navneet_.png'),
-);
+// $doctors = array(
+//     array('name' => 'Dr. Prabhjeet Sethi', 'role' => 'Implantologist & TMJ Specialist', 'image' => 'dr-prabhjeet-sethi.png'),
+//     array('name' => 'Dr. Harleen Sandhu', 'role' => 'Cosmetic Dentist', 'image' => 'dr-harleen-sandhu.png'),
+//     array('name' => 'Dr. Aishi Sinha', 'role' => 'Endodontist', 'image' => 'Aishi_Sinha.png'),
+//     array('name' => 'Dr. Saibal Sen', 'role' => 'Dental Surgeon', 'image' => 'dr-saibal-sen-purnam-medicare-polyclinic--lala-lajpat-rai-sarani-kolkata-dentists-yjki7.jpg'),
+//     array('name' => 'Dr. Prasoon Killa', 'role' => 'Orthodontist', 'image' => 'Prasoon_Killa.png'),
+//     array('name' => 'Dr. Navneet', 'role' => 'Periodontist', 'image' => 'Navneet_.png'),
+// );
 $dynamic_doctors = isset($doctor_list) && is_array($doctor_list) ? $doctor_list : array();
 $doctor_display_list = array();
 $doctor_name_seen = array();

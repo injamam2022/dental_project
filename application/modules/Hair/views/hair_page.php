@@ -426,7 +426,7 @@ $hair_faqs = array(
     <section class="ortho-sec">
         <div class="container">
             <div class="ortho-section-head">
-                <h2>Who Should Visit Us</h2>
+                <h2>Why Should You Visit Us</h2>
                 <p>We are your ideal treatment centre if you are searching for care for:</p>
             </div>
             <ul class="ortho-service-bullets">

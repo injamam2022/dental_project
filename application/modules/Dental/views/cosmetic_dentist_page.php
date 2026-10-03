@@ -222,7 +222,7 @@ $cos_process = array(
                 </article>
                 <article class="cos-svc-card">
                     <h3>Dental Bonding &amp; Clear Aligners</h3>
-                    <p>Our experienced doctors are known for offering a quick remedy for uneven, chipped, or cracked teeth using advanced dental bonding. The bonding process includes the use of a tooth-coloured composite resin. We also use metal braces or orthodontic treatment for teeth straightening. We also provide clear aligners or Invisalign treatment services in Kolkata, ensuring a seamless, normal day-to-day life for a person.</p>
+                    <p>Our experienced doctors are known for offering a quick remedy for uneven, chipped, or cracked teeth using advanced dental bonding. The bonding process includes the use of a tooth-coloured composite resin. We also use metal braces or orthodontic treatment for teeth straightening. We also provide <a href="<?php echo base_url('best-clear-aligners-clinic-in-kolkata'); ?>">clear aligners or Invisalign treatment</a> in Kolkata, for people who want a discreet alternative to fixed braces.</p>
                 </article>
                 <article class="cos-svc-card">
                     <h3>Smile Designing or Smile Makeover</h3>

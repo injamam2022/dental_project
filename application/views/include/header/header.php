@@ -101,11 +101,9 @@ if ($_dcc_tmj_lite_head) {
 	$this->load->view('Dental/partials/tmj_page_critical_styles');
 }
 $dcc_fonts_href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@400;500;600;700&display=swap';
-if (!$_dcc_tmj_lite_head) {
 ?>
 <link rel="preload" href="<?php echo $h($dcc_fonts_href); ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="<?php echo $h($dcc_fonts_href); ?>"></noscript>
-<?php } ?>
 <title><?php echo $h($seo['title']); ?></title>
 <?php if ($seo['description'] !== '') { ?>
 <meta name="description" content="<?php echo $h($seo['description']); ?>">
@@ -436,6 +434,7 @@ if (!empty($seo['head_scripts'])) {
                                                         if ($is_dental_service) {
                                                 ?>
                                                     <li><a href="<?php echo base_url('best-orthodontist-in-kolkata'); ?>">Braces</a></li>
+                                                    <li><a href="<?php echo base_url('best-clear-aligners-clinic-in-kolkata'); ?>">Clear Aligners</a></li>
                                                     <li><a href="<?php echo base_url('best-dental-implant-clinic-in-kolkata'); ?>">Dental Implant</a></li>
                                                     <li><a href="<?php echo base_url('best-root-canal-treatment-in-kolkata'); ?>">Root Canal Treatment</a></li>
                                                     <li><a href="<?php echo base_url('best-cosmetic-dentist-in-kolkata'); ?>">Cosmetic Dentistry</a></li>
