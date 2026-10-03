@@ -89,11 +89,11 @@ $skin_advanced = array(
     ),
     array(
         'title' => 'Xanthelasma Removal',
-        'text' => 'Xanthelasma is a yellow, painless cholesterol deposit that forms at the corners of the eyelids. It does not go away on its own; removal by a healthcare expert may include liquid nitrogen cryotherapy.',
+        'text' => 'Xanthelasma is a yellow, painless cholesterol deposit that forms at the corners of the eyelids. It does not go away on its own; removal by a skin care expert may include TCA solution application or laser therapy depending on size.',
     ),
     array(
         'title' => 'Keloid Treatment',
-        'text' => 'A keloid is an elevated scar that can develop months to years after a skin injury. Dermatological care can reduce its appearance on the skin.',
+        'text' => 'A keloid is an elevated scar that can develop months to years after a skin injury. Cryotherapy care can reduce its appearance on the skin.',
     ),
 );
 
