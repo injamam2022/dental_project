@@ -139,13 +139,13 @@ class Dental extends Frontend_Controller {
                 'description' => 'Precise soft-tissue work with less bleeding and often quicker healing—used where it benefits your treatment.',
                 'image' => 'Dental-Laser.jpg',
             ),
-            array(
-                'id' => 4,
-                'slug' => 'baldus',
-                'title' => 'Baldus Sedation',
-                'description' => 'Safe nitrous oxide (laughing gas) to ease anxiety and make longer appointments more comfortable.',
-                'image' => 'Baldus.jpg',
-            ),
+            // array(
+            //     'id' => 4,
+            //     'slug' => 'baldus',
+            //     'title' => 'Baldus Sedation',
+            //     'description' => 'Safe nitrous oxide (laughing gas) to ease anxiety and make longer appointments more comfortable.',
+            //     'image' => 'Baldus.jpg',
+            // ),
         );
         $media_tech = is_array($media_technology) ? $media_technology : array();
         $tech_match = function ($slug, $title_like) {
@@ -159,9 +159,9 @@ class Dental extends Frontend_Controller {
             if ($slug === 'laser') {
                 return strpos($title_l, 'laser') !== false;
             }
-            if ($slug === 'baldus') {
-                return strpos($title_l, 'baldus') !== false;
-            }
+            // if ($slug === 'baldus') {
+            //     return strpos($title_l, 'baldus') !== false;
+            // }
             return false;
         };
         $used_media_ids = array();
@@ -423,5 +423,41 @@ class Dental extends Frontend_Controller {
         $content['blog_carousel'] = $this->dentalModel->get_blog_posts_for_dental(6);
 
         $this->load->view('Dental/pediatric_dentist_page', $content);
+    }
+
+    public function clear_aligners()
+    {
+        $share_img = 'assets/images/aligners/' . rawurlencode('sonia shil.jpg');
+        $lcp_img = 'assets/images/aligners/' . rawurlencode('sonia shil 3.jpg');
+        $this->seo_overrides = array(
+            'title' => 'Best Clear Aligners Clinic in Kolkata | Invisalign Treatment',
+            'description' => 'Discreet, removable clear aligners and Invisalign at Dontia Care Clinic, Kolkata. Personalised treatment after a professional assessment of your teeth and bite.',
+            'canonical' => base_url('best-clear-aligners-clinic-in-kolkata'),
+            'og_image' => base_url($share_img),
+            'lcp_preload_images' => array(base_url($lcp_img)),
+        );
+
+        $content = array();
+        $content['doctor_list'] = $this->dentalModel->get_active_doctors();
+        $content['technology_cards'] = $this->enrich_technology_cards(array(
+            array(
+                'title' => 'Digital Scanning',
+                'description' => 'Digital impressions can replace messy moulds and help plan aligner fit and tooth movement.',
+                'image_url' => base_url('admin/webroot/uploads/dental_page/technology/hf_20260408_141453_072419cd-d779-4092-9401-4e7427a126ad.png'),
+            ),
+            array(
+                'title' => 'Treatment Planning',
+                'description' => 'A planned sequence of tooth movements is mapped around your current alignment and treatment goals.',
+                'image_url' => base_url('admin/webroot/uploads/dental_page/technology/Cerec.png'),
+            ),
+            array(
+                'title' => 'Professional Monitoring',
+                'description' => 'Follow-up visits let your dentist review progress and adjust the plan when needed.',
+                'image_url' => base_url('admin/webroot/uploads/dental_page/technology/Dental-Laser.jpg'),
+            ),
+        ));
+        $content['blog_carousel'] = $this->dentalModel->get_blog_posts_for_dental(6);
+
+        $this->load->view('Dental/clear_aligners_page', $content);
     }
 }
