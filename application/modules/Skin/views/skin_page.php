@@ -67,7 +67,7 @@ $skin_lasers = array(
     'Hair reduction with laser therapy',
     'Tattoo removal',
     'Elimination of a birthmark',
-    'Face toning',
+    'Laser Toning for Pigmentation Removal',
     'Carbon laser facial therapy for glow',
     'Hollywood facial for celebrity-like glow',
     'PRP-based vampire facial for rejuvenation',

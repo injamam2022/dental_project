@@ -118,8 +118,8 @@ $tmj_yt_poster = (is_file($tmj_yt_poster_local))
                     <tr><th>Type of service</th><th>Estimated range</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>Primary consultation and diagnosis</td><td>₹800 – ₹1,200</td></tr>
-                    <tr><td>Occlusal splint or night guard</td><td>₹4,000 – ₹8,000</td></tr>
+                    <tr><td>Primary consultation and diagnosis</td><td>₹1200 – ₹2000</td></tr>
+                    <tr><td>Occlusal splint or night guard</td><td>₹15,000 – ₹30,000</td></tr>
                     <tr><td>TMJ physiotherapy packages</td><td>₹8,000 – ₹15,000</td></tr>
                     <tr><td>Surgical or advanced interventions</td><td>Custom pricing after assessment</td></tr>
                 </tbody>
@@ -189,6 +189,17 @@ $tmj_yt_poster = (is_file($tmj_yt_poster_local))
                                 if (!isset($dr->doctor_name) || trim((string) $dr->doctor_name) === '') {
                                     continue;
                                 }
+                                $dr_name = (string) $dr->doctor_name;
+                                $dr_desig = isset($dr->designation) ? (string) $dr->designation : '';
+                                // Only TMJ-related doctors on this page (exclude cosmetic / unrelated specialties).
+                                if (stripos($dr_name, 'Harleen') !== false) {
+                                    continue;
+                                }
+                                $is_tmj_doctor = (stripos($dr_desig, 'TMJ') !== false)
+                                    || (stripos($dr_name, 'Prabhjeet') !== false);
+                                if (!$is_tmj_doctor) {
+                                    continue;
+                                }
                                 $dimg = !empty($dr->image_name)
                                     ? site_url('admin/webroot/uploads/doctors/' . $dr->image_name)
                                     : $dontia_dr_prabhjeet_photo;
@@ -199,9 +210,9 @@ $tmj_yt_poster = (is_file($tmj_yt_poster_local))
                                     : ' loading="lazy" decoding="async"';
                         ?>
                         <article class="tmj-doctor-card">
-                            <img src="<?php echo htmlspecialchars($dimg, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars((string) $dr->doctor_name, ENT_QUOTES, 'UTF-8'); ?>"<?php echo $tmj_dr_srcset_attr . $tmj_dr_img_attr; ?>>
-                            <h3><?php echo htmlspecialchars((string) $dr->doctor_name, ENT_QUOTES, 'UTF-8'); ?></h3>
-                            <p><?php echo htmlspecialchars(isset($dr->designation) ? (string) $dr->designation : 'TMJ &amp; restorative dentistry', ENT_QUOTES, 'UTF-8'); ?></p>
+                            <img src="<?php echo htmlspecialchars($dimg, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($dr_name, ENT_QUOTES, 'UTF-8'); ?>"<?php echo $tmj_dr_srcset_attr . $tmj_dr_img_attr; ?>>
+                            <h3><?php echo htmlspecialchars($dr_name, ENT_QUOTES, 'UTF-8'); ?></h3>
+                            <p><?php echo htmlspecialchars($dr_desig !== '' ? $dr_desig : 'TMJ & restorative dentistry', ENT_QUOTES, 'UTF-8'); ?></p>
                         </article>
                         <?php
                             }
