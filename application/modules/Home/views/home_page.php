@@ -195,7 +195,25 @@ $dontia_render_skin_panel = ($dontia_has_skin || $dontia_show_tabs);
         <?php } ?>
 
         <?php
-        $dontia_render_cards = function ($list, $appt_service_preset = '') {
+        $dontia_service_page = function ($product_name) {
+            $n = strtolower(trim(preg_replace('/\s+/', ' ', strip_tags((string) $product_name))));
+            $pages = array(
+                array('keys' => array('invisalign'), 'path' => 'best-clear-aligners-clinic-in-kolkata'),
+                array('keys' => array('brace'), 'path' => 'best-orthodontist-in-kolkata'),
+                array('keys' => array('kid', 'pediatric', 'paediatric'), 'path' => 'best-pediatric-dentist-in-kolkata'),
+                array('keys' => array('tmj'), 'path' => 'tmj-specialist-in-kolkata'),
+                array('keys' => array('root canal', 'cavity'), 'path' => 'best-root-canal-treatment-in-kolkata'),
+            );
+            foreach ($pages as $page) {
+                foreach ($page['keys'] as $key) {
+                    if ($n !== '' && strpos($n, $key) !== false) {
+                        return base_url($page['path']);
+                    }
+                }
+            }
+            return '';
+        };
+        $dontia_render_cards = function ($list, $appt_service_preset = '') use ($dontia_service_page) {
             if (empty($list)) {
                 echo '<div class="col-12"><p class="dontia-services-empty">No services to show yet.</p></div>';
                 return;
@@ -209,6 +227,7 @@ $dontia_render_skin_panel = ($dontia_has_skin || $dontia_show_tabs);
                 if (strlen($excerpt) > 130) {
                     $excerpt = substr($excerpt, 0, 130) . '…';
                 }
+                $learn_url = $dontia_service_page($svc->product_name);
                 ?>
         <div class="col-lg-4 col-md-6 col-sm-12">
             <article class="dontia-service-card">
@@ -221,7 +240,11 @@ $dontia_render_skin_panel = ($dontia_has_skin || $dontia_show_tabs);
                 </div>
                 <h3 class="dontia-service-card-title"><?php echo $name; ?></h3>
                 <p class="dontia-service-card-desc"><em><?php echo htmlspecialchars($excerpt, ENT_QUOTES, 'UTF-8'); ?></em></p>
+                <?php if ($learn_url !== '') { ?>
+                <a href="<?php echo htmlspecialchars($learn_url, ENT_QUOTES, 'UTF-8'); ?>" class="dontia-service-card-book">Learn More</a>
+                <?php } else { ?>
                 <a href="#" class="dontia-service-card-book" data-toggle="modal" data-target="#dontiaAppointmentModal"<?php echo $appt_service_preset !== '' ? ' data-preselect-service="'.$preset_esc.'"' : ''; ?>>Book Now</a>
+                <?php } ?>
             </article>
         </div>
                 <?php

@@ -34,7 +34,7 @@ $dontia_dr_resp_attrs = ' srcset="' . $dontia_dr_prabhjeet_srcset . '" sizes="' 
 .ortho-page .ortho-doctor-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:stretch;max-width:980px;margin:0 auto}
 .ortho-page .ortho-doctor-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;justify-content:stretch}
 .ortho-page .ortho-doctor-card{background:#fff;border-radius:14px;padding:12px;box-shadow:0 10px 24px rgba(0,0,0,.08);border:1px solid #ece6df;text-align:center}
-.ortho-page .ortho-doctor-photo{width:100%;height:250px;object-fit:cover;object-position:center 15%;border-radius:10px;display:block;margin:0 0 12px}
+.ortho-page .ortho-doctor-photo{width:100%;height:340px;object-fit:cover;object-position:center 32%;border-radius:10px;display:block;margin:0 0 12px}
 .ortho-page .ortho-doctor-card h3{margin:0 0 6px;font-size:18px;line-height:1.25}
 .ortho-page .ortho-doctor-card p{margin:0;color:#6d6258;font-size:16px}
 .ortho-page .ortho-doctor-note{background:#fff;border:1px solid #ece6df;border-radius:14px;padding:20px 22px;box-shadow:0 10px 24px rgba(0,0,0,.07);display:flex;flex-direction:column;justify-content:center;text-align:left}
@@ -129,7 +129,7 @@ box-shadow:0 8px 20px rgba(183,131,51,.28);
 .ortho-page .ortho-btn-gold:focus{
 box-shadow:0 12px 24px rgba(183,131,51,.35);
 }
-@media (max-width:900px){.ortho-page .ortho-grid-2,.ortho-page .ortho-ba-grid,.ortho-page .ortho-doctor-layout,.ortho-page .ortho-cert-grid{grid-template-columns:1fr}.ortho-page .ortho-ba-card--full img{height:320px}.ortho-page .ortho-ba-pair img{height:200px}.ortho-page .ortho-doctor-grid{grid-template-columns:minmax(0,1fr)}.ortho-page .ortho-doctor-photo{height:220px;object-position:center 12%}.ortho-page .ortho-doctor-note h3{font-size:28px}.ortho-page .ortho-cta-card{padding:20px 18px}.ortho-page .ortho-why-card{padding:20px 16px}}
+@media (max-width:900px){.ortho-page .ortho-grid-2,.ortho-page .ortho-ba-grid,.ortho-page .ortho-doctor-layout,.ortho-page .ortho-cert-grid{grid-template-columns:1fr}.ortho-page .ortho-ba-card--full img{height:320px}.ortho-page .ortho-ba-pair img{height:200px}.ortho-page .ortho-doctor-grid{grid-template-columns:minmax(0,1fr)}.ortho-page .ortho-doctor-photo{height:280px;object-position:center 28%}.ortho-page .ortho-doctor-note h3{font-size:28px}.ortho-page .ortho-cta-card{padding:20px 18px}.ortho-page .ortho-why-card{padding:20px 16px}}
 </style>
 
 <div class="ortho-page">
@@ -155,11 +155,23 @@ box-shadow:0 12px 24px rgba(183,131,51,.35);
                 <div class="ortho-doctor-grid">
                     <?php if (count($doctors) > 0) {
                         $featured_doctor = null;
+                        $featured_fallback = null;
                         foreach ($doctors as $dr_pick) {
-                            if (isset($dr_pick->doctor_name)) {
+                            if (!isset($dr_pick->doctor_name)) {
+                                continue;
+                            }
+                            if ($featured_fallback === null) {
+                                $featured_fallback = $dr_pick;
+                            }
+                            $pick_name = strtolower((string) $dr_pick->doctor_name);
+                            $pick_role = strtolower(isset($dr_pick->designation) ? (string) $dr_pick->designation : '');
+                            if (strpos($pick_name, 'prasoon') !== false || strpos($pick_role, 'orthodont') !== false) {
                                 $featured_doctor = $dr_pick;
                                 break;
                             }
+                        }
+                        if ($featured_doctor === null) {
+                            $featured_doctor = $featured_fallback;
                         }
                         if ($featured_doctor) {
                             $img = !empty($featured_doctor->image_name) ? site_url('admin/webroot/uploads/doctors/' . $featured_doctor->image_name) : $dontia_dr_prabhjeet_photo;

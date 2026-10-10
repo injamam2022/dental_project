@@ -153,5 +153,74 @@ class Dental_Model extends MY_Model {
         }
         return $out;
     }
+
+    public function ensure_landing_tables()
+    {
+        $this->load->helper('dontia_landing');
+        dontia_landing_ensure_tables($this->db);
+        dontia_landing_seed_defaults($this->db);
+    }
+
+    public function get_landing_page($page_key)
+    {
+        $this->ensure_landing_tables();
+        $this->db->where('page_key', (string) $page_key);
+        $this->db->where('status', 'active');
+        $q = $this->db->get('landing_pages');
+        return ($q && $q->num_rows()) ? $q->row() : null;
+    }
+
+    public function get_landing_items($page_key, $section_key = '')
+    {
+        $this->ensure_landing_tables();
+        $this->db->where('page_key', (string) $page_key);
+        $this->db->where('status', 'active');
+        if ($section_key !== '') {
+            $this->db->where('section_key', (string) $section_key);
+        }
+        $this->db->order_by('sort_order', 'asc');
+        $this->db->order_by('id', 'asc');
+        $q = $this->db->get('landing_page_items');
+        return ($q && $q->num_rows()) ? $q->result() : array();
+    }
+
+    public function get_landing_items_grouped($page_key)
+    {
+        $this->load->helper('dontia_landing');
+        $grouped = array();
+        foreach ($this->get_landing_items($page_key) as $row) {
+            $sec = (string) $row->section_key;
+            if (!isset($grouped[$sec])) {
+                $grouped[$sec] = array();
+            }
+            $grouped[$sec][] = $row;
+        }
+        if ($page_key !== 'dental') {
+            $shared = dontia_landing_shared_sections();
+            $dental_grouped = array();
+            $need_shared = false;
+            foreach ($shared as $sec) {
+                if (empty($grouped[$sec])) {
+                    $need_shared = true;
+                    break;
+                }
+            }
+            if ($need_shared) {
+                foreach ($this->get_landing_items('dental') as $row) {
+                    $sec = (string) $row->section_key;
+                    if (!isset($dental_grouped[$sec])) {
+                        $dental_grouped[$sec] = array();
+                    }
+                    $dental_grouped[$sec][] = $row;
+                }
+                foreach ($shared as $sec) {
+                    if (empty($grouped[$sec]) && !empty($dental_grouped[$sec])) {
+                        $grouped[$sec] = $dental_grouped[$sec];
+                    }
+                }
+            }
+        }
+        return $grouped;
+    }
 }
 

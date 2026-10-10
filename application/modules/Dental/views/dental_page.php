@@ -89,9 +89,11 @@ $technology_cards_view = isset($technology_cards) && is_array($technology_cards)
     ? $technology_cards
     : array();
 $before_after = array(
-    array('title' => 'Smile Enhancement', 'before' => '01_before.png', 'after' => '01_after.jpg'),
-    array('title' => 'Crown Restoration', 'before' => '03_before.png', 'after' => '03_after.png'),
-    array('title' => 'Complete Smile Makeover', 'before' => '02_before.png', 'after' => '02_after.png'),
+    array('title' => 'Chipped Tooth', 'image' => 'cosmetic-dental-veneer-treatment-for-chipped-tooth-fixation-kolkata-india-dontia-care-clinic-dental.jpeg'),
+    array('title' => 'Gap Between Teeth', 'image' => 'cosmetic-dental-veneer-treatment-for-gap-between-teeth-kolkata-india-dontia-care-clinic-dental.jpeg'),
+    array('title' => 'Veneers', 'image' => 'cosmetic-dental-veneer-treatment-for-teeth-gap-closure-kolkata-india-dontia-care-clinic-dental.jpeg'),
+    array('title' => 'Dental Implants', 'image' => 'dental-implants-case-before-after-kolkata-india-dontia-care-clinic-dental.jpg'),
+    array('title' => 'Teeth Whitening', 'image' => 'teeth-whitening-treatment-kolkata.jpg'),
 );
 $procedures = array(
     array('title' => 'Preventive Dentistry', 'description' => 'Maintain oral health and prevent cavities, gum disease, enamel wear, and decay.'),
@@ -129,7 +131,6 @@ $media_why_choose_list = (isset($media_why_choose) && is_array($media_why_choose
 );
 $media_specialisations_list = (isset($media_specialisations) && is_array($media_specialisations) && count($media_specialisations) > 0) ? $media_specialisations : array();
 $media_stats_list = (isset($media_stats) && is_array($media_stats) && count($media_stats) > 0) ? $media_stats : array();
-$media_before_after_list = (isset($media_before_after) && is_array($media_before_after) && count($media_before_after) > 0) ? $media_before_after : array();
 $media_certificates_list = (isset($media_certificates) && is_array($media_certificates) && count($media_certificates) > 0) ? $media_certificates : array();
 $media_about_list = (isset($media_about) && is_array($media_about) && count($media_about) > 0) ? $media_about : array();
 $dental_page_defaults = base_url('admin/webroot/uploads/dental_page/defaults/');
@@ -174,67 +175,97 @@ if (function_exists('GetServices')) {
         }
     }
 }
+include APPPATH . 'modules/Dental/views/partials/landing_bind.php';
 ?>
 <?php $this->load->view('include/header/header'); ?>
 <div class="dental-page-view">
 
     <section class="dr-hero">
         <?php
-        $hero_img = $dental_page_defaults . 'Koel_Mallick_with_dentist_in_kolkata.JPG.jpeg';
-        if (isset($hero_banner) && !empty($hero_banner->image_name)) {
-            $hero_img = base_url('admin/webroot/uploads/banner/' . $hero_banner->image_name);
+        if (empty($hero_img)) {
+            $hero_img = $dental_page_defaults . 'Koel_Mallick_with_dentist_in_kolkata.JPG.jpeg';
+            if (isset($hero_banner) && !empty($hero_banner->image_name)) {
+                $hero_img = base_url('admin/webroot/uploads/banner/' . $hero_banner->image_name);
+            }
         }
+        $hero_heading_esc = htmlspecialchars($hero_heading, ENT_QUOTES, 'UTF-8');
+        $hero_sub_esc = nl2br(htmlspecialchars($hero_subheading, ENT_QUOTES, 'UTF-8'));
         ?>
-        <img src="<?php echo htmlspecialchars($hero_img, ENT_QUOTES, 'UTF-8'); ?>" alt="Dental Clinic Banner" width="1920" height="1080" decoding="async" fetchpriority="high">
+        <img src="<?php echo htmlspecialchars($hero_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($hero_alt, ENT_QUOTES, 'UTF-8'); ?>" width="1920" height="1080" decoding="async" fetchpriority="high">
         <div class="dr-hero-overlay"></div>
         <div class="dr-hero-content dr-container">
-            <h2><?php echo $dental_landing_brand_esc; ?></h2>
-            <p>Your One-Stop Destination for a<br>Radiant Smile &amp; Dental Needs</p>
+            <h2><?php echo $hero_heading_esc; ?></h2>
+            <p><?php echo $hero_sub_esc; ?></p>
         </div>
     </section>
+    <?php if ($hero_video_id !== '' && preg_match('/^[a-zA-Z0-9_-]{6,20}$/', $hero_video_id)) { ?>
+    <section class="dr-section dr-hero-video">
+        <div class="dr-container">
+            <div class="dr-hero-video-frame">
+                <iframe src="https://www.youtube-nocookie.com/embed/<?php echo htmlspecialchars($hero_video_id, ENT_QUOTES, 'UTF-8'); ?>?rel=0" allowfullscreen title="<?php echo $hero_heading_esc; ?>" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+    <?php } ?>
 
     <section id="about" class="dr-section dr-about">
         <div class="dr-container dr-grid">
             <div>
-                <h2>Welcome To <span><?php echo $dental_landing_brand_esc; ?></span> in Kolkata</h2>
+                <?php
+                $intro_heading_esc = htmlspecialchars($intro_heading, ENT_QUOTES, 'UTF-8');
+                if ($dental_landing_brand_esc !== '' && strpos($intro_heading_esc, $dental_landing_brand_esc) !== false) {
+                    $intro_heading_esc = str_replace($dental_landing_brand_esc, '<span>' . $dental_landing_brand_esc . '</span>', $intro_heading_esc);
+                }
+                ?>
+                <h2><?php echo $intro_heading_esc; ?></h2>
+                <?php if ($intro_html !== '') {
+                    echo $intro_html;
+                } else { ?>
                 <p>Founded in 2001, <?php echo $dental_landing_brand_esc; ?> is Kolkata's premier destination for advanced dental care. We bring comprehensive care with precision, compassion, and cutting-edge technology for our patients. We are also termed as a celebrity dental clinic as one of our clients is Koel Mallick, a renowned Bengali actress making us the top dental clinic.</p>
                 <p>As the only <strong>Dawson Academy-trained dentist in Eastern India</strong>, <?php echo $dental_landing_brand_esc; ?> is widely recognized for smile design, dental implants, root canals, braces, and more - performed by a team of best dentists in Kolkata using state-of-the-art equipment and techniques.</p>
                 <p>With an unwavering focus on safety, precision, and patient satisfaction, <?php echo $dental_landing_brand_esc; ?> is where <strong>science meets artistry</strong> - creating brighter smiles.</p>
+                <?php } ?>
 
+                <?php if (!empty($location_items)) { ?>
                 <div class="dr-about-locations">
                     <h3>Our Locations in Kolkata</h3>
+                    <?php foreach ($location_items as $li => $loc) { ?>
                     <div class="dr-about-location-item">
-                        <span class="dr-about-location-index">1</span>
+                        <span class="dr-about-location-index"><?php echo (int) $li + 1; ?></span>
                         <div>
-                            <h4>Bhowanipore, Elgin Road</h4>
-                            <p>1.7 km (6-minute drive) from the iconic Victoria Memorial, making it easily accessible from Central and South Kolkata.</p>
+                            <h4><?php echo htmlspecialchars((string) $loc->title, ENT_QUOTES, 'UTF-8'); ?></h4>
+                            <p><?php echo htmlspecialchars((string) $loc->description, ENT_QUOTES, 'UTF-8'); ?></p>
                         </div>
                     </div>
-                    <div class="dr-about-location-item">
-                        <span class="dr-about-location-index">2</span>
-                        <div>
-                            <h4>Chinar Park</h4>
-                            <p>950m (4-minute drive) from City Centre 2, providing top-tier dental services to North Kolkata, New Town, Salt Lake and Rajarhat regions.</p>
-                        </div>
-                    </div>
+                    <?php } ?>
                 </div>
+                <?php } ?>
             </div>
             <div class="dr-about-photo">
                 <?php
-                $about_img = $dental_page_defaults . 'IMG_1707.JPG';
-                if (count($media_about_list) > 0 && !empty($media_about_list[0]->image_name)) {
-                    $about_img = site_url('admin/webroot/uploads/dental_media/' . $media_about_list[0]->image_name);
+                if (empty($about_img)) {
+                    $about_img = $dental_page_defaults . 'IMG_1707.JPG';
+                    if (count($media_about_list) > 0 && !empty($media_about_list[0]->image_name)) {
+                        $about_img = dontia_landing_image_url($media_about_list[0]->image_name);
+                    }
                 }
                 ?>
-                <img src="<?php echo htmlspecialchars($about_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo $dental_landing_brand_esc; ?>" loading="lazy" decoding="async">
+                <img src="<?php echo htmlspecialchars($about_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($intro_image_alt, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
             </div>
         </div>
     </section>
+    <?php if (!empty($show_extra)) { ?>
+    <section class="dr-section dr-extra">
+        <div class="dr-container dr-extra-body">
+            <?php echo $extra_html; ?>
+        </div>
+    </section>
+    <?php } ?>
 
     <section id="why" class="dr-section dr-why-dark">
         <div class="dr-container">
-            <h1>Why We Are the Best Dental Clinic in Kolkata</h1>
-            <p class="dr-sub dr-sub-light">Why Choose Us</p>
+            <h1><?php echo htmlspecialchars($why_heading, ENT_QUOTES, 'UTF-8'); ?></h1>
+            <p class="dr-sub dr-sub-light"><?php echo htmlspecialchars($why_subheading, ENT_QUOTES, 'UTF-8'); ?></p>
             <div class="dr-choose-grid">
                 <?php
                 $why_desc_fallback = array(
@@ -254,21 +285,21 @@ if (function_exists('GetServices')) {
                         }
                     }
                     $img = !empty($wci->image_name)
-                        ? (is_file(FCPATH . 'admin/webroot/uploads/dental_media/' . $wci->image_name)
-                            ? site_url('admin/webroot/uploads/dental_media/' . $wci->image_name)
-                            : $dental_page_defaults . $wci->image_name)
+                        ? dontia_landing_image_url($wci->image_name)
                         : base_url('assets/images/favicon.png');
+                    $wci_alt = (isset($wci->image_alt) && trim((string) $wci->image_alt) !== '') ? (string) $wci->image_alt : $title;
                 ?>
-                <article><img src="<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async"><h3><?php echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?></h3><?php if ($desc !== '') { ?><p><?php echo htmlspecialchars($desc, ENT_QUOTES, 'UTF-8'); ?></p><?php } ?></article>
+                <article><img src="<?php echo htmlspecialchars($img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($wci_alt, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async"><h3><?php echo htmlspecialchars($title, ENT_QUOTES, 'UTF-8'); ?></h3><?php if ($desc !== '') { ?><p><?php echo htmlspecialchars($desc, ENT_QUOTES, 'UTF-8'); ?></p><?php } ?></article>
                 <?php } ?>
             </div>
         </div>
     </section>
 
+    <?php if (!empty($show_specialisations)) { ?>
     <section class="dr-section dr-services">
         <div class="dr-container">
-            <h2>Dental Specialisation</h2>
-            <p class="dr-sub">We provide a specialised dental doctor for every specialisation at our Smile Dental Clinic in Kolkata.</p>
+            <h2><?php echo htmlspecialchars($specialisations_heading, ENT_QUOTES, 'UTF-8'); ?></h2>
+            <p class="dr-sub"><?php echo htmlspecialchars($specialisations_subheading, ENT_QUOTES, 'UTF-8'); ?></p>
             <div class="dr-mini-grid">
                 <?php
                 $spec_source = count($media_specialisations_list) > 0 ? $media_specialisations_list : array_map(function ($sp) {
@@ -295,9 +326,7 @@ if (function_exists('GetServices')) {
                         }
                     }
                     $sp_img = !empty($sp->image_name)
-                        ? (is_file(FCPATH . 'admin/webroot/uploads/dental_media/' . $sp->image_name)
-                            ? site_url('admin/webroot/uploads/dental_media/' . $sp->image_name)
-                            : $dental_page_defaults . $sp->image_name)
+                        ? dontia_landing_image_url($sp->image_name)
                         : base_url('assets/images/favicon.png');
                     $sp_link = isset($sp->link_url) ? dontia_resolve_media_link($sp->link_url) : '';
                     $sp_title_esc = htmlspecialchars($sp_title, ENT_QUOTES, 'UTF-8');
@@ -310,10 +339,12 @@ if (function_exists('GetServices')) {
             </div>
         </div>
     </section>
+    <?php } ?>
 
+    <?php if (!empty($show_stats)) { ?>
     <section class="dr-section dr-stats">
         <div class="dr-container">
-            <h3>Our Dental Journey</h3>
+            <h3><?php echo htmlspecialchars($stats_heading, ENT_QUOTES, 'UTF-8'); ?></h3>
             <div class="dr-stats-grid">
                 <?php
                 $stats_source = count($media_stats_list) > 0 ? $media_stats_list : array_map(function ($st) {
@@ -325,9 +356,7 @@ if (function_exists('GetServices')) {
                     $st_title = isset($st->title) ? (string) $st->title : '';
                     $st_desc = isset($st->description) ? (string) $st->description : '';
                     $st_img = !empty($st->image_name)
-                        ? (is_file(FCPATH . 'admin/webroot/uploads/dental_media/' . $st->image_name)
-                            ? site_url('admin/webroot/uploads/dental_media/' . $st->image_name)
-                            : $dental_page_defaults . $st->image_name)
+                        ? dontia_landing_image_url($st->image_name)
                         : base_url('assets/images/favicon.png');
                     ?>
                     <img src="<?php echo htmlspecialchars($st_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($st_desc, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
@@ -338,11 +367,13 @@ if (function_exists('GetServices')) {
             </div>
         </div>
     </section>
+    <?php } ?>
 
+    <?php if (!empty($show_services)) { ?>
     <section id="services" class="dr-section dr-services">
         <div class="dr-container">
-            <h2>Dental Services</h2>
-            <p class="dr-sub">Comprehensive dental care solutions tailored to your needs.</p>
+            <h2><?php echo htmlspecialchars($services_heading, ENT_QUOTES, 'UTF-8'); ?></h2>
+            <p class="dr-sub"><?php echo htmlspecialchars($services_subheading, ENT_QUOTES, 'UTF-8'); ?></p>
             <div class="dr-cards">
                 <?php
                 $svc_source = (isset($service_cards) && is_array($service_cards) && count($service_cards) > 0) ? $service_cards : array();
@@ -353,10 +384,11 @@ if (function_exists('GetServices')) {
                         $svc_desc = substr($svc_desc, 0, 180) . '...';
                     }
                     $svc_icon = isset($service['image_url']) ? (string) $service['image_url'] : base_url('assets/images/favicon.png');
+                    $svc_alt = isset($service['image_alt']) && trim((string) $service['image_alt']) !== '' ? (string) $service['image_alt'] : $svc_name;
                 ?>
                 <article class="dr-card">
                     <div class="dr-icon">
-                        <img src="<?php echo htmlspecialchars($svc_icon, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($svc_name, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
+                        <img src="<?php echo htmlspecialchars($svc_icon, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($svc_alt, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
                     </div>
                     <h3><?php echo htmlspecialchars($svc_name, ENT_QUOTES, 'UTF-8'); ?></h3>
                     <p><?php echo htmlspecialchars($svc_desc, ENT_QUOTES, 'UTF-8'); ?></p>
@@ -365,10 +397,12 @@ if (function_exists('GetServices')) {
             </div>
         </div>
     </section>
+    <?php } ?>
 
+    <?php if (!empty($show_doctors)) { ?>
     <section class="dr-section dr-doctors">
         <div class="dr-container">
-            <h2 id="doctors-heading">Meet Our Dentist in Kolkata</h2>
+            <h2 id="doctors-heading"><?php echo htmlspecialchars($doctors_heading, ENT_QUOTES, 'UTF-8'); ?></h2>
             <div class="dr-doctor-slider-wrap">
                 <button type="button" class="dr-doctor-nav dr-doctor-nav-left" aria-label="Scroll doctors left">&#10094;</button>
                 <div class="dr-doctor-slider" id="drDoctorSlider">
@@ -403,11 +437,13 @@ if (function_exists('GetServices')) {
             </div>
         </div>
     </section>
+    <?php } ?>
 
+    <?php if (!empty($show_procedures)) { ?>
     <section class="dr-section dr-procedures">
         <div class="dr-container">
-            <h3>Dental Procedures</h3>
-            <p class="dr-sub">Comprehensive dental care tailored to your needs.</p>
+            <h3><?php echo htmlspecialchars($procedures_heading, ENT_QUOTES, 'UTF-8'); ?></h3>
+            <p class="dr-sub"><?php echo htmlspecialchars($procedures_subheading, ENT_QUOTES, 'UTF-8'); ?></p>
             <div class="dr-procedure-grid">
                 <?php foreach ($procedures as $pr) { ?>
                 <article>
@@ -418,11 +454,13 @@ if (function_exists('GetServices')) {
             </div>
         </div>
     </section>
+    <?php } ?>
 
+    <?php if (!empty($show_tech)) { ?>
     <section class="dr-section dr-tech">
         <div class="dr-container">
             <div class="dr-tech-head">
-                <h3>Dental Technology</h3>
+                <h3><?php echo htmlspecialchars($tech_heading, ENT_QUOTES, 'UTF-8'); ?></h3>
                 <div class="dr-tech-divider" aria-hidden="true">
                     <span class="dr-tech-divider-line"></span>
                     <span class="dr-tech-divider-gem">💎</span>
@@ -437,9 +475,10 @@ if (function_exists('GetServices')) {
                     $tech_img = isset($tech['image_url']) ? (string) $tech['image_url'] : $dental_page_technology . 'Cerec.png';
                     $tech_srcset = isset($tech['image_srcset']) ? (string) $tech['image_srcset'] : '';
                     $tech_sizes = isset($tech['image_sizes']) ? (string) $tech['image_sizes'] : '';
+                    $tech_alt = isset($tech['image_alt']) && trim((string) $tech['image_alt']) !== '' ? (string) $tech['image_alt'] : $tech_title;
                 ?>
                 <article class="dr-tech-card" data-tech-id="<?php echo $tech_id; ?>">
-                    <img src="<?php echo htmlspecialchars($tech_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($tech_title, ENT_QUOTES, 'UTF-8'); ?>"<?php if ($tech_srcset !== '') { ?> srcset="<?php echo htmlspecialchars($tech_srcset, ENT_QUOTES, 'UTF-8'); ?>" sizes="<?php echo htmlspecialchars($tech_sizes, ENT_QUOTES, 'UTF-8'); ?>"<?php } ?> loading="lazy" decoding="async">
+                    <img src="<?php echo htmlspecialchars($tech_img, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($tech_alt, ENT_QUOTES, 'UTF-8'); ?>"<?php if ($tech_srcset !== '') { ?> srcset="<?php echo htmlspecialchars($tech_srcset, ENT_QUOTES, 'UTF-8'); ?>" sizes="<?php echo htmlspecialchars($tech_sizes, ENT_QUOTES, 'UTF-8'); ?>"<?php } ?> loading="lazy" decoding="async">
                     <div class="dr-tech-overlay">
                         <h3><?php echo htmlspecialchars($tech_title, ENT_QUOTES, 'UTF-8'); ?></h3>
                         <p class="dr-tech-desc"><?php echo htmlspecialchars($tech_desc, ENT_QUOTES, 'UTF-8'); ?></p>
@@ -449,45 +488,43 @@ if (function_exists('GetServices')) {
             </div>
         </div>
     </section>
+    <?php } ?>
 
+    <?php if (!empty($show_transformations)) { ?>
     <section class="dr-section dr-before-after">
         <div class="dr-container">
-            <h3>Successful Transformations</h3>
+            <h3><?php echo htmlspecialchars($transform_heading, ENT_QUOTES, 'UTF-8'); ?></h3>
             <div class="dr-ba-grid">
                 <?php
-                $ba_source = count($media_before_after_list) > 0 ? $media_before_after_list : array_map(function ($ba) {
-                    return (object) array('title' => $ba['title'], 'image_name' => $ba['before'], 'image_name_2' => $ba['after']);
-                }, $before_after);
-                foreach ($ba_source as $ba) { ?>
-                <article>
-                    <div class="dr-ba-row">
-                        <?php
-                        $ba_title = isset($ba->title) ? (string) $ba->title : 'Transformation';
-                        $ba_before = !empty($ba->image_name)
-                            ? (is_file(FCPATH . 'admin/webroot/uploads/dental_media/' . $ba->image_name)
-                                ? site_url('admin/webroot/uploads/dental_media/' . $ba->image_name)
-                                : $dental_page_defaults . $ba->image_name)
-                            : base_url('assets/images/favicon.png');
-                        $ba_after = !empty($ba->image_name_2)
-                            ? (is_file(FCPATH . 'admin/webroot/uploads/dental_media/' . $ba->image_name_2)
-                                ? site_url('admin/webroot/uploads/dental_media/' . $ba->image_name_2)
-                                : $dental_page_defaults . $ba->image_name_2)
-                            : $ba_before;
-                        ?>
-                        <img src="<?php echo htmlspecialchars($ba_before, ENT_QUOTES, 'UTF-8'); ?>" alt="Before" loading="lazy" decoding="async">
-                        <img src="<?php echo htmlspecialchars($ba_after, ENT_QUOTES, 'UTF-8'); ?>" alt="After" loading="lazy" decoding="async">
-                    </div>
+                $ba_base = rtrim(base_url('assets/images/successful-transformation/'), '/') . '/';
+                foreach ($before_after as $ba) {
+                    $ba_title = isset($ba['title']) ? (string) $ba['title'] : 'Transformation';
+                    if (!empty($ba['image_url'])) {
+                        $ba_src = $ba['image_url'];
+                    } else {
+                        $ba_file = isset($ba['image']) ? basename((string) $ba['image']) : '';
+                        if ($ba_file === '') {
+                            continue;
+                        }
+                        $ba_src = $ba_base . rawurlencode($ba_file);
+                    }
+                    $ba_alt = isset($ba['alt']) && trim((string) $ba['alt']) !== '' ? (string) $ba['alt'] : ($ba_title . ' before and after');
+                ?>
+                <article class="dr-ba-card">
+                    <img src="<?php echo htmlspecialchars($ba_src, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($ba_alt, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
                     <h3><?php echo htmlspecialchars($ba_title, ENT_QUOTES, 'UTF-8'); ?></h3>
                 </article>
                 <?php } ?>
             </div>
         </div>
     </section>
+    <?php } ?>
 
+    <?php if (!empty($show_videos)) { ?>
     <section class="dr-section dr-testimonials">
         <div class="dr-container">
-            <h3>Patient Testimonials</h3>
-            <p class="dr-sub dr-sub-light">Real patient experiences and transformations shared directly from our patients</p>
+            <h3><?php echo htmlspecialchars($testimonials_heading, ENT_QUOTES, 'UTF-8'); ?></h3>
+            <p class="dr-sub dr-sub-light"><?php echo htmlspecialchars($testimonials_subheading, ENT_QUOTES, 'UTF-8'); ?></p>
             <div class="dr-video-wrap">
                 <button type="button" class="dr-video-nav dr-video-nav-left" aria-label="Scroll left">&#10094;</button>
                 <div class="dr-video-carousel" id="drVideoCarousel">
@@ -542,19 +579,23 @@ if (function_exists('GetServices')) {
             </div>
         </div>
     </section>
+    <?php } ?>
 
+    <?php if (!empty($show_reviews)) { ?>
     <section class="dr-section dr-google">
         <div class="dr-container">
-            <h4>Google Reviews</h4>
-            <p class="dr-sub">See what our patients are saying about their experience at <?php echo $dental_landing_brand_esc; ?></p>
-            <a class="dr-btn dr-btn-inline" href="https://maps.app.goo.gl/Ujpqv8hHVHVkWBeL9" target="_blank" rel="noopener noreferrer">View All Reviews on Google</a>
+            <h4><?php echo htmlspecialchars($reviews_heading, ENT_QUOTES, 'UTF-8'); ?></h4>
+            <p class="dr-sub"><?php echo htmlspecialchars($reviews_subheading, ENT_QUOTES, 'UTF-8'); ?></p>
+            <a class="dr-btn dr-btn-inline" href="<?php echo htmlspecialchars($reviews_url, ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener noreferrer">View All Reviews on Google</a>
         </div>
     </section>
+    <?php } ?>
 
+    <?php if (!empty($show_gallery)) { ?>
     <section class="dr-section dr-gallery">
         <div class="dr-container">
-            <h4>Our Gallery</h4>
-            <p class="dr-sub">Meet our team and see our commitment to excellence</p>
+            <h4><?php echo htmlspecialchars($gallery_heading, ENT_QUOTES, 'UTF-8'); ?></h4>
+            <p class="dr-sub"><?php echo htmlspecialchars($gallery_subheading, ENT_QUOTES, 'UTF-8'); ?></p>
             <?php if (count($gallery) > 0) { ?>
             <div class="dr-gallery-slider-wrap">
                 <button type="button" class="dr-gallery-nav dr-gallery-nav-left" aria-label="Scroll gallery left">&#10094;</button>
@@ -577,11 +618,13 @@ if (function_exists('GetServices')) {
             <?php } ?>
         </div>
     </section>
+    <?php } ?>
 
+    <?php if (!empty($show_certs)) { ?>
     <section class="dr-section dr-certs">
         <div class="dr-container">
-            <h4>Dental Certificates &amp; Awards</h4>
-            <p class="dr-sub">Our commitment to excellence recognized through prestigious certifications and awards</p>
+            <h4><?php echo htmlspecialchars($certs_heading, ENT_QUOTES, 'UTF-8'); ?></h4>
+            <p class="dr-sub"><?php echo htmlspecialchars($certs_subheading, ENT_QUOTES, 'UTF-8'); ?></p>
             <div class="dr-certs-grid">
                 <?php
                 $cert_source = count($media_certificates_list) > 0 ? $media_certificates_list : array_map(function ($ci) {
@@ -589,9 +632,7 @@ if (function_exists('GetServices')) {
                 }, $certs);
                 foreach ($cert_source as $ci) {
                     $cert_img = !empty($ci->image_name)
-                        ? (is_file(FCPATH . 'admin/webroot/uploads/dental_media/' . $ci->image_name)
-                            ? site_url('admin/webroot/uploads/dental_media/' . $ci->image_name)
-                            : $dental_page_defaults . $ci->image_name)
+                        ? dontia_landing_image_url($ci->image_name)
                         : base_url('assets/images/favicon.png');
                     $cert_img_esc = htmlspecialchars($cert_img, ENT_QUOTES, 'UTF-8');
                     $cert_cap = isset($ci->title) ? trim((string) $ci->title) : '';
@@ -607,13 +648,15 @@ if (function_exists('GetServices')) {
             </div>
         </div>
     </section>
+    <?php } ?>
 
+    <?php if (!empty($show_blogs)) { ?>
     <section class="dr-section dr-blog">
         <div class="dr-container">
             <div class="dr-blog-header">
                 <div class="dr-blog-head-text">
-                    <h4>Latest From Our Blog</h4>
-                    <p class="dr-sub dr-blog-lead">Stay informed with our latest articles on dental health and care</p>
+                    <h4><?php echo htmlspecialchars($blog_heading, ENT_QUOTES, 'UTF-8'); ?></h4>
+                    <p class="dr-sub dr-blog-lead"><?php echo htmlspecialchars($blog_subheading, ENT_QUOTES, 'UTF-8'); ?></p>
                 </div>
                 <div class="dr-blog-nav" role="group" aria-label="Blog carousel controls">
                     <button type="button" class="dr-blog-nav-btn" id="drBlogPrev" aria-label="Scroll blog posts left">&#10094;</button>
@@ -664,11 +707,33 @@ if (function_exists('GetServices')) {
             <?php } ?>
         </div>
     </section>
+    <?php } ?>
 
+    <?php if (!empty($show_cta)) { ?>
+    <section class="dr-section dr-cta">
+        <div class="dr-container">
+            <div class="dr-cta-card">
+                <h3><?php echo htmlspecialchars($cta_heading, ENT_QUOTES, 'UTF-8'); ?></h3>
+                <div class="dr-cta-body"><?php echo $cta_html; ?></div>
+                <a class="dr-btn dr-btn-inline" href="#" data-toggle="modal" data-target="#dontiaAppointmentModal">Book An Appointment</a>
+            </div>
+        </div>
+    </section>
+    <?php } ?>
+
+    <?php if (!empty($show_locations)) { ?>
+    <section class="dr-section dr-locations">
+        <div class="dr-container">
+            <?php $this->load->view('Dental/partials/clinic_location_cards'); ?>
+        </div>
+    </section>
+    <?php } ?>
+
+    <?php if (!empty($show_faqs)) { ?>
     <section class="dr-section dr-faq">
         <div class="dr-container">
-            <h4>Frequently Asked Questions</h4>
-            <p class="dr-sub">Find answers to common questions about our dental services</p>
+            <h4><?php echo htmlspecialchars($faq_heading, ENT_QUOTES, 'UTF-8'); ?></h4>
+            <p class="dr-sub"><?php echo htmlspecialchars($faq_subheading, ENT_QUOTES, 'UTF-8'); ?></p>
             <div class="dr-faq-list">
                 <?php foreach ($faqs as $faq) { ?>
                 <details>
@@ -679,6 +744,7 @@ if (function_exists('GetServices')) {
             </div>
         </div>
     </section>
+    <?php } ?>
 
     <script>
     (function () {

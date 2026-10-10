@@ -81,6 +81,7 @@
                             <li><a href="<?php echo site_url('Testimonialvideos/add');?>"><span class="fa fa-plus-circle"></span> Video Testimonials — add</a></li>
                             <li><a href="<?php echo site_url('Dentalmedia');?>"><span class="fa fa-picture-o"></span> Dental Media — list</a></li>
                             <li><a href="<?php echo site_url('Dentalmedia/add');?>"><span class="fa fa-plus-circle"></span> Dental Media — add</a></li>
+                            <li><a href="<?php echo site_url('Landingpages');?>"><span class="fa fa-file-text-o"></span> Dental Pages — content</a></li>
                                  
                              </ul>
                      </li>
