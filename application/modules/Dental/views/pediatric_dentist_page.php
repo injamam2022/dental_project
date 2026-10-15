@@ -8,6 +8,13 @@ $pedo_img = function ($filename) use ($pedo_img_dir) {
 };
 
 $hero_img = $pedo_img('When You Should Take Your Kid to a Pediatric Dentist-pedodontist-treating-patient-kolkat.jpeg');
+$faq_items = array(
+    array('q' => 'Is there an age to schedule a first visit?', 'a' => 'About 6 months of age.'),
+    array('q' => 'How frequently should we consider check-ups?', 'a' => 'Consider once every 6 months, or as advised by your consulting dentist.'),
+    array('q' => 'Is topical fluoride safe for kids?', 'a' => 'Yes, if it is done under the care of an experienced expert.'),
+    array('q' => 'My kid has dental pain. What should I do?', 'a' => 'Do not treat this as normal. Trust us for the rest, so the condition does not turn worse later.'),
+);
+include APPPATH . 'modules/Dental/views/partials/service_page_bind.php';
 $what_img = $pedo_img('WhatisPediatricDentistry.jpg');
 $why_need_img = $pedo_img('WhyChildrenNeedaPediatricDentist_-child-smilin.jpeg');
 $doctor_img = $pedo_img('Why Choose Dontia Care Clinic-Dental_-drsuparnaroybestpediatricdentistinkolkata.jpg');
@@ -143,8 +150,8 @@ $pedo_tips = array(
 <div class="ortho-page implant-page pedo-page">
     <section class="dcc-hero" style="background-image:url('<?php echo htmlspecialchars($hero_img, ENT_QUOTES, 'UTF-8'); ?>')">
         <div class="dcc-hero-inner">
-            <h1>Pediatric Dentist in Kolkata — Gentle and Expert Kids Dental Care at Dontia Care Clinic-Dental</h1>
-            <p class="dcc-hero-sub">Focused, calm dental care for children in South Kolkata — routine checks, early treatment, and a kid-friendly clinic experience.</p>
+            <h1><?php echo htmlspecialchars($cms_hero_heading !== '' ? $cms_hero_heading : 'Pediatric Dentist in Kolkata — Gentle and Expert Kids Dental Care at Dontia Care Clinic-Dental', ENT_QUOTES, 'UTF-8'); ?></h1>
+            <p class="dcc-hero-sub"><?php echo htmlspecialchars($cms_hero_subheading !== '' ? $cms_hero_subheading : 'Focused, calm dental care for children in South Kolkata — routine checks, early treatment, and a kid-friendly clinic experience.', ENT_QUOTES, 'UTF-8'); ?></p>
             <div class="dcc-hero-cta">
                 <a class="ortho-btn ortho-btn-gold" href="#" data-toggle="modal" data-target="#dontiaAppointmentModal">Book an appointment</a>
             </div>
@@ -322,22 +329,12 @@ $pedo_tips = array(
             <div class="ortho-section-head">
                 <h2>Frequently Asked Questions (FAQs)</h2>
             </div>
+            <?php foreach ($faq_items as $faq) { ?>
             <details>
-                <summary>Is there an age to schedule a first visit?</summary>
-                <p>About 6 months of age.</p>
+                <summary><?php echo htmlspecialchars($faq['q'], ENT_QUOTES, 'UTF-8'); ?></summary>
+                <p><?php echo htmlspecialchars($faq['a'], ENT_QUOTES, 'UTF-8'); ?></p>
             </details>
-            <details>
-                <summary>How frequently should we consider check-ups?</summary>
-                <p>Consider once every 6 months, or as advised by your consulting dentist.</p>
-            </details>
-            <details>
-                <summary>Is topical fluoride safe for kids?</summary>
-                <p>Yes, if it is done under the care of an experienced expert.</p>
-            </details>
-            <details>
-                <summary>My kid has dental pain. What should I do?</summary>
-                <p>Do not treat this as normal. Trust us for the rest, so the condition does not turn worse later.</p>
-            </details>
+            <?php } ?>
         </div>
     </section>
 

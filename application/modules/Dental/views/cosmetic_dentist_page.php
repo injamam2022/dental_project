@@ -11,6 +11,12 @@ $cos_img = function ($filename) use ($cos_img_dir) {
 };
 
 $hero_img = base_url('admin/webroot/uploads/banner/Koel_Mallick_with_dentist_in_kolkata_JPG.jpeg');
+$faq_items = array(
+    array('q' => 'When is Cosmetic Dentistry recommended?', 'a' => 'Cosmetic dentistry is an option when your adult teeth have grown in completely, which is usually after the age of 18, if your gums and teeth are healthy.'),
+    array('q' => 'How to select a suitable cosmetic dentist in Kolkata?', 'a' => 'When you\'re visiting the best value Cosmetic Dentistry clinic in Kolkata, look for experience, before-and-after photos, a customized treatment plan, and effective communication.'),
+    array('q' => 'How many days does it take for a smile makeover?', 'a' => 'This could take as long as 1 day for whitening, or 2 – 3 weeks for veneers or a full makeover.'),
+);
+include APPPATH . 'modules/Dental/views/partials/service_page_bind.php';
 $modern_img = $cos_img('Modern Cosmetic Dentistry and a Confident Smileclear-aligners-treatment-in-kolkata.jpg');
 $services_img = $cos_img('cosmetic-dental-services-in-kolkata.jpeg');
 $laser_img = $cos_img('cosmetic-laser-treatment-in-kolkata.jpg');
@@ -137,8 +143,8 @@ $cos_process = array(
 <div class="ortho-page implant-page cos-page">
     <section class="dcc-hero" style="background-image:url('<?php echo htmlspecialchars($hero_img, ENT_QUOTES, 'UTF-8'); ?>')">
         <div class="dcc-hero-inner">
-            <h1>Best Cosmetic Dentist in Kolkata at Dontia Care Clinic – Transform Your Smile</h1>
-            <p class="dcc-hero-sub">Celebrity-trusted cosmetic dentistry in Bhowanipore — personalised smile enhancements that look natural and last.</p>
+            <h1><?php echo htmlspecialchars($cms_hero_heading !== '' ? $cms_hero_heading : 'Best Cosmetic Dentist in Kolkata at Dontia Care Clinic – Transform Your Smile', ENT_QUOTES, 'UTF-8'); ?></h1>
+            <p class="dcc-hero-sub"><?php echo htmlspecialchars($cms_hero_subheading !== '' ? $cms_hero_subheading : 'Celebrity-trusted cosmetic dentistry in Bhowanipore — personalised smile enhancements that look natural and last.', ENT_QUOTES, 'UTF-8'); ?></p>
             <div class="dcc-hero-cta">
                 <a class="ortho-btn ortho-btn-gold" href="#" data-toggle="modal" data-target="#dontiaAppointmentModal">Book consultation</a>
             </div>
@@ -361,18 +367,12 @@ $cos_process = array(
             <div class="ortho-section-head">
                 <h2>Frequently Asked Questions (FAQs)</h2>
             </div>
+            <?php foreach ($faq_items as $faq) { ?>
             <details>
-                <summary>When is Cosmetic Dentistry recommended?</summary>
-                <p>Cosmetic dentistry is an option when your adult teeth have grown in completely, which is usually after the age of 18, if your gums and teeth are healthy.</p>
+                <summary><?php echo htmlspecialchars($faq['q'], ENT_QUOTES, 'UTF-8'); ?></summary>
+                <p><?php echo htmlspecialchars($faq['a'], ENT_QUOTES, 'UTF-8'); ?></p>
             </details>
-            <details>
-                <summary>How to select a suitable cosmetic dentist in Kolkata?</summary>
-                <p>When you're visiting the best value Cosmetic Dentistry clinic in Kolkata, look for experience, before-and-after photos, a customized treatment plan, and effective communication.</p>
-            </details>
-            <details>
-                <summary>How many days does it take for a smile makeover?</summary>
-                <p>This could take as long as 1 day for whitening, or 2 – 3 weeks for veneers or a full makeover.</p>
-            </details>
+            <?php } ?>
         </div>
     </section>
 

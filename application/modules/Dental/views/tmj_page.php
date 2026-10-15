@@ -34,6 +34,8 @@ if ($tmj_img_dir !== '' && is_dir($tmj_img_dir)) {
 }
 $tmj_youtube_id = 'dszEUoxTmKk';
 $tmj_youtube_list = 'PLFAPmv-L_bnYlz18NK5mEEzPaVN_a9umj';
+$faq_items = array();
+include APPPATH . 'modules/Dental/views/partials/service_page_bind.php';
 $tmj_embed = 'https://www.youtube-nocookie.com/embed/' . rawurlencode($tmj_youtube_id)
     . '?list=' . rawurlencode($tmj_youtube_list)
     . '&rel=0&autoplay=1&mute=1&playsinline=1';
@@ -46,8 +48,8 @@ $tmj_yt_poster = (is_file($tmj_yt_poster_local))
 <div class="ortho-page tmj-page">
     <section class="tmj-hero">
         <div class="tmj-hero-inner">
-            <h1>Best TMJ Specialist in Kolkata, India</h1>
-            <p class="tmj-hero-lead">Expert assessment and treatment for jaw pain, clicking, headaches, and TMJ disorders — conservative-first care at Dontia Care Clinic.</p>
+            <h1><?php echo htmlspecialchars($cms_hero_heading !== '' ? $cms_hero_heading : 'Best TMJ Specialist in Kolkata, India', ENT_QUOTES, 'UTF-8'); ?></h1>
+            <p class="tmj-hero-lead"><?php echo htmlspecialchars($cms_hero_subheading !== '' ? $cms_hero_subheading : 'Expert assessment and treatment for jaw pain, clicking, headaches, and TMJ disorders — conservative-first care at Dontia Care Clinic.', ENT_QUOTES, 'UTF-8'); ?></p>
             <div class="tmj-hero-video-wrap">
                 <div class="tmj-hero-video-aspect">
                     <button type="button" class="tmj-hero-yt-facade" id="tmjHeroYoutubeFacade" data-embed="<?php echo htmlspecialchars($tmj_embed, ENT_QUOTES, 'UTF-8'); ?>" aria-label="Play TMJ information video">
@@ -284,6 +286,23 @@ $tmj_yt_poster = (is_file($tmj_yt_poster_local))
             </div>
         </div>
     </section>
+
+    <?php if (!empty($faq_items)) { ?>
+    <section class="ortho-sec tmj-faq-sec">
+        <div class="container">
+            <div class="ortho-section-head">
+                <h4>Frequently Asked Questions</h4>
+                <p>Find answers to common questions about TMJ care at Dontia Care Clinic.</p>
+            </div>
+            <?php foreach ($faq_items as $faq) { ?>
+            <details>
+                <summary><?php echo htmlspecialchars($faq['q'], ENT_QUOTES, 'UTF-8'); ?></summary>
+                <p><?php echo htmlspecialchars($faq['a'], ENT_QUOTES, 'UTF-8'); ?></p>
+            </details>
+            <?php } ?>
+        </div>
+    </section>
+    <?php } ?>
 
     <section class="ortho-sec">
         <div class="container">

@@ -22,6 +22,14 @@ $rct_img = function ($filename) use ($rct_img_dir) {
 };
 
 $hero_img = $rct_img('section-1-Root-canal-treatment-in-kolkat (1).jpeg');
+$faq_items = array(
+    array('q' => 'What is the RCT cost in Kolkata at your clinic?', 'a' => 'The RCT cost ranges from INR 6,500 to INR 14,000, depending on the crown type and treatment approach. Laser RCT costs INR 6,500 to INR 16,000.'),
+    array('q' => 'Is Laser Root Canal Treatment worth the cost?', 'a' => 'Yes. Laser RCT improves disinfection, reduces pain, and promotes faster healing.'),
+    array('q' => 'How many visits are required for RCT?', 'a' => 'Standard RCT may require 1–2 visits. Laser and single-sitting RCT can often be completed in one appointment.'),
+    array('q' => 'Is RCT painful?', 'a' => 'Modern RCT is typically painless due to local anaesthesia and advanced tools.'),
+    array('q' => 'Do I need a crown after RCT?', 'a' => 'Yes. RCT-treated teeth become fragile and require a crown for protection and to restore chewing ability.'),
+);
+include APPPATH . 'modules/Dental/views/partials/service_page_bind.php';
 $what_rct_img = $rct_img('section-7-WhatisRootCanalTreatmentRCT_.jpg');
 $painless_img = $rct_img('section5 (1).JPG');
 $doctor_rct_img = $rct_img('endontist-in-kolkata-dr-prabhjeet-singh-sethi-performing-root-canal-treatment.JPG');
@@ -185,8 +193,8 @@ $rct_aftercare = array(
 <div class="ortho-page implant-page rct-page">
     <section class="dcc-hero" style="background-image:url('<?php echo htmlspecialchars($hero_img, ENT_QUOTES, 'UTF-8'); ?>')">
         <div class="dcc-hero-inner">
-            <h1>Root Canal Treatment in Kolkata – Painless &amp; Advanced Care</h1>
-            <p class="dcc-hero-sub">Expert endodontists, modern technology, and same-day relief from tooth pain at Dontia Care Clinic-Dental.</p>
+            <h1><?php echo htmlspecialchars($cms_hero_heading !== '' ? $cms_hero_heading : 'Root Canal Treatment in Kolkata – Painless & Advanced Care', ENT_QUOTES, 'UTF-8'); ?></h1>
+            <p class="dcc-hero-sub"><?php echo htmlspecialchars($cms_hero_subheading !== '' ? $cms_hero_subheading : 'Expert endodontists, modern technology, and same-day relief from tooth pain at Dontia Care Clinic-Dental.', ENT_QUOTES, 'UTF-8'); ?></p>
             <div class="dcc-hero-cta">
                 <a class="ortho-btn ortho-btn-gold" href="#" data-toggle="modal" data-target="#dontiaAppointmentModal">Book consultation</a>
             </div>
@@ -478,26 +486,12 @@ $rct_aftercare = array(
             <div class="ortho-section-head">
                 <h2>Frequently Asked Questions (FAQs)</h2>
             </div>
+            <?php foreach ($faq_items as $faq) { ?>
             <details>
-                <summary>What is the RCT cost in Kolkata at your clinic?</summary>
-                <p>The RCT cost ranges from INR 6,500 to INR 14,000, depending on the crown type and treatment approach. Laser RCT costs INR 6,500 to INR 16,000.</p>
+                <summary><?php echo htmlspecialchars($faq['q'], ENT_QUOTES, 'UTF-8'); ?></summary>
+                <p><?php echo htmlspecialchars($faq['a'], ENT_QUOTES, 'UTF-8'); ?></p>
             </details>
-            <details>
-                <summary>Is Laser Root Canal Treatment worth the cost?</summary>
-                <p>Yes. Laser RCT improves disinfection, reduces pain, and promotes faster healing.</p>
-            </details>
-            <details>
-                <summary>How many visits are required for RCT?</summary>
-                <p>Standard RCT may require 1–2 visits. Laser and single-sitting RCT can often be completed in one appointment.</p>
-            </details>
-            <details>
-                <summary>Is RCT painful?</summary>
-                <p>Modern RCT is typically painless due to local anaesthesia and advanced tools.</p>
-            </details>
-            <details>
-                <summary>Do I need a crown after RCT?</summary>
-                <p>Yes. RCT-treated teeth become fragile and require a crown for protection and to restore chewing ability.</p>
-            </details>
+            <?php } ?>
         </div>
     </section>
 

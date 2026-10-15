@@ -18,6 +18,9 @@
 .tmj-page .tmj-cost-table th,.tmj-page .tmj-cost-table td{padding:14px 16px;text-align:left;border-bottom:1px solid #eee8e0}
 .tmj-page .tmj-cost-table th{background:#f4efea;color:#3d2a22;font-weight:700}
 .tmj-page .tmj-cost-table tr:last-child td{border-bottom:0}
+.tmj-page .tmj-faq-sec details{border:1px solid #ebe8e2;border-radius:8px;padding:0;margin-bottom:10px;background:#f7f6f3;overflow:hidden}
+.tmj-page .tmj-faq-sec summary{cursor:pointer;font-weight:700;padding:13px 16px}
+.tmj-page .tmj-faq-sec details p{margin:0;padding:0 16px 14px 34px;color:#4f4b46;line-height:1.7;background:#fff;border-top:1px solid #ece7df}
 .tmj-page .tmj-gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:8px}
 .tmj-page .tmj-gallery-card{background:#fff;border-radius:12px;overflow:hidden;border:1px solid #ece6df;box-shadow:0 10px 26px rgba(49,19,0,.1)}
 .tmj-page .tmj-gallery-card img{width:100%;height:240px;object-fit:cover;display:block}

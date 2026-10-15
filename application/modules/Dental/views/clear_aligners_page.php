@@ -135,6 +135,18 @@ $related_links = array(
 );
 
 $book_attrs = 'href="#" data-toggle="modal" data-target="#dontiaAppointmentModal" data-preselect-service="Dental"';
+$faq_items = array(
+    array('q' => 'Are clear aligners the same as invisible braces?', 'a' => 'The terms are often used interchangeably in everyday conversation. Clear aligners are transparent removable trays, while traditional braces use fixed brackets and wires. Clear aligners are therefore commonly described as an invisible braces alternative.'),
+    array('q' => 'Can I straighten my teeth without braces?', 'a' => 'For many suitable cases, yes. Clear aligners such as Invisalign can be used as an alternative orthodontic treatment to traditional braces. Suitability depends on your individual dental condition.'),
+    array('q' => 'Can clear aligners fix crooked teeth?', 'a' => 'Clear aligners can treat many types of tooth alignment problems, including certain cases of crooked teeth. Your dentist needs to assess the severity and cause of the misalignment first.'),
+    array('q' => 'Can clear aligners fix crowded teeth?', 'a' => 'They may be suitable for certain cases of dental crowding. More complex cases may require another orthodontic approach. A clinical assessment is necessary.'),
+    array('q' => 'Can I eat while wearing clear aligners?', 'a' => 'Clear aligners are generally removed for eating and then replaced after cleaning your teeth and the aligners according to your dentist\'s instructions.'),
+    array('q' => 'How many hours a day should I wear clear aligners?', 'a' => 'For Invisalign treatment, patients are generally instructed to wear aligners around 20–22 hours per day, removing them mainly for eating, drinking, and oral hygiene, unless their provider gives different instructions.'),
+    array('q' => 'How much do clear aligners cost?', 'a' => 'The cost depends on your case complexity, treatment duration, aligner system, and treatment plan. During your consultation, Dontia Care Clinic can provide a personalized treatment estimate.'),
+    array('q' => 'Is Invisalign available at Dontia Care Clinic?', 'a' => 'Yes. Dontia Care Clinic provides Invisalign treatment for suitable patients, along with clear aligner treatment options based on individual clinical requirements.'),
+    array('q' => 'Are clear aligners better than braces?', 'a' => 'Clear aligners and braces have different advantages and limitations. The appropriate choice depends on your teeth, bite, treatment complexity, lifestyle, and clinical requirements. Your dentist can help you understand which options are suitable for your case.'),
+);
+include APPPATH . 'modules/Dental/views/partials/service_page_bind.php';
 ?>
 <style>
 .ca-page{overflow-x:hidden}
@@ -234,8 +246,8 @@ $book_attrs = 'href="#" data-toggle="modal" data-target="#dontiaAppointmentModal
 <div class="ortho-page ca-page">
     <section class="dcc-hero ca-hero">
         <div class="dcc-hero-inner">
-            <h1>Clear Aligners – A Discreet Alternative to Traditional Braces</h1>
-            <p class="dcc-hero-sub">Straighten your smile without the look of metal braces.</p>
+            <h1><?php echo htmlspecialchars($cms_hero_heading !== '' ? $cms_hero_heading : 'Clear Aligners – A Discreet Alternative to Traditional Braces', ENT_QUOTES, 'UTF-8'); ?></h1>
+            <p class="dcc-hero-sub"><?php echo htmlspecialchars($cms_hero_subheading !== '' ? $cms_hero_subheading : 'Straighten your smile without the look of metal braces.', ENT_QUOTES, 'UTF-8'); ?></p>
             <div class="dcc-hero-cta">
                 <a class="ortho-btn ortho-btn-gold" <?php echo $book_attrs; ?>>Book Your Appointment</a>
             </div>
@@ -570,42 +582,12 @@ $book_attrs = 'href="#" data-toggle="modal" data-target="#dontiaAppointmentModal
             <div class="ortho-section-head">
                 <h2>Frequently Asked Questions</h2>
             </div>
+            <?php foreach ($faq_items as $faq) { ?>
             <details>
-                <summary>Are clear aligners the same as invisible braces?</summary>
-                <p>The terms are often used interchangeably in everyday conversation. Clear aligners are transparent removable trays, while traditional braces use fixed brackets and wires. Clear aligners are therefore commonly described as an invisible braces alternative.</p>
+                <summary><?php echo htmlspecialchars($faq['q'], ENT_QUOTES, 'UTF-8'); ?></summary>
+                <p><?php echo htmlspecialchars($faq['a'], ENT_QUOTES, 'UTF-8'); ?></p>
             </details>
-            <details>
-                <summary>Can I straighten my teeth without braces?</summary>
-                <p>For many suitable cases, yes. Clear aligners such as Invisalign can be used as an alternative orthodontic treatment to traditional braces. Suitability depends on your individual dental condition.</p>
-            </details>
-            <details>
-                <summary>Can clear aligners fix crooked teeth?</summary>
-                <p>Clear aligners can treat many types of tooth alignment problems, including certain cases of crooked teeth. Your dentist needs to assess the severity and cause of the misalignment first.</p>
-            </details>
-            <details>
-                <summary>Can clear aligners fix crowded teeth?</summary>
-                <p>They may be suitable for certain cases of dental crowding. More complex cases may require another orthodontic approach. A clinical assessment is necessary.</p>
-            </details>
-            <details>
-                <summary>Can I eat while wearing clear aligners?</summary>
-                <p>Clear aligners are generally removed for eating and then replaced after cleaning your teeth and the aligners according to your dentist's instructions.</p>
-            </details>
-            <details>
-                <summary>How many hours a day should I wear clear aligners?</summary>
-                <p>For Invisalign treatment, patients are generally instructed to wear aligners around 20–22 hours per day, removing them mainly for eating, drinking, and oral hygiene, unless their provider gives different instructions.</p>
-            </details>
-            <details>
-                <summary>How much do clear aligners cost?</summary>
-                <p>The cost depends on your case complexity, treatment duration, aligner system, and treatment plan. During your consultation, Dontia Care Clinic can provide a personalized treatment estimate.</p>
-            </details>
-            <details>
-                <summary>Is Invisalign available at Dontia Care Clinic?</summary>
-                <p>Yes. Dontia Care Clinic provides Invisalign treatment for suitable patients, along with clear aligner treatment options based on individual clinical requirements.</p>
-            </details>
-            <details>
-                <summary>Are clear aligners better than braces?</summary>
-                <p>Clear aligners and braces have different advantages and limitations. The appropriate choice depends on your teeth, bite, treatment complexity, lifestyle, and clinical requirements. Your dentist can help you understand which options are suitable for your case.</p>
-            </details>
+            <?php } ?>
         </div>
     </section>
 

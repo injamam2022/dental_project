@@ -37,6 +37,14 @@ $patient_story_captions = array(
     'Comfortable visits, clear planning, and results you can rely on.',
     'Eat, speak, and smile with confidence after implant-supported teeth.',
 );
+$hero_img = base_url('assets/images/dental-implant/hero-banner.jpg');
+$faq_items = array(
+    array('q' => 'How long do dental implants last?', 'a' => 'Success rates are above 97% long term. Like natural teeth, implants can last many years — often a lifetime — with proper care and maintenance.'),
+    array('q' => 'Most people avoid implants for fear of pain — why?', 'a' => 'Although surgery is involved, it is minimally invasive. We use local anaesthesia for comfort so most patients report manageable, short-lived discomfort rather than severe pain.'),
+    array('q' => 'Does the dental implant procedure take a long time?', 'a' => 'You need time for the implant to integrate with the jawbone; it cannot be completed in a single visit. Often you should plan for at least about 3 months of healing before final teeth in typical cases.'),
+    array('q' => 'Is the cost covered by insurance?', 'a' => 'Many insurers offer partial coverage for implants, but benefits vary by plan. Contact our office and we’ll help you understand what your policy may cover.'),
+);
+include APPPATH . 'modules/Dental/views/partials/service_page_bind.php';
 ?>
 <style>
 .implant-page{overflow-x:hidden}
@@ -117,10 +125,10 @@ $patient_story_captions = array(
 </style>
 
 <div class="ortho-page implant-page">
-    <section class="dcc-hero" style="background-image:url('<?php echo base_url('assets/images/dental-implant/hero-banner.jpg'); ?>')">
+    <section class="dcc-hero" style="background-image:url('<?php echo htmlspecialchars($hero_img, ENT_QUOTES, 'UTF-8'); ?>')">
         <div class="dcc-hero-inner">
-            <h1>Best Dental Implant Clinic in Kolkata</h1>
-            <p class="dcc-hero-sub">Expert dentists for a perfect smile — restore your lost smile</p>
+            <h1><?php echo htmlspecialchars($cms_hero_heading !== '' ? $cms_hero_heading : 'Best Dental Implant Clinic in Kolkata', ENT_QUOTES, 'UTF-8'); ?></h1>
+            <p class="dcc-hero-sub"><?php echo htmlspecialchars($cms_hero_subheading !== '' ? $cms_hero_subheading : 'Expert dentists for a perfect smile — restore your lost smile', ENT_QUOTES, 'UTF-8'); ?></p>
         </div>
     </section>
 
@@ -293,10 +301,9 @@ $patient_story_captions = array(
             <div class="ortho-section-head">
                 <h2>Frequently asked questions</h2>
             </div>
-            <details><summary>How long do dental implants last?</summary><p>Success rates are above 97% long term. Like natural teeth, implants can last many years — often a lifetime — with proper care and maintenance.</p></details>
-            <details><summary>Most people avoid implants for fear of pain — why?</summary><p>Although surgery is involved, it is minimally invasive. We use local anaesthesia for comfort so most patients report manageable, short-lived discomfort rather than severe pain.</p></details>
-            <details><summary>Does the dental implant procedure take a long time?</summary><p>You need time for the implant to integrate with the jawbone; it cannot be completed in a single visit. Often you should plan for at least about 3 months of healing before final teeth in typical cases.</p></details>
-            <details><summary>Is the cost covered by insurance?</summary><p>Many insurers offer partial coverage for implants, but benefits vary by plan. Contact our office and we’ll help you understand what your policy may cover.</p></details>
+            <?php foreach ($faq_items as $faq) { ?>
+            <details><summary><?php echo htmlspecialchars($faq['q'], ENT_QUOTES, 'UTF-8'); ?></summary><p><?php echo htmlspecialchars($faq['a'], ENT_QUOTES, 'UTF-8'); ?></p></details>
+            <?php } ?>
         </div>
     </section>
 

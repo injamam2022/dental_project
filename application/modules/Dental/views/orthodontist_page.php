@@ -20,6 +20,13 @@ $dontia_dr_prabhjeet_srcset = htmlspecialchars(
 );
 $dontia_dr_sizes_esc = htmlspecialchars('(max-width: 900px) min(92vw, 360px), min(480px, 48vw)', ENT_QUOTES, 'UTF-8');
 $dontia_dr_resp_attrs = ' srcset="' . $dontia_dr_prabhjeet_srcset . '" sizes="' . $dontia_dr_sizes_esc . '"';
+$hero_img = base_url('assets/images/orthodontist/braces-before-after-2.png');
+$faq_items = array(
+    array('q' => 'Is a dentist and an orthodontist the same? Who is better?', 'a' => 'An orthodontist is specially trained for misaligned teeth and bite correction, while a dentist manages general oral health, cleanings, and cavities.'),
+    array('q' => 'Can an Orthodontist fix TMJ?', 'a' => 'Yes, and we also have a TMJ specialist, Dr. Prabhjjeet Singh Sethi, for TMJ treatment in Kolkata.'),
+    array('q' => 'Do orthodontists charge for broken brackets?', 'a' => 'It depends on how many braces or brackets are broken and the treatment stage.'),
+);
+include APPPATH . 'modules/Dental/views/partials/service_page_bind.php';
 ?>
 <style>
 .ortho-page .ortho-sec{padding:60px 0}
@@ -133,9 +140,9 @@ box-shadow:0 12px 24px rgba(183,131,51,.35);
 </style>
 
 <div class="ortho-page">
-    <section class="dcc-hero dcc-hero--contain" style="background-image:url('<?php echo base_url('assets/images/orthodontist/braces-before-after-2.png'); ?>')">
+    <section class="dcc-hero dcc-hero--contain" style="background-image:url('<?php echo htmlspecialchars($hero_img, ENT_QUOTES, 'UTF-8'); ?>')">
         <div class="dcc-hero-inner">
-            <h1>Transform your Smile with the Best Orthodontist in Kolkata</h1>
+            <h1><?php echo htmlspecialchars($cms_hero_heading !== '' ? $cms_hero_heading : 'Transform your Smile with the Best Orthodontist in Kolkata', ENT_QUOTES, 'UTF-8'); ?></h1>
         </div>
     </section>
 
@@ -343,9 +350,9 @@ box-shadow:0 12px 24px rgba(183,131,51,.35);
                 <h4>Frequently Asked Questions</h4>
                 <p>Find answers to common questions about our dental services</p>
             </div>
-            <details><summary>Is a dentist and an orthodontist the same? Who is better?</summary><p>An orthodontist is specially trained for misaligned teeth and bite correction, while a dentist manages general oral health, cleanings, and cavities.</p></details>
-            <details><summary>Can an Orthodontist fix TMJ?</summary><p>Yes, and we also have a TMJ specialist, Dr. Prabhjjeet Singh Sethi, for TMJ treatment in Kolkata.</p></details>
-            <details><summary>Do orthodontists charge for broken brackets?</summary><p>It depends on how many braces or brackets are broken and the treatment stage.</p></details>
+            <?php foreach ($faq_items as $faq) { ?>
+            <details><summary><?php echo htmlspecialchars($faq['q'], ENT_QUOTES, 'UTF-8'); ?></summary><p><?php echo htmlspecialchars($faq['a'], ENT_QUOTES, 'UTF-8'); ?></p></details>
+            <?php } ?>
         </div>
     </section>
 
