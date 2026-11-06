@@ -60,6 +60,14 @@
                      </li>
 
                      <li class="xn-openable">
+                        <a href="JavaScript:void(0);"><span class="fa fa-th-large"></span> <span class="xn-text">Page Builder</span></a>
+                        <ul>
+                            <li><a href="<?php echo site_url('Pagebuilder'); ?>"><span class="fa fa-files-o"></span> All pages</a></li>
+                            <li><a href="<?php echo site_url('Pagebuilder/create'); ?>"><span class="fa fa-plus-circle"></span> Add new page</a></li>
+                        </ul>
+                     </li>
+
+                     <li class="xn-openable">
                         <a href="JavaScript:void(0);"><span class="fa fa-picture-o"></span> <span class="xn-text">Content Management</span></a>
                              <ul class="ul-open">
 <!--                                 echo site_url('homecontent/').base64_encode('homecontent').'/'.base64_encode('home');-->

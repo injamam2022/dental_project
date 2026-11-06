@@ -79,7 +79,7 @@ $is_local = ($server_name === 'localhost' || strpos($server_name, '127.') === 0 
 if ($is_local) {
 	$username = getenv('DB_USER') ?: 'root';
 	$password = getenv('DB_PASS') ?: '';
-	$database_name = getenv('DB_NAME') ?: 'dental_project';
+	$database_name = getenv('DB_NAME') ?: 'ugqnknyt_dental_project'; // same DB as the public site (application/config/database.php)
 } else {
 	$username = getenv('DB_USER') ?: 'u677776351_dental_project';
 	$password = getenv('DB_PASS') ?: 'Dental_project@2026';
