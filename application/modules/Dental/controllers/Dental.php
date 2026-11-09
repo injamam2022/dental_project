@@ -14,6 +14,25 @@ class Dental extends Frontend_Controller {
         $this->dentalModel->ensure_landing_tables();
     }
 
+    /**
+     * A published Page Builder page with the same URL replaces the hand-coded page below
+     * (a draft is shown only through its admin preview link). Without one, the normal method runs.
+     */
+    public function _remap($method, $params = array())
+    {
+        $uri = trim((string) $this->uri->uri_string(), '/');
+        if ($uri !== '' && strpos($uri, '/') === false && $this->pb_render_builder_page($uri, false)) {
+            return;
+        }
+        if ($method !== '' && $method[0] !== '_' && method_exists($this, $method)) {
+            $ref = new ReflectionMethod($this, $method);
+            if ($ref->isPublic() && !$ref->isStatic() && $ref->getDeclaringClass()->getName() === __CLASS__) {
+                return call_user_func_array(array($this, $method), $params);
+            }
+        }
+        show_404();
+    }
+
     protected function lcp_preload_dr_prabhjeet_responsive()
     {
         return array(

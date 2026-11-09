@@ -20,6 +20,17 @@
 		</div>
 	</div>
 
+	<?php if (in_array($page->slug, pb_takeover_slugs(), true)) { ?>
+	<div class="alert <?php echo $page->status === 'published' ? 'alert-success' : 'alert-warning'; ?>" style="margin-bottom:16px">
+		<i class="fa fa-exchange"></i>
+		<?php if ($page->status === 'published') { ?>
+			<strong>This page is live and replaces the old hand-coded page</strong> at <code>/<?php echo pb_e($page->slug); ?></code>. Switch the status back to Draft to show the old page again.
+		<?php } else { ?>
+			<strong>This URL is already used by an existing page.</strong> Visitors still see the old page at <code>/<?php echo pb_e($page->slug); ?></code>. When you set this page to <em>Published</em>, it replaces the old page on the same URL. Use <em>Preview</em> to check it first.
+		<?php } ?>
+	</div>
+	<?php } ?>
+
 	<div class="row">
 		<!-- ============ Sections builder ============ -->
 		<div class="col-md-8">

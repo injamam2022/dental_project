@@ -31,8 +31,34 @@ class Pagebuilder_Model extends MY_Model {
 				continue;
 			}
 			$r->content = pb_decode_data($r->type, $r->data);
+			$r->live = $this->live_data($r->type, $r->content['fields']);
 			$out[] = $r;
 		}
 		return $out;
+	}
+
+	/** Data for "live" sections that show content managed elsewhere in the admin. */
+	protected function live_data($type, array $f)
+	{
+		if ($type !== 'certificates' && $type !== 'blog_cards') {
+			return null;
+		}
+		if (!isset($this->dentalModel)) {
+			$this->load->model('Dental/Dental_Model', 'dentalModel');
+		}
+		try {
+			if ($type === 'certificates') {
+				$rows = $this->dentalModel->get_media_by_section('certificates');
+				return array_values(array_filter((array) $rows, function ($c) {
+					return !empty($c->image_name);
+				}));
+			}
+			$cat = $f['category'] === 'skin-care' ? 'skin-care' : 'dental';
+			$count = (int) $f['count'] === 6 ? 6 : 3;
+			return (array) $this->dentalModel->get_blog_posts_for_dental($count, $cat);
+		} catch (Throwable $e) {
+			log_message('error', 'Page Builder live section ' . $type . ': ' . $e->getMessage());
+			return array();
+		}
 	}
 }

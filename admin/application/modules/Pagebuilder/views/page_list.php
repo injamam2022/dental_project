@@ -1,4 +1,4 @@
-<?php $this->load->view('_assets'); ?>
+<?php $this->load->view('_assets'); $takeover = pb_takeover_slugs(); ?>
 <ul class="breadcrumb">
 	<li><a href="<?php echo site_url('dashboard'); ?>">Home</a></li>
 	<li class="active">Page Builder</li>
@@ -46,7 +46,8 @@
 									<a href="<?php echo site_url('Pagebuilder/edit/' . $p->id); ?>"><strong><?php echo pb_e($p->title); ?></strong></a><br>
 									<small class="text-muted">/<?php echo pb_e($p->slug); ?></small>
 								</td>
-								<td><span class="pb-badge pb-badge--<?php echo pb_e($p->status); ?>"><?php echo pb_e($p->status); ?></span></td>
+								<td><span class="pb-badge pb-badge--<?php echo pb_e($p->status); ?>"><?php echo pb_e($p->status); ?></span>
+									<?php if (in_array($p->slug, $takeover, true)) { ?><br><small class="text-muted" title="Uses the URL of an existing website page"><i class="fa fa-exchange"></i> <?php echo $p->status === 'published' ? 'replaces old page' : 'old page still live'; ?></small><?php } ?></td>
 								<td class="text-center"><?php echo (int) $p->section_count; ?></td>
 								<td><?php echo $p->updated_at ? pb_e(date('d M Y, H:i', strtotime($p->updated_at))) : '—'; ?></td>
 								<td class="text-right" style="white-space:nowrap">
